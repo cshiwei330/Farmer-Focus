@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/taskTitle"
+            android:layout_width="355dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="28dp"
+            android:layout_weight="1"
+            android:background="#0FFFFFFF"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/taskDesc"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:background="#0FFFFFFF"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
