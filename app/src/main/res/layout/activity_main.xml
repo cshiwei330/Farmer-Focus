@@ -51,9 +51,21 @@
                 android:layout_height="55dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="13dp"
+                android:backgroundTint="#A29574"
                 android:text="+"
+                app:iconTint="#A29574"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <Button
+                android:id="@+id/test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="384dp"
+                android:text="test for login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
