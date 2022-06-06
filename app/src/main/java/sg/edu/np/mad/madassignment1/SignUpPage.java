@@ -46,7 +46,7 @@ public class SignUpPage extends AppCompatActivity {
             public void onClick(View view) {
                 User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
                 if (userDBData == null) {
-                    if (myCreatePassword.equals(myConfirmPassword)) {
+                    if (myCreatePassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
                         User userDataDB = new User();
                         userDataDB.setUsername(myCreateUsername.getText().toString());
                         userDataDB.setPassword(myCreatePassword.getText().toString());
@@ -54,8 +54,8 @@ public class SignUpPage extends AppCompatActivity {
                         Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                         Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
                         startActivity(myCreateIntent);
-                        Log.v(TAG, "sign up successful");
-                    } else {
+                    }
+                    else {
                         Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
                     }
                 } else {
