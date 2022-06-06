@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,7 +19,6 @@ public class SignUpPage extends AppCompatActivity {
     public String MY_USERNAME = "MyUsername";
     public String MY_PASSWORD = "MyPassword";
     public String MY_EMAIL = "MyEmail";
-    //SharedPreferences sharedPreferences;
     sg.edu.np.mad.week4.DBHandler dbHandler = new sg.edu.np.mad.week4.DBHandler(this, null, null, 1);
 
     @Override
@@ -28,6 +28,7 @@ public class SignUpPage extends AppCompatActivity {
 
         EditText myCreateUsername = findViewById(R.id.editTextCreateUsername);
         EditText myCreatePassword = findViewById(R.id.editTextCreatePassword);
+        EditText myConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         EditText myCreateEmail = findViewById(R.id.editTextCreateEmail);
 
         Button myButtonCancel = findViewById(R.id.backToLogin);
@@ -39,24 +40,44 @@ public class SignUpPage extends AppCompatActivity {
             }
         });
 
-        CheckBox tandc = findViewById(R.id.TermsAndCondistions);
-        tandc.setOnClickListener(new View.OnClickListener() {
+        Button CreateAccount = findViewById(R.id.signUpButton);
+        CreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(tandc.isChecked()) {
-                    Button CreateAccount = findViewById(R.id.signUpButton);
-                    CreateAccount.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                        /*sharedPreferences = getSharedPreferences(GLOBAL_PREF, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString(MY_USERNAME, myCreateUsername.getText().toString());
-                        editor.putString(MY_PASSWORD, myCreatePassword.getText().toString());
-                        editor.putString(MY_EMAIL, myCreateEmail.getText().toString());
-                        editor.apply();*/
+                User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
+                if (userDBData == null) {
+                    if (myCreatePassword.equals(myConfirmPassword)) {
+                        User userDataDB = new User();
+                        userDataDB.setUsername(myCreateUsername.getText().toString());
+                        userDataDB.setPassword(myCreatePassword.getText().toString());
+                        dbHandler.addUser(userDataDB);
+                        Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                        Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
+                        startActivity(myCreateIntent);
+                        Log.v(TAG, "sign up successful");
+                    } else {
+                        Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
 
+        // here onwards is my attempt on the checkbox
+        /*Button CreateAccount = findViewById(R.id.signUpButton);
+        CreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBox tandc = findViewById(R.id.TermsAndCondistions);
+                tandc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (tandc.isChecked()) {
                             User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
-                            if(userDBData == null) {
+                            if (userDBData == null) {
                                 User userDataDB = new User();
                                 userDataDB.setUsername(myCreateUsername.getText().toString());
                                 userDataDB.setPassword(myCreatePassword.getText().toString());
@@ -64,17 +85,13 @@ public class SignUpPage extends AppCompatActivity {
                                 Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                                 Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
                                 startActivity(myCreateIntent);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            Toast.makeText(SignUpPage.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
-                else {
-                    Toast.makeText(SignUpPage.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
-                }
+                    }
+                });
             }
-        });
-    }
-}
+        });*/

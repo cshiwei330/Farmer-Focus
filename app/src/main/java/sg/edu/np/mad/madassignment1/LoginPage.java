@@ -16,7 +16,6 @@ public class LoginPage extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
     public String MY_USERNAME = "MyUsername";
     public String MY_PASSWORD = "MyPassword";
-    //SharedPreferences sharedPreferences;
     sg.edu.np.mad.week4.DBHandler dbHandler = new sg.edu.np.mad.week4.DBHandler(this, null, null, 1);
 
     @Override
@@ -53,16 +52,6 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public boolean isValidCredentials(String username, String password) {
-        /*sharedPreferences = getSharedPreferences(GLOBAL_PREF, MODE_PRIVATE);
-        String sharedUsername = sharedPreferences.getString(MY_USERNAME, "");
-        String sharedPassword = sharedPreferences.getString(MY_PASSWORD, "");
-
-        if (username.equals(sharedUsername) && password.equals(sharedPassword)) {
-            return true;
-        }
-        return false;
-        }*/
-
         User userDBData = dbHandler.findUser(username);
         if (userDBData == null) {
             Toast.makeText(LoginPage.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
