@@ -44,23 +44,35 @@ public class SignUpPage extends AppCompatActivity {
         CreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
-                if (userDBData == null) {
-                    if (myCreatePassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
-                        User userDataDB = new User();
-                        userDataDB.setUsername(myCreateUsername.getText().toString());
-                        userDataDB.setPassword(myCreatePassword.getText().toString());
-                        dbHandler.addUser(userDataDB);
-                        Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                        Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
-                        startActivity(myCreateIntent);
+                CheckBox tandc = findViewById(R.id.TermsAndCondistions);
+                tandc.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (tandc.isChecked()) {
+                            User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
+                            if (userDBData == null) {
+                                if (myCreatePassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
+                                    User userDataDB = new User();
+                                    userDataDB.setUsername(myCreateUsername.getText().toString());
+                                    userDataDB.setPassword(myCreatePassword.getText().toString());
+                                    dbHandler.addUser(userDataDB);
+                                    Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
+                                    startActivity(myCreateIntent);
+                                }
+                                else {
+                                    Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else {
+                                Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(SignUpPage.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else {
-                        Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
-                }
+                });
             }
         });
     }
