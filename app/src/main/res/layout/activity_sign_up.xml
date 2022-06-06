@@ -7,6 +7,19 @@
     tools:context=".SignUpPage">
 
     <EditText
+        android:id="@+id/editTextTextPassword3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="#A29574"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCreatePassword" />
+
+    <EditText
         android:id="@+id/editTextCreateEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +45,7 @@
         android:textColor="#A29574"
         app:iconTint="#A29574"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/TermsAndCondistions" />
 
     <Button
         android:id="@+id/signUpButton"
@@ -47,7 +60,7 @@
         app:iconTint="#A29574"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backToLogin"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/TermsAndCondistions" />
 
     <TextView
         android:id="@+id/TextView"
@@ -76,19 +89,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextView" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
+    <CheckBox
+        android:id="@+id/TermsAndCondistions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Password"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="165dp"
+        android:text="I agree to the Terms and Conditions"
         android:textColor="#A29574"
-        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCreateEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
 
     <EditText
         android:id="@+id/editTextCreatePassword"
@@ -97,22 +107,10 @@
         android:layout_marginStart="43dp"
         android:layout_marginTop="11dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Confirm Password"
+        android:inputType="textPassword"
         android:textColor="#A29574"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="164dp"
-        android:text="I agree to the Terms and Conditions"
-        android:textColor="#A29574"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCreatePassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCreateEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

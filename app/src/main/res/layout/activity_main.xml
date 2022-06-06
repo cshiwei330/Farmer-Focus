@@ -61,8 +61,8 @@
                 android:id="@+id/test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="384dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="260dp"
                 android:text="test for login"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView" />

@@ -8,12 +8,12 @@ public class User {
 
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return UserName;
     }
 
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setUsername(String username) {
+        this.UserName = username;
     }
 
     public String getPassword() {
@@ -21,6 +21,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.Password = password;
     }
 }

@@ -16,7 +16,8 @@ public class LoginPage extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
     public String MY_USERNAME = "MyUsername";
     public String MY_PASSWORD = "MyPassword";
-    SharedPreferences sharedPreferences;
+    //SharedPreferences sharedPreferences;
+    sg.edu.np.mad.week4.DBHandler dbHandler = new sg.edu.np.mad.week4.DBHandler(this, null, null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,11 @@ public class LoginPage extends AppCompatActivity {
                 EditText etMyPassword = findViewById(R.id.editTextPassword);
 
                 if (isValidCredentials(etMyUsername.getText().toString(), etMyPassword.getText().toString())) {
+                    Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
                     Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
                     startActivity(myIntent);
-                    Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Toast.makeText(LoginPage.this, "Invalid Login", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -43,21 +44,33 @@ public class LoginPage extends AppCompatActivity {
 
         Button newUser = findViewById(R.id.newUser);
         newUser.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent CreateAccount = new Intent(LoginPage.this, SignUpPage.class);
-            startActivity(CreateAccount);
+            @Override
+            public void onClick(View view) {
+                Intent CreateAccount = new Intent(LoginPage.this, SignUpPage.class);
+                startActivity(CreateAccount);
             }
         });
     }
-    public boolean isValidCredentials(String username, String password) {
-    sharedPreferences = getSharedPreferences(GLOBAL_PREF, MODE_PRIVATE);
-    String sharedUsername = sharedPreferences.getString(MY_USERNAME, "");
-    String sharedPassword = sharedPreferences.getString(MY_PASSWORD, "");
 
-    if (username.equals(sharedUsername) && password.equals(sharedPassword)) {
-        return true;
-    }
-    return false;
+    public boolean isValidCredentials(String username, String password) {
+        /*sharedPreferences = getSharedPreferences(GLOBAL_PREF, MODE_PRIVATE);
+        String sharedUsername = sharedPreferences.getString(MY_USERNAME, "");
+        String sharedPassword = sharedPreferences.getString(MY_PASSWORD, "");
+
+        if (username.equals(sharedUsername) && password.equals(sharedPassword)) {
+            return true;
+        }
+        return false;
+        }*/
+
+        User userDBData = dbHandler.findUser(username);
+        if (userDBData == null) {
+            Toast.makeText(LoginPage.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+        } else {
+            if (userDBData.getUsername().equals(username) && userDBData.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
