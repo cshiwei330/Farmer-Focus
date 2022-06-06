@@ -16,7 +16,7 @@ public class LoginPage extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
     public String MY_USERNAME = "MyUsername";
     public String MY_PASSWORD = "MyPassword";
-    sg.edu.np.mad.week4.DBHandler dbHandler = new sg.edu.np.mad.week4.DBHandler(this, null, null, 1);
+    sg.edu.np.mad.madassignment1.DBHandler dbHandler = new sg.edu.np.mad.madassignment1.DBHandler(this, null, null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package sg.edu.np.mad.week4;
+package sg.edu.np.mad.madassignment1;
 
 import android.content.ContentValues;
 import android.content.Context;
