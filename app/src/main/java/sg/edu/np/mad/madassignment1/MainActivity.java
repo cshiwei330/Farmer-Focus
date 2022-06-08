@@ -1,64 +1,35 @@
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static int DELAY = 30;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView tasksIcon = findViewById(R.id.tasksIcon);
-        TextView tasksTexView = findViewById(R.id.tasksTextView);
-        Fragment taskFragment = new TimerFragment();
-
-        tasksIcon.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                //define fragment transaction
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                // set fragment to tasks fragment
-                ft.add(R.id.fragmentLayout, taskFragment);
-                ft.show(taskFragment);
-                ft.commit();
+            public void run() {
+                SharedPreferences sharedPreferences = getSharedPreferences(LoginPage.PREFS_NAME, 0);
+                boolean remember = sharedPreferences.getBoolean("remember", false);
+                if(remember){
+                    Intent intent = new Intent(MainActivity.this, HomePage.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(MainActivity.this, LoginPage.class);
+                    startActivity(intent);
+                }
             }
-        });
+        }, DELAY);
 
-        tasksTexView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //define fragment transaction
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                // set fragment to tasks fragment
-                ft.add(R.id.fragmentLayout, taskFragment);
-                ft.show(taskFragment);
-                ft.commit();
-            }
-        });
-
-
-        Button test = findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent testlogin = new Intent(MainActivity.this, LoginPage.class);
-                startActivity(testlogin);
-            }
-        });
     }
 }
