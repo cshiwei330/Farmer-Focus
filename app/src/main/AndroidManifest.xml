@@ -13,10 +13,10 @@
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LoginPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
