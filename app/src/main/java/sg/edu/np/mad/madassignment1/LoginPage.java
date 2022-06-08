@@ -34,6 +34,7 @@ public class LoginPage extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("remember", true);
                     editor.commit();
+                    Toast.makeText(LoginPage.this, "Remembering you...", Toast.LENGTH_SHORT).show();
                 }
                 else if(!compoundButton.isChecked()){
                     SharedPreferences sharedPreferences = getSharedPreferences(LoginPage.PREFS_NAME, 0);
