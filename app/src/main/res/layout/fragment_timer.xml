@@ -24,8 +24,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toDoListRecycleView"
-            android:layout_width="380dp"
-            android:layout_height="565dp"
+            android:layout_width="342dp"
+            android:layout_height="447dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
@@ -33,10 +33,35 @@
             android:background="#C8BF9E"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
+            app:layout_constraintVertical_bias="0.224" />
+
+        <TextView
+            android:id="@+id/totalTasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="7dp"
+            android:text="Total:"
+            app:layout_constraintBottom_toTopOf="@+id/toDoListRecycleView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
             app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewTaskButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="318dp"
+            android:layout_marginTop="4dp"
+            android:clickable="true"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
