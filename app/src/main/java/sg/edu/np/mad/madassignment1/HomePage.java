@@ -16,7 +16,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.fragment_home);
 
         ImageView tasksIcon = findViewById(R.id.tasksIcon);
         TextView tasksTexView = findViewById(R.id.tasksTextView);

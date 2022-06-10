@@ -12,6 +12,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import sg.edu.np.mad.madassignment1.ui.home.HomeFragment;
+
 public class LoginPage extends AppCompatActivity {
     public static final String PREFS_NAME = "MyLoginPrefs";
     private String TAG = "Login Page";
@@ -55,7 +57,7 @@ public class LoginPage extends AppCompatActivity {
                 if (isValidCredentials(etMyUsername.getText().toString(), etMyPassword.getText().toString())) {
                     Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    Intent myIntent = new Intent(LoginPage.this, HomePage.class);
+                    Intent myIntent = new Intent(LoginPage.this, HomeFragment.class);
                     startActivity(myIntent);
                 } else {
                     Toast.makeText(LoginPage.this, "Invalid Login", Toast.LENGTH_SHORT).show();
