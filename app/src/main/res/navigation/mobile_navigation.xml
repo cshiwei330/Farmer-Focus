@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="sg.edu.np.mad.madassignment1.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_Statistics"
+        android:name="sg.edu.np.mad.madassignment1.StatisticsFragment"
+        android:label="@string/menu_statistics"
+        tools:layout="@layout/fragment_statistics" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="sg.edu.np.mad.madassignment1.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_calendar"
+        android:name="sg.edu.np.mad.madassignment1.CalenderFragment"
+        android:label="@string/menu_calendar"
+        tools:layout="@layout/fragment_calender" />
 </navigation>
