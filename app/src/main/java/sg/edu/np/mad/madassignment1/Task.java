@@ -2,11 +2,13 @@ package sg.edu.np.mad.madassignment1;
 
 public class Task {
     private int Id;
-    private boolean status;
+    private int status;
     private String taskName;
     private String taskDesc;
 
-    public Task(int Id, boolean status, String taskName, String taskDesc) {
+    public Task(){}
+
+    public Task(int Id, int status, String taskName, String taskDesc) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -21,11 +23,11 @@ public class Task {
         Id = id;
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

@@ -1,5 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -78,18 +80,40 @@ public class TimerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
+        DBHandler dbHandler = new DBHandler(getActivity(), null, null,6);
 
-        if (taskList.size() == 0){
-//            AddTasksExamples();
-            Toast.makeText(getContext(), "No Tasks", Toast.LENGTH_SHORT).show();
-        }
+        taskList = dbHandler.getTaskData();
+
+        TextView totalTask = view.findViewById(R.id.totalTasks);
+        final String[] totalTaskText = {"Total: " + String.valueOf(taskList.size())};
+        totalTask.setText(totalTaskText[0]);
+
+        Log.v(TAG, "First TAG Size: " + String.valueOf(taskList.size()));
 
         Bundle bundle = getArguments();
 
         if (bundle != null){
             String newTaskName = bundle.getString("task name");
             String newTaskDesc = bundle.getString("task desc");
-            AddTasks(newTaskName, newTaskDesc);
+
+            // 0 means false = not completed, 1 means true = completed
+            int status = 0;
+            int id = taskList.size() + 1;
+
+            Task newTaskDB = new Task();
+            newTaskDB.setId(id);
+            newTaskDB.setStatus(status);
+            newTaskDB.setTaskName(newTaskName);
+            newTaskDB.setTaskDesc(newTaskDesc);
+            dbHandler.addTask(newTaskDB);
+            Log.v(TAG, "Added to DB");
+            taskList = dbHandler.getTaskData();
+            totalTaskText[0] = "Total: " + String.valueOf(taskList.size());
+            totalTask.setText(totalTaskText[0]);
+        }
+
+        if (taskList.size() == 0){
+            Toast.makeText(getActivity(), "No Tasks", Toast.LENGTH_LONG).show();
         }
 
         RecyclerView recyclerView = view.findViewById(R.id.toDoListRecycleView);
@@ -98,10 +122,22 @@ public class TimerFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
 
-        TextView totalTask = view.findViewById(R.id.totalTasks);
-        String totalTaskText = "Total: " + String.valueOf(taskList.size());
-        totalTask.setText(totalTaskText);
-        Log.v(TAG, "Total No. of Tasks Set");
+        Button clearAllTaskButton = view.findViewById(R.id.clearAllTaskButton);
+        clearAllTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHandler.deleteAllTask();
+                taskList = dbHandler.getTaskData();
+                mAdaptor.clear();
+                // make it a one element array
+                // If not, problem: Cannot assign a value to final variable 'totalTaskText'
+                totalTaskText[0] = "Total: " + String.valueOf(taskList.size());
+                totalTask.setText(totalTaskText[0]);
+                Toast.makeText(getActivity(), "Tasks Cleared", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
         FloatingActionButton addNewTask = view.findViewById(R.id.addNewTaskButton);
         addNewTask.setOnClickListener(new View.OnClickListener() {
@@ -122,13 +158,4 @@ public class TimerFragment extends Fragment {
         return view;
     }
 
-    private void AddTasks(String newTaskName, String newTaskDesc){
-        boolean status = false;
-        int id6 = taskList.size() + 1;
-        Task taskSix = new Task(id6, status, newTaskName, newTaskDesc);
-        taskList.add(taskSix);
-    }
 }
-/*
-
-*/

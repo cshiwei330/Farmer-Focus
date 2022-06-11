@@ -61,5 +61,16 @@
             app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
             app:layout_constraintVertical_bias="0.111" />
 
+        <Button
+            android:id="@+id/clearAllTaskButton"
+            android:layout_width="110dp"
+            android:layout_height="29dp"
+            android:text="Clear All Tasks"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/totalTasks"
+            app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
+            app:layout_constraintTop_toTopOf="@+id/totalTasks"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

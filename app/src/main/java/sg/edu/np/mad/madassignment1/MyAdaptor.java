@@ -32,12 +32,12 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View view) {
                 if (holder.taskCheckBox.isChecked()) {
                     Toast.makeText(view.getContext(), "Mark as completed", Toast.LENGTH_SHORT).show();
-                    t.setStatus(true);
+                    t.setStatus(1);
                 }
                 else{
                     Toast.makeText(view.getContext(), "Mark as uncompleted", Toast.LENGTH_SHORT).show();
-                    if (t.getStatus() == true){
-                        t.setStatus(false);
+                    if (t.getStatus() == 1){
+                        t.setStatus(0);
                     }
                 }
             }
@@ -47,4 +47,12 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount(){
         return data.size();
     }
+
+    public void clear() {
+        int size = data.size();
+        data.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 }
+
+

@@ -73,6 +73,8 @@ public class AddNewTaskFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Toast.makeText(getActivity(), "Task Created", Toast.LENGTH_SHORT).show();
+
                 String newTaskNameString = newTaskName.getText().toString();
                 String newTaskDescString = newTaskDesc.getText().toString();
 
