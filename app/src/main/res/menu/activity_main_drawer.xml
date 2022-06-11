@@ -24,5 +24,9 @@
             android:id="@+id/nav_Timer"
             android:icon="@drawable/ic_menu_timer_24"
             android:title="@string/menu_timer" />
+        <item
+            android:id="@+id/nav_Settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings" />
     </group>
 </menu>

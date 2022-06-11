@@ -1,12 +1,19 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,12 +60,37 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        ImageButton myButtonSettings = findViewById(R.id.AccSettingsBtn);
+//        myButtonSettings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent myCreateIntent = new Intent(SettingsFragment.this, AccountSettingsFragment.class);
+//                startActivity(myCreateIntent);
+//            }
+//        });
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        //return inflater.inflate(R.layout.fragment_settings, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ImageButton myButtonSettings = (ImageButton) view.findViewById(R.id.AccSettingsBtn);
+        myButtonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent myCreateIntent = new Intent(, AccountSettingsFragment.class);
+//                startActivity(myCreateIntent);
+                  Intent myCreateIntent = new Intent(myButtonSettings.getContext(), MainActivity.class);
+                  myButtonSettings.getContext().startActivity(myCreateIntent);
+
+            }
+        });
+        return view;
     }
 }
