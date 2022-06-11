@@ -77,9 +77,21 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        AddTasks();
-
         View view = inflater.inflate(R.layout.fragment_timer, container, false);
+
+        if (taskList.size() == 0){
+//            AddTasksExamples();
+            Toast.makeText(getContext(), "No Tasks", Toast.LENGTH_SHORT).show();
+        }
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null){
+            String newTaskName = bundle.getString("task name");
+            String newTaskDesc = bundle.getString("task desc");
+            AddTasks(newTaskName, newTaskDesc);
+        }
+
         RecyclerView recyclerView = view.findViewById(R.id.toDoListRecycleView);
         MyAdaptor mAdaptor = new MyAdaptor(taskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
@@ -110,23 +122,11 @@ public class TimerFragment extends Fragment {
         return view;
     }
 
-    private void AddTasks(){
-        int id = taskList.size() + 1;
+    private void AddTasks(String newTaskName, String newTaskDesc){
         boolean status = false;
-        Task taskOne = new Task(id, status,"Finish Math Homework", "Page 1-10");
-        taskList.add(taskOne);
-        int id2 = taskList.size() + 1;
-        Task taskTwo = new Task(id2, status,"Finish English Homework", "Page 1-5");
-        taskList.add(taskTwo);
-        int id3 = taskList.size() + 1;
-        Task taskThree = new Task(id3, status,"Finish Science Homework", "Page 1-9");
-        taskList.add(taskThree);
-        int id4 = taskList.size() + 1;
-        Task taskFour = new Task(id4, status,"Finish Chinese Homework", "Page 1-7");
-        taskList.add(taskFour);
-        int id5 = taskList.size() + 1;
-        Task taskFive = new Task(id5, status,"Finish FP2 Homework", "Page 1-4");
-        taskList.add(taskFive);
+        int id6 = taskList.size() + 1;
+        Task taskSix = new Task(id6, status, newTaskName, newTaskDesc);
+        taskList.add(taskSix);
     }
 }
 /*
