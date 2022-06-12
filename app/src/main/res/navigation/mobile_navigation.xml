@@ -34,4 +34,14 @@
         android:name="sg.edu.np.mad.madassignment1.AccountSettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_account_settings" />
+    <fragment
+        android:id="@+id/nav_Tasks"
+        android:name="sg.edu.np.mad.madassignment1.TimerFragment"
+        android:label="fragment_timer"
+        tools:layout="@layout/fragment_timer" />
+    <fragment
+        android:id="@+id/nav_addNewTaskFragment"
+        android:name="sg.edu.np.mad.madassignment1.AddNewTaskFragment"
+        android:label="fragment_add_new_task"
+        tools:layout="@layout/fragment_add_new_task" />
 </navigation>

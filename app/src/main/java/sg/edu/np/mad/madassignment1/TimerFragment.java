@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -146,9 +147,13 @@ public class TimerFragment extends Fragment {
                 //define fragment transaction
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 // set fragment to tasks fragment
+                //ft.replace(R.id.fragmentLayout, addTaskFragment);
                 ft.replace(R.id.fragmentLayout, addTaskFragment);
+                Log.v(TAG, "Replaced fragment");
                 ft.show(addTaskFragment);
+                Log.v(TAG, "Fragment shown");
                 ft.commit();
+                Log.v(TAG, "Fragment commited");
             }
         });
 
