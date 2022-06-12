@@ -20,6 +20,7 @@ import sg.edu.np.mad.madassignment1.LoginPage;
 import sg.edu.np.mad.madassignment1.R;
 import sg.edu.np.mad.madassignment1.TimerFragment;
 import sg.edu.np.mad.madassignment1.databinding.FragmentHomeBinding;
+import sg.edu.np.mad.madassignment1.ui.login.LoginFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -34,13 +35,16 @@ public class HomeFragment extends Fragment {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent testlogin = new Intent(getActivity(), LoginPage.class);
-                startActivity(testlogin);
+                Fragment LoginFragment = new LoginFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.add(R.id.fragmentLayout, LoginFragment);
+                ft.show(LoginFragment);
+                ft.commit();
             }
         });
 
         ImageView tasksIcon = view.findViewById(R.id.tasksIcon);
-        TextView tasksTexView = view.findViewById(R.id.tasksTextView);
+        TextView tasksTextView = view.findViewById(R.id.tasksTextView);
         Fragment taskFragment = new TimerFragment();
 
         tasksIcon.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +59,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        tasksTexView.setOnClickListener(new View.OnClickListener() {
+        tasksTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //define fragment transaction

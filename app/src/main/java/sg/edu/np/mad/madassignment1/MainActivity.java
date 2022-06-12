@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityMainBinding;
+import sg.edu.np.mad.madassignment1.ui.login.LoginFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(LoginPage.PREFS_NAME, 0);
                 Boolean remember = sharedPreferences.getBoolean("remember", false);
                 if(!remember){
-                    Intent intent = new Intent(MainActivity.this, LoginPage.class);
+                    Intent intent = new Intent(MainActivity.this, LoginFragment.class);
                 }
             }
         }, DELAY);
