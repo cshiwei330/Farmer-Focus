@@ -1,14 +1,9 @@
 package sg.edu.np.mad.madassignment1;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +21,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TimerFragment#newInstance} factory method to
+ * Use the {@link TaskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TimerFragment extends Fragment {
+public class TaskFragment extends Fragment {
     private String TAG = "Timer Fragment";
     ArrayList<Task> taskList = new ArrayList<>();
     Fragment addTaskFragment = new AddNewTaskFragment();
@@ -44,7 +38,7 @@ public class TimerFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public TimerFragment() {
+    public TaskFragment() {
         // Required empty public constructor
     }
 
@@ -57,8 +51,8 @@ public class TimerFragment extends Fragment {
      * @return A new instance of fragment TimerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TimerFragment newInstance(String param1, String param2) {
-    TimerFragment fragment = new TimerFragment();
+    public static TaskFragment newInstance(String param1, String param2) {
+    TaskFragment fragment = new TaskFragment();
     Bundle args = new Bundle();
     args.putString(ARG_PARAM1, param1);
     args.putString(ARG_PARAM2, param2);

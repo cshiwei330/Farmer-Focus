@@ -20,7 +20,7 @@ public class HomePage extends AppCompatActivity {
 
         ImageView tasksIcon = findViewById(R.id.tasksIcon);
         TextView tasksTexView = findViewById(R.id.tasksTextView);
-        Fragment taskFragment = new TimerFragment();
+        Fragment taskFragment = new TaskFragment();
 
         tasksIcon.setOnClickListener(new View.OnClickListener() {
             @Override

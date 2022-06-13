@@ -66,6 +66,9 @@ public class SignUpPage extends AppCompatActivity {
                             Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
                             startActivity(myCreateIntent);
                         }
+                        else{
+                            Toast.makeText(SignUpPage.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
                     }
@@ -76,33 +79,3 @@ public class SignUpPage extends AppCompatActivity {
         });
     }
 }
-
-        // here onwards is my attempt on the checkbox
-        /*Button CreateAccount = findViewById(R.id.signUpButton);
-        CreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CheckBox tandc = findViewById(R.id.TermsAndCondistions);
-                tandc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (tandc.isChecked()) {
-                            User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
-                            if (userDBData == null) {
-                                User userDataDB = new User();
-                                userDataDB.setUsername(myCreateUsername.getText().toString());
-                                userDataDB.setPassword(myCreatePassword.getText().toString());
-                                dbHandler.addUser(userDataDB);
-                                Toast.makeText(SignUpPage.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                                Intent myCreateIntent = new Intent(SignUpPage.this, LoginPage.class);
-                                startActivity(myCreateIntent);
-                            } else {
-                                Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(SignUpPage.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });*/
