@@ -94,13 +94,23 @@ public class AccountSettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_settings, container, false);
         Button myButtonSave = (Button) view.findViewById(R.id.SaveBtn);
         TextView myUserName = (TextView) view.findViewById(R.id.UserName);
         TextView editText = (TextView) view.findViewById(R.id.EditAccountUsername);
+        TextView myPassword = (TextView) view.findViewById(R.id.ChangePass);
 
+        // Navigate to password fragment
+        myPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_nav_AccountSettings_to_nav_Password);
+            }
+        });
 
+        // Navigate back to settings fragment
         myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,16 +125,14 @@ public class AccountSettingsFragment extends Fragment {
                 editor.putString(TEXT, myUserName.getText().toString());
                 editor.apply();
 
-                // edit
-//                String username = sharedPreferences.getString("username", "default");
-//                TextView editUser = (TextView) getActivity().findViewById(R.id.EditAccountUsername);
-//                editUser.setText(username);
-
                 // Once saved, go back to Settings page
                 Navigation.findNavController(view).navigate(R.id.action_nav_AccountSettings_to_nav_Settings); //call the action
                 // Display "Saved"
-                Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Saved!", Toast.LENGTH_SHORT).show();
             }
+
+
+
         });
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         text = sharedPreferences.getString(TEXT, "");

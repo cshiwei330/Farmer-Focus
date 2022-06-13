@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rememberUser" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/ChangePass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/ChangePass" />
 
     <EditText
         android:id="@+id/password"

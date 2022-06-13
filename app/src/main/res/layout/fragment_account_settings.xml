@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/EditAccountUsername" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/ChangePass"
             android:layout_width="392dp"
             android:layout_height="45dp"
             android:layout_marginStart="11dp"
