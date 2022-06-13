@@ -140,8 +140,7 @@ public class TaskFragment extends Fragment {
                 //define fragment transaction
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 // set fragment to tasks fragment
-                //ft.replace(R.id.fragmentLayout, addTaskFragment);
-                ft.replace(R.id.taskFragmentLayout, addTaskFragment);
+                ft.replace(R.id.nav_host_fragment_content_main, addTaskFragment);
                 Log.v(TAG, "Replaced fragment");
                 ft.show(addTaskFragment);
                 Log.v(TAG, "Fragment shown");
