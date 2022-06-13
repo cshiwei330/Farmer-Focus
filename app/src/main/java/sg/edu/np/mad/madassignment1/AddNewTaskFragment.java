@@ -88,7 +88,7 @@ public class AddNewTaskFragment extends Fragment {
 
                 timerFragment.setArguments(bundle);
 
-                fT.replace(R.id.fragmentLayout, timerFragment);
+                fT.replace(R.id.taskFragmentLayout, timerFragment);
                 fT.show(timerFragment);
                 fT.commit();
             }

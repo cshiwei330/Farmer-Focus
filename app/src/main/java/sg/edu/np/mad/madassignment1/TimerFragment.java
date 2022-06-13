@@ -139,7 +139,6 @@ public class TimerFragment extends Fragment {
         });
 
 
-
         FloatingActionButton addNewTask = view.findViewById(R.id.addNewTaskButton);
         addNewTask.setOnClickListener(new View.OnClickListener() {
             @Override
