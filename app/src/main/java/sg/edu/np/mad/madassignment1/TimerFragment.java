@@ -148,13 +148,13 @@ public class TimerFragment extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 // set fragment to tasks fragment
                 //ft.replace(R.id.fragmentLayout, addTaskFragment);
-                ft.replace(R.id.fragmentLayout, addTaskFragment);
+                ft.replace(R.id.taskFragmentLayout, addTaskFragment);
                 Log.v(TAG, "Replaced fragment");
                 ft.show(addTaskFragment);
                 Log.v(TAG, "Fragment shown");
                 ft.commit();
                 Log.v(TAG, "Fragment commited");
-            }
+        }
         });
 
 
