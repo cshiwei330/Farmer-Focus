@@ -46,10 +46,23 @@
         android:id="@+id/nav_Tasks"
         android:name="sg.edu.np.mad.madassignment1.TaskFragment"
         android:label="fragment_timer"
-        tools:layout="@layout/fragment_timer" />
+        tools:layout="@layout/fragment_task" />
     <fragment
         android:id="@+id/nav_addNewTaskFragment"
         android:name="sg.edu.np.mad.madassignment1.AddNewTaskFragment"
         android:label="fragment_add_new_task"
         tools:layout="@layout/fragment_add_new_task" />
+
+    <activity
+        android:id="@+id/nav_Login"
+        android:name="sg.edu.np.mad.madassignment1.LoginPage"
+        android:label="LoginPage"
+        tools:layout="@layout/activity_login" />
+
+    <activity
+        android:id="@+id/nav_signUp"
+        android:name="sg.edu.np.mad.madassignment1.SignUpPage"
+        android:label="SignUpPage"
+        tools:layout="@layout/activity_sign_up" />
+
 </navigation>

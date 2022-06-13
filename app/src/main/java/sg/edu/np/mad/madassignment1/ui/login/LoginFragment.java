@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import sg.edu.np.mad.madassignment1.LoginPage;
+import sg.edu.np.mad.madassignment1.MainActivity;
 import sg.edu.np.mad.madassignment1.SignUpFragment;
 import sg.edu.np.mad.madassignment1.User;
 import sg.edu.np.mad.madassignment1.databinding.FragmentLoginBinding;
@@ -170,11 +172,14 @@ public class LoginFragment extends Fragment {
                 if (isValidCredentials(usernameEditText.getText().toString(), passwordEditText.getText().toString())) {
                     Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    Fragment homeFragment = new HomeFragment();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+
+                    /*Fragment homeFragment = new HomeFragment();
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.add(R.id.loginLayout, homeFragment);
+                    ft.replace(R.id.loginLayout, homeFragment);
                     ft.show(homeFragment);
-                    ft.commit();
+                    ft.commit();*/
                 } else {
                     Toast.makeText(getActivity(), "Invalid Login", Toast.LENGTH_SHORT).show();
                 }

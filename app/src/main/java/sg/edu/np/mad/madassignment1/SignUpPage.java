@@ -73,7 +73,7 @@ public class SignUpPage extends AppCompatActivity {
                         Toast.makeText(SignUpPage.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(SignUpPage.this, "User already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpPage.this, "Username already exists", Toast.LENGTH_SHORT).show();
                 }
             }
         });

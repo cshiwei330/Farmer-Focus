@@ -74,7 +74,7 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_timer, container, false);
+        View view = inflater.inflate(R.layout.fragment_task, container, false);
         DBHandler dbHandler = new DBHandler(getActivity(), null, null,6);
 
         taskList = dbHandler.getTaskData();

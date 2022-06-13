@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Fragment LoginFragment = new LoginFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.add(R.id.fragmentLayout, LoginFragment);
+                ft.add(R.id.homeFragmentContainer, LoginFragment);
                 ft.show(LoginFragment);
                 ft.commit();
             }
@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Fragment signUpFragment = new SignUpFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.add(R.id.fragmentLayout, signUpFragment);
+                ft.add(R.id.homeFragmentContainer, signUpFragment);
                 ft.show(signUpFragment);
                 ft.commit();
             }
