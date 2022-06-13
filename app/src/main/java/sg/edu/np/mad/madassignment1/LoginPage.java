@@ -57,7 +57,7 @@ public class LoginPage extends AppCompatActivity {
                 if (isValidCredentials(etMyUsername.getText().toString(), etMyPassword.getText().toString())) {
                     Toast.makeText(LoginPage.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    Intent myIntent = new Intent(LoginPage.this, HomeFragment.class);
+                    Intent myIntent = new Intent(LoginPage.this, MainActivity.class);
                     startActivity(myIntent);
                 } else {
                     Toast.makeText(LoginPage.this, "Invalid Login", Toast.LENGTH_SHORT).show();
