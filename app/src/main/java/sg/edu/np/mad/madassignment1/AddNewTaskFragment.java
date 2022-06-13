@@ -82,12 +82,12 @@ public class AddNewTaskFragment extends Fragment {
 
                 FragmentTransaction fT = getActivity().getSupportFragmentManager().beginTransaction();
 
-                TaskFragment timerFragment = new TaskFragment();
+                TaskFragment taskFragment = new TaskFragment();
 
-                timerFragment.setArguments(bundle);
+                taskFragment.setArguments(bundle);
 
-                fT.replace(R.id.taskFragmentLayout, timerFragment);
-                fT.show(timerFragment);
+                fT.replace(R.id.nav_host_fragment_content_main, taskFragment);
+                fT.show(taskFragment);
                 fT.commit();
             }
         });
