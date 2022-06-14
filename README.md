@@ -5,10 +5,15 @@ In the GitHub readme file, include the following info,
  All relevant appendices (diagrams, screenshots, user guides)
 
 Team Members:
+
 CHEW SHI WEI S10221849H
+
 CHUA KAI YI 
+
 KOH KA-WEI DARRYL
+
 RADCHANON DON SUKKRAM S10223354J
+
 TAN YU XIN AISLINN S10222271H
 
 Description of App: 
