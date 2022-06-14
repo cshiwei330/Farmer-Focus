@@ -80,15 +80,18 @@ public class AddNewTaskFragment extends Fragment {
                 bundle.putString("task name", newTaskNameString);
                 bundle.putString("task desc", newTaskDescString);
 
-                FragmentTransaction fT = getActivity().getSupportFragmentManager().beginTransaction();
+//                FragmentTransaction fT = getActivity().getSupportFragmentManager().beginTransaction();
+
+                //define fragment transaction
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
 
                 TaskFragment taskFragment = new TaskFragment();
 
                 taskFragment.setArguments(bundle);
 
-                fT.replace(R.id.nav_host_fragment_content_main, taskFragment);
-                fT.show(taskFragment);
-                fT.commit();
+                ft.replace(R.id.nav_host_fragment_content_main, taskFragment);
+                ft.show(taskFragment);
+                ft.commit();
             }
         });
 

@@ -14,25 +14,41 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="41dp"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="40dp"
             android:text="Calender"
             android:textColor="#000000"
             android:textSize="34sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/calendarView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CalendarView
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginTop="16dp"
             android:background="#EFEAD8"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/totalTaskCalender"
+            android:layout_width="138dp"
+            android:layout_height="38dp"
+            android:text="Total:"
+            app:layout_constraintStart_toStartOf="@+id/calendarView"
+            app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/toDoListRecycleView"
+            android:layout_width="350dp"
+            android:layout_height="226dp"
+            android:background="#C8BF9E"
+            app:layout_constraintStart_toStartOf="@+id/calendarView"
+            app:layout_constraintTop_toBottomOf="@+id/totalTaskCalender">
+
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
