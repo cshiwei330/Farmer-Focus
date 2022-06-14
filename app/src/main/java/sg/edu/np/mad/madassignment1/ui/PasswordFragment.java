@@ -1,23 +1,26 @@
-package sg.edu.np.mad.madassignment1;
+package sg.edu.np.mad.madassignment1.ui;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import sg.edu.np.mad.madassignment1.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AddNewTaskFragment#newInstance} factory method to
+ * Use the {@link PasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddNewTaskFragment extends Fragment {
+public class PasswordFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,7 +30,7 @@ public class AddNewTaskFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AddNewTaskFragment() {
+    public PasswordFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +40,11 @@ public class AddNewTaskFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddNewTaskFragment.
+     * @return A new instance of fragment PasswordFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddNewTaskFragment newInstance(String param1, String param2) {
-        AddNewTaskFragment fragment = new AddNewTaskFragment();
+    public static PasswordFragment newInstance(String param1, String param2) {
+        PasswordFragment fragment = new PasswordFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,38 +64,18 @@ public class AddNewTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_new_task, container, false);
-
-        EditText newTaskName = view.findViewById(R.id.newTaskName);
-        EditText newTaskDesc = view.findViewById(R.id.newTaskDesc);
-        Button createNewTaskButton = view.findViewById(R.id.createNewTaskButton);
-
-        createNewTaskButton.setOnClickListener(new View.OnClickListener() {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_password, container, false);
+        Button myButtonSave = (Button) view.findViewById(R.id.SavebBtn2);
+        myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Toast.makeText(getActivity(), "Task Created", Toast.LENGTH_SHORT).show();
-
-                String newTaskNameString = newTaskName.getText().toString();
-                String newTaskDescString = newTaskDesc.getText().toString();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("task name", newTaskNameString);
-                bundle.putString("task desc", newTaskDescString);
-
-                FragmentTransaction fT = getActivity().getSupportFragmentManager().beginTransaction();
-
-                TaskFragment taskFragment = new TaskFragment();
-
-                taskFragment.setArguments(bundle);
-
-                fT.replace(R.id.nav_host_fragment_content_main, taskFragment);
-                fT.show(taskFragment);
-                fT.commit();
+                // Navigate back to AccountSettings Fragment
+                Navigation.findNavController(view).navigate(R.id.action_nav_Password_to_nav_AccountSettings); //call the action created in navigation
+                // Display "Saved"
+                Toast.makeText(getActivity(), "Saved!", Toast.LENGTH_SHORT).show();
             }
         });
-
-        // Inflate the layout for this fragment
         return view;
     }
 }

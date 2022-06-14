@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/AccSettings"
             android:layout_width="234dp"
             android:layout_height="43dp"
             android:layout_marginStart="41dp"
@@ -36,19 +36,19 @@
             android:src="@drawable/profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/AccSettings" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/EditAccountUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="101dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="101dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="Username"
+            android:text="Enter farmer's name"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
             android:textColor="#A29574"
             app:iconTint="#00FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/EditAccountUsername" />
 
         <Button
             android:id="@+id/SaveBtn"
@@ -78,22 +78,37 @@
             android:text="Save"
             app:iconTint="#A29574"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/EditAccountUsername" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/ChangePass"
             android:layout_width="392dp"
             android:layout_height="45dp"
             android:layout_marginStart="11dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="11dp"
             android:text="Change Password"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+            app:layout_constraintTop_toBottomOf="@+id/EditAccountUsername" />
+
+        <TextView
+            android:id="@+id/UserName"
+            android:layout_width="193dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="112dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="112dp"
+            android:text="farmer's name"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
