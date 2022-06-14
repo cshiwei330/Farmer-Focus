@@ -59,13 +59,23 @@
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/app_bar_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/content_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_account_settings.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_add_new_task.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_calender.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_password.xml" value="0.2" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_statistics.xml" value="0.11203703703703703" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_task.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_timer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/nav_header_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/to_do_list_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Year 2/Mobile App Development (MAD)/Assignment/Assignment V2/app/src/main/res/layout/activity_main.xml" value="0.327445652173913" />
         <entry key="..\:/Year 2/Mobile App Development (MAD)/Assignment/Assignment V2/app/src/main/res/layout/fragment_timer.xml" value="0.327445652173913" />
       </map>
