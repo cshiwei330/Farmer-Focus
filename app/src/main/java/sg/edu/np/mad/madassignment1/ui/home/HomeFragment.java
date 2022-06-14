@@ -13,9 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import sg.edu.np.mad.madassignment1.R;
-import sg.edu.np.mad.madassignment1.SignUpFragment;
 import sg.edu.np.mad.madassignment1.TaskFragment;
-import sg.edu.np.mad.madassignment1.ui.login.LoginFragment;
 import sg.edu.np.mad.madassignment1.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -26,30 +24,6 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home,container,false);
-
-        Button test = view.findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment LoginFragment = new LoginFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.add(R.id.homeFragmentContainer, LoginFragment);
-                ft.show(LoginFragment);
-                ft.commit();
-            }
-        });
-
-        Button signuptest = view.findViewById(R.id.signuptest);
-        signuptest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment signUpFragment = new SignUpFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.add(R.id.homeFragmentContainer, signUpFragment);
-                ft.show(signUpFragment);
-                ft.commit();
-            }
-        });
 
         ImageView tasksIcon = view.findViewById(R.id.tasksIcon);
         TextView tasksTextView = view.findViewById(R.id.tasksTextView);

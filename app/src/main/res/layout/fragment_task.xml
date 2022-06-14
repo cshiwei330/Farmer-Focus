@@ -44,10 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="316dp"
             android:layout_marginTop="8dp"
+            android:backgroundTint="#A29574"
             android:clickable="true"
             android:src="@android:drawable/ic_input_add"
+            android:tint="#A29574"
+            app:borderWidth="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
+            app:rippleColor="#A29574"
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         <TextView
@@ -66,6 +70,7 @@
             android:id="@+id/clearAllTaskButton"
             android:layout_width="110dp"
             android:layout_height="29dp"
+            android:backgroundTint="#A29574"
             android:text="Clear All Tasks"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/totalTasks"

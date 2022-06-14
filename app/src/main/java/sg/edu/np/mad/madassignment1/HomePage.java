@@ -47,15 +47,5 @@ public class HomePage extends AppCompatActivity {
         });
 
 
-        Button test = findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent testlogin = new Intent(HomePage.this, LoginPage.class);
-                startActivity(testlogin);
-            }
-        });
-
-
     }
 }

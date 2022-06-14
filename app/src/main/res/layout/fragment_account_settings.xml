@@ -17,8 +17,8 @@
             android:id="@+id/textView4"
             android:layout_width="234dp"
             android:layout_height="43dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="37dp"
             android:text="Account Settings"
             android:textColor="#101010"
             android:textSize="30sp"
@@ -60,7 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
             android:layout_marginTop="255dp"
+            android:background="#00FFFFFF"
+            android:backgroundTint="#00FFFFFF"
             android:text="Cancel"
+            android:textColor="#A29574"
+            app:iconTint="#00FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
@@ -70,7 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="255dp"
             android:layout_marginEnd="46dp"
+            android:backgroundTint="#A29574"
             android:text="Save"
+            app:iconTint="#A29574"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 

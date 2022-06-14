@@ -14,10 +14,10 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="monospace"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="37dp"
             android:text="Calender"
+            android:textColor="#000000"
             android:textSize="34sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
