@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".DashBoardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DrawerBaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
