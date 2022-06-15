@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".TaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalenderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".DashBoardActivity"
             android:exported="true" />
         <activity
@@ -26,4 +41,3 @@
     </application>
 
 </manifest>
-

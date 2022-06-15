@@ -5,21 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 
-import sg.edu.np.mad.madassignment1.databinding.ActivityDashBoardBinding;
+import sg.edu.np.mad.madassignment1.databinding.ActivityTaskBinding;
 
-public class DashBoardActivity extends DrawerBaseActivity {
+public class TaskActivity extends DrawerBaseActivity {
 
     //define activity binding
-    ActivityDashBoardBinding activityDashBoardBinding;
+    ActivityTaskBinding activityTaskBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //inflate according to activity binding to show
-        activityDashBoardBinding = ActivityDashBoardBinding.inflate(getLayoutInflater());
+        activityTaskBinding = ActivityTaskBinding.inflate(getLayoutInflater());
         //set view to this activity
-        setContentView(activityDashBoardBinding.getRoot());
+        setContentView(activityTaskBinding.getRoot());
         //set title
-        allocateActivityTitle("Dashboard");
+        allocateActivityTitle("Task");
     }
 }
