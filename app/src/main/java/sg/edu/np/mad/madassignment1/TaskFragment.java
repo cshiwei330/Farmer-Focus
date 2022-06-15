@@ -85,8 +85,10 @@ public class TaskFragment extends Fragment {
 
         Log.v(TAG, "First TAG Size: " + String.valueOf(taskList.size()));
 
+        // get bundle from AddNewTask
         Bundle bundle = getArguments();
 
+        // if tasks inside AddNewTasks bundle, add them to database
         if (bundle != null){
             String newTaskName = bundle.getString("task name");
             String newTaskDesc = bundle.getString("task desc");
@@ -107,16 +109,19 @@ public class TaskFragment extends Fragment {
             totalTask.setText(totalTaskText[0]);
         }
 
+        // toast to say no tasks
         if (taskList.size() == 0){
             Toast.makeText(getActivity(), "No Tasks", Toast.LENGTH_LONG).show();
         }
 
+        // initialize recyclerview
         RecyclerView recyclerView = view.findViewById(R.id.toDoListRecycleView);
         MyAdaptor mAdaptor = new MyAdaptor(taskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
 
+        // button to clear all tasks
         Button clearAllTaskButton = view.findViewById(R.id.clearAllTaskButton);
         clearAllTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +137,7 @@ public class TaskFragment extends Fragment {
             }
         });
 
-
+        // floating button to go to addnewtask
         FloatingActionButton addNewTask = view.findViewById(R.id.addNewTaskButton);
         addNewTask.setOnClickListener(new View.OnClickListener() {
             @Override

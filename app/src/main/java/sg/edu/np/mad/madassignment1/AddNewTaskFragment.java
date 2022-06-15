@@ -1,7 +1,10 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -9,15 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddNewTaskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddNewTaskFragment extends Fragment {
+public class AddNewTaskFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,11 +69,31 @@ public class AddNewTaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //inflate fragment
         View view = inflater.inflate(R.layout.fragment_add_new_task, container, false);
 
+        //define elements in fragment
         EditText newTaskName = view.findViewById(R.id.newTaskName);
         EditText newTaskDesc = view.findViewById(R.id.newTaskDesc);
         Button createNewTaskButton = view.findViewById(R.id.createNewTaskButton);
+        Button dateButton = view.findViewById(R.id.datePickerButton);
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+//                //define fragment transaction
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                // set fragment to tasks fragment
+//                ft.replace(R.id.nav_host_fragment_content_main, datePicker);
+//                ft.show(datePicker);
+//                ft.commit();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                datePicker.show(ft, "date picker");
+
+            }
+        });
 
         createNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,5 +125,26 @@ public class AddNewTaskFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        TextView textView = view.findViewById(R.id.textView2);
+        textView.setText(currentDateString);
+    }
+
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        return new DatePickerDialog(getContext(), (DatePickerDialog.OnDateSetListener) getContext(), year, month, day);
     }
 }
