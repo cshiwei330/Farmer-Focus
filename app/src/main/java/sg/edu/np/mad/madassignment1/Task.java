@@ -6,21 +6,15 @@ public class Task {
     private String taskName;
     private String taskDesc;
 
-    private int TaskHour;
-    private int TaskMinute;
-    private int TaskYear;
-    private int TaskMonth;
-    private int TaskDayOfMonth;
+    private int taskHour;
+    private int taskMinute;
+    private int taskYear;
+    private int taskMonth;
+    private int taskDayOfMonth;
 
-    public Task(){}
-
-    public Task(String taskName, int taskHour, int taskMinute, int taskYear, int taskMonth) {
-        this.taskName = taskName;
-        TaskHour = taskHour;
-        TaskMinute = taskMinute;
-        TaskYear = taskYear;
-        TaskMonth = taskMonth;
+    public Task() {
     }
+
 
     public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
         this.Id = Id;
@@ -28,14 +22,16 @@ public class Task {
         this.taskName = taskName;
         this.taskDesc = taskDesc;
 
-        this.TaskHour = taskHour;
-        this.TaskMinute = taskMinute;
-        this.TaskYear = taskYear;
-        this.TaskMonth = taskMonth;
-        this.TaskDayOfMonth = taskDayOfMonth;
+        this.taskHour = taskHour;
+        this.taskMinute = taskMinute;
+        this.taskYear = taskYear;
+        this.taskMonth = taskMonth;
+        this.taskDayOfMonth = taskDayOfMonth;
     }
 
-    public int getId() { return Id; }
+    public int getId() {
+        return Id;
+    }
 
     public void setId(int id) {
         Id = id;
@@ -65,25 +61,44 @@ public class Task {
         this.taskDesc = taskDesc;
     }
 
-    public int getTaskHour() { return TaskHour; }
-
-    public void setTaskHour(int taskHour) {
-        TaskHour = taskHour;
+    public int getTaskHour() {
+        return taskHour;
     }
 
-    public int getTaskMinute() { return TaskMinute; }
+    public void setTaskHour(int taskHour) {
+        this.taskHour = taskHour;
+    }
 
-    public void setTaskMinute(int taskMinute) { TaskMinute = taskMinute; }
+    public int getTaskMinute() {
+        return taskMinute;
+    }
 
-    public int getTaskYear() { return TaskYear; }
+    public void setTaskMinute(int taskMinute) {
+        this.taskMinute = taskMinute;
+    }
 
-    public void setTaskYear(int taskYear) { TaskYear = taskYear; }
+    public int getTaskYear() {
+        return taskYear;
+    }
 
-    public int getTaskMonth() { return TaskMonth; }
+    public void setTaskYear(int taskYear) {
+        this.taskYear = taskYear;
+    }
 
-    public void setTaskMonth(int taskMonth) { TaskMonth = taskMonth; }
+    public int getTaskMonth() {
+        return taskMonth;
+    }
 
-    public int getTaskDayOfMonth() { return TaskDayOfMonth; }
+    public void setTaskMonth(int taskMonth) {
+        this.taskMonth = taskMonth;
+    }
 
-    public void setTaskDayOfMonth(int taskDayOfMonth) { TaskDayOfMonth = taskDayOfMonth; }
+    public int getTaskDayOfMonth() {
+        return taskDayOfMonth;
+    }
+
+    public void setTaskDayOfMonth(int taskDayOfMonth) {
+        this.taskDayOfMonth = taskDayOfMonth;
+    }
+
 }
