@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public class TaskActivity extends DrawerBaseActivity{
         clearAllTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //delete all task entries
                 dbHandler.deleteAllTask();
                 //replace taskList with empty dbHandler
@@ -81,7 +83,7 @@ public class TaskActivity extends DrawerBaseActivity{
                 setTotalTaskTextView(taskList);
 
                 //toast to indicate tasks successfully cleared
-                Toast.makeText(getBaseContext(), "Tasks Cleared", Toast.LENGTH_LONG).show();
+                Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -89,9 +91,20 @@ public class TaskActivity extends DrawerBaseActivity{
         addNewTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //start AddNewTaskActivity
-                Intent intent = new Intent(getBaseContext(), AddNewTaskActivity.class);
-                startActivity(intent);
+                //create intent to go to AddNewTaskActivity
+                Intent TaskActivityToAddNewTaskActivity = new Intent(TaskActivity.this,AddNewTaskActivity.class);
+
+                //put extra
+                TaskActivityToAddNewTaskActivity.putExtra("finisher", new ResultReceiver(null) {
+                    @Override
+                    //when result code =1, received from bundle, kill this activity
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        TaskActivity.this.finish();
+                    }
+                });
+                //start activity with result
+                startActivityForResult(TaskActivityToAddNewTaskActivity,1);
+
             }
         });
 
