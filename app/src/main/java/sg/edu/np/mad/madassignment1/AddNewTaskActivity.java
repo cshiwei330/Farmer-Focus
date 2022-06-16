@@ -70,6 +70,11 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                 newTaskDB.setStatus(status);
                 newTaskDB.setTaskName(newTaskNameString);
                 newTaskDB.setTaskDesc(newTaskDescString);
+                newTaskDB.setTaskHour(hour);
+                newTaskDB.setTaskMinute(minute);
+                newTaskDB.setTaskYear(year);
+                newTaskDB.setTaskMonth(month);
+                newTaskDB.setTaskDayOfMonth(dayOfMonth);
 
                 //add new task to db
                 dbHandler.addTask(newTaskDB);
@@ -84,9 +89,14 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        c.set(Calendar.YEAR, selectedYear);
+        c.set(Calendar.MONTH, selectedMonth);
+        c.set(Calendar.DAY_OF_MONTH, selectedDayOfMonth);
+
+        year = selectedYear;
+        month = selectedMonth+1;
+        dayOfMonth = selectedDayOfMonth;
+
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
         TextView textView = (TextView) findViewById(R.id.datePickerTextView);
