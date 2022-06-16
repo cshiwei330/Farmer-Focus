@@ -88,20 +88,6 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         //define task as t
         Task t = data.get(position);
 
-//        if (dataDeep != null) {
-//            for(Task task:dataDeep){
-//                if(t == task){
-//                    holder.itemView.setVisibility(View.VISIBLE);
-//                }
-//                else{
-//                    holder.itemView.setLayoutParams(holder.params);
-//                }
-//            }
-//        }
-//        else{
-//            holder.itemView.setLayoutParams(holder.params);
-//        }
-
         if (dataDeep != null && dataDeep.size() > 0){
             for(Task task:dataDeep){
                 holder.itemView.setVisibility(View.VISIBLE);
