@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".AccountSettings"
+            android:exported="false" />
+        <activity
             android:name=".AddNewTaskActivity"
             android:exported="false" />
         <activity

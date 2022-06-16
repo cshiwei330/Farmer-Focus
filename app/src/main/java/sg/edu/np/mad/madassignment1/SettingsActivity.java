@@ -2,7 +2,10 @@ package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.view.View;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivitySettingsBinding;
 
@@ -20,5 +23,8 @@ public class SettingsActivity extends DrawerBaseActivity {
         setContentView(activitySettingsBinding.getRoot());
         //set title
         allocateActivityTitle("Settings");
+
+
+
     }
 }
