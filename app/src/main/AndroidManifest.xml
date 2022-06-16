@@ -29,7 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".LoginPageActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".DashBoardActivity"
             android:exported="true" />
@@ -41,9 +41,6 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.MADAssignment1.NoActionBar" />
-        <activity
-            android:name=".SignUpPage"
-            android:exported="false" />
     </application>
 
 </manifest>
