@@ -6,4 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".TaskActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/toDoListRecycleView"
+        android:layout_width="342dp"
+        android:layout_height="440dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="63dp"
+        android:background="#C8BF9E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
+        app:layout_constraintVertical_bias="0.158" />
+
+    <TextView
+        android:id="@+id/toDoListTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Tasks List"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/totalTasks"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNewTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="316dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#A29574"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="#A29574"
+        app:borderWidth="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
+        app:rippleColor="#A29574"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/totalTasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="7dp"
+        android:text="Total:"
+        app:layout_constraintBottom_toTopOf="@+id/toDoListRecycleView"
+        app:layout_constraintStart_toStartOf="@+id/toDoListRecycleView"
+        app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
+        app:layout_constraintVertical_bias="0.111" />
+
+    <Button
+        android:id="@+id/clearAllTaskButton"
+        android:layout_width="110dp"
+        android:layout_height="29dp"
+        android:backgroundTint="#A29574"
+        android:text="Clear All Tasks"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalTasks"
+        app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
+        app:layout_constraintTop_toTopOf="@+id/totalTasks"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

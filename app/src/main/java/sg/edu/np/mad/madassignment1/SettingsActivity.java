@@ -4,11 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SettingsActivity extends AppCompatActivity {
+import sg.edu.np.mad.madassignment1.databinding.ActivitySettingsBinding;
+
+public class SettingsActivity extends DrawerBaseActivity {
+
+    //define activity binding
+    ActivitySettingsBinding activitySettingsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        //inflate according to activity binding to show
+        activitySettingsBinding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        //set view to this activity
+        setContentView(activitySettingsBinding.getRoot());
+        //set title
+        allocateActivityTitle("Settings");
     }
 }
