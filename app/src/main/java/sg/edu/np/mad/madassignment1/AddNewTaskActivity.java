@@ -1,21 +1,34 @@
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
-public class AddNewTaskActivity extends AppCompatActivity {
+public class AddNewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     ArrayList<Task> taskList = new ArrayList<>();
+    int hour, minute;
+    int year, month, dayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +39,6 @@ public class AddNewTaskActivity extends AppCompatActivity {
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
-        Button dateButton = findViewById(R.id.datePickerButtonActivity);
 
         //define database
         DBHandler dbHandler = new DBHandler(this, null, null,6);
@@ -34,11 +46,16 @@ public class AddNewTaskActivity extends AppCompatActivity {
         //get task data from database
         taskList = dbHandler.getTaskData();
 
+        //confirm create new task button listener
         createNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getBaseContext(), "Task Created", Toast.LENGTH_SHORT).show();
+
+                //kill TaskActivity
+                ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
+
+                Toast.makeText(AddNewTaskActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
 
                 String newTaskNameString = newTaskName.getText().toString();
                 String newTaskDescString = newTaskDesc.getText().toString();
@@ -58,12 +75,49 @@ public class AddNewTaskActivity extends AppCompatActivity {
                 dbHandler.addTask(newTaskDB);
 
                 //start TaskActivity
-                Intent intent = new Intent(getBaseContext(), TaskActivity.class);
+                Intent intent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
                 startActivity(intent);
-
-                //end this activity
-                finish();
             }
         });
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+
+        TextView textView = (TextView) findViewById(R.id.datePickerTextView);
+        textView.setText(currentDateString);
+    }
+
+    public void popTimePicker(View view)
+    {
+        TextView timeTextView = findViewById(R.id.timePickerTextView);
+
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+        {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+            {
+                hour = selectedHour;
+                minute = selectedMinute;
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
+            }
+        };
+
+        //int style = AlertDialog.THEME_TRADITIONAL;
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void onDateClick(View view) {
+        DialogFragment datePicker = new DatePickerFragment();
+        datePicker.show(getSupportFragmentManager(), "date picker");
     }
 }

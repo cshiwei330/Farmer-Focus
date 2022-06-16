@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".AddNewTaskActivity">
 
+    <Button
+        android:id="@+id/datePickerTextView"
+        style="?android:spinnerStyle"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:onClick="onDateClick"
+        android:text="JAN 01 2020"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/taskDatePickerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/taskDatePickerTextView" />
+
     <EditText
         android:id="@+id/newTaskNameActivity"
         android:layout_width="280dp"
@@ -19,32 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskNameTextView3"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/datePickerButtonActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="45dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/createNewTaskButtonActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="97dp"
-        android:layout_marginBottom="38dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/datePickerButtonActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskDateTextView3" />
 
     <TextView
         android:id="@+id/taskNameTextView3"
@@ -72,13 +61,13 @@
         android:id="@+id/createNewTaskButtonActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="324dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#A29574"
         android:text="Create New Task"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskDescActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/timePickerTextView" />
 
     <TextView
         android:id="@+id/taskDescTextView3"
@@ -91,13 +80,36 @@
         app:layout_constraintTop_toBottomOf="@+id/newTaskNameActivity" />
 
     <TextView
-        android:id="@+id/taskDateTextView3"
+        android:id="@+id/taskDatePickerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Task DatePicker"
+        android:text="Task Date"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/newTaskDescActivity"
         app:layout_constraintTop_toBottomOf="@+id/newTaskDescActivity" />
+
+    <TextView
+        android:id="@+id/TaskTimePickerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Task Time"
+        app:layout_constraintStart_toStartOf="@+id/datePickerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/datePickerTextView" />
+
+    <TextView
+        android:id="@+id/timePickerTextView"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:onClick="popTimePicker"
+        android:text="9:00"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/TaskTimePickerTextView"
+        app:layout_constraintTop_toBottomOf="@+id/TaskTimePickerTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,11 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 
 public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
@@ -24,9 +28,32 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
     }
 
     public void onBindViewHolder(MyViewHolder holder, int position){
+        //define task as t
         Task t = data.get(position);
+
+        //convert int data to string
+        String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
+        //date format
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yyyy");
+        //give dumby value to taskDate for forced initialization
+        Date taskDate = null;
+
+
+        //try catch because .parse throws errors before compiling??????
+        try {
+            //convert to date class
+            taskDate = fmt.parse(stringDate);
+        }
+        catch(ParseException pe){ }
+
+        //convert date object to string with chosen dateformat
+        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
+
+
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
+        holder.taskDate.setText(strDate);
+
         holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
