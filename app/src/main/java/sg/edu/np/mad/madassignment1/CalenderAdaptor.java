@@ -102,19 +102,22 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 //            holder.itemView.setLayoutParams(holder.params);
 //        }
 
-        if (dataDeep != null){
-            holder.itemView.setVisibility(View.VISIBLE);
+        if (dataDeep != null && dataDeep.size() > 0){
             for(Task task:dataDeep){
+                holder.itemView.setVisibility(View.VISIBLE);
                 if(t == task){
+                    Log.v("CALVIS",String.valueOf(t.getTaskDayOfMonth()));
                     holder.itemView.setLayoutParams(holder.visible);
                 }
                 else{
+                    Log.v("CALINVIS",String.valueOf(t.getTaskDayOfMonth()));
                     holder.itemView.setLayoutParams(holder.params);
                 }
             }
         }
         else{
             for(Task task:data){
+                Log.v("ELSE",String.valueOf(task.getTaskDayOfMonth()));
                 holder.itemView.setLayoutParams(holder.params);
                 holder.itemView.setVisibility(View.GONE);
             }
