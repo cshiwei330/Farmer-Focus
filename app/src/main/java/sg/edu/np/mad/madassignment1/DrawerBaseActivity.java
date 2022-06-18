@@ -102,13 +102,13 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 break;
         }
 
-//        //Log Out button
-//        switch (item.getItemId()){
-//            case R.id.nav_Logout:
-//                startActivity(new Intent(this,LogOutActivity.class));
-//                overridePendingTransition(0,0);
-//                break;
-//        }
+        //Log Out button
+        switch (item.getItemId()){
+            case R.id.nav_Logout:
+                startActivity(new Intent(this,LoginPageActivity.class));
+                overridePendingTransition(0,0);
+                break;
+       }
 
         return false;
     }
