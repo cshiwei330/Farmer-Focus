@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
-            android:name=".AccountSettings"
+            android:name=".PasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountSettingsActivity"
             android:exported="false" />
         <activity
             android:name=".AddNewTaskActivity"
@@ -30,16 +33,17 @@
         <activity
             android:name=".SignUpPageActivity"
             android:exported="false" />
+        <activity
+            android:name=".LoginPageActivity"
+            android:exported="true">
 
-        // defining default activity
-        <activity android:name=".LoginPageActivity" android:exported="true">
             <!-- This activity is the login page, should appear in app launcher -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DashBoardActivity"
             android:exported="true" />
