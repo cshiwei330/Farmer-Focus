@@ -57,11 +57,11 @@ public class SignUpPageActivity extends AppCompatActivity {
                 User userDBData = dbHandler.findUser(myCreateUsername.getText().toString());
                 if (userDBData == null) {
                     if (myCreatePassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
-                        User userDataDB = new User();
-                        userDataDB.setUsername(myCreateUsername.getText().toString());
-                        userDataDB.setPassword(myConfirmPassword.getText().toString());
-                        dbHandler.addUser(userDataDB);
                         if (tandc.isChecked()) {
+                            User userDataDB = new User();
+                            userDataDB.setUsername(myCreateUsername.getText().toString());
+                            userDataDB.setPassword(myConfirmPassword.getText().toString());
+                            dbHandler.addUser(userDataDB);
                             Toast.makeText(SignUpPageActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
                             Intent myCreateIntent = new Intent(SignUpPageActivity.this, LoginPageActivity.class);
                             startActivity(myCreateIntent);
