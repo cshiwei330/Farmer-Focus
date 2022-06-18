@@ -30,17 +30,17 @@ public class LoginPageActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(compoundButton.isChecked()){
-                    SharedPreferences sharedPreferences = getSharedPreferences(LoginPageActivity.PREFS_NAME, 0);
+                    SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("remember", true);
-                    editor.commit();
+                    editor.putString("remember", "true");
+                    editor.apply();
                     Toast.makeText(LoginPageActivity.this, "Remembering you...", Toast.LENGTH_SHORT).show();
                 }
                 else if(!compoundButton.isChecked()){
                     SharedPreferences sharedPreferences = getSharedPreferences(LoginPageActivity.PREFS_NAME, 0);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("remember", false);
-                    editor.commit();
+                    editor.putString("remember", "false");
+                    editor.apply();
                 }
             }
         });
@@ -55,7 +55,7 @@ public class LoginPageActivity extends AppCompatActivity {
                 if (isValidCredentials(etMyUsername.getText().toString(), etMyPassword.getText().toString())) {
                     Toast.makeText(LoginPageActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    Intent myIntent = new Intent(LoginPageActivity.this, DashBoardActivity.class);
+                    Intent myIntent = new Intent(LoginPageActivity.this, HomeActivity.class);
                     startActivity(myIntent);
                 } else {
                     Toast.makeText(LoginPageActivity.this, "Invalid Login", Toast.LENGTH_SHORT).show();
