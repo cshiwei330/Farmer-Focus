@@ -17,12 +17,14 @@
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         android:selectAllOnFocus="true"
         android:textColor="#A29574"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -31,8 +33,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="24dp"
-        android:hint="Username"
+        android:hint="@string/prompt_username"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         android:selectAllOnFocus="true"
         android:textColor="#A29574"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:layout_marginTop="88dp"
-        android:text="Login"
+        android:text="@string/login_small"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -56,27 +60,29 @@
     <CheckBox
         android:id="@+id/rememberUser"
         android:layout_width="152dp"
-        android:layout_height="27dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Remember Me"
+        android:text="@string/remember_user"
         android:textColor="#A29574"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/newUser"
         android:layout_width="153dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="43dp"
         android:layout_marginTop="316dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#A29574"
         android:backgroundTintMode="add"
-        android:text="Sign Up Here"
+        android:text="@string/sign_up_here"
         android:textColor="#A29574"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rememberUser" />
+        app:layout_constraintTop_toBottomOf="@+id/rememberUser"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/loginButton"
@@ -86,12 +92,13 @@
         android:layout_marginTop="316dp"
         android:layout_marginEnd="43dp"
         android:backgroundTint="#A29574"
-        android:text="Login"
+        android:text="@string/login_caps"
         android:textColor="#FFFFFF"
         app:iconTint="#A29574"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.789"
         app:layout_constraintStart_toEndOf="@+id/newUser"
-        app:layout_constraintTop_toBottomOf="@+id/rememberUser" />
+        app:layout_constraintTop_toBottomOf="@+id/rememberUser"
+        tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
