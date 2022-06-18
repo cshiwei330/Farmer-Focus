@@ -26,6 +26,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
+        Button myButtonCancel = findViewById(R.id.CancelBtn);
         TextView myUserName = (TextView) findViewById(R.id.UserName);
         TextView editText = (TextView) findViewById(R.id.EditAccountUsername);
         TextView myPassword = (TextView) findViewById(R.id.ChangePass);
@@ -49,7 +50,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 myUserName.setText(getString);
 
                 // shared preferences
-                Log.v("front", "test");
+                Log.v("SP", "test");
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(TEXT, myUserName.getText().toString());
@@ -62,6 +63,11 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 startActivityForResult(AccountSettingsToSettingsActivity,1);
             }
         });
+
+        //Display saved nickname
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        text = sharedPreferences.getString(TEXT, "");
+        myUserName.setText(text);
 
         // Navigate to PasswordActivity
         myPassword.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +89,28 @@ public class AccountSettingsActivity extends AppCompatActivity {
             }
         });
 
-        //Display saved nickname
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-        text = sharedPreferences.getString(TEXT, "");
-        myUserName.setText(text);
+        // Navigate back to settings if cancel is pressed
+        myButtonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //create intent to go to Password
+                Intent AccountSettingsToSettingsActivity = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
 
+                //put extra
+                AccountSettingsToSettingsActivity.putExtra("finisher", new ResultReceiver(null) {
+                    @Override
+                    //when result code =1, received from bundle, kill this activity
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        AccountSettingsActivity.this.finish();
+                    }
+                });
+                // Display "Cancelled" msg
+                Toast.makeText(AccountSettingsActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
+
+                //start activity with result
+                startActivityForResult(AccountSettingsToSettingsActivity,1);
+            }
+        });
 
     }
 }
