@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -18,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 
 //this DrawerBaseActivity to be extended to all activities which need a hamburger icon
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //setting global variables
+    public String GLOBAL_PREF = "MyPrefs";
 
     //define navbar drawer
     DrawerLayout drawerLayout;
@@ -105,6 +109,10 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         //Log Out button
         switch (item.getItemId()){
             case R.id.nav_Logout:
+                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("remember", "false");
+                editor.apply();
                 startActivity(new Intent(this,LoginPageActivity.class));
                 overridePendingTransition(0,0);
                 break;
