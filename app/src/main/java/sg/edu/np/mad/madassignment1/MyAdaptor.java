@@ -63,8 +63,15 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View view) {
                 Bundle extras = new Bundle();
                 Intent myIntent = new Intent(holder.taskName.getContext(), ViewTaskActivity.class);
+                extras.putInt("task id", t.getId());
+                extras.putInt("task status", t.getStatus());
                 extras.putString("task name", t.getTaskName());
                 extras.putString("task desc", t.getTaskDesc());
+                extras.putInt("task hour", t.getTaskHour());
+                extras.putInt("task minute", t.getTaskYear());
+                extras.putInt("task year", t.getTaskYear());
+                extras.putInt("task month", t.getTaskMonth());
+                extras.putInt("task dayOfMonth", t.getTaskDayOfMonth());
                 myIntent.putExtras(extras);
 
                 holder.taskName.getContext().startActivity(myIntent);

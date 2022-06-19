@@ -17,14 +17,23 @@ public class ViewTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
 
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+
         TextView taskName = findViewById(R.id.taskViewTaskNameDisplay);
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
         Button backButton = findViewById(R.id.backButton);
         Button deleteTaskButton = findViewById(R.id.deleteTaskButton);
 
         Intent receivingEnd = getIntent();
+        int newTaskId = receivingEnd.getIntExtra("task id", 0);
+        int newTaskStatus = receivingEnd.getIntExtra("task status", 0);
         String newTaskName = receivingEnd.getStringExtra("task name");
         String newTaskDesc = receivingEnd.getStringExtra("task desc");
+        int newTaskHour = receivingEnd.getIntExtra("task hour", 0);
+        int newTaskMin = receivingEnd.getIntExtra("task minute", 0);
+        int newTaskYear = receivingEnd.getIntExtra("task year", 0);
+        int newTaskMonth = receivingEnd.getIntExtra("task month", 0);
+        int newTaskDayOfMonth = receivingEnd.getIntExtra("task dayOfMonth", 0);
 
         taskName.setText(newTaskName);
         taskDesc.setText(newTaskDesc);
@@ -37,12 +46,16 @@ public class ViewTaskActivity extends AppCompatActivity {
             }
         });
 
-//        deleteTaskButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        deleteTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Task deleteTask = new Task(newTaskId, newTaskStatus, newTaskName, newTaskDesc,
+                        newTaskHour, newTaskMin, newTaskYear, newTaskMonth, newTaskDayOfMonth);
+                dbHandler.deleteTask(deleteTask);
+                Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
     }
 }
