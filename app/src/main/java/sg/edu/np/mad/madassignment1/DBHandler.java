@@ -1,6 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Timer;
-
-import sg.edu.np.mad.madassignment1.User;
 
 public class DBHandler extends SQLiteOpenHelper {
-    private String TAG = "DB Handler";
+    private final String TAG = "DB Handler";
 
     //database
     public static String DATABASE_NAME = "accountsDB.db";
@@ -83,6 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return queryData;
     }
 
+    // adding user data into user table created
     public void addUser(User userData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, userData.getUsername());
@@ -93,20 +90,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateUser(User userDBData){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_PASSWORD, userDBData.getPassword());
-
-
-        // updating password
-//        db.update(ACCOUNTS, values, COLUMN_PASSWORD + " = ?",
-//            new String[]{String.valueOf(userDBData.getPassword())});
-//        db.close();
-        db.insert(ACCOUNTS, null, values);
-        db.close();
-    }
-
+    // adding task data into task table created
     public void addTask(Task taskData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_TASKID, taskData.getId());
@@ -144,6 +128,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         db.close();
         return taskArrayList;
+    }
+
+    public void deleteTask(Task deleteTask){ // String taskName, String taskDesc
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Tasks","TaskId=? and TaskStatus=? and TaskName=? and TaskDesc=?" +
+                        " and TaskHour=? and TaskMinute=? and TaskYear=? and TaskMonth=? and TaskDayOfMonth=?",
+                new String[]{String.valueOf(deleteTask.getId()), String.valueOf(deleteTask.getStatus()),
+                        deleteTask.getTaskName(), deleteTask.getTaskDesc(), String.valueOf(deleteTask.getTaskHour()),
+                        String.valueOf(deleteTask.getTaskMinute()), String.valueOf(deleteTask.getTaskYear()),
+                        String.valueOf(deleteTask.getTaskMonth()), String.valueOf(deleteTask.getTaskDayOfMonth())});
+
+        Log.v(TAG, "Task Deleted");
+        // db.delete("Tasks","TaskName=? and TaskDesc=?",new String[]{taskName,taskDesc});
     }
 
     public void deleteAllTask(){
