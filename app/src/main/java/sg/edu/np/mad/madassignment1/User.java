@@ -1,14 +1,15 @@
 package sg.edu.np.mad.madassignment1;
 
 public class User {
-    private String UserName;
+    private static String UserName;
     private String Password;
 
     public User(){
 
     }
 
-    public String getUsername() {
+    // for menu header, need get username
+    public static String getUsername() {
         return UserName;
     }
 
