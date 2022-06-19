@@ -1,5 +1,8 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DateFormat;
@@ -39,7 +44,6 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //give dumby value to taskDate for forced initialization
         Date taskDate = null;
 
-
         //try catch because .parse throws errors before compiling??????
         try {
             //convert to date class
@@ -50,10 +54,22 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //convert date object to string with chosen dateformat
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
-
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskDate.setText(strDate);
+
+        holder.taskName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extras = new Bundle();
+                Intent myIntent = new Intent(holder.taskName.getContext(), ViewTaskActivity.class);
+                extras.putString("task name", t.getTaskName());
+                extras.putString("task desc", t.getTaskDesc());
+                myIntent.putExtras(extras);
+
+                holder.taskName.getContext().startActivity(myIntent);
+            }
+        });
 
         holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override

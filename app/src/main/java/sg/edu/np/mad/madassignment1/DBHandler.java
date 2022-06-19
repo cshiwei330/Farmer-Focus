@@ -132,6 +132,11 @@ public class DBHandler extends SQLiteOpenHelper {
         return taskArrayList;
     }
 
+//    public void deleteTask(Task task){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        int myTable = db.delete("Tasks", "TaskName = '" + task.getTaskName() + "'", null);
+//    }
+
     public void deleteAllTask(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from "+ TASKS);
