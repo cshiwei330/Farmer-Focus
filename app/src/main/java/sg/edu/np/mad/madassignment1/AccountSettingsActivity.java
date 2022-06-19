@@ -8,6 +8,7 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,25 +21,26 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
     public static final String TEXT = "text";
     public String text;
 
-    //define activity binding
-    ActivityAccountSettingsBinding activityAccountSettingsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //inflate according to activity binding to show
-        activityAccountSettingsBinding = ActivityAccountSettingsBinding.inflate(getLayoutInflater());
-        //set view to this activity
-        setContentView(activityAccountSettingsBinding.getRoot());
-        //set title
-        allocateActivityTitle("Account Settings");
 
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
         Button myButtonCancel = findViewById(R.id.BackBtn);
-        TextView myUserName = (TextView) findViewById(R.id.UserName);
+        TextView myUserName = (TextView) findViewById(R.id.Nickname);
         TextView editText = (TextView) findViewById(R.id.EditAccountUsername);
         TextView myPassword = (TextView) findViewById(R.id.ChangePass);
+        ImageView myProfilePic = (ImageView) findViewById(R.id.ProfilePic);
+
+        myProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent AccountSettingsActivityToImagesActivity = new Intent(AccountSettingsActivity.this, ImagesActivity.class);
+                startActivity(AccountSettingsActivityToImagesActivity);
+            }
+        });
 
         myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override

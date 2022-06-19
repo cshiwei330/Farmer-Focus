@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ProfilePic"
         android:layout_width="142dp"
         android:layout_height="128dp"
         android:layout_marginStart="130dp"
@@ -45,7 +45,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
     <Button
         android:id="@+id/BackBtn"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/EditAccountUsername" />
 
     <TextView
-        android:id="@+id/UserName"
+        android:id="@+id/Nickname"
         android:layout_width="193dp"
         android:layout_height="30dp"
         android:layout_marginStart="112dp"
@@ -95,6 +95,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
