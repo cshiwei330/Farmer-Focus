@@ -37,4 +37,13 @@
     <string name="back">"BACK"</string>
     <string name="login_caps">"LOGIN</string>
     <string name="login_small">"Login</string>
+
+    <!-- Strings related to home -->
+    <string name="motivationalQuote">"Quote"</string>
+    <string name="greetings">TextView</string>
+    <string name="stressed">Stressed</string>
+    <string name="happy">Happy</string>
+    <string name="neutral">Neutral</string>
+    <string name="sad">Sad</string>
+    <string name="recent_tasks">Recent Tasks:</string>
 </resources>

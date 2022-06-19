@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/displayMoodButtons"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoodFragment">
+
+    <TextView
+        android:id="@+id/moodQuestion"
+        android:layout_width="362dp"
+        android:layout_height="29dp"
+        android:text="How are you feeling today?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/happyButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:drawableEnd="@drawable/ic_baseline_sentiment_very_satisfied_24"
+        android:drawableTint="@color/white"
+        android:text="@string/happy"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/neutralButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/neutralButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:drawableEnd="@drawable/ic_baseline_sentiment_neutral_24"
+        android:drawableTint="@color/white"
+        android:text="@string/neutral"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/sadButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
+        android:drawableTint="@color/white"
+        android:text="@string/sad"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/stressButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/happyButton"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/stressButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:drawableEnd="@drawable/ic_baseline_sentiment_dissatisfied_24"
+        android:drawableTint="@color/white"
+        android:text="@string/stressed"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neutralButton"
+        tools:ignore="TextContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
