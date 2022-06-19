@@ -49,10 +49,10 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         navigationView.setNavigationItemSelectedListener(this);
 
         // For Menu header
-        //View header = navigationView.getHeaderView(0);
-        //String username = User.getUsername();
-        //TextView menuHeaderUsername = findViewById(R.id.menuHeaderUsername);
-        //menuHeaderUsername.setText(username);
+        View header = navigationView.getHeaderView(0);
+        String username = User.getUsername();
+        TextView menuHeaderUsername = header.findViewById(R.id.menuHeaderUsername);
+        menuHeaderUsername.setText(username);
 
         //drawer closing and opening state
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.menu_drawer_open, R.string.menu_drawer_close);
