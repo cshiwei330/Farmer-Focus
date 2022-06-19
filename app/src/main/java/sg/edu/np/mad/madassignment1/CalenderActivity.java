@@ -52,9 +52,8 @@ public class CalenderActivity extends DrawerBaseActivity {
                 //i2 = day
                 String dateString = String.format("%d/%d/%d",i2,i1+1,i);
 
-                calenderAdaptor.notifyDataSetChanged();
                 calenderAdaptor.getFilter().filter(dateString);
-                calenderAdaptor.notifyDataSetChanged();
+                //calenderAdaptor.notifyDataSetChanged();
             }
         });
     }

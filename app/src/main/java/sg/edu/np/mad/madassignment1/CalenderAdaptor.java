@@ -22,7 +22,7 @@ import java.util.List;
 public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> implements Filterable {
 
     ArrayList<Task> data;
-    ArrayList<Task> dataDeep;
+    ArrayList<Task> dataDateFilter;
 
     public CalenderAdaptor (ArrayList<Task> input) {
         data = input;
@@ -34,25 +34,34 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         return new CalenderViewHolder(item);
     }
 
+    //creates a list of Tasks to be filtered
     @Override
     public Filter getFilter() {
+        //define filter
         Filter filter = new Filter() {
+            //filtering method
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+                //define filter results to return
                 FilterResults filterResults = new FilterResults();
-                Log.v("HOW",String.valueOf(constraint));
+
+//                Log.v("HOW",String.valueOf(constraint));
+
+                //convert input 'constraint' to string
                 String stringDate = constraint.toString();
+                //split string into day,month,year
                 String[] stringDateArr = stringDate.split("/",3);
                 //force initialize to null
                 int[] intDateArr = new int[stringDateArr.length];
+                //convert stingDateArr to int
                 for(int i = 0;i < stringDateArr.length;i++)
                 {
                     //intDateArr[0] == dayOfMonth
-                    //intDateArr[0] == month
-                    //intDateArr[0] == year
+                    //intDateArr[1] == month
+                    //intDateArr[2] == year
                     intDateArr[i] = Integer.parseInt(stringDateArr[i]);
                 }
-
+                //check all tasks in data to filter date, if date is the same, add to filter
                 ArrayList<Task> taskFilter = new ArrayList<Task>();
                 for(Task task: data){
                     Log.v("Filter",String.valueOf(task.getTaskYear())+ "/" +
@@ -73,8 +82,9 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
-                dataDeep = ((ArrayList<Task>) results.values);
+                //set filter results to date filter list
+                dataDateFilter = ((ArrayList<Task>) results.values);
+                //forces onBindViewHolder to rerun
                 notifyDataSetChanged();
 
             }
@@ -87,26 +97,31 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
         //define task as t
         Task t = data.get(position);
-
-        if (dataDeep != null && dataDeep.size() > 0){
-            for(Task task:dataDeep){
-                holder.itemView.setVisibility(View.VISIBLE);
-                if(t == task){
-                    Log.v("CALVIS",String.valueOf(t.getTaskDayOfMonth()));
-                    holder.itemView.setLayoutParams(holder.visible);
+        //if filter is NOT null (initialized), AND NOT empty
+        if (dataDateFilter != null && dataDateFilter.size() > 0) {
+            //check all filter tasks to task t if similar
+            for (Task task : dataDateFilter) {
+                //if present in filter, set to visible and break
+                if (t == task) {
+                    Log.v("CAL_VIS", String.valueOf(t.getTaskDayOfMonth()));
+                    holder.itemView.setVisibility(View.VISIBLE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    Log.v("CALENDER VISIBLE",String.valueOf(position));
+                    break;
                 }
-                else{
-                    Log.v("CALINVIS",String.valueOf(t.getTaskDayOfMonth()));
-                    holder.itemView.setLayoutParams(holder.params);
+                //else, set to invisible
+                else {
+                    Log.v("CAL_INVIS", String.valueOf(t.getTaskDayOfMonth()));
+                    holder.itemView.setVisibility(View.GONE);
+                    holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
                 }
             }
         }
-        else{
-            for(Task task:data){
-                Log.v("ELSE",String.valueOf(task.getTaskDayOfMonth()));
-                holder.itemView.setLayoutParams(holder.params);
-                holder.itemView.setVisibility(View.GONE);
-            }
+        //filter is initialized, thus a filter has been applied, but is empty, set all to 0 size
+        else {
+            Log.v("ELSE", String.valueOf(t.getTaskDayOfMonth()));
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
         //convert int data to string
