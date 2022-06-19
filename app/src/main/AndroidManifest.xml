@@ -16,6 +16,12 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".PasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".TaskActivity"
             android:exported="false" />
         <activity

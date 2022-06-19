@@ -94,10 +94,10 @@ public class AccountSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //create intent to go to Password
-                Intent AccountSettingsToSettingsActivity = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
+                Intent AccountSettingsToSettingsActivity2 = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
 
                 //put extra
-                AccountSettingsToSettingsActivity.putExtra("finisher", new ResultReceiver(null) {
+                AccountSettingsToSettingsActivity2.putExtra("finisher", new ResultReceiver(null) {
                     @Override
                     //when result code =1, received from bundle, kill this activity
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -108,7 +108,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 Toast.makeText(AccountSettingsActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
 
                 //start activity with result
-                startActivityForResult(AccountSettingsToSettingsActivity,1);
+                startActivityForResult(AccountSettingsToSettingsActivity2,1);
             }
         });
 

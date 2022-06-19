@@ -3,8 +3,11 @@ package sg.edu.np.mad.madassignment1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivitySettingsBinding;
 
@@ -23,27 +26,26 @@ public class SettingsActivity extends DrawerBaseActivity {
         //set title
         allocateActivityTitle("Settings");
 
-        // floating button to go to account settings
-        ImageButton accountsettings = findViewById(R.id.AccSettingsBtn);
+        // image button to go to account settings
+        ImageButton myButtonSettings = findViewById(R.id.AccSettingsBtn);
 
         //add new task listener
-        accountsettings.setOnClickListener(new View.OnClickListener() {
+        myButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //create intent to go to AccountSettings
-                Intent SettingsActivityToAccountSettings = new Intent(SettingsActivity.this, AccountSettingsActivity.class);
-
-                //put extra
-                SettingsActivityToAccountSettings.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        SettingsActivity.this.finish();
-                    }
-                });
-                //start activity with result
-                startActivityForResult(SettingsActivityToAccountSettings,1);
-
+                Log.v("Settings", "test2");
+                Intent SettingsActivityToAccountSettingsActivity = new Intent(SettingsActivity.this, AccountSettingsActivity.class);
+                startActivity(SettingsActivityToAccountSettingsActivity);
+//                //put extra
+//                SettingsActivityToAccountSettingsActivity.putExtra("finisher", new ResultReceiver(null) {
+//                    @Override
+//                    //when result code =1, received from bundle, kill this activity
+//                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+//                        SettingsActivity.this.finish();
+//                    }
+//                });
+//                //start activity with result
+//                startActivityForResult(SettingsActivityToAccountSettingsActivity,1);
             }
         });
     }
