@@ -93,6 +93,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateUser(User userDBData){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_PASSWORD, userDBData.getPassword());
+
+
+        // updating password
+//        db.update(ACCOUNTS, values, COLUMN_PASSWORD + " = ?",
+//            new String[]{String.valueOf(userDBData.getPassword())});
+//        db.close();
+        db.insert(ACCOUNTS, null, values);
+        db.close();
+    }
+
     public void addTask(Task taskData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_TASKID, taskData.getId());

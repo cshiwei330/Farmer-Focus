@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mySettings"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
-    android:id="@+id/mySettings"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
 
     <TextView
-        android:id="@+id/settings_text"
+        android:id="@+id/titleTV"
         android:layout_width="175dp"
         android:layout_height="48dp"
         android:layout_marginStart="28dp"
@@ -35,7 +34,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_text" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTV" />
 
     <ImageButton
         android:id="@+id/AccSettingsBtn"
@@ -49,7 +48,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/themeTV"
         android:layout_width="183dp"
         android:layout_height="47dp"
         android:layout_marginStart="32dp"

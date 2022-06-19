@@ -1,8 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,19 +11,31 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AccountSettingsActivity extends AppCompatActivity {
+import sg.edu.np.mad.madassignment1.databinding.ActivityAccountSettingsBinding;
+
+public class AccountSettingsActivity extends DrawerBaseActivity {
 
     public String getString;
     public static final String SHARED_PREF = "shared";
     public static final String TEXT = "text";
     public String text;
 
+    //define activity binding
+    ActivityAccountSettingsBinding activityAccountSettingsBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //inflate according to activity binding to show
+        activityAccountSettingsBinding = ActivityAccountSettingsBinding.inflate(getLayoutInflater());
+        //set view to this activity
+        setContentView(activityAccountSettingsBinding.getRoot());
+        //set title
+        allocateActivityTitle("Account Settings");
+
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
-        Button myButtonCancel = findViewById(R.id.CancelBtn);
+        Button myButtonCancel = findViewById(R.id.BackBtn);
         TextView myUserName = (TextView) findViewById(R.id.UserName);
         TextView editText = (TextView) findViewById(R.id.EditAccountUsername);
         TextView myPassword = (TextView) findViewById(R.id.ChangePass);
@@ -104,8 +113,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
                         AccountSettingsActivity.this.finish();
                     }
                 });
-                // Display "Cancelled" msg
-                Toast.makeText(AccountSettingsActivity.this, "Cancelled!", Toast.LENGTH_SHORT).show();
+                // Display "Back" msg
+                Toast.makeText(AccountSettingsActivity.this, "Back to Settings", Toast.LENGTH_SHORT).show();
 
                 //start activity with result
                 startActivityForResult(AccountSettingsToSettingsActivity2,1);
