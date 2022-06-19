@@ -21,8 +21,6 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         TextView taskName = findViewById(R.id.taskViewTaskNameDisplay);
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
-        TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
-        TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
         Button backButton = findViewById(R.id.backButton);
         Button deleteTaskButton = findViewById(R.id.deleteTaskButton);
 
@@ -39,8 +37,6 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         taskName.setText(newTaskName);
         taskDesc.setText(newTaskDesc);
-        taskDate.setText(newTaskDayOfMonth + "/" + newTaskMonth + "/" + newTaskYear);
-        taskTime.setText(newTaskHour + ":" + newTaskMin);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

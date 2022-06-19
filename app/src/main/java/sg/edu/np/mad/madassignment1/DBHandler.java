@@ -1,5 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
+import static android.icu.text.MessagePattern.ArgType.SELECT;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -88,6 +90,21 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ACCOUNTS, null, values);
         db.close();
+    }
+
+    public void updateUser(User userDBData){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // update password
+        String update = "UPDATE " + ACCOUNTS + " SET " + COLUMN_PASSWORD + " = " + "\""+ userDBData.getPassword()+ "\""  + " WHERE " + COLUMN_USERNAME + " = " + "\""+ userDBData.getUsername()+ "\"";
+        db.execSQL(update);
+        db.close();
+
+        //updating password
+//        db.update(ACCOUNTS, values, COLUMN_PASSWORD + " = ?",
+//            new String[]{String.valueOf(userDBData.getPassword())});
+//        db.close();
+        //db.insert(ACCOUNTS, null, values);
+        //db.close();
     }
 
     // adding task data into task table created
