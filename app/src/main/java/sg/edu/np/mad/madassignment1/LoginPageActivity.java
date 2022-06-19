@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginPageActivity extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
                     Intent myIntent = new Intent(LoginPageActivity.this, HomeActivity.class);
                     startActivity(myIntent);
+
                 } else {
                     Toast.makeText(LoginPageActivity.this, "Invalid Login", Toast.LENGTH_SHORT).show();
                 }

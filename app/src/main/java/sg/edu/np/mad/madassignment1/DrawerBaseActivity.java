@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -46,6 +47,12 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         //create listener for nav_ACTIVITYNAME for switching nav items
         NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // For Menu header
+        //View header = navigationView.getHeaderView(0);
+        //String username = User.getUsername();
+        //TextView menuHeaderUsername = findViewById(R.id.menuHeaderUsername);
+        //menuHeaderUsername.setText(username);
 
         //drawer closing and opening state
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.menu_drawer_open, R.string.menu_drawer_close);
