@@ -10,8 +10,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -116,6 +114,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         //Log Out button
         switch (item.getItemId()){
             case R.id.nav_Logout:
+                // setting remember me as false, until user checks the box again when logging in
                 SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                 @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("remember", "false");

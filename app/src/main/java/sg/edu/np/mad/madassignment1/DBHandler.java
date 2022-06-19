@@ -1,6 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Timer;
-
-import sg.edu.np.mad.madassignment1.User;
 
 public class DBHandler extends SQLiteOpenHelper {
-    private String TAG = "DB Handler";
+    private final String TAG = "DB Handler";
 
     //database
     public static String DATABASE_NAME = "accountsDB.db";
@@ -83,6 +79,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return queryData;
     }
 
+    // adding user data into user table created
     public void addUser(User userData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, userData.getUsername());
@@ -93,6 +90,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    // adding task data into task table created
     public void addTask(Task taskData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_TASKID, taskData.getId());
