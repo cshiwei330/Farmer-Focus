@@ -29,8 +29,8 @@ public class CalenderViewHolder extends RecyclerView.ViewHolder {
         taskCheckBox = itemView.findViewById(R.id.taskCheckBox);
         taskDate = itemView.findViewById(R.id.taskDate);
         taskTime = itemView.findViewById(R.id.taskTime);
-        params = new LinearLayout.LayoutParams(0, 0);
-        visible = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        //rootView = itemView.findViewById(R.id.rootView);
+//        params = new LinearLayout.LayoutParams(0, 0);
+//        visible = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        //rootView = itemView.findViewById(R.id.rootView);
     }
 }
