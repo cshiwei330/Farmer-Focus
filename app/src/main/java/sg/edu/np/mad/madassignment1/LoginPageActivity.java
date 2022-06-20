@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -48,6 +49,11 @@ public class LoginPageActivity extends AppCompatActivity {
             // getting username and password
             EditText etMyUsername = findViewById(R.id.editTextUsername);
             EditText etMyPassword = findViewById(R.id.editTextPassword);
+            // creating shared preferences to access username in other activities
+            SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", etMyUsername.getText().toString());
+            editor.apply();
 
             // checking if username and password entered are valid
             if (isValidCredentials(etMyUsername.getText().toString(), etMyPassword.getText().toString())) {

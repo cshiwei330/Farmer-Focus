@@ -1,25 +1,17 @@
 package sg.edu.np.mad.madassignment1;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.Toast;
-
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Timer;
 
 public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
     ArrayList<Task> data;
@@ -54,7 +46,7 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //convert date object to string with chosen dateformat
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
-        holder.taskName.setText(t.getId() + ". " +t.getTaskName());
+        holder.taskName.setText(String.valueOf(position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskDate.setText(strDate);
 

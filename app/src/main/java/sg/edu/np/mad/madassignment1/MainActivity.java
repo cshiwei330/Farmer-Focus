@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -22,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
             // getting value
             String remember = sharedPreferences.getString("remember", "");
+            User user = new User();
+            // getting stored username
+            String username = sharedPreferences.getString("username", "");
+            user.setUsername(username);
             if (remember.equals("false")) {
                 // starting new activity, bringing user to login page if the user did not check the remember me box
                 Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
