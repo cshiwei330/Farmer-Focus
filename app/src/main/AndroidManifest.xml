@@ -43,7 +43,7 @@
             android:name=".SignUpPageActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginPageActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
             <!-- This activity is the login page, should appear in app launcher -->
@@ -60,7 +60,7 @@
             android:name=".DrawerBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginPageActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.MADAssignment1.NoActionBar" />
