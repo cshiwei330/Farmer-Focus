@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#0AFFFFFF"
     tools:context=".ImagesActivity">
 
     <ImageView
@@ -13,6 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="152dp"
         android:background="#4CAF50"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/android" />

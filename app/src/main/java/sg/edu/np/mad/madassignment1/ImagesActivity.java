@@ -3,15 +3,17 @@ package sg.edu.np.mad.madassignment1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ImagesActivity extends AppCompatActivity {
-    public String GLOBAL_PREF = "MyPrefs";
-    public String getString;
 
+    public String GLOBAL_PREF = "MyPrefs";
+    //SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
 
 
 
@@ -30,7 +32,25 @@ public class ImagesActivity extends AppCompatActivity {
         myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // shared preferences to store latest username to set profile pic
+                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+                String username = sharedPreferences.getString("username", "");
 
+                //User userDBdata = dbHandler.findProfile(username);
+
+//                switch(view.getId())
+//                {
+//                    case R.id.Image1:
+//                        userDBdata.setImageID(Image1.toString());
+//                        break;
+//                }
+
+
+
+                Toast.makeText(ImagesActivity.this, "Profile picture successfully changed!", Toast.LENGTH_SHORT).show();
+                //create intent to go back to Account Settings
+                Intent AccountSettingsToPasswordActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
+                startActivity(AccountSettingsToPasswordActivity);
                 //User userDBData = dbHandler.findUser(myEditUsername.getText().toString());
             }
         });
