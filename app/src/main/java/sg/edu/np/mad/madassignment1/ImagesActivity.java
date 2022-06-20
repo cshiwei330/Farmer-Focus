@@ -32,8 +32,18 @@ public class ImagesActivity extends AppCompatActivity {
         myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // shared preferences to store latest username to set profile pic
                 SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                 String username = sharedPreferences.getString("username", "");
+
+                //User userDBdata = dbHandler.findProfile(username);
+
+//                switch(view.getId())
+//                {
+//                    case R.id.Image1:
+//                        userDBdata.setImageID(Image1.toString());
+//                        break;
+//                }
 
 
 

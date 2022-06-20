@@ -27,4 +27,6 @@ public class User {
     }
 
     public String getImageID() {return ImageID; }
+
+    public void setImageID(String imageID) { this.ImageID = imageID; }
 }
