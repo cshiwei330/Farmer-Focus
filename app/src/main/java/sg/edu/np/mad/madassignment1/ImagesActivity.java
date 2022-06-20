@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImagesActivity extends AppCompatActivity {
-
+    public String GLOBAL_PREF = "MyPrefs";
     public String getString;
 
 
