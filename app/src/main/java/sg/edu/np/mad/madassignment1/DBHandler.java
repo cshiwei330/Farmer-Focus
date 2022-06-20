@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String ACCOUNTS = "Accounts"; //table name
     public static String COLUMN_USERNAME = "Username";
     public static String COLUMN_PASSWORD = "Password";
+    public static String COLUMN_IMAGEID = "Image";
 
     //tasks
     public static String TASKS = "Tasks";
@@ -43,7 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
     //create tables
     public void onCreate(SQLiteDatabase db){
         String CREATE_DATABASE = "CREATE TABLE " + ACCOUNTS + "(" + COLUMN_USERNAME
-                + " TEXT, " + COLUMN_PASSWORD + " TEXT" + ")";
+                + " TEXT, " + COLUMN_PASSWORD + " TEXT" + COLUMN_IMAGEID + "TEXT " + ")";
         // CREATE TABLE Accounts ( Username TEXT, Password TEXT )
         String CREATE_DATABASE_TASK = "CREATE TABLE " + TASKS + "(" + COLUMN_TASKID  + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TASKSTATUS + " INTEGER, " + COLUMN_TASKNAME + " TEXT, " + COLUMN_TASKDESC + " TEXT," +
@@ -53,6 +55,7 @@ public class DBHandler extends SQLiteOpenHelper {
         //execute sql commands
         db.execSQL(CREATE_DATABASE);
         db.execSQL(CREATE_DATABASE_TASK);
+
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -86,6 +89,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, userData.getUsername());
         values.put(COLUMN_PASSWORD, userData.getPassword());
+        values.put(COLUMN_IMAGEID, userData.getImageID());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ACCOUNTS, null, values);
@@ -98,13 +102,14 @@ public class DBHandler extends SQLiteOpenHelper {
         String update = "UPDATE " + ACCOUNTS + " SET " + COLUMN_PASSWORD + " = " + "\""+ userDBData.getPassword()+ "\""  + " WHERE " + COLUMN_USERNAME + " = " + "\""+ userDBData.getUsername()+ "\"";
         db.execSQL(update);
         db.close();
+    }
 
-        //updating password
-//        db.update(ACCOUNTS, values, COLUMN_PASSWORD + " = ?",
-//            new String[]{String.valueOf(userDBData.getPassword())});
-//        db.close();
-        //db.insert(ACCOUNTS, null, values);
-        //db.close();
+    public void updateProfile(User userDBData){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // update profile picture
+        String update = "UPDATE " + ACCOUNTS + " SET " + COLUMN_IMAGEID + " = " + "\""+ userDBData.getImageID()+ "\""  + " WHERE " + COLUMN_USERNAME + " = " + "\""+ userDBData.getUsername()+ "\"";
+        db.execSQL(update);
+        db.close();
     }
 
     // adding task data into task table created

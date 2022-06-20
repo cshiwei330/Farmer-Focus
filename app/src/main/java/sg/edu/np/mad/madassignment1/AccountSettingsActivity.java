@@ -21,7 +21,6 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
     public static final String TEXT = "text";
     public String text;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,16 +28,33 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
         Button myButtonCancel = findViewById(R.id.BackBtn);
-        TextView myUserName = (TextView) findViewById(R.id.Nickname);
-        TextView editText = (TextView) findViewById(R.id.EditAccountUsername);
-        TextView myPassword = (TextView) findViewById(R.id.ChangePass);
-        ImageView myProfilePic = (ImageView) findViewById(R.id.ProfilePic);
+        TextView myUserName = findViewById(R.id.Nickname);
+        TextView editText = findViewById(R.id.EditAccountUsername);
+        TextView myPassword = findViewById(R.id.ChangePass);
+        ImageView myProfilePic = findViewById(R.id.ProfilePic);
+
 
         myProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Go to Images Activity
                 Intent AccountSettingsActivityToImagesActivity = new Intent(AccountSettingsActivity.this, ImagesActivity.class);
                 startActivity(AccountSettingsActivityToImagesActivity);
+
+
+                //myProfilePic.setImageResource(R.drawable.img1);
+
+
+//                switch(view.getId())
+//                {
+//                    case R.id.Image1:
+//                        myProfilePic.setImageResource(R.drawable.img1);
+//                        break;
+//                }
+//                if(tag == R.drawable.img1){
+//                    myProfilePic.setImageResource(R.drawable.img1);
+//                    myProfilePic.setTag(R.drawable.img1);
+//                }
             }
         });
 

@@ -7,12 +7,74 @@
     tools:context=".ImagesActivity">
 
     <ImageView
-        android:id="@+id/Image1"
-        android:layout_width="146dp"
-        android:layout_height="174dp"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="93dp"
+        android:id="@+id/Image2"
+        android:layout_width="172dp"
+        android:layout_height="178dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="188dp"
+        android:background="#4CAF50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img" />
+        app:srcCompat="@drawable/android" />
+
+    <ImageView
+        android:id="@+id/Image1"
+        android:layout_width="172dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00BCD4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Image3"
+        app:srcCompat="@drawable/android" />
+
+    <ImageView
+        android:id="@+id/Image4"
+        android:layout_width="172dp"
+        android:layout_height="178dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="49dp"
+        android:background="#FFEB3B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Image2"
+        app:srcCompat="@drawable/android" />
+
+    <ImageView
+        android:id="@+id/Image3"
+        android:layout_width="172dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="188dp"
+        android:layout_marginEnd="16dp"
+        android:background="#9C27B0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/android" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="258dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="76dp"
+        android:text="Choose Your Profile"
+        android:textColor="#171515"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/SaveBtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginBottom="128dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

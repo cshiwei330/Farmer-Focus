@@ -2,41 +2,72 @@ package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImagesActivity extends AppCompatActivity {
 
     public String getString;
 
-    public static final String SHARED_PREF = "shared";
-    //public static final ImageView IMAGE = "image";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
+        //define dbHandler
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+        ImageView Image1 = findViewById(R.id.Image1);
+        ImageView Image2 = findViewById(R.id.Image2);
+        ImageView Image3 = findViewById(R.id.Image3);
+        ImageView Image4 = findViewById(R.id.Image4);
 
-        ImageView Image1 = (ImageView) findViewById(R.id.Image1);
-        Image1.setOnClickListener(new View.OnClickListener() {
+        Button myButtonSave = findViewById(R.id.SaveBtn3);
+        myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                //Image1.replace(R.id.ProfilePic);
-                // shared preferences
-                Log.v("SP", "test");
-                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.apply();
-
+                //User userDBData = dbHandler.findUser(myEditUsername.getText().toString());
             }
         });
 
 
+//        Image1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+////                switch(view.getId())
+////                {
+////                    case R.id.Image1:
+////                        myProfilePic.setImageResource(R.drawable.img1);
+////                        break;
+////                }
+//
+//                //create intent to go back to Settings
+//                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
+//                startActivity(ImagesActivityToAccountSettingsActivity);
+//
+//            }
+//        });
+
+
     }
+
+//    public void onCLick(View v){
+//        switch(v.getId())
+//        {
+//            case R.id.Image1:
+//                Image1.setImageResource(R.drawable.img1);
+//                break;
+//        }
+//        //create intent to go back to Settings
+//        Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
+//        startActivity(ImagesActivityToAccountSettingsActivity);
+//
+//    }
 }

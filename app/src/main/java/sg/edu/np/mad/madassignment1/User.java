@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 public class User {
     private static String UserName;
     private String Password;
+    private String ImageID;
 
     public User(){
 
@@ -24,4 +25,6 @@ public class User {
     public void setPassword(String password) {
         this.Password = password;
     }
+
+    public String getImageID() {return ImageID; }
 }
