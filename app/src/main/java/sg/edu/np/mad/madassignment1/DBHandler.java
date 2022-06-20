@@ -84,6 +84,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return queryData;
     }
 
+
     // adding user data into user table created
     public void addUser(User userData){
         ContentValues values = new ContentValues();
@@ -96,6 +97,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    // add profile pic
     public void addProfile(User userData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_IMAGEID, userData.getImageID());
