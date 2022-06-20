@@ -1,7 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -37,7 +35,13 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_MONTH ="TaskMonth";
     public static String COLUMN_DAYOFMONTH ="TaskDayOfMonth";
 
+    //mood tracker
+    public static String MOODTRACKER = "MoodTracker";
+    public static String COLUMN_MOODDATE = "MoodDate";
+    public static String COLUMN_MOOD = "Mood";
+
     public static int DATABASE_VERSION = 6;
+
     //define DBHandler
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -52,10 +56,14 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_HOUR + " INTEGER, " + COLUMN_MINUTE + " INTEGER, " + COLUMN_YEAR + " INTEGER, " + COLUMN_MONTH + " INTEGER, " + COLUMN_DAYOFMONTH + " INTEGER" + ")";
         // CREATE TABLE Tasks ( TaskID INTEGER PRIMARY KEY AUTOINCREMENT, TaskStatus INTEGER TaskName, TaskName TEXT, TaskDesc TEXT
         //                         TaskHour INTEGER, TaskMinute INTEGER, TaskYear INTEGER, TaskMonth INTEGER, TaskDayOfMonth INTEGER )
+
+        // FOR MOOD TRACKER
+        String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "(" + COLUMN_MOODDATE + " TEXT," + COLUMN_MOOD + " TEXT" + ")";
+
         //execute sql commands
         db.execSQL(CREATE_DATABASE);
         db.execSQL(CREATE_DATABASE_TASK);
-
+        db.execSQL(CREATE_DATABASE_MOODTRACKER);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -170,4 +178,41 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("delete from "+ TASKS);
         db.close();
     }
+
+    // adding mood entry to moodtracker table
+    public void addMood(Mood moodData){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_MOODDATE, moodData.getDate());
+        values.put(COLUMN_MOOD, moodData.getMood());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(MOODTRACKER, null, values);
+        Log.v(TAG, "Added to db");
+        db.close();
+    }
+
+    // put mood data into list
+    public ArrayList<Mood> getMoodData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Mood> moodArrayList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from " + MOODTRACKER, null);
+        while (cursor.moveToNext()){
+            String date = cursor.getString(0);
+            String mood = cursor.getString(1);
+            Mood newMoodEntry = new Mood(date, mood);
+            moodArrayList.add(newMoodEntry);
+        }
+        db.close();
+        return moodArrayList;
+    }
+
+    public void changeMood (Mood editedMood){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // edit Mood entry
+        String changeMood = "UPDATE " + MOODTRACKER + " SET " + COLUMN_MOOD + " = " + "\""+ editedMood.getMood()+ "\""  + " WHERE " + COLUMN_MOODDATE + " = " + "\""+ editedMood.getDate()+ "\"";
+        db.execSQL(changeMood);
+        db.close();
+    }
+
+
 }

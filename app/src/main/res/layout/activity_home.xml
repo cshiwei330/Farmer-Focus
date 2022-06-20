@@ -33,7 +33,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greetings" />
+        app:layout_constraintTop_toBottomOf="@+id/greetings"
+        tools:layout="@layout/fragment_mood" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recentTasksRecyclerView"
@@ -53,7 +54,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/recent_tasks"
+        android:text="Upcoming Tasks:"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

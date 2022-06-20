@@ -97,11 +97,13 @@ public class HomeActivity extends DrawerBaseActivity {
             currentDateAfter1Week.add(Calendar.DAY_OF_MONTH, 7);
 
             // current date before 1 week
-            Calendar currentDateBefore1Week = Calendar.getInstance();
-            currentDateBefore1Week.add(Calendar.DAY_OF_MONTH, -7);
+            //Calendar currentDateBefore1Week = Calendar.getInstance();
+            //currentDateBefore1Week.add(Calendar.DAY_OF_MONTH, -7);
 
-            if (date.before(currentDateAfter1Week.getTime())
-                    && date.after(currentDateBefore1Week.getTime())) {
+            //if (date.before(currentDateAfter1Week.getTime())
+                    //&& date.after(currentDateBefore1Week.getTime()))
+
+            if (date.before(currentDateAfter1Week.getTime())){
                 //ok everything is fine, date in range
                 return true;
 
