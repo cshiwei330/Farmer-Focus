@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginTop="72dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Task Name:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,6 +44,7 @@
         android:layout_width="115dp"
         android:layout_height="18dp"
         android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Task Description:"
         app:layout_constraintStart_toStartOf="@+id/taskViewTaskName"
         app:layout_constraintTop_toBottomOf="@+id/taskViewTaskNameDisplay" />

@@ -40,7 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Task Name"
+        android:fontFamily="sans-serif-medium"
+        android:text="Task Name:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/newTaskNameActivity"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Task Description:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/newTaskDescActivity"
@@ -84,7 +86,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Task Date"
+        android:fontFamily="sans-serif-medium"
+        android:text="Task Date:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/newTaskDescActivity"
         app:layout_constraintTop_toBottomOf="@+id/newTaskDescActivity" />
@@ -94,7 +97,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Task Time"
+        android:fontFamily="sans-serif-medium"
+        android:text="Task Time:"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/datePickerTextView"
         app:layout_constraintTop_toBottomOf="@+id/datePickerTextView" />
 
@@ -108,7 +113,6 @@
         android:text="9:00"
         android:textAlignment="center"
         android:textSize="34sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/TaskTimePickerTextView"
         app:layout_constraintTop_toBottomOf="@+id/TaskTimePickerTextView" />
 

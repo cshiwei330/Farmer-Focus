@@ -48,12 +48,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="88dp"
+        android:fontFamily="sans-serif-black"
         android:text="@string/login_small"
         android:textColor="#000000"
         android:textSize="34sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,6 +63,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/remember_user"
         android:textColor="#A29574"
         app:layout_constraintStart_toStartOf="parent"
