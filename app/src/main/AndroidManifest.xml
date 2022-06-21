@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".ComingSoonActivity"
+            android:exported="false" />
+        <activity
             android:name=".ImagesActivity"
             android:exported="false" />
         <activity

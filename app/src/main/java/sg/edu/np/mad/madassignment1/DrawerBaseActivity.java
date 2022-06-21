@@ -87,6 +87,14 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 break;
         }
 
+        //Statistics button
+        switch (item.getItemId()){
+            case R.id.nav_Statistics:
+                startActivity(new Intent(this,ComingSoonActivity.class));
+                overridePendingTransition(0,0);
+                break;
+        }
+
         //Tasks button
         switch (item.getItemId()){
             case R.id.nav_Tasks:
@@ -98,7 +106,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         //Timer button
         switch (item.getItemId()){
             case R.id.nav_Timer:
-                startActivity(new Intent(this,TaskActivity.class));
+                startActivity(new Intent(this,ComingSoonActivity.class));
                 overridePendingTransition(0,0);
                 break;
         }

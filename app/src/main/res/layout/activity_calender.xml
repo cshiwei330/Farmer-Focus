@@ -33,9 +33,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@null"
+                        android:background="#00FFFFFF"
                         android:onClick="previousMonthAction"
                         android:text="@string/calenderBack"
+                        android:textColor="@color/darkBeige"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -53,9 +54,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@null"
+                        android:background="#00FFFFFF"
                         android:onClick="nextMonthAction"
                         android:text="@string/CalenderForward"
+                        android:textColor="@color/darkBeige"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
