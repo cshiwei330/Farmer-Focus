@@ -72,7 +72,7 @@ public class ImagesActivity extends AppCompatActivity {
 
                 userDBdata.setImageID(1);
                 dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 1 chosen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImagesActivity.this, "Team 1 chosen!", Toast.LENGTH_SHORT).show();
 
                 //create intent to go back to Settings
                 Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
@@ -93,7 +93,7 @@ public class ImagesActivity extends AppCompatActivity {
 
                 userDBdata.setImageID(2);
                 dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 2 chosen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImagesActivity.this, "Team 2 chosen!", Toast.LENGTH_SHORT).show();
 
                 //create intent to go back to Settings
                 Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
@@ -114,7 +114,7 @@ public class ImagesActivity extends AppCompatActivity {
 
                 userDBdata.setImageID(3);
                 dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 3 chosen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImagesActivity.this, "Team 3 chosen!", Toast.LENGTH_SHORT).show();
 
                 //create intent to go back to Settings
                 Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
@@ -135,7 +135,7 @@ public class ImagesActivity extends AppCompatActivity {
 
                 userDBdata.setImageID(4);
                 dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 4 chosen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ImagesActivity.this, "Team 4 chosen!", Toast.LENGTH_SHORT).show();
 
                 //create intent to go back to Settings
                 Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
