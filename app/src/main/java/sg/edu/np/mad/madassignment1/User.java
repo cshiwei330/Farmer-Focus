@@ -3,10 +3,17 @@ package sg.edu.np.mad.madassignment1;
 public class User {
     private static String UserName;
     private String Password;
-    private String ImageID;
+    private Integer ImageID;
+
 
     public User(){
 
+    }
+
+    public User(String userName, String password, Integer ImageID){
+        this.UserName = userName;
+        this.Password = password;
+        ImageID = 0;
     }
 
     // for menu header, need get username
@@ -26,7 +33,7 @@ public class User {
         this.Password = password;
     }
 
-    public String getImageID() {return ImageID; }
+    public Integer getImageID() {return ImageID; }
 
-    public void setImageID(String imageID) { this.ImageID = imageID; }
+    public void setImageID(Integer imageID) { this.ImageID = imageID; }
 }

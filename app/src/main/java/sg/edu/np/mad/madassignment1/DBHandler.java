@@ -20,7 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String ACCOUNTS = "Accounts"; //table name
     public static String COLUMN_USERNAME = "Username";
     public static String COLUMN_PASSWORD = "Password";
-    public static String COLUMN_IMAGEID = "Image";
+    public static String COLUMN_IMAGEID = "ImageId";
 
     //tasks
     public static String TASKS = "Tasks";
@@ -49,8 +49,8 @@ public class DBHandler extends SQLiteOpenHelper {
     //create tables
     public void onCreate(SQLiteDatabase db){
         String CREATE_DATABASE = "CREATE TABLE " + ACCOUNTS + "(" + COLUMN_USERNAME
-                + " TEXT, " + COLUMN_PASSWORD + " TEXT" + COLUMN_IMAGEID + "TEXT " + ")";
-        // CREATE TABLE Accounts ( Username TEXT, Password TEXT )
+                + " TEXT, " + COLUMN_PASSWORD + " TEXT, " + COLUMN_IMAGEID + " TEXT " + ")";
+        // CREATE TABLE Accounts ( Username TEXT, Password TEXT, ImageId TEXT)
         String CREATE_DATABASE_TASK = "CREATE TABLE " + TASKS + "(" + COLUMN_TASKID  + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_TASKSTATUS + " INTEGER, " + COLUMN_TASKNAME + " TEXT, " + COLUMN_TASKDESC + " TEXT," +
                 COLUMN_HOUR + " INTEGER, " + COLUMN_MINUTE + " INTEGER, " + COLUMN_YEAR + " INTEGER, " + COLUMN_MONTH + " INTEGER, " + COLUMN_DAYOFMONTH + " INTEGER" + ")";
@@ -94,16 +94,17 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public User findProfile(String username){
         //String query = "SELECT * FROM " + ACCOUNTS + COLUMN_IMAGEID + imageID + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
-        String query = "SELECT " + COLUMN_IMAGEID + " FROM " + ACCOUNTS + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
+        String query = "SELECT " + COLUMN_IMAGEID  + " FROM " + ACCOUNTS + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
         // select COLUMN_IMAGEID from Accounts when username = "??"
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         User queryData = new User();
 
-        if(cursor.moveToFirst()){
+        if(cursor.moveToPosition(1)){
+            //cursor.moveToPosition(1);
             queryData.setUsername(cursor.getString(0));
-            queryData.setImageID(cursor.getString(1));
+            queryData.setImageID(cursor.getInt(1));
             cursor.close();
         }
         else {

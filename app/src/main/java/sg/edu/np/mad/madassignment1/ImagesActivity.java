@@ -23,10 +23,12 @@ public class ImagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_images);
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
+
         ImageView Image1 = findViewById(R.id.Image1);
         ImageView Image2 = findViewById(R.id.Image2);
         ImageView Image3 = findViewById(R.id.Image3);
         ImageView Image4 = findViewById(R.id.Image4);
+        ImageView Default = findViewById(R.id.ProfilePic);
 
         Button myButtonSave = findViewById(R.id.SaveBtn3);
         myButtonSave.setOnClickListener(new View.OnClickListener() {
@@ -36,14 +38,30 @@ public class ImagesActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                 String username = sharedPreferences.getString("username", "");
 
-                //User userDBdata = dbHandler.findProfile(username);
+                User userDBdata = dbHandler.findProfile(username);
+                //User userdata = dbHandler.addProfile(userDBdata);
 
-//                switch(view.getId())
-//                {
-//                    case R.id.Image1:
-//                        userDBdata.setImageID(Image1.toString());
-//                        break;
-//                }
+                switch(view.getId())
+                {
+                    case R.id.Image1:
+                        userDBdata.setImageID(1);
+                        Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.Image2:
+                        userDBdata.setImageID(2);
+                        Toast.makeText(ImagesActivity.this, "Team green chosen", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.Image3:
+                        userDBdata.setImageID(3);
+                        Toast.makeText(ImagesActivity.this, "Team purple chosen", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.Image4:
+                        userDBdata.setImageID(4);
+                        Toast.makeText(ImagesActivity.this, "Team yellow chosen", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        userDBdata.setImageID(0);
+                }
 
 
 
@@ -51,7 +69,6 @@ public class ImagesActivity extends AppCompatActivity {
                 //create intent to go back to Account Settings
                 Intent AccountSettingsToPasswordActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
                 startActivity(AccountSettingsToPasswordActivity);
-                //User userDBData = dbHandler.findUser(myEditUsername.getText().toString());
             }
         });
 
