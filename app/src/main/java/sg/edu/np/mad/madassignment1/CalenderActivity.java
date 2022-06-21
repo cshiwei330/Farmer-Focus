@@ -1,38 +1,28 @@
 package sg.edu.np.mad.madassignment1;
 
-import static java.security.AccessController.getContext;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
-import android.widget.CalendarView;
+
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Year;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.Locale;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityCalenderBinding;
 
 public class CalenderActivity extends DrawerBaseActivity implements CalenderViewAdaptor.OnItemListener{
-
-    public static boolean filterCheck;
 
     ActivityCalenderBinding activityCalenderBinding;
 
@@ -40,7 +30,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private String selectedDate;
+
 
     private Calendar calendar;
     private Date currentDate;
@@ -185,9 +175,46 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             SimpleDateFormat df = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
             //apply date format to current date
             String dateString = df.format(currentDate);
-            calendarViewAdapter.getFilter().filter(dayText+"/"+dateString);
-            calenderAdaptor.getFilter().filter(dayText+"/"+dateString);
-            Log.v("Calender button clicked",dateString);
+            String stringDate = dayText+"/"+dateString;
+
+            //set text to see how many tasks
+            int numberOfSameDateTasks = tasksWhiteList(stringDate,taskList).size();
+            todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + stringDate);
+
+            //set shading and todolist filters
+            calendarViewAdapter.getFilter().filter(stringDate);
+            calenderAdaptor.getFilter().filter(stringDate);
+            Log.v("Calender button clicked",stringDate);
+
+
+
         }
+    }
+    public ArrayList<Task> tasksWhiteList(String dateString, ArrayList<Task> taskList){
+        //split string into day,month,year
+        String[] stringDateArr = dateString.split("/",3);
+        //force initialize to null
+        int[] intDateArr = new int[stringDateArr.length];
+        //convert stingDateArr to int
+        for(int i = 0;i < stringDateArr.length;i++)
+        {
+            //intDateArr[0] == dayOfMonth
+            //intDateArr[1] == month
+            //intDateArr[2] == year
+            intDateArr[i] = Integer.parseInt(stringDateArr[i]);
+        }
+        //check all tasks in data to filter date, if date is the same, add to filter
+        ArrayList<Task> taskFilter = new ArrayList<Task>();
+        for(Task task: taskList){
+            Log.v("Filter",String.valueOf(task.getTaskYear())+ "/" +
+                    String.valueOf(task.getTaskMonth()) + "/" +
+                    String.valueOf(task.getTaskDayOfMonth()));
+            if(task.getTaskYear() == intDateArr[2] &&
+                    task.getTaskMonth() == intDateArr[1] &&
+                    task.getTaskDayOfMonth() == intDateArr[0]){
+                taskFilter.add(task);
+            }
+        }
+        return taskFilter;
     }
 }

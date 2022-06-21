@@ -46,9 +46,13 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //convert date object to string with chosen dateformat
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
+        //convert time ints to string
+        String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
+
         holder.taskName.setText(String.valueOf(position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskDate.setText(strDate);
+        holder.taskTime.setText(taskTime);
 
         holder.taskName.setOnClickListener(new View.OnClickListener() {
             @Override
