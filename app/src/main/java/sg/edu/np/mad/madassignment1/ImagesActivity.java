@@ -39,29 +39,40 @@ public class ImagesActivity extends AppCompatActivity {
                 String username = sharedPreferences.getString("username", "");
 
                 User userDBdata = dbHandler.findProfile(username);
-                //User userdata = dbHandler.addProfile(userDBdata);
 
-                switch(view.getId())
-                {
-                    case R.id.Image1:
-                        userDBdata.setImageID(1);
-                        Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.Image2:
-                        userDBdata.setImageID(2);
-                        Toast.makeText(ImagesActivity.this, "Team green chosen", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.Image3:
-                        userDBdata.setImageID(3);
-                        Toast.makeText(ImagesActivity.this, "Team purple chosen", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.Image4:
-                        userDBdata.setImageID(4);
-                        Toast.makeText(ImagesActivity.this, "Team yellow chosen", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        userDBdata.setImageID(0);
-                }
+                //if(document.getElementById('button').clicked == true)
+
+                //if(view.getId(Image1).clicked == true)
+
+
+//                switch(view.getId())
+//                {
+//                    case R.id.Image1:
+//                        userDBdata.setImageID(1);
+//                        Toast.makeText(ImagesActivity.this, "Testing", Toast.LENGTH_SHORT).show();
+//                        dbHandler.updateProfile(userDBdata);
+//                        Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.Image2:
+//                        userDBdata.setImageID(2);
+//                        dbHandler.updateProfile(userDBdata);
+//                        Toast.makeText(ImagesActivity.this, "Team green chosen", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.Image3:
+//                        userDBdata.setImageID(3);
+//                        dbHandler.updateProfile(userDBdata);
+//                        Toast.makeText(ImagesActivity.this, "Team purple chosen", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.Image4:
+//                        userDBdata.setImageID(4);
+//                        dbHandler.updateProfile(userDBdata);
+//                        Toast.makeText(ImagesActivity.this, "Team yellow chosen", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case R.id.ProfilePic:
+//                        userDBdata.setImageID(0);
+//                        dbHandler.updateProfile(userDBdata);
+//                        break;
+//                }
 
 
 
@@ -73,27 +84,27 @@ public class ImagesActivity extends AppCompatActivity {
         });
 
 
-//        Image1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//
-////                switch(view.getId())
-////                {
-////                    case R.id.Image1:
-////                        myProfilePic.setImageResource(R.drawable.img1);
-////                        break;
-////                }
-//
-//                //create intent to go back to Settings
-//                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
-//                startActivity(ImagesActivityToAccountSettingsActivity);
-//
-//            }
-//        });
+        Image1.setOnClickListener(new View.OnClickListener() {
+            // shared preferences to store latest username to set profile pic
+            SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+            String username = sharedPreferences.getString("username", "");
+            User userDBdata = dbHandler.findProfile(username);
+            @Override
+            public void onClick(View view) {
+                userDBdata.setImageID(1);
+                dbHandler.updateProfile(userDBdata);
+                Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
+
+                //create intent to go back to Settings
+                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
+                startActivity(ImagesActivityToAccountSettingsActivity);
+
+            }
+        });
 
 
     }
+
 
 //    public void onCLick(View v){
 //        switch(v.getId())

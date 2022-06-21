@@ -54,6 +54,8 @@ public class SignUpPageActivity extends AppCompatActivity {
                         // setting username and password of object
                         userDataDB.setUsername(myCreateUsername.getText().toString());
                         userDataDB.setPassword(myConfirmPassword.getText().toString());
+                        // make ImageId equals to 0 when default
+                        userDataDB.setImageID(0);
                         // adding object into database
                         dbHandler.addUser(userDataDB);
                         // telling user that their account has been created successfully

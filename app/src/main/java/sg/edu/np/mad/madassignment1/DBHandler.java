@@ -104,7 +104,7 @@ public class DBHandler extends SQLiteOpenHelper {
         if(cursor.moveToPosition(1)){
             //cursor.moveToPosition(1);
             queryData.setUsername(cursor.getString(0));
-            queryData.setImageID(cursor.getInt(1));
+            queryData.setImageID(cursor.getInt(2));
             cursor.close();
         }
         else {
@@ -120,7 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, userData.getUsername());
         values.put(COLUMN_PASSWORD, userData.getPassword());
-        //values.put(COLUMN_IMAGEID, userData.getImageID());
+        values.put(COLUMN_IMAGEID, userData.getImageID());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ACCOUNTS, null, values);
