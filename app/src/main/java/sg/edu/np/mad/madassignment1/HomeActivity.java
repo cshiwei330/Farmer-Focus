@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -86,11 +87,14 @@ public class HomeActivity extends DrawerBaseActivity {
         return recentTaskList;
     }
 
-    public boolean withinAWeek (String dateToValidate) {
+    public boolean withinAWeek (String date) {
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = sdf.parse(dateToValidate);
+            Date dateToValidate = sdf.parse(date);
+
+            // current date with same formatting as dateToValidate
+            Date today = sdf.parse(sdf.format(new Date()));
 
             // current date after 1 week
             Calendar currentDateAfter1Week = Calendar.getInstance();
@@ -103,11 +107,13 @@ public class HomeActivity extends DrawerBaseActivity {
             //if (date.before(currentDateAfter1Week.getTime())
                     //&& date.after(currentDateBefore1Week.getTime()))
 
-            if (date.before(currentDateAfter1Week.getTime())){
+            if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){
                 //ok everything is fine, date in range
                 return true;
-
-            } else {
+            } else if (dateToValidate.compareTo(today)==0){
+                return true;
+            }
+            else {
                 return false;
             }
 
