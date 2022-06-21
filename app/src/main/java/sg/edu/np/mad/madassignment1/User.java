@@ -10,10 +10,10 @@ public class User {
 
     }
 
-    public User(String userName, String password, Integer ImageID){
+    public User(String userName, String password, Integer imageID){
         this.UserName = userName;
         this.Password = password;
-        ImageID = 0;
+        this.ImageID = imageID;
     }
 
     // for menu header, need get username

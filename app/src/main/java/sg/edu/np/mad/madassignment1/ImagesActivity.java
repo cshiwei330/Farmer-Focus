@@ -38,7 +38,7 @@ public class ImagesActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                 String username = sharedPreferences.getString("username", "");
 
-                User userDBdata = dbHandler.findProfile(username);
+                User userDBdata = dbHandler.findUser(username);
 
                 //if(document.getElementById('button').clicked == true)
 
@@ -85,12 +85,13 @@ public class ImagesActivity extends AppCompatActivity {
 
 
         Image1.setOnClickListener(new View.OnClickListener() {
-            // shared preferences to store latest username to set profile pic
-            SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-            String username = sharedPreferences.getString("username", "");
-            User userDBdata = dbHandler.findProfile(username);
             @Override
             public void onClick(View view) {
+                // shared preferences to store latest username to set profile pic
+                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+                String username = sharedPreferences.getString("username", "");
+                User userDBdata = dbHandler.findUser(username);
+
                 userDBdata.setImageID(1);
                 dbHandler.updateProfile(userDBdata);
                 Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
@@ -99,6 +100,8 @@ public class ImagesActivity extends AppCompatActivity {
                 Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
                 startActivity(ImagesActivityToAccountSettingsActivity);
 
+                //kill this activity
+                finish();
             }
         });
 

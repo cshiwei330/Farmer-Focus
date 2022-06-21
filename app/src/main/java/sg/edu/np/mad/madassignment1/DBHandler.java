@@ -83,27 +83,6 @@ public class DBHandler extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             queryData.setUsername(cursor.getString(0));
             queryData.setPassword(cursor.getString(1));
-            cursor.close();
-        }
-        else {
-            queryData = null;
-        }
-        db.close();
-        return queryData;
-    }
-
-    public User findProfile(String username){
-        //String query = "SELECT * FROM " + ACCOUNTS + COLUMN_IMAGEID + imageID + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
-        String query = "SELECT " + COLUMN_IMAGEID  + " FROM " + ACCOUNTS + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
-        // select COLUMN_IMAGEID from Accounts when username = "??"
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        User queryData = new User();
-
-        if(cursor.moveToPosition(1)){
-            //cursor.moveToPosition(1);
-            queryData.setUsername(cursor.getString(0));
             queryData.setImageID(cursor.getInt(2));
             cursor.close();
         }
@@ -113,6 +92,28 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return queryData;
     }
+
+//    public User findProfile(String username){
+//        //String query = "SELECT * FROM " + ACCOUNTS + COLUMN_IMAGEID + imageID + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
+//        String query = "SELECT " + COLUMN_IMAGEID  + " FROM " + ACCOUNTS + " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
+//        // select COLUMN_IMAGEID from Accounts when username = "??"
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(query, null);
+//
+//        User queryData = new User();
+//
+//        if(cursor.moveToFirst()){
+//            //cursor.moveToPosition(1);
+//            queryData.setUsername(cursor.getString(0));
+//            queryData.setImageID(cursor.getInt(2));
+//            cursor.close();
+//        }
+//        else {
+//            queryData = null;
+//        }
+//        db.close();
+//        return queryData;
+//    }
 
 
     // adding user data into user table created

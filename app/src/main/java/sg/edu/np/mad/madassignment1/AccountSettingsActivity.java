@@ -36,37 +36,46 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         TextView myPassword = findViewById(R.id.ChangePass);
         ImageView myProfilePic = findViewById(R.id.ProfilePic);
 
+        // shared preferences to store latest username to set profile pic
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
 
+        int[] imageList = new int [] {R.drawable.android, R.drawable.a3};
+
+        User userDBdata = dbHandler.findUser(username);
+       //ImageView myProfilePic = new ImageView(R.id.ProfilePic);
+
+        //if user has not a default profile pic, set profile pic to image
+        if (userDBdata.getImageID() != 0){
+            myProfilePic.setImageResource(imageList[userDBdata.getImageID()]);
+        }
+        else{
+            myProfilePic.setImageResource(R.drawable.profile);
+        }
+
+        //go to images activity
         myProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // shared preferences to store latest username to set profile pic
-                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-                String username = sharedPreferences.getString("username", "");
-
-
-                User userDBdata = dbHandler.findProfile(username);
-                //ImageView myProfilePic = new ImageView(R.id.ProfilePic);
-                //myProfilePic.setImageResource(userDBdata.getImageID());
-
-
-
                 //Go to Images Activity
                 Intent AccountSettingsActivityToImagesActivity = new Intent(AccountSettingsActivity.this, ImagesActivity.class);
-                startActivity(AccountSettingsActivityToImagesActivity);
+//                startActivity(AccountSettingsActivityToImagesActivity);
 
+                //put extra
+                AccountSettingsActivityToImagesActivity.putExtra("finisher", new ResultReceiver(null) {
+                    @Override
+                    //when result code =1, received from bundle, kill this activity
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        AccountSettingsActivity.this.finish();
+                    }
+                });
 
-//                switch(view.getId())
-//                {
-//                    case R.id.Image1:
-//                        myProfilePic.setImageResource(R.id.Image1);
-//                        break;
-//                }
-//                if(tag == R.drawable.img1){
-//                    myProfilePic.setImageResource(R.drawable.img1);
-//                    myProfilePic.setTag(R.drawable.img1);
-//                }
+                //start activity with result
+                startActivityForResult(AccountSettingsActivityToImagesActivity,1);
+
+                //kill this activity
+                finish();
             }
         });
 
@@ -107,7 +116,7 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         });
 
         //Display saved nickname
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         text = sharedPreferences.getString(TEXT, "");
         myUserName.setText(text);
 
