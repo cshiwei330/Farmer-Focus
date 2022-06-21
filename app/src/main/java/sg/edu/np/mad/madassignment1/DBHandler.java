@@ -195,12 +195,16 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteTask(Task deleteTask){ // String taskName, String taskDesc
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("Tasks","TaskId=? and TaskStatus=? and TaskName=? and TaskDesc=?" +
-                        " and TaskHour=? and TaskMinute=? and TaskYear=? and TaskMonth=? and TaskDayOfMonth=?",
-                new String[]{String.valueOf(deleteTask.getId()), String.valueOf(deleteTask.getStatus()),
-                        deleteTask.getTaskName(), deleteTask.getTaskDesc(), String.valueOf(deleteTask.getTaskHour()),
-                        String.valueOf(deleteTask.getTaskMinute()), String.valueOf(deleteTask.getTaskYear()),
-                        String.valueOf(deleteTask.getTaskMonth()), String.valueOf(deleteTask.getTaskDayOfMonth())});
+
+        // THERE IS SOMETHING WRONG HERE AND I CANT TELL WHY
+//        db.delete("Tasks","TaskId=? and TaskStatus=? and TaskName=? and TaskDesc=? and TaskHour=? and TaskMinute=? and TaskYear=? and TaskMonth=? and TaskDayOfMonth=?",
+//                new String[]{String.valueOf(deleteTask.getId()), String.valueOf(deleteTask.getStatus()),
+//                        deleteTask.getTaskName(), deleteTask.getTaskDesc(), String.valueOf(deleteTask.getTaskHour()),
+//                        String.valueOf(deleteTask.getTaskMinute()), String.valueOf(deleteTask.getTaskYear()),
+//                        String.valueOf(deleteTask.getTaskMonth()), String.valueOf(deleteTask.getTaskDayOfMonth())});
+
+        //shortened .delete command to delete task by id
+        db.delete("Tasks","TaskId=?", new String[]{String.valueOf(deleteTask.getId())});
 
         Log.v(TAG, "Task Deleted");
         // db.delete("Tasks","TaskName=? and TaskDesc=?",new String[]{taskName,taskDesc});
