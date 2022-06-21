@@ -50,7 +50,8 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
         //convert time ints to string
-        String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
+        //String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
+        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
 
         holder.taskName.setText(String.valueOf(position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
