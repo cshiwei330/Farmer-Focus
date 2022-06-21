@@ -61,6 +61,9 @@ public class SignUpPageActivity extends AppCompatActivity {
                         // starting activity, bringing user back to the login page to log into the app with their newly created account
                         Intent myCreateIntent = new Intent(SignUpPageActivity.this, LoginPageActivity.class);
                         startActivity(myCreateIntent);
+
+                        //kill this activity
+                        finish();
                     }
                     else{
                         // telling user to agree to terms and conditions

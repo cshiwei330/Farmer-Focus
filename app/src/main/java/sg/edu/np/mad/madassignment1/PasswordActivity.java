@@ -30,17 +30,6 @@ public class PasswordActivity extends AppCompatActivity {
         myButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //create intent to go to Password
-                Intent AccountSettingsToPasswordActivity = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
-
-                //put extra
-                AccountSettingsToPasswordActivity.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        PasswordActivity.this.finish();
-                    }
-                });
 
                 while (true){
                     User userDBData = dbHandler.findUser(myEditUsername.getText().toString());
@@ -60,8 +49,17 @@ public class PasswordActivity extends AppCompatActivity {
                                 // Display "Saved" msg
                                 //Toast.makeText(PasswordActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
 
+                                //kill TaskActivity
+                                ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
+
+                                //create intent to go to Password
+                                Intent AccountSettingsToPasswordActivity = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
+
                                 //start activity with result
                                 startActivityForResult(AccountSettingsToPasswordActivity,1);
+
+                                //kill this activity
+                                finish();
                             }
                             else{
                                 Toast.makeText(PasswordActivity.this, "Passwords do not match. Please try again.", Toast.LENGTH_SHORT).show();

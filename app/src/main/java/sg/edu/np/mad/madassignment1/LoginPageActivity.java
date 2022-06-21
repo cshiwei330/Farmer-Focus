@@ -64,6 +64,9 @@ public class LoginPageActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(LoginPageActivity.this, HomeActivity.class);
                 startActivity(myIntent);
 
+                //kill this activity
+                finish();
+
             } else {
                 // telling user that their username or password is invalid
                 Toast.makeText(LoginPageActivity.this, "Invalid Login", Toast.LENGTH_SHORT).show();
@@ -76,6 +79,7 @@ public class LoginPageActivity extends AppCompatActivity {
             // starting activity, bringing user to sign up page
             Intent CreateAccount = new Intent(LoginPageActivity.this, SignUpPageActivity.class);
             startActivity(CreateAccount);
+
         });
     }
 

@@ -88,6 +88,9 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
 
                 //start activity with result
                 startActivityForResult(AccountSettingsToSettingsActivity,1);
+
+                //kill this activity
+                finish();
             }
         });
 

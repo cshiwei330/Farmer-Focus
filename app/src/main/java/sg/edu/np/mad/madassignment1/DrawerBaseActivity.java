@@ -119,7 +119,14 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("remember", "false");
                 editor.apply();
-                startActivity(new Intent(this,LoginPageActivity.class));
+//                startActivity(new Intent(this,LoginPageActivity.class));
+
+                //start loginpage and clear back stack
+                Intent intent = new Intent(this, LoginPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+
                 overridePendingTransition(0,0);
                 break;
        }

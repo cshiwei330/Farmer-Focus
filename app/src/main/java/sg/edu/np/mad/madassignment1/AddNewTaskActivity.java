@@ -82,6 +82,9 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                 //start TaskActivity
                 Intent intent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
                 startActivity(intent);
+
+                //kill this activity
+                finish();
             }
         });
     }
