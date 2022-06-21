@@ -43,6 +43,9 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     private Date currentDate;
 
     private CalenderAdaptor calenderAdaptor;
+    private RecyclerView recyclerView;
+
+    private TextView todayTasksTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         taskList = dbHandler.getTaskData();
 
         //define recyclerView
-        RecyclerView recyclerView = findViewById(R.id.calenderToDoListRecycleView);
+        recyclerView = findViewById(R.id.calenderToDoListRecycleView);
 
         // initialize recyclerview
         //set adaptor to MyAdaptor, given taskList
@@ -66,11 +69,19 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         recyclerView.setLayoutManager(LayoutManager);
         recyclerView.setAdapter(calenderAdaptor);
 
+        //set recycler view to be invisible until a date has been selected
+        recyclerView.setVisibility(View.GONE);
+
         //calenderView
         //initialize views
         initWidgets();
+
+        //set text for number of task on date
+        todayTasksTextView.setText("Select a date to see tasks!");
+
         //get current date
         calendar = Calendar.getInstance();
+
         //set recyclerview
         setMonthView();
 
@@ -80,6 +91,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
+        todayTasksTextView = findViewById(R.id.todayTasksTextView);
     }
     //set the top textView and date numbers, initialize the recyclerView inside calenderView
     private void setMonthView()
@@ -158,6 +170,10 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         //if not a blank date cell is clicked
         if(!dayText.equals(""))
         {
+            //set recycler view to be visible when a date has been selected
+            if (recyclerView.getVisibility()== View.GONE)
+                recyclerView.setVisibility(View.VISIBLE);
+
             //set date format
             SimpleDateFormat df = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
             //apply date format to current date

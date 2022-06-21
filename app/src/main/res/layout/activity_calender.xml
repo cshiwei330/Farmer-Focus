@@ -140,8 +140,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/calenderToDoListRecycleView"
-                    android:layout_width="383dp"
-                    android:layout_height="254dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
@@ -155,11 +155,12 @@
                     android:id="@+id/todayTasksTextView"
                     android:layout_width="246dp"
                     android:layout_height="29dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="12 Tasks on June 30th"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/calenderToDoListRecycleView"
+                    app:layout_constraintStart_toStartOf="@+id/calendarRecyclerView"
                     app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
