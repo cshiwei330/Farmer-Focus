@@ -25,6 +25,9 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //define dbHandler
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
         Button myButtonCancel = findViewById(R.id.BackBtn);
@@ -37,18 +40,27 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         myProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // shared preferences to store latest username to set profile pic
+                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+                String username = sharedPreferences.getString("username", "");
+
+
+                User userDBdata = dbHandler.findProfile(username);
+                //ImageView myProfilePic = new ImageView(R.id.ProfilePic);
+                //myProfilePic.setImageResource(userDBdata.getImageID());
+
+
+
                 //Go to Images Activity
                 Intent AccountSettingsActivityToImagesActivity = new Intent(AccountSettingsActivity.this, ImagesActivity.class);
                 startActivity(AccountSettingsActivityToImagesActivity);
 
 
-                //myProfilePic.setImageResource(R.drawable.img1);
-
-
 //                switch(view.getId())
 //                {
 //                    case R.id.Image1:
-//                        myProfilePic.setImageResource(R.drawable.img1);
+//                        myProfilePic.setImageResource(R.id.Image1);
 //                        break;
 //                }
 //                if(tag == R.drawable.img1){
