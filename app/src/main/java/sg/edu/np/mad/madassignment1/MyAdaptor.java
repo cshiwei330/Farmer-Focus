@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
     ArrayList<Task> data;
+    DBHandler dbHandler;
 
     public MyAdaptor(ArrayList<Task> input) {
         data = input;
@@ -22,6 +23,8 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.to_do_list_layout,parent,false);
+        //define dbHandler
+        dbHandler = new DBHandler(item.getContext(), null, null,6);
         return new MyViewHolder(item);
     }
 
@@ -54,6 +57,12 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         holder.taskDate.setText(strDate);
         holder.taskTime.setText(taskTime);
 
+        //if checked, set box to checked
+        if (t.getStatus()==1){
+            holder.taskCheckBox.setChecked(true);
+        }
+
+        //open delete task screen if taskname is clicked
         holder.taskName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,11 +89,14 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
                 if (holder.taskCheckBox.isChecked()) {
                     Toast.makeText(view.getContext(), "Mark as completed", Toast.LENGTH_SHORT).show();
                     t.setStatus(1);
+                    dbHandler.changeTaskStatus(t);
+
                 }
                 else{
                     Toast.makeText(view.getContext(), "Mark as uncompleted", Toast.LENGTH_SHORT).show();
                     if (t.getStatus() == 1){
                         t.setStatus(0);
+                        dbHandler.changeTaskStatus(t);
                     }
                 }
             }

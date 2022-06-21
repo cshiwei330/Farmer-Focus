@@ -251,5 +251,13 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void changeTaskStatus (Task taskStatus){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // edit Mood entry
+        String changeTaskStatus = "UPDATE " + TASKS + " SET " + COLUMN_TASKSTATUS + " = " + "\""+ taskStatus.getStatus()+ "\""  + " WHERE " + COLUMN_TASKID + " = " + "\""+ taskStatus.getId()+ "\"";
+        db.execSQL(changeTaskStatus);
+        db.close();
+    }
+
 
 }
