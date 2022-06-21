@@ -124,10 +124,11 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
             holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
+
         //convert int data to string
         String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
         //date format
-        SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
         //give dumby value to taskDate for forced initialization
         Date taskDate = null;
 
@@ -142,29 +143,17 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         //convert date object to string with chosen dateformat
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
+        //convert time ints to string
+        String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
 
+        //set viewholder details
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
-        holder.taskDate.setText(strDate);
-
-        holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.taskCheckBox.isChecked()) {
-                    Toast.makeText(view.getContext(), "Mark as completed", Toast.LENGTH_SHORT).show();
-                    t.setStatus(1);
-                }
-                else{
-                    Toast.makeText(view.getContext(), "Mark as uncompleted", Toast.LENGTH_SHORT).show();
-                    if (t.getStatus() == 1){
-                        t.setStatus(0);
-                    }
-                }
-            }
-        });
+        holder.taskTime.setText(taskTime);
 
 
     }
+
 
     @Override
     public int getItemCount() {

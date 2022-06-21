@@ -47,4 +47,10 @@
     <string name="sad">Sad</string>
     <string name="recent_tasks">Recent Tasks:</string>
     <string name="upcoming_tasks">Upcoming Tasks</string>
+
+    <!-- Strings related to calender -->
+    <string name="calenderBack"><![CDATA[<-]]></string>
+    <string name="CalenderForward"><![CDATA[->]]></string>
+
+
 </resources>

@@ -51,40 +51,46 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View view) {
 
-
-                //kill TaskActivity
-                ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
-
-                Toast.makeText(AddNewTaskActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
-
                 String newTaskNameString = newTaskName.getText().toString();
                 String newTaskDescString = newTaskDesc.getText().toString();
+                String validity = taskIsValid(newTaskNameString);
+                //if "VALID" task is properly filled in
+                if (validity.equals("VALID")){
+                    //kill TaskActivity
+                    ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
 
-                // 0 means false = not completed, 1 means true = completed
-                int status = 0;
-                int id = taskList.size() + 1;
+                    Toast.makeText(AddNewTaskActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
 
-                //populate new task fields
-                Task newTaskDB = new Task();
-                newTaskDB.setId(id);
-                newTaskDB.setStatus(status);
-                newTaskDB.setTaskName(newTaskNameString);
-                newTaskDB.setTaskDesc(newTaskDescString);
-                newTaskDB.setTaskHour(hour);
-                newTaskDB.setTaskMinute(minute);
-                newTaskDB.setTaskYear(year);
-                newTaskDB.setTaskMonth(month);
-                newTaskDB.setTaskDayOfMonth(dayOfMonth);
+                    // 0 means false = not completed, 1 means true = completed
+                    int status = 0;
+                    int id = taskList.size() + 1;
 
-                //add new task to db
-                dbHandler.addTask(newTaskDB);
+                    //populate new task fields
+                    Task newTaskDB = new Task();
+                    newTaskDB.setId(id);
+                    newTaskDB.setStatus(status);
+                    newTaskDB.setTaskName(newTaskNameString);
+                    newTaskDB.setTaskDesc(newTaskDescString);
+                    newTaskDB.setTaskHour(hour);
+                    newTaskDB.setTaskMinute(minute);
+                    newTaskDB.setTaskYear(year);
+                    newTaskDB.setTaskMonth(month);
+                    newTaskDB.setTaskDayOfMonth(dayOfMonth);
 
-                //start TaskActivity
-                Intent intent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
-                startActivity(intent);
+                    //add new task to db
+                    dbHandler.addTask(newTaskDB);
 
-                //kill this activity
-                finish();
+                    //start TaskActivity
+                    Intent intent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
+                    startActivity(intent);
+
+                    //kill this activity
+                    finish();
+                }
+                else {
+                    Toast.makeText(AddNewTaskActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -132,5 +138,18 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
     public void onDateClick(View view) {
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
+    }
+
+    public String  taskIsValid(String newTaskNameString){
+        if(newTaskNameString.length() < 1){
+            return "name";
+        }
+        if(year == 0 && month == 0 && dayOfMonth != 0){
+            return "date";
+        }
+//        if(hour == 0 && minute == 0){
+//            return "time";
+//        }
+        return "VALID";
     }
 }
