@@ -1,7 +1,10 @@
 package sg.edu.np.mad.madassignment1;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,6 +67,8 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         recyclerView = findViewById(R.id.calenderToDoListRecycleView);
 
         // initialize recyclerview
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         //set adaptor to MyAdaptor, given taskList
         calenderAdaptor = new CalenderAdaptor(taskList);
         LinearLayoutManager LayoutManager = new LinearLayoutManager(this);

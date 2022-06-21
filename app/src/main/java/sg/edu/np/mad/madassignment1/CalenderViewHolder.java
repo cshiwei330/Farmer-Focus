@@ -19,7 +19,6 @@ public class CalenderViewHolder extends RecyclerView.ViewHolder {
     TextView taskDesc;
     CheckBox taskCheckBox;
     TextView taskId;
-    TextView taskDate;
     TextView taskTime;
 
     public CalenderViewHolder(View itemView){
@@ -27,7 +26,6 @@ public class CalenderViewHolder extends RecyclerView.ViewHolder {
         taskName = itemView.findViewById(R.id.taskTitle);
         taskDesc = itemView.findViewById(R.id.taskDesc);
         taskCheckBox = itemView.findViewById(R.id.taskCheckBox);
-        taskDate = itemView.findViewById(R.id.taskDate);
         taskTime = itemView.findViewById(R.id.taskTime);
 //        params = new LinearLayout.LayoutParams(0, 0);
 //        visible = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
