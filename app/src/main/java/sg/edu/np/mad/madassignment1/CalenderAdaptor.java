@@ -127,7 +127,7 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         //convert int data to string
         String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
         //date format
-        SimpleDateFormat fmt = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
         //give dumby value to taskDate for forced initialization
         Date taskDate = null;
 
