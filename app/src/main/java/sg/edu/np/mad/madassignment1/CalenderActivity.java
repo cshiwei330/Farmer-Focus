@@ -43,6 +43,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     private Date currentDate;
 
     private CalenderAdaptor calenderAdaptor;
+    private CalenderViewAdaptor calendarViewAdapter;
     private RecyclerView recyclerView;
 
     private TextView todayTasksTextView;
@@ -112,7 +113,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         ArrayList<String> daysInMonth = daysInMonthArray(numberOfDaysInMonth);
 
         //initialize recyclerview
-        CalenderViewAdaptor calendarViewAdapter = new CalenderViewAdaptor(daysInMonth, CalenderActivity.this);
+        calendarViewAdapter = new CalenderViewAdaptor(daysInMonth, CalenderActivity.this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarViewAdapter);
@@ -171,13 +172,15 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         if(!dayText.equals(""))
         {
             //set recycler view to be visible when a date has been selected
-            if (recyclerView.getVisibility()== View.GONE)
+            if (recyclerView.getVisibility()== View.GONE){
                 recyclerView.setVisibility(View.VISIBLE);
+            }
 
             //set date format
             SimpleDateFormat df = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
             //apply date format to current date
             String dateString = df.format(currentDate);
+            calendarViewAdapter.getFilter().filter(dayText+"/"+dateString);
             calenderAdaptor.getFilter().filter(dayText+"/"+dateString);
             Log.v("Calender button clicked",dateString);
         }

@@ -7,11 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CalenderViewViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
+
+    public final View cellConstraintLayout;
     public final TextView dayOfMonth;
     private final CalenderViewAdaptor.OnItemListener onItemListener;
+
     public CalenderViewViewHolder(@NonNull View itemView, CalenderViewAdaptor.OnItemListener onItemListener)
     {
         super(itemView);
+        cellConstraintLayout = itemView.findViewById(R.id.cellConstraintLayout);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
