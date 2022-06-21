@@ -40,14 +40,14 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
 
-        int[] imageList = new int [] {R.drawable.android, R.drawable.a3};
+        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.a2, R.drawable.a1};
 
         User userDBdata = dbHandler.findUser(username);
        //ImageView myProfilePic = new ImageView(R.id.ProfilePic);
 
         //if user has not a default profile pic, set profile pic to image
         if (userDBdata.getImageID() != 0){
-            myProfilePic.setImageResource(imageList[userDBdata.getImageID()]);
+            myProfilePic.setImageResource(imageList[userDBdata.getImageID()-1]);
         }
         else{
             myProfilePic.setImageResource(R.drawable.profile);

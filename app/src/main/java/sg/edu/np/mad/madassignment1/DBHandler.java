@@ -121,7 +121,7 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERNAME, userData.getUsername());
         values.put(COLUMN_PASSWORD, userData.getPassword());
-        values.put(COLUMN_IMAGEID, userData.getImageID());
+        //values.put(COLUMN_IMAGEID, userData.getImageID());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ACCOUNTS, null, values);

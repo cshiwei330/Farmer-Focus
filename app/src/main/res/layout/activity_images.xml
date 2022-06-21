@@ -8,44 +8,13 @@
     tools:context=".ImagesActivity">
 
     <ImageView
-        android:id="@+id/Image2"
-        android:layout_width="172dp"
-        android:layout_height="178dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="152dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/android" />
-
-    <ImageView
         android:id="@+id/Image1"
-        android:layout_width="172dp"
-        android:layout_height="178dp"
-        android:layout_marginTop="49dp"
+        android:layout_width="158dp"
+        android:layout_height="170dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="174dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Image3"
-        app:srcCompat="@drawable/android" />
-
-    <ImageView
-        android:id="@+id/Image4"
-        android:layout_width="172dp"
-        android:layout_height="178dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="49dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Image2"
-        app:srcCompat="@drawable/android" />
-
-    <ImageView
-        android:id="@+id/Image3"
-        android:layout_width="172dp"
-        android:layout_height="178dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/android" />
 
     <TextView
@@ -63,18 +32,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/SaveBtn3"
-        android:layout_width="116dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="158dp"
-        android:layout_marginBottom="128dp"
-        android:text="Save"
+    <ImageView
+        android:id="@+id/Image2"
+        android:layout_width="193dp"
+        android:layout_height="199dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="164dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Image1" />
+        app:srcCompat="@drawable/a3" />
+
+    <ImageView
+        android:id="@+id/Image3"
+        android:layout_width="158dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/a2" />
+
+    <ImageView
+        android:id="@+id/Image4"
+        android:layout_width="161dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:background="#F8F5F5"
+        android:backgroundTint="#0AFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/a1" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
