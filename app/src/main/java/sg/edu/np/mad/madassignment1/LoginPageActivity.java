@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -90,11 +90,10 @@ public class LoginPageActivity extends AppCompatActivity {
         if (userDBData == null) {
             // telling user that the username entered does not exist
             Toast.makeText(LoginPageActivity.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
-        } else {
-            if (userDBData.getUsername().equals(username) && userDBData.getPassword().equals(password)) {
-                // if username and password entered matches up with the account in the database, details entered for login is correct
-                return true;
-            }
+        }
+        else if (userDBData.getUsername().equals(username) && userDBData.getPassword().equals(password)) {
+            // if username and password entered matches up with the account in the database, details entered for login is correct
+            return true;
         }
         return false;
     }

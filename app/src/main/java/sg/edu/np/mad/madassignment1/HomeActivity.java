@@ -1,24 +1,17 @@
 package sg.edu.np.mad.madassignment1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.view.View;
+
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityHomeBinding;
 
@@ -110,7 +103,8 @@ public class HomeActivity extends DrawerBaseActivity {
             if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){
                 //ok everything is fine, date in range
                 return true;
-            } else if (dateToValidate.compareTo(today)==0){
+            }
+            else if (dateToValidate.compareTo(today)==0){
                 return true;
             }
             else {

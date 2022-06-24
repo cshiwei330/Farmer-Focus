@@ -10,7 +10,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
     TextView taskName;
     TextView taskDesc;
     CheckBox taskCheckBox;
-    TextView taskId;
     TextView taskDate;
     TextView taskTime;
 

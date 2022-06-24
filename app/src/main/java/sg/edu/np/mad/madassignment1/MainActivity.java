@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,15 +27,17 @@ public class MainActivity extends AppCompatActivity {
             // getting stored username
             String username = sharedPreferences.getString("username", "");
             user.setUsername(username);
+
+            Intent intent;
             if (remember.equals("false")) {
                 // starting new activity, bringing user to login page if the user did not check the remember me box
-                Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
-                startActivity(intent);
-            } else {
-                // starting new activity, bringing user to home page if the user checked the remember me box
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
+                intent = new Intent(MainActivity.this, LoginPageActivity.class);
             }
+            else {
+                // starting new activity, bringing user to home page if the user checked the remember me box
+                intent = new Intent(MainActivity.this, HomeActivity.class);
+            }
+            startActivity(intent);
         }, DELAY);
     }
 }

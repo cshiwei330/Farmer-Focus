@@ -35,13 +35,13 @@ public class moodmsgFragment extends Fragment {
 
         TextView msg = view.findViewById(R.id.moodMsg);
 
-        if (emotion == "happy"){
+        if (emotion.equals("happy")){
             msg.setText("Glad that you are feeling happy. Hope this positivity continues!");
         }
-        else if (emotion == "neutral"){
+        else if (emotion.equals("neutral")){
             msg.setText("It will come and get you. It's not that you shouldn't be neutral. It's that you won't be able to stay neutral");
         }
-        else if (emotion == "sad"){
+        else if (emotion.equals("sad")){
             msg.setText("It's ok to be sad sometimes. It'll get easier with time, trust me :)");
         }
         else{

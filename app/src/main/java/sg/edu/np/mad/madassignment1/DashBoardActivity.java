@@ -1,8 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityDashBoardBinding;

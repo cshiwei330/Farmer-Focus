@@ -193,12 +193,10 @@ public class MoodFragment extends Fragment {
             Mood mood = moodList.get(i);
 
             String entryDate = mood.getDate();
+
             if (entryDate.equals(today)){
                 changeMood = mood;
                 break;
-            }
-            else{
-                continue;
             }
         }
 

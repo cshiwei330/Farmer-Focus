@@ -1,7 +1,5 @@
 package sg.edu.np.mad.madassignment1;
 
-import java.util.Calendar;
-
 public class Mood {
     private String date;
     private String mood;

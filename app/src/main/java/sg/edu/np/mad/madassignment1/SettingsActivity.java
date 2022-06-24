@@ -1,20 +1,15 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
+
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivitySettingsBinding;
 

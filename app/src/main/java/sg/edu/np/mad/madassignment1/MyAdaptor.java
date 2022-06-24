@@ -2,6 +2,7 @@ package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,9 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
             //convert to date class
             taskDate = fmt.parse(stringDate);
         }
-        catch(ParseException pe){ }
+        catch(ParseException pe){
+            Log.v("MyAdaptor","String Date formatting has produced and error and this should have never happened. FIX THIS");
+        }
 
         //convert date object to string with chosen dateformat
         String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
@@ -53,7 +56,7 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
         String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
 
-        holder.taskName.setText(String.valueOf(position+1) + ". " +t.getTaskName());
+        holder.taskName.setText((position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskDate.setText(strDate);
         holder.taskTime.setText(taskTime);

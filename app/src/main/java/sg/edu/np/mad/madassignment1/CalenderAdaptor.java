@@ -6,18 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> implements Filterable {
 
@@ -27,7 +24,6 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
     public CalenderAdaptor (ArrayList<Task> input) {
         data = input;
     }
-
 
     public CalenderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.calender_to_do_list_layout,parent,false);
@@ -62,11 +58,9 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
                     intDateArr[i] = Integer.parseInt(stringDateArr[i]);
                 }
                 //check all tasks in data to filter date, if date is the same, add to filter
-                ArrayList<Task> taskFilter = new ArrayList<Task>();
+                ArrayList<Task> taskFilter = new ArrayList<>();
                 for(Task task: data){
-                    Log.v("Filter",String.valueOf(task.getTaskYear())+ "/" +
-                            String.valueOf(task.getTaskMonth()) + "/" +
-                            String.valueOf(task.getTaskDayOfMonth()));
+                    Log.v("Filter",task.getTaskYear()+ "/" + (task.getTaskMonth()) + "/" + task.getTaskDayOfMonth());
                     if(task.getTaskYear() == intDateArr[2] &&
                             task.getTaskMonth() == intDateArr[1] &&
                             task.getTaskDayOfMonth() == intDateArr[0]){

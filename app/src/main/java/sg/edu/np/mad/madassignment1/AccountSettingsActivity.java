@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import sg.edu.np.mad.madassignment1.databinding.ActivityAccountSettingsBinding;
-
 public class AccountSettingsActivity extends DrawerBaseActivity {
 
     public String getString;

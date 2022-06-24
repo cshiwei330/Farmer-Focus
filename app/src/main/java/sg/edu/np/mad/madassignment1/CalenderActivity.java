@@ -104,7 +104,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         //get number of days in a month
         int numberOfDaysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        //get array of length 42 that have blanks to show in recylcerView
+        //get array of length 42 that have blanks to show in recyclerView
         ArrayList<String> daysInMonth = daysInMonthArray(numberOfDaysInMonth);
 
         //initialize recyclerview
@@ -204,11 +204,9 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             intDateArr[i] = Integer.parseInt(stringDateArr[i]);
         }
         //check all tasks in data to filter date, if date is the same, add to filter
-        ArrayList<Task> taskFilter = new ArrayList<Task>();
+        ArrayList<Task> taskFilter = new ArrayList<>();
         for(Task task: taskList){
-            Log.v("Filter",String.valueOf(task.getTaskYear())+ "/" +
-                    String.valueOf(task.getTaskMonth()) + "/" +
-                    String.valueOf(task.getTaskDayOfMonth()));
+            Log.v("Filter",task.getTaskYear()+ "/" + (task.getTaskMonth()) + "/" + task.getTaskDayOfMonth());
             if(task.getTaskYear() == intDateArr[2] &&
                     task.getTaskMonth() == intDateArr[1] &&
                     task.getTaskDayOfMonth() == intDateArr[0]){
