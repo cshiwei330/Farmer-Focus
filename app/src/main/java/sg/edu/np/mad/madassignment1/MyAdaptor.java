@@ -33,33 +33,33 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         //define task as t
         Task t = data.get(position);
 
-        //convert int data to string
-        String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
-        //date format
-        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-        //give dumby value to taskDate for forced initialization
-        Date taskDate = null;
-
-        //try catch because .parse throws errors before compiling??????
-        try {
-            //convert to date class
-            taskDate = fmt.parse(stringDate);
-        }
-        catch(ParseException pe){
-            Log.v("MyAdaptor","String Date formatting has produced and error and this should have never happened. FIX THIS");
-        }
-
-        //convert date object to string with chosen dateformat
-        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
+//        //convert int data to string
+//        String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
+//        //date format
+//        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+//        //give dumby value to taskDate for forced initialization
+//        Date taskDate = null;
+//
+//        //try catch because .parse throws errors before compiling??????
+//        try {
+//            //convert to date class
+//            taskDate = fmt.parse(stringDate);
+//        }
+//        catch(ParseException pe){
+//            Log.v("MyAdaptor","String Date formatting has produced and error and this should have never happened. FIX THIS");
+//        }
+//
+//        //convert date object to string with chosen dateformat
+//        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
         //convert time ints to string
         //String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
-        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
+//        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
 
         holder.taskName.setText((position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
-        holder.taskDate.setText(strDate);
-        holder.taskTime.setText(taskTime);
+        holder.taskDate.setText(t.getTaskDate());
+        holder.taskTime.setText(t.getTaskTime());
 
         //if checked, set box to checked
         if (t.getStatus()==1){
@@ -106,14 +106,14 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         Bundle extras = new Bundle();
         Intent myIntent = new Intent(holder.taskName.getContext(), ViewTaskActivity.class);
         extras.putInt("task id", t.getId());
-        extras.putInt("task status", t.getStatus());
-        extras.putString("task name", t.getTaskName());
-        extras.putString("task desc", t.getTaskDesc());
-        extras.putInt("task hour", t.getTaskHour());
-        extras.putInt("task minute", t.getTaskYear());
-        extras.putInt("task year", t.getTaskYear());
-        extras.putInt("task month", t.getTaskMonth());
-        extras.putInt("task dayOfMonth", t.getTaskDayOfMonth());
+//        extras.putInt("task status", t.getStatus());
+//        extras.putString("task name", t.getTaskName());
+//        extras.putString("task desc", t.getTaskDesc());
+//        extras.putInt("task hour", t.getTaskHour());
+//        extras.putInt("task minute", t.getTaskYear());
+//        extras.putInt("task year", t.getTaskYear());
+//        extras.putInt("task month", t.getTaskMonth());
+//        extras.putInt("task dayOfMonth", t.getTaskDayOfMonth());
         myIntent.putExtras(extras);
 
         holder.taskName.getContext().startActivity(myIntent);

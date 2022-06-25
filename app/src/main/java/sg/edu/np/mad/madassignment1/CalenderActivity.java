@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,8 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
     private TextView todayTasksTextView;
 
+    public String GLOBAL_PREF = "MyPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,14 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
-        //fill taskList with db data
-        taskList = dbHandler.getTaskData();
+
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
+        //get task data from database
+        taskList = dbHandler.getTaskData(user.getUserID());
 
         //define recyclerView
         recyclerView = findViewById(R.id.calenderToDoListRecycleView);
@@ -195,24 +204,22 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     //filter tasks for selected date
     public ArrayList<Task> tasksWhiteList(String dateString, ArrayList<Task> taskList){
         //split string into day,month,year
-        String[] stringDateArr = dateString.split("/",3);
-        //force initialize to null
-        int[] intDateArr = new int[stringDateArr.length];
-        //convert stingDateArr to int
-        for(int i = 0;i < stringDateArr.length;i++)
-        {
-            //intDateArr[0] == dayOfMonth
-            //intDateArr[1] == month
-            //intDateArr[2] == year
-            intDateArr[i] = Integer.parseInt(stringDateArr[i]);
-        }
+//        String[] stringDateArr = dateString.split("/",3);
+//        //force initialize to null
+//        int[] intDateArr = new int[stringDateArr.length];
+//        //convert stingDateArr to int
+//        for(int i = 0;i < stringDateArr.length;i++)
+//        {
+//            //intDateArr[0] == dayOfMonth
+//            //intDateArr[1] == month
+//            //intDateArr[2] == year
+//            intDateArr[i] = Integer.parseInt(stringDateArr[i]);
+//        }
         //check all tasks in data to filter date, if date is the same, add to filter
         ArrayList<Task> taskFilter = new ArrayList<>();
         for(Task task: taskList){
-            Log.v("Filter",task.getTaskYear()+ "/" + (task.getTaskMonth()) + "/" + task.getTaskDayOfMonth());
-            if(task.getTaskYear() == intDateArr[2] &&
-                    task.getTaskMonth() == intDateArr[1] &&
-                    task.getTaskDayOfMonth() == intDateArr[0]){
+            Log.v("Filter",task.getTaskDate());
+            if(task.getTaskDate().equals(dateString)){
                 taskFilter.add(task);
             }
         }
@@ -222,8 +229,9 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     public ArrayList<String> tasksThisMonth(ArrayList<Task> taskList){
         ArrayList<String> tasksInThisMonth = new ArrayList<>();
         for(Task task: taskList){
-            if(task.getTaskYear() == calendar.get(Calendar.YEAR) && task.getTaskMonth() == calendar.get(Calendar.MONTH)+1){
-                tasksInThisMonth.add(String.valueOf(task.getTaskDayOfMonth()));
+            String[] dateArr = task.getTaskDate().split("/",3);
+            if(Integer.parseInt(dateArr[2]) == (calendar.get(Calendar.YEAR)) && Integer.parseInt(dateArr[1]) == (calendar.get(Calendar.MONTH)+1)){
+                tasksInThisMonth.add(dateArr[0]);
             }
         }
         return tasksInThisMonth;

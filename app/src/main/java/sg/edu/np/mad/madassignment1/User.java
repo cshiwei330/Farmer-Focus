@@ -5,15 +5,17 @@ public class User {
     private String Password;
     private Integer ImageID;
 
+    private int userID;
 
     public User(){
 
     }
 
-    public User(String userName, String password, Integer imageID){
+    public User(String userName, String password, Integer imageID, int userID){
         this.UserName = userName;
         this.Password = password;
         this.ImageID = imageID;
+        this.userID = userID;
     }
 
     // for menu header, need get username
@@ -34,4 +36,14 @@ public class User {
     public Integer getImageID() {return ImageID; }
 
     public void setImageID(Integer imageID) { this.ImageID = imageID; }
+
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
 }

@@ -144,6 +144,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
                 @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("remember", "false");
+                editor.putString("username","");
                 editor.apply();
 //                startActivity(new Intent(this,LoginPageActivity.class));
 

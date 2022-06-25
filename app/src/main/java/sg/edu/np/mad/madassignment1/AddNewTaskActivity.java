@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
@@ -28,6 +29,8 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
     int hour, minute;
     int year, month, dayOfMonth;
 
+    public String GLOBAL_PREF = "MyPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,13 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         //define database
         DBHandler dbHandler = new DBHandler(this, null, null,6);
 
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
         //get task data from database
-        taskList = dbHandler.getTaskData();
+        taskList = dbHandler.getTaskData(user.getUserID());
 
         //confirm create new task button listener
         createNewTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -69,11 +77,17 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setStatus(status);
                     newTaskDB.setTaskName(newTaskNameString);
                     newTaskDB.setTaskDesc(newTaskDescString);
-                    newTaskDB.setTaskHour(hour);
-                    newTaskDB.setTaskMinute(minute);
-                    newTaskDB.setTaskYear(year);
-                    newTaskDB.setTaskMonth(month);
-                    newTaskDB.setTaskDayOfMonth(dayOfMonth);
+//                    newTaskDB.setTaskHour(hour);
+//                    newTaskDB.setTaskMinute(minute);
+//                    newTaskDB.setTaskYear(year);
+//                    newTaskDB.setTaskMonth(month);
+//                    newTaskDB.setTaskDayOfMonth(dayOfMonth);
+                    //String date = String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+                    String date = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
+                    newTaskDB.setTaskDate(date);
+                    String time =  String.format("%02d:%02d",hour,minute);
+                    newTaskDB.setTaskTime(time);
+                    newTaskDB.setTaskUserID(user.getUserID());
 
                     //add new task to db
                     dbHandler.addTask(newTaskDB);
@@ -142,7 +156,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         if(newTaskNameString.length() < 1){
             return "name";
         }
-        if(year == 0 && month == 0 && dayOfMonth != 0){
+        if(year == 0 || month == 0 || dayOfMonth == 0){
             return "date";
         }
 

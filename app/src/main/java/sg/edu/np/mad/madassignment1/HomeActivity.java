@@ -20,6 +20,7 @@ public class HomeActivity extends DrawerBaseActivity {
 
     public String GLOBAL_PREF = "MyPrefs";
 
+
     //define activity binding
     ActivityHomeBinding activityHomeBinding;
 
@@ -33,9 +34,13 @@ public class HomeActivity extends DrawerBaseActivity {
         //set title
         allocateActivityTitle("Home");
 
+        //define dbHandler
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+
         // getting stored username
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
 
         // For Greetings
         //String username = User.getUsername();
@@ -45,14 +50,11 @@ public class HomeActivity extends DrawerBaseActivity {
         //define recyclerView
         RecyclerView recyclerView = findViewById(R.id.recentTasksRecyclerView);
 
-        //define dbHandler
-        DBHandler dbHandler = new DBHandler(this, null, null,6);
-
         //Finding recent tasks
         //define taskList array
         ArrayList<Task> taskList = new ArrayList<>();
         //current taskList with db data
-        taskList = dbHandler.getTaskData();
+        taskList = dbHandler.getTaskData(user.getUserID());
         //use method
         ArrayList<Task> recentTaskList = findRecentTasks(taskList);
 
@@ -73,10 +75,11 @@ public class HomeActivity extends DrawerBaseActivity {
             Task task = taskList.get(i);
 
             //form date string from obj
-            String checkDate = String.format("%d/%d/%d",task.getTaskDayOfMonth(),task.getTaskMonth(),task.getTaskYear());
+//            String checkDate = String.format("%d/%d/%d",task.getTaskDayOfMonth(),task.getTaskMonth(),task.getTaskYear());
 
             //check if within a week
-            boolean result = withinAWeek(checkDate);
+//            boolean result = withinAWeek(checkDate);
+            boolean result = withinAWeek(task.getTaskDate());
 
             if (result){
                 recentTaskList.add(task);

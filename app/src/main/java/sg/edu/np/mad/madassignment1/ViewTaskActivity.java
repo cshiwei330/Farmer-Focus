@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 public class ViewTaskActivity extends AppCompatActivity {
 
+    Task task;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,17 +28,19 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         Intent receivingEnd = getIntent();
         int newTaskId = receivingEnd.getIntExtra("task id", 0);
-        int newTaskStatus = receivingEnd.getIntExtra("task status", 0);
-        String newTaskName = receivingEnd.getStringExtra("task name");
-        String newTaskDesc = receivingEnd.getStringExtra("task desc");
-        int newTaskHour = receivingEnd.getIntExtra("task hour", 0);
-        int newTaskMin = receivingEnd.getIntExtra("task minute", 0);
-        int newTaskYear = receivingEnd.getIntExtra("task year", 0);
-        int newTaskMonth = receivingEnd.getIntExtra("task month", 0);
-        int newTaskDayOfMonth = receivingEnd.getIntExtra("task dayOfMonth", 0);
+//        int newTaskStatus = receivingEnd.getIntExtra("task status", 0);
+//        String newTaskName = receivingEnd.getStringExtra("task name");
+//        String newTaskDesc = receivingEnd.getStringExtra("task desc");
+//        int newTaskHour = receivingEnd.getIntExtra("task hour", 0);
+//        int newTaskMin = receivingEnd.getIntExtra("task minute", 0);
+//        int newTaskYear = receivingEnd.getIntExtra("task year", 0);
+//        int newTaskMonth = receivingEnd.getIntExtra("task month", 0);
+//        int newTaskDayOfMonth = receivingEnd.getIntExtra("task dayOfMonth", 0);
 
-        taskName.setText(newTaskName);
-        taskDesc.setText(newTaskDesc);
+        task = dbHandler.findTask(newTaskId);
+
+        taskName.setText(task.getTaskName());
+        taskDesc.setText(task.getTaskDesc());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,9 +53,10 @@ public class ViewTaskActivity extends AppCompatActivity {
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Task deleteTask = new Task(newTaskId, newTaskStatus, newTaskName, newTaskDesc,
-                        newTaskHour, newTaskMin, newTaskYear, newTaskMonth, newTaskDayOfMonth);
-                dbHandler.deleteTask(deleteTask);
+//                Task deleteTask = new Task(newTaskId, newTaskStatus, newTaskName, newTaskDesc,
+//                        newTaskHour, newTaskMin, newTaskYear, newTaskMonth, newTaskDayOfMonth);
+//                dbHandler.deleteTask(deleteTask);
+                dbHandler.deleteTask(task);
                 Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
                 startActivity(myIntent);
             }

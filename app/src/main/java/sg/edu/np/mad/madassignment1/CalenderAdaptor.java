@@ -49,25 +49,23 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
                 //convert input 'constraint' to string
                 String stringDate = constraint.toString();
-                //split string into day,month,year
-                String[] stringDateArr = stringDate.split("/",3);
-                //force initialize to null
-                int[] intDateArr = new int[stringDateArr.length];
-                //convert stingDateArr to int
-                for(int i = 0;i < stringDateArr.length;i++)
-                {
-                    //intDateArr[0] == dayOfMonth
-                    //intDateArr[1] == month
-                    //intDateArr[2] == year
-                    intDateArr[i] = Integer.parseInt(stringDateArr[i]);
-                }
+//                //split string into day,month,year
+//                String[] stringDateArr = stringDate.split("/",3);
+//                //force initialize to null
+//                int[] intDateArr = new int[stringDateArr.length];
+//                //convert stingDateArr to int
+//                for(int i = 0;i < stringDateArr.length;i++)
+//                {
+//                    //intDateArr[0] == dayOfMonth
+//                    //intDateArr[1] == month
+//                    //intDateArr[2] == year
+//                    intDateArr[i] = Integer.parseInt(stringDateArr[i]);
+//                }
                 //check all tasks in data to filter date, if date is the same, add to filter
                 ArrayList<Task> taskFilter = new ArrayList<>();
                 for(Task task: data){
-                    Log.v("Filter",task.getTaskYear()+ "/" + (task.getTaskMonth()) + "/" + task.getTaskDayOfMonth());
-                    if(task.getTaskYear() == intDateArr[2] &&
-                            task.getTaskMonth() == intDateArr[1] &&
-                            task.getTaskDayOfMonth() == intDateArr[0]){
+                    Log.v("Filter",task.getTaskDate());
+                    if(task.getTaskDate().equals(stringDate)){
                         taskFilter.add(task);
                     }
                 }
@@ -101,7 +99,7 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
             for (Task task : dataDateFilter) {
                 //if present in filter, set to visible and break
                 if (t == task) {
-                    Log.v("CAL_VIS", String.valueOf(t.getTaskDayOfMonth()));
+                    Log.v("CAL_VIS", String.valueOf(t.getTaskDate()));
                     holder.itemView.setVisibility(View.VISIBLE);
                     holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                     Log.v("CALENDER VISIBLE",String.valueOf(position));
@@ -109,7 +107,7 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
                 }
                 //else, set to invisible
                 else {
-                    Log.v("CAL_INVIS", String.valueOf(t.getTaskDayOfMonth()));
+                    Log.v("CAL_INVIS", String.valueOf(t.getTaskDate()));
                     holder.itemView.setVisibility(View.GONE);
                     holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
                 }
@@ -117,38 +115,38 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         }
         //filter is initialized, thus a filter has been applied, but is empty, set all to 0 size
         else {
-            Log.v("ELSE", String.valueOf(t.getTaskDayOfMonth()));
+            Log.v("ELSE", String.valueOf(t.getTaskDate()));
             holder.itemView.setVisibility(View.GONE);
             holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
 
 
         //convert int data to string
-        String stringDate = String.format("%d/%d/%d",t.getTaskDayOfMonth(),t.getTaskMonth(),t.getTaskYear());
-        //date format
-        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-        //give dumby value to taskDate for forced initialization
-        Date taskDate = null;
-
-
-        //try catch because .parse throws errors before compiling??????
-        try {
-            //convert to date class
-            taskDate = fmt.parse(stringDate);
-        }
-        catch(ParseException pe){ }
-
-        //convert date object to string with chosen dateformat
-        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
+        String stringDate = String.format(t.getTaskDate());
+//        //date format
+//        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+//        //give dumby value to taskDate for forced initialization
+//        Date taskDate = null;
+//
+//
+//        //try catch because .parse throws errors before compiling??????
+//        try {
+//            //convert to date class
+//            taskDate = fmt.parse(stringDate);
+//        }
+//        catch(ParseException pe){ }
+//
+//        //convert date object to string with chosen dateformat
+//        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
 
         //convert time ints to string
         //String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
-        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
+//        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
 
         //set viewholder details
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
-        holder.taskTime.setText(taskTime);
+        holder.taskTime.setText(t.getTaskTime());
 
         //if checked, set box to checked
         if (t.getStatus()==1){

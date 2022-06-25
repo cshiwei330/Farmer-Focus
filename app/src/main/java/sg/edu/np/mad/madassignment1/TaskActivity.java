@@ -1,13 +1,13 @@
 package sg.edu.np.mad.madassignment1;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +25,8 @@ public class TaskActivity extends DrawerBaseActivity{
     ActivityTaskBinding activityTaskBinding;
     //define taskList array
     ArrayList<Task> taskList = new ArrayList<>();
+
+    public String GLOBAL_PREF = "MyPrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,13 @@ public class TaskActivity extends DrawerBaseActivity{
         // floating button to go to addnewtask
         FloatingActionButton addNewTask = findViewById(R.id.addNewTaskButton);
 
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
         //fill taskList with db data
-        taskList = dbHandler.getTaskData();
+        taskList = dbHandler.getTaskData(user.getUserID());
 
 
         //set textview to show number of tasks
@@ -75,7 +82,8 @@ public class TaskActivity extends DrawerBaseActivity{
                 //delete all task entries
                 dbHandler.deleteAllTask();
                 //replace taskList with empty dbHandler
-                taskList = dbHandler.getTaskData();
+                taskList = dbHandler.getTaskData(user.getUserID());
+                Log.v("GOD",String.valueOf(taskList.size()));
                 //force clear adaptor
                 mAdaptor.clear();
 
