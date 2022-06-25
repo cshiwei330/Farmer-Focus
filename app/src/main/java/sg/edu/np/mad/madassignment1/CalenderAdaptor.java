@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
     ArrayList<Task> data;
     ArrayList<Task> dataDateFilter;
+    DBHandler dbHandler;
 
     public CalenderAdaptor (ArrayList<Task> input) {
         data = input;
@@ -27,6 +29,8 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
     public CalenderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.calender_to_do_list_layout,parent,false);
+        //define dbHandler
+        dbHandler = new DBHandler(item.getContext(), null, null,6);
         return new CalenderViewHolder(item);
     }
 
@@ -145,6 +149,30 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskTime.setText(taskTime);
+
+        //if checked, set box to checked
+        if (t.getStatus()==1){
+            holder.taskCheckBox.setChecked(true);
+        }
+
+        holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.taskCheckBox.isChecked()) {
+                    Toast.makeText(view.getContext(), "Mark as completed", Toast.LENGTH_SHORT).show();
+                    t.setStatus(1);
+                    dbHandler.changeTaskStatus(t);
+
+                }
+                else{
+                    Toast.makeText(view.getContext(), "Mark as uncompleted", Toast.LENGTH_SHORT).show();
+                    if (t.getStatus() == 1){
+                        t.setStatus(0);
+                        dbHandler.changeTaskStatus(t);
+                    }
+                }
+            }
+        });
 
 
     }
