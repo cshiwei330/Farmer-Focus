@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import sg.edu.np.mad.madassignment1.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends DrawerBaseActivity {
 
+    public String GLOBAL_PREF = "MyPrefs";
+
     //define activity binding
     ActivityHomeBinding activityHomeBinding;
 
@@ -30,8 +33,12 @@ public class HomeActivity extends DrawerBaseActivity {
         //set title
         allocateActivityTitle("Home");
 
+        // getting stored username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+
         // For Greetings
-        String username = User.getUsername();
+        //String username = User.getUsername();
         TextView greetings = findViewById(R.id.greetings);
         greetings.setText("What's up, " + username + "!");
 

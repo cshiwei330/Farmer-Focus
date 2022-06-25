@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
             // getting value
             String remember = sharedPreferences.getString("remember", "");
-            User user = new User();
-            // getting stored username
-            String username = sharedPreferences.getString("username", "");
-            user.setUsername(username);
+//            User user = new User();
+//            // getting stored username
+//            String username = sharedPreferences.getString("username", "");
+//            user.setUsername(username);
 
             Intent intent;
             if (remember.equals("false")) {

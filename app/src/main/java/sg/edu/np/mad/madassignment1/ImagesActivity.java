@@ -13,21 +13,28 @@ public class ImagesActivity extends AppCompatActivity {
 
     public String GLOBAL_PREF = "MyPrefs";
     //SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-
-
+    String username;
+    User userDBdata;
+    DBHandler dbHandler;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
         //define dbHandler
-        DBHandler dbHandler = new DBHandler(this, null, null,6);
+        dbHandler = new DBHandler(this, null, null,6);
 
         ImageView Image1 = findViewById(R.id.Image1);
         ImageView Image2 = findViewById(R.id.Image2);
         ImageView Image3 = findViewById(R.id.Image3);
         ImageView Image4 = findViewById(R.id.Image4);
         ImageView Default = findViewById(R.id.ProfilePic);
+
+        // shared preferences to store latest username to set profile pic
+        sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        username = sharedPreferences.getString("username", "");
+        userDBdata = dbHandler.findUser(username);
 
         //                switch(view.getId())
 //                {
@@ -64,88 +71,51 @@ public class ImagesActivity extends AppCompatActivity {
         Image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // shared preferences to store latest username to set profile pic
-                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-                String username = sharedPreferences.getString("username", "");
-                User userDBdata = dbHandler.findUser(username);
-
-                userDBdata.setImageID(1);
-                dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 1 chosen!", Toast.LENGTH_SHORT).show();
-
-                //create intent to go back to Settings
-                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
-                startActivity(ImagesActivityToAccountSettingsActivity);
-
-                //kill this activity
-                finish();
+                imageClicked(1);
             }
         });
 
         Image2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // shared preferences to store latest username to set profile pic
-                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-                String username = sharedPreferences.getString("username", "");
-                User userDBdata = dbHandler.findUser(username);
-
-                userDBdata.setImageID(2);
-                dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 2 chosen!", Toast.LENGTH_SHORT).show();
-
-                //create intent to go back to Settings
-                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
-                startActivity(ImagesActivityToAccountSettingsActivity);
-
-                //kill this activity
-                finish();
+                imageClicked(2);
             }
         });
 
         Image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // shared preferences to store latest username to set profile pic
-                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-                String username = sharedPreferences.getString("username", "");
-                User userDBdata = dbHandler.findUser(username);
-
-                userDBdata.setImageID(3);
-                dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 3 chosen!", Toast.LENGTH_SHORT).show();
-
-                //create intent to go back to Settings
-                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
-                startActivity(ImagesActivityToAccountSettingsActivity);
-
-                //kill this activity
-                finish();
+                imageClicked(3);
             }
         });
 
         Image4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // shared preferences to store latest username to set profile pic
-                SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-                String username = sharedPreferences.getString("username", "");
-                User userDBdata = dbHandler.findUser(username);
-
-                userDBdata.setImageID(4);
-                dbHandler.updateProfile(userDBdata);
-                Toast.makeText(ImagesActivity.this, "Team 4 chosen!", Toast.LENGTH_SHORT).show();
-
-                //create intent to go back to Settings
-                Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
-                startActivity(ImagesActivityToAccountSettingsActivity);
-
-                //kill this activity
-                finish();
+                imageClicked(4);
             }
         });
 
 
+    }
+
+    public void imageClicked(int imageID){
+
+        userDBdata.setImageID(imageID);
+        dbHandler.updateProfile(userDBdata);
+        Toast.makeText(ImagesActivity.this, "Team" + imageID + " chosen!", Toast.LENGTH_SHORT).show();
+
+        //creating shared preferences to store a value if user wants to be remembered or not
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("imageID", String.valueOf(imageID));
+        editor.apply();
+
+        //create intent to go back to Settings
+        Intent ImagesActivityToAccountSettingsActivity = new Intent(ImagesActivity.this, AccountSettingsActivity.class);
+        startActivity(ImagesActivityToAccountSettingsActivity);
+
+        //kill this activity
+        finish();
     }
 
 }

@@ -19,6 +19,8 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
     public static final String TEXT = "text";
     public String text;
 
+    public String GLOBAL_PREF = "MyPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
