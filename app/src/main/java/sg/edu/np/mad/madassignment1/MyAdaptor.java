@@ -66,26 +66,11 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
             holder.taskCheckBox.setChecked(true);
         }
 
-        //open delete task screen if taskname is clicked
-        holder.taskName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle extras = new Bundle();
-                Intent myIntent = new Intent(holder.taskName.getContext(), ViewTaskActivity.class);
-                extras.putInt("task id", t.getId());
-                extras.putInt("task status", t.getStatus());
-                extras.putString("task name", t.getTaskName());
-                extras.putString("task desc", t.getTaskDesc());
-                extras.putInt("task hour", t.getTaskHour());
-                extras.putInt("task minute", t.getTaskYear());
-                extras.putInt("task year", t.getTaskYear());
-                extras.putInt("task month", t.getTaskMonth());
-                extras.putInt("task dayOfMonth", t.getTaskDayOfMonth());
-                myIntent.putExtras(extras);
-
-                holder.taskName.getContext().startActivity(myIntent);
-            }
-        });
+        //open delete task screen if any element other than checkbox is clicked
+        holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
+        holder.taskDate.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
+        holder.taskDesc.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
+        holder.taskTime.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
 
         holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +100,23 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         int size = data.size();
         data.clear();
         notifyItemRangeRemoved(0, size);
+    }
+
+    public void openTaskInfo(MyViewHolder holder, Task t){
+        Bundle extras = new Bundle();
+        Intent myIntent = new Intent(holder.taskName.getContext(), ViewTaskActivity.class);
+        extras.putInt("task id", t.getId());
+        extras.putInt("task status", t.getStatus());
+        extras.putString("task name", t.getTaskName());
+        extras.putString("task desc", t.getTaskDesc());
+        extras.putInt("task hour", t.getTaskHour());
+        extras.putInt("task minute", t.getTaskYear());
+        extras.putInt("task year", t.getTaskYear());
+        extras.putInt("task month", t.getTaskMonth());
+        extras.putInt("task dayOfMonth", t.getTaskDayOfMonth());
+        myIntent.putExtras(extras);
+
+        holder.taskName.getContext().startActivity(myIntent);
     }
 }
 
