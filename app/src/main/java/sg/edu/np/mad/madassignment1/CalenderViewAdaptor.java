@@ -15,12 +15,14 @@ import java.util.ArrayList;
 public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHolder> implements Filterable {
     private final ArrayList<String> daysOfMonth;
     private final OnItemListener onItemListener;
+    ArrayList<String> tasksThisMonth;
     String selectedDay;
 
-    public CalenderViewAdaptor(ArrayList<String> daysOfMonth, OnItemListener onItemListener)
+    public CalenderViewAdaptor(ArrayList<String> daysOfMonth, OnItemListener onItemListener, ArrayList<String> input)
     {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
+        this.tasksThisMonth = input;
     }
 
     @NonNull
@@ -28,6 +30,7 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
     public CalenderViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        Log.d("VIEWTYPE",String.valueOf(viewType));
         View view = inflater.inflate(R.layout.calender_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);
@@ -38,6 +41,17 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
     public void onBindViewHolder(@NonNull CalenderViewViewHolder holder, int position)
     {
         holder.dayOfMonth.setText(daysOfMonth.get(position));
+        holder.eventRing.setVisibility(View.GONE);
+
+        for (String taskday : tasksThisMonth ){
+            if (daysOfMonth.get(position).equals(taskday)){
+                holder.eventRing.setVisibility(View.VISIBLE);
+                break;
+            }
+            else {
+                holder.eventRing.setVisibility(View.GONE);
+            }
+        }
 
         if(selectedDay != null && selectedDay.equals(daysOfMonth.get(position))){
             Log.v("selectedDay:",selectedDay);

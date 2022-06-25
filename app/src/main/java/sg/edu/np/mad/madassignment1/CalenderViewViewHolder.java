@@ -1,6 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ public class CalenderViewViewHolder extends RecyclerView.ViewHolder implements  
 
     public final View cellConstraintLayout;
     public final TextView dayOfMonth;
+    public final ImageView eventRing;
     private final CalenderViewAdaptor.OnItemListener onItemListener;
 
     public CalenderViewViewHolder(@NonNull View itemView, CalenderViewAdaptor.OnItemListener onItemListener)
@@ -17,6 +19,7 @@ public class CalenderViewViewHolder extends RecyclerView.ViewHolder implements  
         super(itemView);
         cellConstraintLayout = itemView.findViewById(R.id.cellConstraintLayout);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
+        eventRing = itemView.findViewById(R.id.eventRing);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
     }

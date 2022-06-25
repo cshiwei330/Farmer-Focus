@@ -106,9 +106,11 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         int numberOfDaysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         //get array of length 42 that have blanks to show in recyclerView
         ArrayList<String> daysInMonth = daysInMonthArray(numberOfDaysInMonth);
+        //get all the tasks that are in this month
+        ArrayList<String> tasksThisMonth = tasksThisMonth(taskList);
 
         //initialize recyclerview
-        calendarViewAdapter = new CalenderViewAdaptor(daysInMonth, CalenderActivity.this);
+        calendarViewAdapter = new CalenderViewAdaptor(daysInMonth, CalenderActivity.this,tasksThisMonth);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarViewAdapter);
@@ -190,6 +192,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         }
     }
+    //filter tasks for selected date
     public ArrayList<Task> tasksWhiteList(String dateString, ArrayList<Task> taskList){
         //split string into day,month,year
         String[] stringDateArr = dateString.split("/",3);
@@ -214,5 +217,15 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             }
         }
         return taskFilter;
+    }
+
+    public ArrayList<String> tasksThisMonth(ArrayList<Task> taskList){
+        ArrayList<String> tasksInThisMonth = new ArrayList<>();
+        for(Task task: taskList){
+            if(task.getTaskYear() == calendar.get(Calendar.YEAR) && task.getTaskMonth() == calendar.get(Calendar.MONTH)+1){
+                tasksInThisMonth.add(String.valueOf(task.getTaskDayOfMonth()));
+            }
+        }
+        return tasksInThisMonth;
     }
 }
