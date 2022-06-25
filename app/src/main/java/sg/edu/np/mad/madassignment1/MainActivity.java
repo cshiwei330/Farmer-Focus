@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, HomeActivity.class);
             }
             startActivity(intent);
+            finish();
         }, DELAY);
     }
 }

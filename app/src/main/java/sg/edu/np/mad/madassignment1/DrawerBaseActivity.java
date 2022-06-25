@@ -94,6 +94,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 //set animation
                 overridePendingTransition(0,0);
                 //break out of this switch case and return false, exiting this
+                finishAffinity();
                 break;
         }
 
@@ -102,6 +103,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_home:
                 startActivity(new Intent(this,HomeActivity.class));
                 overridePendingTransition(0,0);
+                finishAffinity();
                 break;
         }
 
@@ -110,6 +112,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_Statistics:
                 startActivity(new Intent(this,ComingSoonActivity.class));
                 overridePendingTransition(0,0);
+                finishAffinity();
                 break;
         }
 
@@ -118,6 +121,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_Tasks:
                 startActivity(new Intent(this,TaskActivity.class));
                 overridePendingTransition(0,0);
+                finishAffinity();
                 break;
         }
 
@@ -126,6 +130,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_Timer:
                 startActivity(new Intent(this,ComingSoonActivity.class));
                 overridePendingTransition(0,0);
+                finishAffinity();
                 break;
         }
 
@@ -134,6 +139,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
             case R.id.nav_Settings:
                 startActivity(new Intent(this,SettingsActivity.class));
                 overridePendingTransition(0,0);
+                finishAffinity();
                 break;
         }
 
