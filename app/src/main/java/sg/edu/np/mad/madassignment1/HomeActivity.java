@@ -43,7 +43,6 @@ public class HomeActivity extends DrawerBaseActivity {
         User user = dbHandler.findUser(username);
 
         // For Greetings
-        //String username = User.getUsername();
         TextView greetings = findViewById(R.id.greetings);
         greetings.setText("What's up, " + username + "!");
 
@@ -71,25 +70,25 @@ public class HomeActivity extends DrawerBaseActivity {
 
         ArrayList<Task> recentTaskList = new ArrayList<>();
 
-        for (int i = 0; i < taskList.size(); i++){
+        for (int i = 0; i < taskList.size(); i++){ //loop thru current taskList to find tasks that are upcoming
             Task task = taskList.get(i);
 
-            boolean result = withinAWeek(task.getTaskDate());
+            boolean result = withinAWeek(task.getTaskDate()); //check if task date is within a week
 
             if (result){
-                recentTaskList.add(task);
+                recentTaskList.add(task); //if true then add to new list
             }
 
         }
 
-        return recentTaskList;
+        return recentTaskList; //display this list in the recyclerView
     }
 
-    public boolean withinAWeek (String date) {
+    public boolean withinAWeek (String date) { //task.getTaskDate will be a string
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date dateToValidate = sdf.parse(date);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
+            Date dateToValidate = sdf.parse(date); //convert the string to a Date
 
             // current date with same formatting as dateToValidate
             Date today = sdf.parse(sdf.format(new Date()));
@@ -98,11 +97,12 @@ public class HomeActivity extends DrawerBaseActivity {
             Calendar currentDateAfter1Week = Calendar.getInstance();
             currentDateAfter1Week.add(Calendar.DAY_OF_MONTH, 7);
 
-            if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){
+                                                                    //.getTime() returns a Date so comparison can be made
+            if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){ //define the date range
                 //ok everything is fine, date in range
                 return true;
             }
-            else if (dateToValidate.compareTo(today)==0){
+            else if (dateToValidate.compareTo(today)==0){ //tasks that are today are considered within a week
                 return true;
             }
             else {

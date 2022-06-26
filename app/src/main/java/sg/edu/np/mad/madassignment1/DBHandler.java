@@ -256,6 +256,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return moodArrayList;
     }
 
+    //edit the data entry if user wants to change their mood
     public void changeMood (Mood editedMood){
         SQLiteDatabase db = this.getWritableDatabase();
         // edit Mood entry

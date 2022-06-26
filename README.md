@@ -21,7 +21,7 @@ Reward yourself with animals growing in your farm whenever you accumulate a cert
 | Name:  | Contribution: | Concept: |
 | ------------- | ------------- | ------------- |
 | CHEW SHI WEI  | Home page (mood tracker database), Navigation system, Google Play Release  | Database, Recycler View, Event Handling  |
-| CHUAH KAI YI  | Calender, Add New Task (date/time), Database (date and time)  | Database, Recycler View, Event Handling  |
+| CHUAH KAI YI  | Calender, Add New Task (date/time), Database (date and time), Navigation system  | Database, Recycler View, Event Handling  |
 | KOH KA-WEI DARRYL  | Settings, Account settings, change password, Database (update user), Change profile picture  | Database, Shared preferences, Multimedia, Event Handling  |
 | RADCHANON DON SUKKRAM  | Task, Add New Task, View Task Page and Database (task)  | Database, Recycler View, Event Handling  |
 | TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon  | Database, Shared Preferences, Event Handling  |

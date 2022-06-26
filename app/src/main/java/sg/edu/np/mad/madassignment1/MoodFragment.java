@@ -69,6 +69,7 @@ public class MoodFragment extends Fragment {
                     if (existingEntry.getMood().equals(mood)){
                         switchingFragmentWithBundle(mood);
                     }
+                    //otherwise, show alert to ask user to confirm the mood change and update database
                     else{
                         promptChangeMood(existingEntry,dbHandler,mood);
                     }
@@ -97,6 +98,7 @@ public class MoodFragment extends Fragment {
                     if (existingEntry.getMood().equals(mood)){
                         switchingFragmentWithBundle(mood);
                     }
+                    //otherwise, show alert to ask user to confirm the mood change and update database
                     else{
                         promptChangeMood(existingEntry,dbHandler,mood);
                     }
@@ -126,6 +128,7 @@ public class MoodFragment extends Fragment {
                     if (existingEntry.getMood().equals(mood)){
                         switchingFragmentWithBundle(mood);
                     }
+                    //otherwise, show alert to ask user to confirm the mood change and update database
                     else{
                         promptChangeMood(existingEntry,dbHandler,mood);
                     }
@@ -154,6 +157,7 @@ public class MoodFragment extends Fragment {
                     if (existingEntry.getMood().equals(mood)){
                         switchingFragmentWithBundle(mood);
                     }
+                    //otherwise, show alert to ask user to confirm the mood change and update database
                     else{
                         promptChangeMood(existingEntry,dbHandler,mood);
                     }
@@ -187,14 +191,14 @@ public class MoodFragment extends Fragment {
 
     public Mood moodToBeChanged (ArrayList<Mood> moodList, String today){
 
-        Mood changeMood = null;
+        Mood changeMood = null; //set mood object to be null
 
-        for (int i = 0; i < moodList.size(); i++){
+        for (int i = 0; i < moodList.size(); i++){  //loop thru mood list to find existing mood entry for today
             Mood mood = moodList.get(i);
 
             String entryDate = mood.getDate();
 
-            if (entryDate.equals(today)){
+            if (entryDate.equals(today)){       //if there's already a entry, return the mood Object
                 changeMood = mood;
                 break;
             }
@@ -203,6 +207,7 @@ public class MoodFragment extends Fragment {
         return changeMood;
     }
 
+    // if a different mood is selected on the same day, prompt user
     public void promptChangeMood (Mood mood, DBHandler dbHandler, String newMood){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Feeling different now?");
@@ -213,7 +218,7 @@ public class MoodFragment extends Fragment {
         builder.setPositiveButton("Change Mood", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         mood.changeMood(newMood);
-                        dbHandler.changeMood(mood);
+                        dbHandler.changeMood(mood);     //update database
                         Toast.makeText(getActivity(), "Updated your mood!", Toast.LENGTH_SHORT).show();
 
                         //switch fragment to show message based on new mood

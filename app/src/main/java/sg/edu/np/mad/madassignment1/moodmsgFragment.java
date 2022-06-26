@@ -35,6 +35,8 @@ public class moodmsgFragment extends Fragment {
 
         TextView msg = view.findViewById(R.id.moodMsg);
 
+        //displays msg based on mood
+        //*will add in more messages and randomize the messages shown so user can see different msgs
         if (emotion.equals("happy")){
             msg.setText("Glad that you are feeling happy. Hope this positivity continues!");
         }
