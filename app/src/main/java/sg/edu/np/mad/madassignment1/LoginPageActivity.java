@@ -53,7 +53,14 @@ public class LoginPageActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("username", etMyUsername.getText().toString());
-            editor.putString("imageID", String.valueOf(dbHandler.findUser(etMyUsername.getText().toString()).getImageID()));
+            String imageIDString;
+            try{
+                imageIDString = String.valueOf(dbHandler.findUser(etMyUsername.getText().toString()).getImageID());
+            }
+            catch (NullPointerException e){
+                imageIDString = "0";
+            }
+            editor.putString("imageID", imageIDString);
             editor.apply();
 
             // checking if username and password entered are valid
