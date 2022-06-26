@@ -63,7 +63,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
         int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.a2, R.drawable.a1};
 
-        if (imageID == null || imageID == ""){
+        if (imageID == null || imageID == "" || imageID.equals("0")){
             menuHeaderProfilePic.setImageResource(R.drawable.profile);
         }
         else{
