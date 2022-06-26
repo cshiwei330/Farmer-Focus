@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class ViewTaskActivity extends AppCompatActivity {
 
     Task task;
@@ -23,6 +25,8 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         TextView taskName = findViewById(R.id.taskViewTaskNameDisplay);
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
+        TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
+        TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
         Button backButton = findViewById(R.id.backButton);
         Button deleteTaskButton = findViewById(R.id.deleteTaskButton);
 
@@ -33,6 +37,8 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         taskName.setText(task.getTaskName());
         taskDesc.setText(task.getTaskDesc());
+        taskDate.setText(task.getTaskDate());
+        taskTime.setText(task.getTaskTime());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

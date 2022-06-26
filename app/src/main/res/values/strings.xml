@@ -51,6 +51,7 @@
     <!-- Strings related to calender -->
     <string name="calenderBack"><![CDATA[<-]]></string>
     <string name="CalenderForward"><![CDATA[->]]></string>
+    <string name="textview">TextView</string>
 
 
 </resources>
