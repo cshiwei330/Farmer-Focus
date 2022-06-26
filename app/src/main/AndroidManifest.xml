@@ -38,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CalenderActivity"
             android:exported="false" />
