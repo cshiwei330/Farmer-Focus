@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -66,6 +67,9 @@ public class ImagesActivity extends AppCompatActivity {
     }
 
     public void imageClicked(int imageID){
+
+        //kill AccountSettings
+        ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
 
         userDBdata.setImageID(imageID);
         dbHandler.updateProfile(userDBdata);

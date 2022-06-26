@@ -73,9 +73,6 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
 
                 //start activity with result
                 startActivityForResult(AccountSettingsActivityToImagesActivity,1);
-
-                //kill this activity
-                finish();
             }
         });
 
