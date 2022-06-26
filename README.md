@@ -7,14 +7,11 @@
 - TAN YU XIN AISLINN S10222271H
 
 ## Description of App: 
-'Farmer Focus' is a great buddy to help you keep track of your tasks and boost productivity.
+Farmer Focus is a great buddy to help you keep track of your tasks and boost productivity.
 
-- Get to-dos out of your head, and let the app remember for you
-- Add a due date to your tasks and get reminded via mobile notifications (stage 2)
-- Track your productive hours using our timer (stage 2) 
-
-More features like the farm and tracking your productive hours will come soon! 
-Reward yourself with animals growing in your farm whenever you accumulate a certain number of productive hours. 
+- Keep track of your tasks
+- Help remain focused on tasks
+- Be reminded of urgent tasks
 
 ## Contribution of each member:
 
