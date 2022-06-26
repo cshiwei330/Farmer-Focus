@@ -81,7 +81,7 @@ public class TaskActivity extends DrawerBaseActivity{
             public void onClick(View view) {
 
                 //delete all task entries
-                dbHandler.deleteAllTask();
+                dbHandler.deleteAllTask(user.getUserID());
                 //replace taskList with empty dbHandler
                 taskList = dbHandler.getTaskData(user.getUserID());
                 Log.v("GOD",String.valueOf(taskList.size()));

@@ -223,9 +223,9 @@ public class DBHandler extends SQLiteOpenHelper {
         // db.delete("Tasks","TaskName=? and TaskDesc=?",new String[]{taskName,taskDesc});
     }
 
-    public void deleteAllTask(){
+    public void deleteAllTask(int userID){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from "+ TASKS);
+        db.execSQL("delete from "+ TASKS + " WHERE " + COLUMN_USERID + "=" + userID);
         db.close();
     }
 
