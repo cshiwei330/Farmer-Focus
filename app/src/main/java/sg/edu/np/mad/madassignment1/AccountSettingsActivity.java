@@ -60,7 +60,6 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
 
                 //Go to Images Activity
                 Intent AccountSettingsActivityToImagesActivity = new Intent(AccountSettingsActivity.this, ImagesActivity.class);
-//                startActivity(AccountSettingsActivityToImagesActivity);
 
                 //put extra
                 AccountSettingsActivityToImagesActivity.putExtra("finisher", new ResultReceiver(null) {
