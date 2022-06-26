@@ -41,8 +41,7 @@ public class TaskActivity extends DrawerBaseActivity{
         //define elements
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
-        //define totalTask textview
-        //TextView totalTask = findViewById(R.id.totalTasks);
+
         //define recyclerView
         RecyclerView recyclerView = findViewById(R.id.toDoListRecycleView);
         // button to clear all tasks

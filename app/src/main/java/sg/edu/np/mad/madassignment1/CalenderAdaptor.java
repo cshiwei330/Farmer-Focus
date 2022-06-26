@@ -45,22 +45,9 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
                 //define filter results to return
                 FilterResults filterResults = new FilterResults();
 
-//                Log.v("HOW",String.valueOf(constraint));
-
                 //convert input 'constraint' to string
                 String stringDate = constraint.toString();
-//                //split string into day,month,year
-//                String[] stringDateArr = stringDate.split("/",3);
-//                //force initialize to null
-//                int[] intDateArr = new int[stringDateArr.length];
-//                //convert stingDateArr to int
-//                for(int i = 0;i < stringDateArr.length;i++)
-//                {
-//                    //intDateArr[0] == dayOfMonth
-//                    //intDateArr[1] == month
-//                    //intDateArr[2] == year
-//                    intDateArr[i] = Integer.parseInt(stringDateArr[i]);
-//                }
+
                 //check all tasks in data to filter date, if date is the same, add to filter
                 ArrayList<Task> taskFilter = new ArrayList<>();
                 for(Task task: data){
@@ -123,25 +110,6 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
         //convert int data to string
         String stringDate = String.format(t.getTaskDate());
-//        //date format
-//        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-//        //give dumby value to taskDate for forced initialization
-//        Date taskDate = null;
-//
-//
-//        //try catch because .parse throws errors before compiling??????
-//        try {
-//            //convert to date class
-//            taskDate = fmt.parse(stringDate);
-//        }
-//        catch(ParseException pe){ }
-//
-//        //convert date object to string with chosen dateformat
-//        String strDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(taskDate);
-
-        //convert time ints to string
-        //String taskTime =  t.getTaskHour()+":"+t.getTaskMinute();
-//        String taskTime =  String.format("%02d:%02d",t.getTaskHour(),t.getTaskMinute());
 
         //set viewholder details
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
@@ -174,7 +142,6 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
 
 
     }
-
 
     @Override
     public int getItemCount() {

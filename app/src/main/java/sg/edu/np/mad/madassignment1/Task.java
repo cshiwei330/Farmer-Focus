@@ -37,11 +37,6 @@ public class Task {
         this.taskTime = taskTime;
         this.taskUserID = taskUserID;
 
-//        this.taskHour = taskHour;
-//        this.taskMinute = taskMinute;
-//        this.taskYear = taskYear;
-//        this.taskMonth = taskMonth;
-//        this.taskDayOfMonth = taskDayOfMonth;
     }
 
     public int getTaskUserID() {
@@ -101,47 +96,5 @@ public class Task {
     public void setTaskTime(String taskTime) {
         this.taskTime = taskTime;
     }
-
-
-
-//    public int getTaskHour() {
-//        return taskHour;
-//    }
-//
-//    public void setTaskHour(int taskHour) {
-//        this.taskHour = taskHour;
-//    }
-//
-//    public int getTaskMinute() {
-//        return taskMinute;
-//    }
-//
-//    public void setTaskMinute(int taskMinute) {
-//        this.taskMinute = taskMinute;
-//    }
-//
-//    public int getTaskYear() {
-//        return taskYear;
-//    }
-//
-//    public void setTaskYear(int taskYear) {
-//        this.taskYear = taskYear;
-//    }
-//
-//    public int getTaskMonth() {
-//        return taskMonth;
-//    }
-//
-//    public void setTaskMonth(int taskMonth) {
-//        this.taskMonth = taskMonth;
-//    }
-//
-//    public int getTaskDayOfMonth() {
-//        return taskDayOfMonth;
-//    }
-//
-//    public void setTaskDayOfMonth(int taskDayOfMonth) {
-//        this.taskDayOfMonth = taskDayOfMonth;
-//    }
 
 }

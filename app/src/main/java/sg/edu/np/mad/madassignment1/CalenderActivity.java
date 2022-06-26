@@ -203,18 +203,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     }
     //filter tasks for selected date
     public ArrayList<Task> tasksWhiteList(String dateString, ArrayList<Task> taskList){
-        //split string into day,month,year
-//        String[] stringDateArr = dateString.split("/",3);
-//        //force initialize to null
-//        int[] intDateArr = new int[stringDateArr.length];
-//        //convert stingDateArr to int
-//        for(int i = 0;i < stringDateArr.length;i++)
-//        {
-//            //intDateArr[0] == dayOfMonth
-//            //intDateArr[1] == month
-//            //intDateArr[2] == year
-//            intDateArr[i] = Integer.parseInt(stringDateArr[i]);
-//        }
+
         //check all tasks in data to filter date, if date is the same, add to filter
         ArrayList<Task> taskFilter = new ArrayList<>();
         for(Task task: taskList){

@@ -77,12 +77,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setStatus(status);
                     newTaskDB.setTaskName(newTaskNameString);
                     newTaskDB.setTaskDesc(newTaskDescString);
-//                    newTaskDB.setTaskHour(hour);
-//                    newTaskDB.setTaskMinute(minute);
-//                    newTaskDB.setTaskYear(year);
-//                    newTaskDB.setTaskMonth(month);
-//                    newTaskDB.setTaskDayOfMonth(dayOfMonth);
-                    //String date = String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+
                     String date = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
                     newTaskDB.setTaskDate(date);
                     String time =  String.format("%02d:%02d",hour,minute);

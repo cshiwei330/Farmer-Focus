@@ -56,61 +56,7 @@ public class SettingsActivity extends DrawerBaseActivity {
             }
         });
         Log.v("Settings", "test2");
-//        initWidgets();
-//        loadSharedPreferences();
-//        initSwitchListener();
 
     }
-
-//    private void initWidgets() {
-//        titleTV = findViewById(R.id.titleTV);
-//        mySettings = findViewById(R.id.mySettings);
-//        themeSwitch = findViewById(R.id.themeSwitch);
-//        themeTV = findViewById(R.id.themeTV);
-//    }
-//
-//    private void loadSharedPreferences() {
-//        SharedPreferences sharedPreferences = getSharedPreferences(DarkMode.PREFERENCES, MODE_PRIVATE);
-//        String theme = sharedPreferences.getString(DarkMode.CUSTOM_THEME, DarkMode.LIGHT_THEME);
-//        mode.setCustomTheme(theme);
-//        updateView();
-//    }
-//
-//    private void initSwitchListener() {
-//        themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-//                if(checked)
-//                    mode.setCustomTheme(DarkMode.DARK_THEME);
-//                else
-//                    mode.setCustomTheme(DarkMode.LIGHT_THEME);
-//
-//                SharedPreferences.Editor editor = getSharedPreferences(DarkMode.PREFERENCES, MODE_PRIVATE).edit();
-//                editor.putString(DarkMode.CUSTOM_THEME, mode.getCustomTheme());
-//                editor.apply();
-//                updateView();
-//            }
-//
-//        });
-//
-//    }
-//
-//    private void updateView() {
-//        final int black = ContextCompat.getColor(this, R.color.black);
-//        final int white = ContextCompat.getColor(this, R.color.white);
-//
-//        if(mode.getCustomTheme().equals(DarkMode.DARK_THEME)){
-//            titleTV.setTextColor(white);
-//            themeTV.setTextColor(white);
-//            mySettings.setBackgroundColor(black);
-//            themeSwitch.setChecked(true);
-//        }
-//        else{
-//            titleTV.setTextColor(black);
-//            themeTV.setTextColor(black);
-//            mySettings.setBackgroundColor(white);
-//            themeSwitch.setChecked(false);
-//        }
-//    }
 
 }

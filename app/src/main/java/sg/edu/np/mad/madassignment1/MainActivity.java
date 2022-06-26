@@ -26,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
             String remember = sharedPreferences.getString("remember", "");
             // get user name
             String username = sharedPreferences.getString("username", "");
-//            User user = new User();
-//            // getting stored username
-//            String username = sharedPreferences.getString("username", "");
-//            user.setUsername(username);
-
-
 
             Intent intent;
             if (remember.equals("false")) {

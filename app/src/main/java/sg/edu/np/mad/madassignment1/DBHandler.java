@@ -57,18 +57,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     //create tables
     public void onCreate(SQLiteDatabase db){
-//        String CREATE_DATABASE = "CREATE TABLE " + ACCOUNTS + "(" + COLUMN_USERNAME
-//                + " TEXT, " + COLUMN_PASSWORD + " TEXT, " + COLUMN_IMAGEID + " TEXT " + ")";
-//        // CREATE TABLE Accounts ( Username TEXT, Password TEXT, ImageId TEXT)
 
-//        String CREATE_DATABASE_TASK = "CREATE TABLE " + TASKS + "(" + COLUMN_TASKID  + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                COLUMN_TASKSTATUS + " INTEGER, " + COLUMN_TASKNAME + " TEXT, " + COLUMN_TASKDESC + " TEXT," +
-//                COLUMN_HOUR + " INTEGER, " + COLUMN_MINUTE + " INTEGER, " + COLUMN_YEAR + " INTEGER, " + COLUMN_MONTH + " INTEGER, " + COLUMN_DAYOFMONTH + " INTEGER" + ")";
-//        // CREATE TABLE Tasks ( TaskID INTEGER PRIMARY KEY AUTOINCREMENT, TaskStatus INTEGER TaskName, TaskName TEXT, TaskDesc TEXT
-//        //                         TaskHour INTEGER, TaskMinute INTEGER, TaskYear INTEGER, TaskMonth INTEGER, TaskDayOfMonth INTEGER )
-
-        String CREATE_DATABASE = "CREATE TABLE " + ACCOUNTS + "(" + COLUMN_USERNAME
-                + " TEXT, " + COLUMN_PASSWORD + " TEXT, " + COLUMN_IMAGEID + " TEXT, " + COLUMN_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT" + ")";
+        String CREATE_DATABASE = "CREATE TABLE " + ACCOUNTS + "("
+                + COLUMN_USERNAME + " TEXT, "
+                + COLUMN_PASSWORD + " TEXT, "
+                + COLUMN_IMAGEID + " TEXT, "
+                + COLUMN_USERID
+                + " INTEGER PRIMARY KEY AUTOINCREMENT"
+                + ")";
         // CREATE TABLE Accounts ( Username TEXT, Password TEXT, ImageId TEXT, UserID INTEGER)
 
         String CREATE_DATABASE_TASK = "CREATE TABLE " + TASKS + "("
@@ -157,11 +153,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_TASKSTATUS, taskData.getStatus());
         values.put(COLUMN_TASKNAME, taskData.getTaskName());
         values.put(COLUMN_TASKDESC, taskData.getTaskDesc());
-//        values.put(COLUMN_HOUR, taskData.getTaskHour());
-//        values.put(COLUMN_MINUTE, taskData.getTaskMinute());
-//        values.put(COLUMN_YEAR, taskData.getTaskYear());
-//        values.put(COLUMN_MONTH, taskData.getTaskMonth());
-//        values.put(COLUMN_DAYOFMONTH, taskData.getTaskDayOfMonth());
 
         values.put(COLUMN_TASKDATE, taskData.getTaskDate());
         values.put(COLUMN_TASKTIME, taskData.getTaskTime());
@@ -190,12 +181,6 @@ public class DBHandler extends SQLiteOpenHelper {
             String taskDate = cursor.getString(5);
             String taskTime = cursor.getString(6);
 
-
-//            int hour = cursor.getInt(4);
-//            int min = cursor.getInt(5);
-//            int year = cursor.getInt(6);
-//            int month = cursor.getInt(7);
-//            int dayOfMonth = cursor.getInt(8);
             Task newTask = new Task(id, status, name, desc, taskDate,taskTime,userID);
             taskArrayList.add(newTask);
         }
@@ -230,13 +215,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteTask(Task deleteTask){ // String taskName, String taskDesc
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // THERE IS SOMETHING WRONG HERE AND I CANT TELL WHY
-//        db.delete("Tasks","TaskId=? and TaskStatus=? and TaskName=? and TaskDesc=? and TaskHour=? and TaskMinute=? and TaskYear=? and TaskMonth=? and TaskDayOfMonth=?",
-//                new String[]{String.valueOf(deleteTask.getId()), String.valueOf(deleteTask.getStatus()),
-//                        deleteTask.getTaskName(), deleteTask.getTaskDesc(), String.valueOf(deleteTask.getTaskHour()),
-//                        String.valueOf(deleteTask.getTaskMinute()), String.valueOf(deleteTask.getTaskYear()),
-//                        String.valueOf(deleteTask.getTaskMonth()), String.valueOf(deleteTask.getTaskDayOfMonth())});
 
         //shortened .delete command to delete task by id
         db.delete("Tasks","TaskId=?", new String[]{String.valueOf(deleteTask.getId())});

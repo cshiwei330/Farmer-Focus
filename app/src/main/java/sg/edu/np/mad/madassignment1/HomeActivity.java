@@ -74,11 +74,6 @@ public class HomeActivity extends DrawerBaseActivity {
         for (int i = 0; i < taskList.size(); i++){
             Task task = taskList.get(i);
 
-            //form date string from obj
-//            String checkDate = String.format("%d/%d/%d",task.getTaskDayOfMonth(),task.getTaskMonth(),task.getTaskYear());
-
-            //check if within a week
-//            boolean result = withinAWeek(checkDate);
             boolean result = withinAWeek(task.getTaskDate());
 
             if (result){
@@ -102,13 +97,6 @@ public class HomeActivity extends DrawerBaseActivity {
             // current date after 1 week
             Calendar currentDateAfter1Week = Calendar.getInstance();
             currentDateAfter1Week.add(Calendar.DAY_OF_MONTH, 7);
-
-            // current date before 1 week
-            //Calendar currentDateBefore1Week = Calendar.getInstance();
-            //currentDateBefore1Week.add(Calendar.DAY_OF_MONTH, -7);
-
-            //if (date.before(currentDateAfter1Week.getTime())
-                    //&& date.after(currentDateBefore1Week.getTime()))
 
             if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){
                 //ok everything is fine, date in range

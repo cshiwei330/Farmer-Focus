@@ -36,38 +36,6 @@ public class ImagesActivity extends AppCompatActivity {
         username = sharedPreferences.getString("username", "");
         userDBdata = dbHandler.findUser(username);
 
-        //                switch(view.getId())
-//                {
-//                    case R.id.Image1:
-//                        userDBdata.setImageID(1);
-//                        Toast.makeText(ImagesActivity.this, "Testing", Toast.LENGTH_SHORT).show();
-//                        dbHandler.updateProfile(userDBdata);
-//                        Toast.makeText(ImagesActivity.this, "Team blue chosen", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.Image2:
-//                        userDBdata.setImageID(2);
-//                        dbHandler.updateProfile(userDBdata);
-//                        Toast.makeText(ImagesActivity.this, "Team green chosen", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.Image3:
-//                        userDBdata.setImageID(3);
-//                        dbHandler.updateProfile(userDBdata);
-//                        Toast.makeText(ImagesActivity.this, "Team purple chosen", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.Image4:
-//                        userDBdata.setImageID(4);
-//                        dbHandler.updateProfile(userDBdata);
-//                        Toast.makeText(ImagesActivity.this, "Team yellow chosen", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case R.id.ProfilePic:
-//                        userDBdata.setImageID(0);
-//                        dbHandler.updateProfile(userDBdata);
-//                        break;
-//                }
-
-
-
-
         Image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,8 +63,6 @@ public class ImagesActivity extends AppCompatActivity {
                 imageClicked(4);
             }
         });
-
-
     }
 
     public void imageClicked(int imageID){
