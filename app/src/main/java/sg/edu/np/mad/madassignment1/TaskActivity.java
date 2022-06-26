@@ -31,6 +31,8 @@ public class TaskActivity extends DrawerBaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Navigate from navigation bar to activity
         //inflate according to activity binding to show
         activityTaskBinding = ActivityTaskBinding.inflate(getLayoutInflater());
         //set view to this activity
