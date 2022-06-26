@@ -109,7 +109,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
         //Statistics button
         switch (item.getItemId()){
-            case R.id.nav_Statistics:
+            case R.id.nav_statistics:
                 startActivity(new Intent(this,ComingSoonActivity.class));
                 overridePendingTransition(0,0);
                 finishAffinity();
