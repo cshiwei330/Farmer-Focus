@@ -9,43 +9,33 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/toDoListRecycleView"
         android:layout_width="342dp"
-        android:layout_height="440dp"
+        android:layout_height="480dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="63dp"
         android:background="#C8BF9E"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
-        app:layout_constraintVertical_bias="0.158" />
-
-    <TextView
-        android:id="@+id/toDoListTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Tasks List"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="@+id/totalTasks"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/totalTasks" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNewTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="316dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="#A29574"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
         android:tint="#A29574"
         app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
+        app:layout_constraintVertical_bias="0.0"
         app:rippleColor="#A29574"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
@@ -53,14 +43,10 @@
         android:id="@+id/totalTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="7dp"
         android:fontFamily="sans-serif-medium"
         android:text="Total:"
-        app:layout_constraintBottom_toTopOf="@+id/toDoListRecycleView"
         app:layout_constraintStart_toStartOf="@+id/toDoListRecycleView"
-        app:layout_constraintTop_toBottomOf="@+id/toDoListTextView"
-        app:layout_constraintVertical_bias="0.111" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/clearAllTaskButton"
@@ -72,5 +58,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/totalTasks"
         app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
         app:layout_constraintTop_toTopOf="@+id/totalTasks"
+        app:layout_constraintVertical_bias="0.6"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_checklist_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
