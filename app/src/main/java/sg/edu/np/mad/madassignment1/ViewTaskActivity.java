@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.w3c.dom.Text;
 
 public class ViewTaskActivity extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
         TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
         Button backButton = findViewById(R.id.backButton);
-        Button deleteTaskButton = findViewById(R.id.deleteTaskButton);
+        FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
 
         Intent receivingEnd = getIntent();
         int newTaskId = receivingEnd.getIntExtra("task id", 0);
