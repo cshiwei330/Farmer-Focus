@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".TaskActivity">
 
+    <ImageView
+        android:id="@+id/tasksListIcon"
+        android:layout_width="80dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_checklist_24" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/toDoListRecycleView"
         android:layout_width="342dp"
@@ -13,31 +23,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:background="#C8BF9E"
+        android:background="#BECCC0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalTasks" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addNewTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="312dp"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="#A29574"
-        android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
-        android:tint="#A29574"
-        app:borderWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
-        app:layout_constraintVertical_bias="0.0"
-        app:rippleColor="#A29574"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/totalTasks"
@@ -46,29 +36,28 @@
         android:fontFamily="sans-serif-medium"
         android:text="Total:"
         app:layout_constraintStart_toStartOf="@+id/toDoListRecycleView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/tasksListIcon" />
 
-    <Button
+    <ImageView
         android:id="@+id/clearAllTaskButton"
-        android:layout_width="110dp"
-        android:layout_height="29dp"
-        android:backgroundTint="#A29574"
-        android:text="Clear All Tasks"
-        android:textSize="8sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/totalTasks"
         app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
         app:layout_constraintTop_toTopOf="@+id/totalTasks"
-        app:layout_constraintVertical_bias="0.6"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="80dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_checklist_24" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNewTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="#7E9278"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
+        app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView"
+        app:layout_constraintVertical_bias="0.097"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

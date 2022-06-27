@@ -10,6 +10,7 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +48,7 @@ public class TaskActivity extends DrawerBaseActivity{
         //define recyclerView
         RecyclerView recyclerView = findViewById(R.id.toDoListRecycleView);
         // button to clear all tasks
-        Button clearAllTaskButton = findViewById(R.id.clearAllTaskButton);
+        ImageView clearAllTaskButton = findViewById(R.id.clearAllTaskButton);
         // floating button to go to addnewtask
         FloatingActionButton addNewTask = findViewById(R.id.addNewTaskButton);
 
