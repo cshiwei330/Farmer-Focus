@@ -8,113 +8,124 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="46dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="36dp"
-        android:backgroundTint="#FF0000"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/taskViewTaskDescriptionDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_baseline_delete_outline_24"
-        app:tint="#FFFFFF"
-        tools:ignore="SpeakableTextPresentCheck" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/taskViewTaskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="108dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Task Name:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/taskViewTaskDesc"
-        android:layout_width="115dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Task Description:"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskName"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskNameDisplay" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#7E9278"
-        android:text="Back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTimeDisplay" />
+                <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
-    <TextView
-        android:id="@+id/taskViewTaskDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Task Date:"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskDescriptionDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDescriptionDisplay" />
+                <TextView
+                    android:id="@+id/taskViewTaskDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Task Date:"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskDescriptionDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDescriptionDisplay" />
 
-    <TextView
-        android:id="@+id/taskViewTaskTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Task Time:"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskDateDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDateDisplay" />
+                <TextView
+                    android:id="@+id/taskViewTaskName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="108dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Task Name:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/taskViewTaskDateDisplay"
-        android:layout_width="132dp"
-        android:layout_height="32dp"
-        android:text="@string/textview"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskDate"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDate" />
+                <TextView
+                    android:id="@+id/taskViewTaskTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Task Time:"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskDateDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDateDisplay" />
 
-    <TextView
-        android:id="@+id/taskViewTaskNameDisplay"
-        android:layout_width="232dp"
-        android:layout_height="31dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskName"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskName" />
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="177dp"
+                    android:layout_marginTop="120dp"
+                    android:backgroundTint="#FF0000"
+                    android:clickable="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTimeDisplay"
+                    app:srcCompat="@drawable/ic_baseline_delete_outline_24"
+                    app:tint="#FFFFFF"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/taskViewTaskTimeDisplay"
-        android:layout_width="132dp"
-        android:layout_height="32dp"
-        android:text="TextView"
-        android:textAlignment="viewStart"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskTime"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTime" />
+                <TextView
+                    android:id="@+id/taskViewTaskNameDisplay"
+                    android:layout_width="232dp"
+                    android:layout_height="31dp"
+                    android:layout_marginTop="1dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskName"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskName" />
 
-    <TextView
-        android:id="@+id/taskViewTaskDescriptionDisplay"
-        android:layout_width="228dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/taskViewTaskNameDisplay"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="@+id/taskViewTaskDesc"
-        app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDesc" />
+                <TextView
+                    android:id="@+id/taskViewTaskDesc"
+                    android:layout_width="115dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="46dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Task Description:"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskNameDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskNameDisplay" />
+
+                <TextView
+                    android:id="@+id/taskViewTaskTimeDisplay"
+                    android:layout_width="132dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="1dp"
+                    android:text="TextView"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskTime"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTime" />
+
+                <TextView
+                    android:id="@+id/taskViewTaskDescriptionDisplay"
+                    android:layout_width="228dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="13dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskDesc"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDesc" />
+
+                <TextView
+                    android:id="@+id/taskViewTaskDateDisplay"
+                    android:layout_width="132dp"
+                    android:layout_height="32dp"
+                    android:text="@string/textview"
+                    android:textAlignment="viewStart"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskDate"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDate" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

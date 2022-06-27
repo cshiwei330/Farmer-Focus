@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
+        ImageView backButton = findViewById(R.id.addNewTaskBackButton);
 
         //define database
         DBHandler dbHandler = new DBHandler(this, null, null,6);
@@ -98,6 +100,14 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     Toast.makeText(AddNewTaskActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
+                startActivity(myIntent);
             }
         });
     }

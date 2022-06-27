@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,7 +30,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
         TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
-        Button backButton = findViewById(R.id.backButton);
+        ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
 
         Intent receivingEnd = getIntent();
