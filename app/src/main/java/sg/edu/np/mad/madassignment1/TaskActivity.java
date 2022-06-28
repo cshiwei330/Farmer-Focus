@@ -1,8 +1,10 @@
 package sg.edu.np.mad.madassignment1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -81,19 +83,36 @@ public class TaskActivity extends DrawerBaseActivity{
             @Override
             public void onClick(View view) {
 
-                //delete all task entries
-                dbHandler.deleteAllTask(user.getUserID());
-                //replace taskList with empty dbHandler
-                taskList = dbHandler.getTaskData(user.getUserID());
-                Log.v("GOD",String.valueOf(taskList.size()));
-                //force clear adaptor
-                mAdaptor.clear();
+                AlertDialog.Builder builder = new AlertDialog.Builder(TaskActivity.this);
+                builder.setMessage("Are you sure you want to clear all tasks?").setCancelable(true);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //delete all task entries
+                        dbHandler.deleteAllTask(user.getUserID());
+                        //replace taskList with empty dbHandler
+                        taskList = dbHandler.getTaskData(user.getUserID());
+                        Log.v("GOD",String.valueOf(taskList.size()));
+                        //force clear adaptor
+                        mAdaptor.clear();
 
-                //set textview to show number of tasks
-                setTotalTaskTextView(taskList);
+                        //set textview to show number of tasks
+                        setTotalTaskTextView(taskList);
 
-                //toast to indicate tasks successfully cleared
-                Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
+                        //toast to indicate tasks successfully cleared
+                        Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.setTitle("Clear all tasks");
+                alert.show();
             }
         });
 

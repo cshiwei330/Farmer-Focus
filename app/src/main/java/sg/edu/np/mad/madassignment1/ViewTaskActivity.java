@@ -1,15 +1,19 @@
 package sg.edu.np.mad.madassignment1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,9 +59,29 @@ public class ViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dbHandler.deleteTask(task);
-                Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
-                startActivity(myIntent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ViewTaskActivity.this);
+                builder.setMessage("Are you sure you want to delete this task?").setCancelable(true);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dbHandler.deleteTask(task);
+                        Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
+                        startActivity(myIntent);
+
+                        //toast to indicate tasks successfully cleared
+                        Toast.makeText(ViewTaskActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.setTitle("Clear task");
+                alert.show();
             }
         });
 
