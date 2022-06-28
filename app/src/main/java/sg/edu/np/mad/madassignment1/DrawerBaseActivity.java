@@ -128,7 +128,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         //Timer button
         switch (item.getItemId()){
             case R.id.nav_Timer:
-                startActivity(new Intent(this,ComingSoonActivity.class));
+                startActivity(new Intent(this,TimerActivity.class));
                 overridePendingTransition(0,0);
                 finishAffinity();
                 break;

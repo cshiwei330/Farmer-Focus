@@ -46,7 +46,7 @@ public class PasswordActivity extends AppCompatActivity {
                             // ensure that the new password is not equals to the original password
                             if(!(myNewPassword.getText().toString()).equals(myOldPassword.getText().toString()) && !(myNewPassword.getText().toString()).equals("")) {
                                 // ensure that the new password must be the same as the confirm password
-                                if (myNewPassword.getText().toString().equals(myConfirmPassword.getText().toString()) && !(myConfirmPassword.getText().toString()).equals("")) {
+                                if (myNewPassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
                                     newPass = myConfirmPassword.getText().toString();
                                     userDBData.setPassword(newPass);
                                     dbHandler.updateUser(userDBData);
