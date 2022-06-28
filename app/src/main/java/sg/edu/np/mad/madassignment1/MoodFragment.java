@@ -1,6 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.content.DialogInterface;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +51,7 @@ public class MoodFragment extends Fragment {
         //make list final
         ArrayList<Mood> finalMoodList = moodList;
         //Happy Button
-        Button happy = view.findViewById(R.id.happyButton);
+        ImageView happy = view.findViewById(R.id.happyButton);
         happy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +80,7 @@ public class MoodFragment extends Fragment {
         });
 
         //Neutral Button
-        Button neutral = view.findViewById(R.id.neutralButton);
+        ImageView neutral = view.findViewById(R.id.neutralButton);
         neutral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +110,7 @@ public class MoodFragment extends Fragment {
         });
 
         //Sad Button
-        Button sad = view.findViewById(R.id.sadButton);
+        ImageView sad = view.findViewById(R.id.sadButton);
         sad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +139,7 @@ public class MoodFragment extends Fragment {
         });
 
         //Stressed Button
-        Button stressed = view.findViewById(R.id.stressButton);
+        ImageView stressed = view.findViewById(R.id.stressedButton);
         stressed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

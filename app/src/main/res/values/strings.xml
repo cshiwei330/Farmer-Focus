@@ -41,10 +41,10 @@
     <!-- Strings related to home -->
     <string name="motivationalQuote">"Quote"</string>
     <string name="greetings">TextView</string>
-    <string name="stressed">Stressed</string>
-    <string name="happy">Happy</string>
-    <string name="neutral">Neutral</string>
-    <string name="sad">Sad</string>
+    <string name="stressed">STRESSED</string>
+    <string name="happy">HAPPY</string>
+    <string name="neutral">NEUTRAL</string>
+    <string name="sad">SAD</string>
     <string name="recent_tasks">Recent Tasks:</string>
     <string name="upcoming_tasks">Upcoming Tasks</string>
 
