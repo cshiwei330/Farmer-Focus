@@ -13,6 +13,7 @@
         android:layout_height="29dp"
         android:fontFamily="sans-serif-medium"
         android:text="How are you feeling today?"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
