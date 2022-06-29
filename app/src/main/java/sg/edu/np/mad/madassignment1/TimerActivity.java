@@ -54,6 +54,8 @@ public class TimerActivity extends DrawerBaseActivity {
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
 
+        // after the user have entered their preferred timing for countdown in "edit_text_minutes",
+        // they should click on the image view represented by a green tick, to set the time
         SetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +75,7 @@ public class TimerActivity extends DrawerBaseActivity {
             }
         });
 
+        // if timer is running, start button changes to become pause, else, start button will remain unchanged
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +87,8 @@ public class TimerActivity extends DrawerBaseActivity {
             }
         });
 
+        // reset the timer (this button will only be shown once countdown timer has started and after the user
+        // clicked the pause button)
         mButtonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,15 +97,17 @@ public class TimerActivity extends DrawerBaseActivity {
         });
     }
 
+    // set the time on the timer
     private void setTime(long milliseconds) {
         mStartTimeInMillis = milliseconds;
         resetTimer();
         //closeKeyboard();
     }
 
+    // start the timer
     private void startTimer() {
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
-
+        // set the count down interval to every 1000 milliseconds which is 1 second
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -136,6 +143,8 @@ public class TimerActivity extends DrawerBaseActivity {
         int minutes = (int) (((mTimeLeftInMillis / 1000) % 3600) / 60); // change milliseconds to minutes after accounting for hours
         int seconds = (int) ((mTimeLeftInMillis / 1000) % 60); // change milliseconds to seconds after accounting for minutes
 
+        // the hours place will only be shown in the event when the user selects more than or equals to 60 minutes which is equivalent to an hour
+        // if the user selects less than 60 minutes, only the minutes and seconds place will be shown on the countdown timer
         String timeLeftFormatted;
         if (hours > 0) {
             timeLeftFormatted = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds);
@@ -145,6 +154,11 @@ public class TimerActivity extends DrawerBaseActivity {
 
         mTextViewCountDown.setText(timeLeftFormatted);
     }
+
+    // when the timer has started, only the timer countdown and pause button will be shown on the screen.
+    // when paused is clicked, a reset button will pop out on the screen to allow users to reset the timer
+    // if users wants to change the time on the timer, they have to key in their preferred value at the edit
+    // text location which they wishes to change the timer countdown to (in minutes)
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
