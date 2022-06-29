@@ -5,6 +5,7 @@
     <string name="menu_statistics">Statistics</string>
     <string name="menu_tasks">Tasks</string>
     <string name="menu_timer">Timer</string>
+    <string name="menu_farm">My Farm</string>
     <string name="menu_drawer_open">Drawer Open</string>
     <string name="menu_drawer_close">Drawer Close</string>
 

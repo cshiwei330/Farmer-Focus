@@ -134,6 +134,15 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 break;
         }
 
+        //Farm button
+        switch (item.getItemId()){
+            case R.id.nav_Farm:
+                startActivity(new Intent(this,FarmActivity.class));
+                overridePendingTransition(0,0);
+                finishAffinity();
+                break;
+        }
+
         //Settings button
         switch (item.getItemId()){
             case R.id.nav_Settings:
