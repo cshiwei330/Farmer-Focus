@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".RecurringTaskStatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="false" />
+        <activity
             android:name=".FarmActivity"
             android:exported="false" />
         <activity
