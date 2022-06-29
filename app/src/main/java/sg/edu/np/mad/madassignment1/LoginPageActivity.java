@@ -76,8 +76,8 @@ public class LoginPageActivity extends AppCompatActivity {
                 finish();
 
             } else {
-                // telling user that their username or password is invalid
-                Toast.makeText(LoginPageActivity.this, "Invalid Login", Toast.LENGTH_SHORT).show();
+                // telling user that their username or password is wrong
+                Toast.makeText(LoginPageActivity.this, "Username or Password is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,8 +96,7 @@ public class LoginPageActivity extends AppCompatActivity {
         // finding username entered in the table of the database
         User userDBData = dbHandler.findUser(username);
         if (userDBData == null) {
-            // telling user that the username entered does not exist
-            Toast.makeText(LoginPageActivity.this, "User Doesn't Exist", Toast.LENGTH_SHORT).show();
+            return false;
         }
         else if (userDBData.getUsername().equals(username) && userDBData.getPassword().equals(password)) {
             // if username and password entered matches up with the account in the database, details entered for login is correct
