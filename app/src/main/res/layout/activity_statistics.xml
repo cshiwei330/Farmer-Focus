@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".StatisticsActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/motwContainerView"
+        android:name="sg.edu.np.mad.madassignment1.MoodoftheweekFragment"
+        android:layout_width="337dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="324dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_moodoftheweek" />
 </androidx.constraintlayout.widget.ConstraintLayout>
