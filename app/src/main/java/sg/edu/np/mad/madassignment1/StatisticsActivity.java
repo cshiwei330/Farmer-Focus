@@ -19,5 +19,9 @@ public class StatisticsActivity extends DrawerBaseActivity {
         setContentView(activityStatisticsBinding.getRoot());
         //set title
         allocateActivityTitle("Statistics");
+
+
+
+
     }
 }

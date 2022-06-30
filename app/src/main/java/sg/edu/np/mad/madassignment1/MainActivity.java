@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
 
-    private static final int DELAY = 0;
+    private static final int DELAY = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
