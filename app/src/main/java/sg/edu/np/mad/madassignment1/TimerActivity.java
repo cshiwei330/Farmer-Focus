@@ -101,7 +101,7 @@ public class TimerActivity extends DrawerBaseActivity {
     private void setTime(long milliseconds) {
         mStartTimeInMillis = milliseconds;
         resetTimer();
-        //closeKeyboard();
+        closeKeyboard();
     }
 
     // start the timer
@@ -187,12 +187,13 @@ public class TimerActivity extends DrawerBaseActivity {
         }
     }
 
-//    private void closeKeyboard() {
-//        View view = this.getCurrentFocus();
-//        if (view != null) {
-//            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//        }
-//    }
+    // closes the keyboard once user has selected a time by clicking on the tick button to confirm the time
+    private void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 
 }
