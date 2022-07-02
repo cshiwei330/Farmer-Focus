@@ -43,33 +43,39 @@ public class PasswordActivity extends AppCompatActivity {
                     else{
                         // ensure that the password entered is valid
                         if(myOldPassword.getText().toString().equals(userDBData.getPassword()) && !(myOldPassword.getText().toString()).equals("")){
-                            // ensure that the new password is not equals to the original password
-                            if(!(myNewPassword.getText().toString()).equals(myOldPassword.getText().toString()) && !(myNewPassword.getText().toString()).equals("")) {
-                                // ensure that the new password must be the same as the confirm password
-                                if (myNewPassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
-                                    newPass = myConfirmPassword.getText().toString();
-                                    userDBData.setPassword(newPass);
-                                    dbHandler.updateUser(userDBData);
-                                    Toast.makeText(PasswordActivity.this, "Password successfully changed!", Toast.LENGTH_SHORT).show();
+                            // ensure that the user must enter a new password (field cannot be left empty)
+                            if(!(myNewPassword.getText().toString()).equals("")) {
+                                // ensure that the new password is not equals to the original password
+                                if(!(myNewPassword.getText().toString()).equals(myOldPassword.getText().toString()) /*&& !(myNewPassword.getText().toString()).equals("")*/) {
+                                    // ensure that the new password must be the same as the confirm password
+                                    if (myNewPassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
+                                        newPass = myConfirmPassword.getText().toString();
+                                        userDBData.setPassword(newPass);
+                                        dbHandler.updateUser(userDBData);
+                                        Toast.makeText(PasswordActivity.this, "Password successfully changed!", Toast.LENGTH_SHORT).show();
 
-                                    //kill TaskActivity
-                                    ((ResultReceiver) getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
+                                        //kill TaskActivity
+                                        ((ResultReceiver) getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
 
-                                    //create intent to go to Password
-                                    Intent AccountSettingsToPasswordActivity = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
+                                        //create intent to go to Password
+                                        Intent AccountSettingsToPasswordActivity = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
 
-                                    //start activity with result
-                                    startActivityForResult(AccountSettingsToPasswordActivity, 1);
+                                        //start activity with result
+                                        startActivityForResult(AccountSettingsToPasswordActivity, 1);
 
-                                    //kill this activity
-                                    finish();
+                                        //kill this activity
+                                        finish();
+                                    }
+                                    else {
+                                        Toast.makeText(PasswordActivity.this, "Passwords do not match. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(PasswordActivity.this, "Passwords do not match. Please try again.", Toast.LENGTH_SHORT).show();
+                                else{
+                                    Toast.makeText(PasswordActivity.this, "Password already exists. Please enter a different one.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             else{
-                                Toast.makeText(PasswordActivity.this, "Password already exists. Please enter a different one.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PasswordActivity.this, "Please enter a new password. This field cannot be left empty.", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else{
