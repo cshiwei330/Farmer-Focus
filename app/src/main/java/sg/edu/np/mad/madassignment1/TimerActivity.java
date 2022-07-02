@@ -147,9 +147,9 @@ public class TimerActivity extends DrawerBaseActivity {
         // if the user selects less than 60 minutes, only the minutes and seconds place will be shown on the countdown timer
         String timeLeftFormatted;
         if (hours > 0) {
-            timeLeftFormatted = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds);
+            timeLeftFormatted = String.format(Locale.getDefault(), "%dh:%02dm:%02ds", hours, minutes, seconds);
         } else {
-            timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+            timeLeftFormatted = String.format(Locale.getDefault(), "%02dm:%02ds", minutes, seconds);
         }
 
         mTextViewCountDown.setText(timeLeftFormatted);
