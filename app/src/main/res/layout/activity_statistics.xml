@@ -7,6 +7,17 @@
     tools:context=".StatisticsActivity">
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/dotwContainerView"
+        android:name="sg.edu.np.mad.madassignment1.StatsWeekFragment"
+        android:layout_width="337dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_stats_week" />
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/motwContainerView"
         android:name="sg.edu.np.mad.madassignment1.MoodoftheweekFragment"
         android:layout_width="337dp"
