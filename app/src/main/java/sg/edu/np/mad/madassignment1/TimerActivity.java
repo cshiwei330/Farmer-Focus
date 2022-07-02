@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -53,6 +54,10 @@ public class TimerActivity extends DrawerBaseActivity {
         SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
+
+        // displays numeric keyboard
+        // only allow user to key in integers 0 to 9 and not anything else when setting the time
+        mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
@@ -195,5 +200,11 @@ public class TimerActivity extends DrawerBaseActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+//    private class NumericKeyBoardTransformationMethod extends TimerActivity {
+//        public CharSequence getTransformation(CharSequence source, View view) {
+//            return source;
+//        }
+//    }
 
 }
