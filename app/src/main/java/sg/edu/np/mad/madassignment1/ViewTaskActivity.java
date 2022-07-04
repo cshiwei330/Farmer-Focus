@@ -36,6 +36,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
+        FloatingActionButton editTaskButton = findViewById(R.id.editTaskButton);
 
         Intent receivingEnd = getIntent();
         int newTaskId = receivingEnd.getIntExtra("task id", 0);
@@ -51,6 +52,17 @@ public class ViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
+        editTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extras = new Bundle();
+                Intent myIntent = new Intent(ViewTaskActivity.this, EditTaskActivity.class);
+                extras.putInt("task id", newTaskId);
+                myIntent.putExtras(extras);
                 startActivity(myIntent);
             }
         });

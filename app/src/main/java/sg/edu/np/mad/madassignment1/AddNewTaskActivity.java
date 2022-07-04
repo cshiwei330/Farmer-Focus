@@ -125,13 +125,13 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
-        TextView textView = (TextView) findViewById(R.id.datePickerTextView);
+        TextView textView = (TextView) findViewById(R.id.editTaskDatePicker);
         textView.setText(currentDateString);
     }
 
     public void popTimePicker(View view)
     {
-        TextView timeTextView = findViewById(R.id.timePickerTextView);
+        TextView timeTextView = findViewById(R.id.editTaskTimePicker);
 
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
         {
