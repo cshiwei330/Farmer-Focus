@@ -77,8 +77,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKTIME + " STRING, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
-        // CREATE TABLE Tasks ( TaskID INTEGER PRIMARY KEY AUTOINCREMENT, TaskStatus INTEGER, TaskName TEXT, TaskDesc TEXT,
-        //                         UserID INTEGER, TaskDate DATE, TaskTime TIME )
 
         // FOR MOOD TRACKER
         String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "(" + COLUMN_MOODDATE + " TEXT," + COLUMN_MOOD + " TEXT" + ")";
@@ -240,14 +238,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
 
-
-//        String editTask = "UPDATE " + TASKS
-//                + " SET " + COLUMN_TASKNAME + " = " + "\""+ task.getTaskName() + "\""
-//                + " SET " + COLUMN_TASKDESC + " = " + "\""+ task.getTaskDesc() + "\""
-//                + " SET " + COLUMN_TASKDATE + " = " + "\""+ task.getTaskDate() + "\""
-//                + " SET " + COLUMN_TASKTIME + " = " + "\""+ task.getTaskTime() + "\""
-//                + " WHERE " + COLUMN_TASKID + " = " + "\""+ task.getId()+ "\"";
-//        db.execSQL(editTask);
         db.close();
     }
 

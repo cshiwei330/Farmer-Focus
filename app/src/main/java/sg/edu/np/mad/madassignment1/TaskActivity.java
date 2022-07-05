@@ -84,8 +84,8 @@ public class TaskActivity extends DrawerBaseActivity{
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(TaskActivity.this);
-                builder.setMessage("Are you sure you want to clear all tasks?").setCancelable(true);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setMessage("Warning! This action is irreversible. Are you sure you want to clear all tasks?").setCancelable(true);
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //delete all task entries
@@ -103,7 +103,7 @@ public class TaskActivity extends DrawerBaseActivity{
                         Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();

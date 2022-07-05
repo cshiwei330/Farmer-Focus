@@ -144,8 +144,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
             }
         };
 
-        //int style = AlertDialog.THEME_TRADITIONAL;
-
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
 
         timePickerDialog.setTitle("Select Time");

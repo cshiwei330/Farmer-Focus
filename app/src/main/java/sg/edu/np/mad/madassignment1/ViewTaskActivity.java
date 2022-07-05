@@ -72,8 +72,8 @@ public class ViewTaskActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewTaskActivity.this);
-                builder.setMessage("Are you sure you want to delete this task?").setCancelable(true);
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dbHandler.deleteTask(task);
@@ -84,7 +84,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                         Toast.makeText(ViewTaskActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
                     }
                 });
-                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
@@ -92,7 +92,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 });
 
                 AlertDialog alert = builder.create();
-                alert.setTitle("Clear task");
+                alert.setTitle("Delete task");
                 alert.show();
             }
         });
