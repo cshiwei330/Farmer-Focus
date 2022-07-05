@@ -28,7 +28,7 @@ public class ImagesActivity extends AppCompatActivity {
 
         ImageView Image1 = findViewById(R.id.Image1);
         ImageView Image2 = findViewById(R.id.Image2);
-        ImageView Image3 = findViewById(R.id.Image3);
+        ImageView Farmer = findViewById(R.id.Farmer);
         ImageView Image4 = findViewById(R.id.Image4);
         ImageView Default = findViewById(R.id.ProfilePic);
 
@@ -51,7 +51,7 @@ public class ImagesActivity extends AppCompatActivity {
             }
         });
 
-        Image3.setOnClickListener(new View.OnClickListener() {
+        Farmer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 imageClicked(3);
@@ -73,7 +73,7 @@ public class ImagesActivity extends AppCompatActivity {
 
         userDBdata.setImageID(imageID);
         dbHandler.updateProfile(userDBdata);
-        Toast.makeText(ImagesActivity.this, "Team" + imageID + " chosen!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ImagesActivity.this, "Team " + imageID + " chosen!", Toast.LENGTH_SHORT).show();
 
         //creating shared preferences to store a value if user wants to be remembered or not
         SharedPreferences.Editor editor = sharedPreferences.edit();
