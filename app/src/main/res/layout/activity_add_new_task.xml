@@ -22,7 +22,7 @@
                 tools:layout_editor_absoluteY="61dp">
 
                 <Button
-                    android:id="@+id/datePickerTextView"
+                    android:id="@+id/editTaskDatePicker"
                     style="?android:spinnerStyle"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
@@ -88,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/timePickerTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskTimePicker"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
@@ -121,11 +121,11 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Time:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/datePickerTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/datePickerTextView" />
+                    app:layout_constraintStart_toStartOf="@+id/editTaskDatePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
 
                 <TextView
-                    android:id="@+id/timePickerTextView"
+                    android:id="@+id/editTaskTimePicker"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"

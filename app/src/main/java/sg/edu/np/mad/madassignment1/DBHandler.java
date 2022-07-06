@@ -77,8 +77,6 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKTIME + " STRING, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
-        // CREATE TABLE Tasks ( TaskID INTEGER PRIMARY KEY AUTOINCREMENT, TaskStatus INTEGER, TaskName TEXT, TaskDesc TEXT,
-        //                         UserID INTEGER, TaskDate DATE, TaskTime TIME )
 
         // FOR MOOD TRACKER
         String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "(" + COLUMN_MOODDATE + " TEXT," + COLUMN_MOOD + " TEXT" + ")";
@@ -229,6 +227,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void editTask(Task task){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_TASKNAME, task.getTaskName());
+        contentValues.put(COLUMN_TASKDESC, task.getTaskDesc());
+        contentValues.put(COLUMN_TASKDATE, task.getTaskDate());
+        contentValues.put(COLUMN_TASKTIME, task.getTaskTime());
+
+        db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
+
+        db.close();
+    }
+
     // adding mood entry to moodtracker table
     public void addMood(Mood moodData){
         ContentValues values = new ContentValues();
@@ -267,7 +279,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void changeTaskStatus (Task taskStatus){
         SQLiteDatabase db = this.getWritableDatabase();
-        // edit Mood entry
+        // edit Task status
         String changeTaskStatus = "UPDATE " + TASKS + " SET " + COLUMN_TASKSTATUS + " = " + "\""+ taskStatus.getStatus()+ "\""  + " WHERE " + COLUMN_TASKID + " = " + "\""+ taskStatus.getId()+ "\"";
         db.execSQL(changeTaskStatus);
         db.close();

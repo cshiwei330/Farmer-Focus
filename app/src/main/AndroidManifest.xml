@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".EditTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecurringTaskStatsActivity"
             android:exported="false" />
         <activity

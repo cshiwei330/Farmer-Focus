@@ -125,13 +125,13 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
 
-        TextView textView = (TextView) findViewById(R.id.datePickerTextView);
+        TextView textView = (TextView) findViewById(R.id.editTaskDatePicker);
         textView.setText(currentDateString);
     }
 
     public void popTimePicker(View view)
     {
-        TextView timeTextView = findViewById(R.id.timePickerTextView);
+        TextView timeTextView = findViewById(R.id.editTaskTimePicker);
 
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
         {
@@ -143,8 +143,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                 timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
             }
         };
-
-        //int style = AlertDialog.THEME_TRADITIONAL;
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
 

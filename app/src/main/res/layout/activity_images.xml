@@ -43,16 +43,6 @@
         app:srcCompat="@drawable/a3" />
 
     <ImageView
-        android:id="@+id/Image3"
-        android:layout_width="158dp"
-        android:layout_height="167dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/a2" />
-
-    <ImageView
         android:id="@+id/Image4"
         android:layout_width="161dp"
         android:layout_height="167dp"
@@ -63,6 +53,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/a1" />
+
+    <ImageView
+        android:id="@+id/Farmer"
+        android:layout_width="208dp"
+        android:layout_height="244dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/farmer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
