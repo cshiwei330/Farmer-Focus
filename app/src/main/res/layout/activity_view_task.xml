@@ -60,20 +60,6 @@
                     app:layout_constraintStart_toStartOf="@+id/taskViewTaskDateDisplay"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDateDisplay" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/deleteTaskButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="177dp"
-                    android:layout_marginTop="120dp"
-                    android:backgroundTint="#FF0000"
-                    android:clickable="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTimeDisplay"
-                    app:srcCompat="@drawable/ic_baseline_delete_outline_24"
-                    app:tint="#FFFFFF"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
                 <TextView
                     android:id="@+id/taskViewTaskNameDisplay"
                     android:layout_width="232dp"
@@ -96,7 +82,7 @@
 
                 <TextView
                     android:id="@+id/taskViewTaskTimeDisplay"
-                    android:layout_width="132dp"
+                    android:layout_width="232dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="1dp"
                     android:text="TextView"
@@ -107,23 +93,40 @@
 
                 <TextView
                     android:id="@+id/taskViewTaskDescriptionDisplay"
-                    android:layout_width="228dp"
+                    android:layout_width="232dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="13dp"
                     android:text="TextView"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/taskViewTaskDesc"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDesc" />
 
                 <TextView
                     android:id="@+id/taskViewTaskDateDisplay"
-                    android:layout_width="132dp"
+                    android:layout_width="232dp"
                     android:layout_height="32dp"
                     android:text="@string/textview"
                     android:textAlignment="viewStart"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/taskViewTaskDate"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDate" />
+
+                <TextView
+                    android:id="@+id/viewTaskAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Alert:"
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskTimeDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskTimeDisplay" />
+
+                <TextView
+                    android:id="@+id/viewTaskAlertDisplay"
+                    android:layout_width="232dp"
+                    android:layout_height="32dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskAlert"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlert" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/editTaskButton"
@@ -135,6 +138,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_edit_24"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="#FF0000"
+                    android:clickable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDisplay"
+                    app:srcCompat="@drawable/ic_baseline_delete_outline_24"
+                    app:tint="#FFFFFF"
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

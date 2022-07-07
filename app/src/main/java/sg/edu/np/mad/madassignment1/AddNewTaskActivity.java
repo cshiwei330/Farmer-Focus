@@ -10,11 +10,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -26,11 +30,16 @@ import java.util.Locale;
 
 public class AddNewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
+    private String TAG = "AddNewTaskActivity";
+
     ArrayList<Task> taskList = new ArrayList<>();
     int hour, minute;
     int year, month, dayOfMonth;
+    String alert;
 
     public String GLOBAL_PREF = "MyPrefs";
+
+    private Spinner spinnerAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,23 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
         ImageView backButton = findViewById(R.id.addNewTaskBackButton);
+
+        spinnerAlert = findViewById(R.id.addNewTaskAlertDropDown);
+
+        String[] alertTimes = getResources().getStringArray(R.array.alert_times);
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAlert.setAdapter(adapter);
+
+        spinnerAlert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                alert = adapterView.getItemAtPosition(i).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         //define database
         DBHandler dbHandler = new DBHandler(this, null, null,6);
@@ -84,6 +110,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setTaskDate(date);
                     String time =  String.format("%02d:%02d",hour,minute);
                     newTaskDB.setTaskTime(time);
+                    newTaskDB.setAlert(alert);
                     newTaskDB.setTaskUserID(user.getUserID());
 
                     //add new task to db
@@ -161,6 +188,9 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         }
         if(year == 0 || month == 0 || dayOfMonth == 0){
             return "date";
+        }
+        if (alert == null){
+            return "alert";
         }
 
         return "VALID";

@@ -32,14 +32,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_TASKNAME = "TaskName";
     public static String COLUMN_TASKDESC = "TaskDesc";
 
-    public static String COLUMN_HOUR ="TaskHour";
-    public static String COLUMN_MINUTE ="TaskMinute";
-    public static String COLUMN_YEAR ="TaskYear";
-    public static String COLUMN_MONTH ="TaskMonth";
-    public static String COLUMN_DAYOFMONTH ="TaskDayOfMonth";
-
     public static String COLUMN_TASKDATE ="TaskDate";
     public static String COLUMN_TASKTIME ="TaskTime";
+    public static String COLUMN_TASKALERT = "TaskAlert";
     public static String COLUMN_TASKUSERID = "taskUserID";
 
     //mood tracker
@@ -75,6 +70,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_USERID + " INTEGER, "
                 + COLUMN_TASKDATE + " STRING, "
                 + COLUMN_TASKTIME + " STRING, "
+                + COLUMN_TASKALERT + " STRING, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
 
@@ -154,6 +150,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         values.put(COLUMN_TASKDATE, taskData.getTaskDate());
         values.put(COLUMN_TASKTIME, taskData.getTaskTime());
+        values.put(COLUMN_TASKALERT, taskData.getAlert());
         values.put(COLUMN_USERID, taskData.getTaskUserID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,11 +172,11 @@ public class DBHandler extends SQLiteOpenHelper {
             String name = cursor.getString(2);
             String desc = cursor.getString(3);
 
-            //userID = cursor.getInt(4);
             String taskDate = cursor.getString(5);
             String taskTime = cursor.getString(6);
+            String taskAlert = cursor.getString(7);
 
-            Task newTask = new Task(id, status, name, desc, taskDate,taskTime,userID);
+            Task newTask = new Task(id, status, name, desc, taskDate,taskTime, taskAlert, userID);
             taskArrayList.add(newTask);
         }
         db.close();
@@ -202,12 +199,15 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setTaskUserID(cursor.getInt(4));
             queryData.setTaskDate(cursor.getString(5));
             queryData.setTaskTime(cursor.getString(6));
+            queryData.setAlert(cursor.getString(7));
 
         }
         else {
             queryData = null;
         }
+
         db.close();
+        Log.v(TAG, queryData.getAlert());
         return queryData;
     }
 
@@ -216,9 +216,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //shortened .delete command to delete task by id
         db.delete("Tasks","TaskId=?", new String[]{String.valueOf(deleteTask.getId())});
-
-        Log.v(TAG, "Task Deleted");
-        // db.delete("Tasks","TaskName=? and TaskDesc=?",new String[]{taskName,taskDesc});
     }
 
     public void deleteAllTask(int userID){
@@ -235,6 +232,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TASKDESC, task.getTaskDesc());
         contentValues.put(COLUMN_TASKDATE, task.getTaskDate());
         contentValues.put(COLUMN_TASKTIME, task.getTaskTime());
+        contentValues.put(COLUMN_TASKALERT, task.getAlert());
 
         db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
 
@@ -249,7 +247,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(MOODTRACKER, null, values);
-        Log.v(TAG, "Added to db");
+        //Log.v(TAG, "Added to db");
         db.close();
     }
 

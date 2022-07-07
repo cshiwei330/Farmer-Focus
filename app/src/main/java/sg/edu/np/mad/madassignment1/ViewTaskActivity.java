@@ -34,6 +34,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
         TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
+        TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
         FloatingActionButton editTaskButton = findViewById(R.id.editTaskButton);
@@ -47,6 +48,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         taskDesc.setText(task.getTaskDesc());
         taskDate.setText(task.getTaskDate());
         taskTime.setText(task.getTaskTime());
+        taskAlert.setText(task.getAlert());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

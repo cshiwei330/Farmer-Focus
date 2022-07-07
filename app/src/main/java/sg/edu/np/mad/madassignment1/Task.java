@@ -10,15 +10,10 @@ public class Task {
     private String taskName;
     private String taskDesc;
 
-    private int taskHour;
-    private int taskMinute;
-    private int taskYear;
-    private int taskMonth;
-    private int taskDayOfMonth;
-
-
     private String taskDate;
     private String taskTime;
+
+    private String alert;
 
     private int taskUserID;
 
@@ -27,7 +22,7 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskTime, int taskUserID) {
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskTime, String alert, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -35,6 +30,9 @@ public class Task {
 
         this.taskDate = taskDate;
         this.taskTime = taskTime;
+
+        this.alert = alert;
+
         this.taskUserID = taskUserID;
 
     }
@@ -97,4 +95,11 @@ public class Task {
         this.taskTime = taskTime;
     }
 
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
 }
