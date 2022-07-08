@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -282,5 +284,18 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public int getTaskStatus(Date date) throws ParseException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //String query = "SELECT * FROM " + TASKS + " WHERE " + COLUMN_TASKSTATUS + "=" + "1";
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateParsed = sdf.format(date);
+        String getTaskStatus = "SELECT " + COLUMN_TASKSTATUS + " FROM " + TASKS + " WHERE " + COLUMN_TASKSTATUS + " = " + "1"
+               + " AND " + COLUMN_TASKDATE + " = " + dateParsed;
+        //select column task status from tasks where taskstatus == 1 (complete)
+        Cursor cursor = db.rawQuery(getTaskStatus, null);
+        int count = cursor.getCount();
+        db.close();
+        return count;
+    }
 }
