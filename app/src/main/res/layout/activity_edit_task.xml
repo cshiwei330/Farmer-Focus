@@ -6,113 +6,147 @@
     android:layout_height="match_parent"
     tools:context=".EditTaskActivity">
 
-    <ImageView
-        android:id="@+id/editTaskIcon"
-        android:layout_width="85dp"
-        android:layout_height="77dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_edit_note_24" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/editTaskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="20dp"
-        android:text="Task Name:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskIcon" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editTaskNameDisplay"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="@+id/editTaskName"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskName" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/editTaskDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Task Description:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/editTaskNameDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskNameDisplay" />
+                <EditText
+                    android:id="@+id/editTaskDescDisplay"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:text="Name"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskDesc"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDesc" />
 
-    <EditText
-        android:id="@+id/editTaskDescDisplay"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="@+id/editTaskDesc"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDesc" />
+                <TextView
+                    android:id="@+id/editTaskName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Task Name:"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskIcon" />
 
-    <TextView
-        android:id="@+id/editTaskDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Task Date:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/editTaskDescDisplay"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDescDisplay" />
+                <EditText
+                    android:id="@+id/editTaskNameDisplay"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:text="Name"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskName" />
 
-    <Button
-        android:id="@+id/editTaskDatePicker"
-        style="?android:spinnerStyle"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:onClick="onDateClick"
-        android:text="Select a date!"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/editTaskDate"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDate" />
+                <TextView
+                    android:id="@+id/editTaskTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Task Time:"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskDatePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
 
-    <TextView
-        android:id="@+id/editTaskTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Task Time:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/editTaskDatePicker"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
+                <TextView
+                    android:id="@+id/editTaskDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Task Description:"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskNameDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskNameDisplay" />
 
-    <TextView
-        android:id="@+id/editTaskTimePicker"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:onClick="popTimePicker"
-        android:text="00:00"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintStart_toStartOf="@+id/editTaskTime"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskTime" />
+                <TextView
+                    android:id="@+id/editTaskTimePicker"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:clickable="true"
+                    android:onClick="popTimePicker"
+                    android:text="00:00"
+                    android:textAlignment="center"
+                    android:textSize="34sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskTime"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskTime" />
 
-    <Button
-        android:id="@+id/saveDetailsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="154dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTaskTimePicker" />
+                <Button
+                    android:id="@+id/editTaskDatePicker"
+                    style="?android:spinnerStyle"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:clickable="true"
+                    android:onClick="onDateClick"
+                    android:text="Select a date!"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskDate"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDate" />
+
+                <ImageView
+                    android:id="@+id/editTaskIcon"
+                    android:layout_width="85dp"
+                    android:layout_height="77dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_edit_note_24" />
+
+                <TextView
+                    android:id="@+id/editTaskDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Task Date:"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskDescDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDescDisplay" />
+
+                <TextView
+                    android:id="@+id/editTaskAlert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Alert:"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskTimePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskTimePicker" />
+
+                <Spinner
+                    android:id="@+id/editTaskAlertDropDown"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskAlert"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlert"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <Button
+                    android:id="@+id/saveDetailsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Save"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
