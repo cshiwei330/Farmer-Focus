@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addNewTaskAlertDropDown" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
 
                 <TextView
                     android:id="@+id/taskDescTextView3"
@@ -155,7 +155,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/editTaskTimePicker" />
 
                 <Spinner
-                    android:id="@+id/addNewTaskAlertDropDown"
+                    android:id="@+id/editTaskAlertDropDown"
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

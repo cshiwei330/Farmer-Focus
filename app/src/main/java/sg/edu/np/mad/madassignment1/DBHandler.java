@@ -207,7 +207,6 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         db.close();
-        Log.v(TAG, queryData.getAlert());
         return queryData;
     }
 

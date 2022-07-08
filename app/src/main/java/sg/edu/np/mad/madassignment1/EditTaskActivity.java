@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,19 +24,20 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
+public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private final String TAG = "Edit Task Activity";
 
     int hour, minute;
     int year, month, dayOfMonth;
+
     String alert;
+    private Spinner spinnerAlert;
+    int alertIndex;
 
     public String GLOBAL_PREF = "MyPrefs";
 
-    private Spinner spinnerAlertTimes;
-
-    DBHandler dbHandler = new DBHandler(this, null, null,6);
+    DBHandler dbHandler = new DBHandler(this, null, null, 6);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +50,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         TextView newTaskTime = findViewById(R.id.editTaskTimePicker);
         Button saveDetailsButton = findViewById(R.id.saveDetailsButton);
 
-        spinnerAlertTimes = findViewById(R.id.addNewTaskAlertDropDown);
-
-        String[] alerTimes = getResources().getStringArray(R.array.alert_times);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, alerTimes);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAlertTimes.setAdapter(adapter);
+        spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
 
         // receive from bundle
         Intent receivingEnd = getIntent();
@@ -72,14 +69,37 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         newTaskDate.setText(currentTask.getTaskDate());
         newTaskTime.setText(currentTask.getTaskTime());
 
+        String[] alertTimes = getResources().getStringArray(R.array.alert_times);
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAlert.setAdapter(adapter);
+
+        spinnerAlert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                alert = adapterView.getItemAtPosition(i).toString();
+                if (alert.matches("Choose Alert")){
+                    alert = null;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
         saveDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (alert == null){
+                    alert = currentTask.getAlert();
+                }
+
                 String finalTaskName = newTaskName.getText().toString();
                 String finalTaskDesc = newTaskDesc.getText().toString();
 
                 // prevents error from occurring if task description is blank
-                if (finalTaskDesc.matches("")){
+                if (finalTaskDesc.matches("")) {
                     finalTaskDesc = " ";
                 }
 
@@ -87,7 +107,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                 // if user change date, use new date
                 // or else use the old date
                 // Note: if this isn't done, if the user does not change the date, the date will be 00/00/0000 which is an invalid date
-                if(year == 0 || month == 0 || dayOfMonth == 0){
+                if (year == 0 || month == 0 || dayOfMonth == 0) {
                     String[] separatedDate = currentTask.getTaskDate().split("/");
                     year = Integer.valueOf(separatedDate[2]);
                     month = Integer.valueOf(separatedDate[1]);
@@ -101,26 +121,24 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                 // if user did change time, use new time
                 // or else use the old time
                 // Note: if this isn't done, if the user does not change the time, the time wil become 00:00
-                if (hour == 0 && minute == 0){
-                    if (Integer.valueOf(separatedTime[0]) == 0 && Integer.valueOf(separatedTime[1]) == 0){
+                if (hour == 0 && minute == 0) {
+                    if (Integer.valueOf(separatedTime[0]) == 0 && Integer.valueOf(separatedTime[1]) == 0) {
                         hour = 0;
                         minute = 0;
-                    }
-                    else {
+                    } else {
                         hour = Integer.valueOf(separatedTime[0]);
                         minute = Integer.valueOf(separatedTime[1]);
                     }
                 }
 
-                String finalTaskDate = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
-                String finalTaskTime =  String.format("%02d:%02d",hour,minute);
-
+                String finalTaskDate = String.format("%02d/%02d/%02d", dayOfMonth, month, year);
+                String finalTaskTime = String.format("%02d:%02d", hour, minute);
 
 
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
-                if (validity.equals("VALID")){
+                if (validity.equals("VALID")) {
 
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate, finalTaskTime, alert, user.getUserID());
 
@@ -131,9 +149,8 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                     extras.putInt("task id", oldTaskId);
                     myIntent.putExtras(extras);
                     startActivity(myIntent);
-                }
-                else {
-                    Toast.makeText(EditTaskActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditTaskActivity.this, "Please enter a valid " + validity + "!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -148,7 +165,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.DAY_OF_MONTH, selectedDayOfMonth);
 
         year = selectedYear;
-        month = selectedMonth+1;
+        month = selectedMonth + 1;
         dayOfMonth = selectedDayOfMonth;
 
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
@@ -157,18 +174,15 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         textView.setText(currentDateString);
     }
 
-    public void popTimePicker(View view)
-    {
+    public void popTimePicker(View view) {
         TextView timeTextView = findViewById(R.id.editTaskTimePicker);
 
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
-        {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
-            {
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 hour = selectedHour;
                 minute = selectedMinute;
-                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
             }
         };
 
@@ -185,26 +199,17 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         datePicker.show(getSupportFragmentManager(), "date picker");
     }
 
-    public String taskIsValid(String newTaskNameString){
-        if(newTaskNameString.length() < 1){
+    public String taskIsValid(String newTaskNameString) {
+        if (newTaskNameString.length() < 1) {
             return "name";
         }
-        if(year == 0 || month == 0 || dayOfMonth == 0){
+        if (year == 0 || month == 0 || dayOfMonth == 0) {
             return "date";
+        }
+        if (alert == null) {
+            return "alert";
         }
 
         return "VALID";
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent.getId() == R.id.addNewTaskAlertDropDown){
-            alert = parent.getItemAtPosition(position).toString();
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

@@ -52,7 +52,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
         ImageView backButton = findViewById(R.id.addNewTaskBackButton);
 
-        spinnerAlert = findViewById(R.id.addNewTaskAlertDropDown);
+        spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
 
         String[] alertTimes = getResources().getStringArray(R.array.alert_times);
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
@@ -63,6 +63,9 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 alert = adapterView.getItemAtPosition(i).toString();
+                if (alert.matches("Choose Alert")){
+                    alert = null;
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -84,7 +87,6 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         createNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String newTaskNameString = newTaskName.getText().toString();
                 String newTaskDescString = newTaskDesc.getText().toString();
                 String validity = taskIsValid(newTaskNameString);
