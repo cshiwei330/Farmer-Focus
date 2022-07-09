@@ -35,6 +35,7 @@ public class TaskActivity extends DrawerBaseActivity{
     ActivityTaskBinding activityTaskBinding;
     //define taskList array
     ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> secondTaskList = new ArrayList<>();
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -98,31 +99,68 @@ public class TaskActivity extends DrawerBaseActivity{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String filterOption = adapterView.getItemAtPosition(i).toString();
-                if (filterOption.matches("Default")){
-                    Collections.sort(taskList, Task.TaskIdAscComparator);
-                    mAdaptor.notifyDataSetChanged();
-                    Log.v(TAG, "Selected " + filterOption);
-                }
-                else if (filterOption.matches("Task Id Desc")){
-                    Collections.sort(taskList, Task.TaskIdDescComparator);
-                    mAdaptor.notifyDataSetChanged();
-                }
-                else if (filterOption.matches("Name Asc")){
-                    Collections.sort(taskList, Task.TaskNameAscComparator);
+
+                if (secondTaskList.size() != 0){
+                    for (int j=0; j < secondTaskList.size(); j++){
+                        taskList.add(secondTaskList.get(j));
+                    }
+                    secondTaskList.clear();
+                    setTotalTaskTextView(taskList);
                     mAdaptor.notifyDataSetChanged();
                 }
-                else if (filterOption.matches("Name Desc")){
-                    Collections.sort(taskList, Task.TaskNameDescComparator);
-                    mAdaptor.notifyDataSetChanged();
+                else{
+                    if (filterOption.matches("Default")){
+                        Collections.sort(taskList, Task.TaskIdAscComparator);
+                        mAdaptor.notifyDataSetChanged();
+                        Log.v(TAG, "Selected " + filterOption);
+                    }
+                    else if (filterOption.matches("Task Id Desc")){
+                        Collections.sort(taskList, Task.TaskIdDescComparator);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Name Asc")){
+                        Collections.sort(taskList, Task.TaskNameAscComparator);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Name Desc")){
+                        Collections.sort(taskList, Task.TaskNameDescComparator);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Date Asc")){
+                        Collections.sort(taskList, Task.TaskDateAscComparator);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Date Desc")){
+                        Collections.sort(taskList, Task.TaskDateDescComparator);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Completed")){
+                        for (int j=0; j < taskList.size(); j++){
+                            if (taskList.get(j).getStatus() == 0){
+                                secondTaskList.add(taskList.get(j));
+                            }
+                        }
+                        for (int j=0; j<secondTaskList.size(); j++){
+                            taskList.remove(secondTaskList.get(j));
+                        }
+                        setTotalTaskTextView(taskList);
+                        mAdaptor.notifyDataSetChanged();
+                    }
+                    else if (filterOption.matches("Not Completed")){
+                        for (int j=0; j < taskList.size(); j++){
+                            if (taskList.get(j).getStatus() == 1){
+                                secondTaskList.add(taskList.get(j));
+                            }
+                        }
+                        for (int j=0; j<secondTaskList.size(); j++){
+                            taskList.remove(secondTaskList.get(j));
+                        }
+                        setTotalTaskTextView(taskList);
+                        mAdaptor.notifyDataSetChanged();
+                    }
                 }
-                else if (filterOption.matches("Date Asc")){
-                    Collections.sort(taskList, Task.TaskDateAscComparator);
-                    mAdaptor.notifyDataSetChanged();
-                }
-                else if (filterOption.matches("Date Desc")){
-                    Collections.sort(taskList, Task.TaskDateDescComparator);
-                    mAdaptor.notifyDataSetChanged();
-                }
+
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
