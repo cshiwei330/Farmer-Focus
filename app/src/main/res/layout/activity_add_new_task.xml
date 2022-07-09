@@ -17,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="899dp"
+                android:layout_height="match_parent"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="61dp">
 
@@ -76,18 +76,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/taskDescTextView3"
                     tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-                <Button
-                    android:id="@+id/createNewTaskButtonActivity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="52dp"
-                    android:backgroundTint="#7E9278"
-                    android:text="Create New Task"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
-
                 <TextView
                     android:id="@+id/taskDescTextView3"
                     android:layout_width="wrap_content"
@@ -111,28 +99,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/newTaskDescActivity" />
 
                 <TextView
-                    android:id="@+id/TaskTimePickerTextView"
+                    android:id="@+id/newTaskStartTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Task Time:"
+                    android:text="Task Start Time:"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/editTaskDatePicker"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
-
-                <TextView
-                    android:id="@+id/editTaskTimePicker"
-                    android:layout_width="280dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:onClick="popTimePicker"
-                    android:text="00:00"
-                    android:textAlignment="center"
-                    android:textSize="34sp"
-                    app:layout_constraintStart_toStartOf="@+id/TaskTimePickerTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/TaskTimePickerTextView" />
 
                 <ImageView
                     android:id="@+id/addNewTaskBackButton"
@@ -151,19 +126,66 @@
                     android:layout_marginTop="28dp"
                     android:text="Alert:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/editTaskTimePicker"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskTimePicker" />
+                    app:layout_constraintStart_toStartOf="@+id/newTaskEndTimePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/newTaskEndTimePicker" />
+
+                <Button
+                    android:id="@+id/createNewTaskButtonActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="#7E9278"
+                    android:text="Create New Task"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.487"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
 
                 <Spinner
                     android:id="@+id/editTaskAlertDropDown"
                     android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="16dp"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="@+id/editTaskTimePicker"
-                    app:layout_constraintStart_toStartOf="@+id/editTaskTimePicker"
+                    app:layout_constraintStart_toStartOf="@+id/addNewTaskAlert"
                     app:layout_constraintTop_toBottomOf="@+id/addNewTaskAlert"
                     tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/editTaskStartTimePicker"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:onClick="popStartTimePicker"
+                    android:text="00:00"
+                    android:textAlignment="center"
+                    android:textSize="34sp"
+                    app:layout_constraintStart_toStartOf="@+id/newTaskStartTime"
+                    app:layout_constraintTop_toBottomOf="@+id/newTaskStartTime" />
+
+                <TextView
+                    android:id="@+id/newTaskEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="Task End Time:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskStartTimePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskStartTimePicker" />
+
+                <TextView
+                    android:id="@+id/newTaskEndTimePicker"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:clickable="true"
+                    android:onClick="popEndTimePicker"
+                    android:text="00:00"
+                    android:textAlignment="center"
+                    android:textSize="34sp"
+                    app:layout_constraintStart_toStartOf="@+id/newTaskEndTime"
+                    app:layout_constraintTop_toBottomOf="@+id/newTaskEndTime" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

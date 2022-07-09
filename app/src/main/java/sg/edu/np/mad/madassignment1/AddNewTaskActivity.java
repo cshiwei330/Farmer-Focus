@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +32,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
     private String TAG = "AddNewTaskActivity";
 
     ArrayList<Task> taskList = new ArrayList<>();
-    int hour, minute;
+    int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
     String alert;
 
@@ -110,8 +109,10 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
 
                     String date = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
                     newTaskDB.setTaskDate(date);
-                    String time =  String.format("%02d:%02d",hour,minute);
-                    newTaskDB.setTaskTime(time);
+                    String startTime =  String.format("%02d:%02d",starthour,startminute);
+                    newTaskDB.setTaskStartTime(startTime);
+                    String endTime =  String.format("%02d:%02d",endhour,endminute);
+                    newTaskDB.setTaskEndTime(endTime);
                     newTaskDB.setAlert(alert);
                     newTaskDB.setTaskUserID(user.getUserID());
 
@@ -158,22 +159,43 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         textView.setText(currentDateString);
     }
 
-    public void popTimePicker(View view)
+    public void popStartTimePicker(View view)
     {
-        TextView timeTextView = findViewById(R.id.editTaskTimePicker);
+        TextView timeTextView = findViewById(R.id.editTaskStartTimePicker);
 
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
         {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
             {
-                hour = selectedHour;
-                minute = selectedMinute;
-                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",hour, minute));
+                starthour = selectedHour;
+                startminute = selectedMinute;
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",starthour, startminute));
             }
         };
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, starthour, startminute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void popEndTimePicker(View view)
+    {
+        TextView timeTextView = findViewById(R.id.newTaskEndTimePicker);
+
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+        {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+            {
+                endhour = selectedHour;
+                endminute = selectedMinute;
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",endhour, endminute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, endhour, endminute, true);
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();

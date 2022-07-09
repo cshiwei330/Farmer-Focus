@@ -28,7 +28,7 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
     private final String TAG = "Edit Task Activity";
 
-    int hour, minute;
+    int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
 
     String alert;
@@ -47,7 +47,8 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         EditText newTaskName = findViewById(R.id.editTaskNameDisplay);
         EditText newTaskDesc = findViewById(R.id.editTaskDescDisplay);
         TextView newTaskDate = findViewById(R.id.editTaskDatePicker);
-        TextView newTaskTime = findViewById(R.id.editTaskTimePicker);
+        TextView newTaskStartTime = findViewById(R.id.editTaskStartTimePicker);
+        TextView newTaskEndTime = findViewById(R.id.editTaskEndTimePicker);
         Button saveDetailsButton = findViewById(R.id.saveDetailsButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
@@ -63,11 +64,14 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
         Task currentTask = dbHandler.findTask(oldTaskId);
 
+        Log.v(TAG, currentTask.getTaskEndTime());
+
         // set old task details
         newTaskName.setText(currentTask.getTaskName());
         newTaskDesc.setText(currentTask.getTaskDesc());
         newTaskDate.setText(currentTask.getTaskDate());
-        newTaskTime.setText(currentTask.getTaskTime());
+        newTaskStartTime.setText(currentTask.getTaskStartTime());
+        newTaskEndTime.setText(currentTask.getTaskEndTime());
 
         String[] alertTimes = getResources().getStringArray(R.array.alert_times);
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
@@ -115,32 +119,49 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                 }
 
                 // split time for checking purpose
-                String[] separatedTime = currentTask.getTaskTime().split(":");
+                String[] separatedStartTime = currentTask.getTaskStartTime().split(":");
 
                 // checks if user changed time
                 // if user did change time, use new time
                 // or else use the old time
                 // Note: if this isn't done, if the user does not change the time, the time wil become 00:00
-                if (hour == 0 && minute == 0) {
-                    if (Integer.valueOf(separatedTime[0]) == 0 && Integer.valueOf(separatedTime[1]) == 0) {
-                        hour = 0;
-                        minute = 0;
+                if (starthour == 0 && startminute == 0) {
+                    if (Integer.valueOf(separatedStartTime[0]) == 0 && Integer.valueOf(separatedStartTime[1]) == 0) {
+                        starthour = 0;
+                        startminute = 0;
                     } else {
-                        hour = Integer.valueOf(separatedTime[0]);
-                        minute = Integer.valueOf(separatedTime[1]);
+                        starthour = Integer.valueOf(separatedStartTime[0]);
+                        startminute = Integer.valueOf(separatedStartTime[1]);
+                    }
+                }
+
+                // split time for checking purpose
+                String[] separatedEndTime = currentTask.getTaskEndTime().split(":");
+
+                // checks if user changed time
+                // if user did change time, use new time
+                // or else use the old time
+                // Note: if this isn't done, if the user does not change the time, the time wil become 00:00
+                if (endhour == 0 && endminute == 0) {
+                    if (Integer.valueOf(separatedEndTime[0]) == 0 && Integer.valueOf(separatedEndTime[1]) == 0) {
+                        endhour = 0;
+                        endminute = 0;
+                    } else {
+                        endhour = Integer.valueOf(separatedEndTime[0]);
+                        endminute = Integer.valueOf(separatedEndTime[1]);
                     }
                 }
 
                 String finalTaskDate = String.format("%02d/%02d/%02d", dayOfMonth, month, year);
-                String finalTaskTime = String.format("%02d:%02d", hour, minute);
-
+                String finalTaskStartTime = String.format("%02d:%02d", starthour, startminute);
+                String finalTaskEndTime = String.format("%02d:%02d", endhour, endminute);
 
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
-                    Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate, finalTaskTime, alert, user.getUserID());
+                    Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate, finalTaskStartTime, finalTaskEndTime, alert, user.getUserID());
 
                     dbHandler.editTask(editedTask);
 
@@ -174,21 +195,43 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
         textView.setText(currentDateString);
     }
 
-    public void popTimePicker(View view) {
-        TextView timeTextView = findViewById(R.id.editTaskTimePicker);
+    public void popStartTimePicker(View view)
+    {
+        TextView timeTextView = findViewById(R.id.editTaskStartTimePicker);
 
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+        {
             @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                hour = selectedHour;
-                minute = selectedMinute;
-                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+            {
+                starthour = selectedHour;
+                startminute = selectedMinute;
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",starthour, startminute));
             }
         };
 
-        //int style = AlertDialog.THEME_TRADITIONAL;
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, starthour, startminute, true);
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
+    }
+
+    public void popEndTimePicker(View view)
+    {
+        TextView timeTextView = findViewById(R.id.editTaskEndTimePicker);
+
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+        {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+            {
+                endhour = selectedHour;
+                endminute = selectedMinute;
+                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d",endhour, endminute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, endhour, endminute, true);
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();

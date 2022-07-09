@@ -36,7 +36,7 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         holder.taskName.setText((position+1) + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         holder.taskDate.setText(t.getTaskDate());
-        holder.taskTime.setText(t.getTaskTime());
+        holder.taskTime.setText(t.getTaskStartTime());
 
         //if checked, set box to checked
         if (t.getStatus()==1){

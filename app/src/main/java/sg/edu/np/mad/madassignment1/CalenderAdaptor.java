@@ -114,7 +114,7 @@ public class CalenderAdaptor extends RecyclerView.Adapter<CalenderViewHolder> im
         //set viewholder details
         holder.taskName.setText(t.getId() + ". " +t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
-        holder.taskTime.setText(t.getTaskTime());
+        holder.taskTime.setText(t.getTaskStartTime());
 
         //if checked, set box to checked
         if (t.getStatus()==1){

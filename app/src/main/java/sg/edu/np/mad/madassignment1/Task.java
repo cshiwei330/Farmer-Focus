@@ -15,8 +15,8 @@ public class Task {
     private String taskDesc;
 
     private String taskDate;
-    private String taskTime;
-
+    private String taskStartTime;
+    private String taskEndTime;
     private String alert;
 
     private int taskUserID;
@@ -26,14 +26,15 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskTime, String alert, int taskUserID) {
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, String alert, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
         this.taskDesc = taskDesc;
 
         this.taskDate = taskDate;
-        this.taskTime = taskTime;
+        this.taskStartTime = taskStartTime;
+        this.taskEndTime = taskEndTime;
 
         this.alert = alert;
 
@@ -89,12 +90,20 @@ public class Task {
         this.taskDate = taskDate;
     }
 
-    public String getTaskTime() {
-        return taskTime;
+    public String getTaskStartTime() {
+        return taskStartTime;
     }
 
-    public void setTaskTime(String taskTime) {
-        this.taskTime = taskTime;
+    public void setTaskStartTime(String taskStartTime) {
+        this.taskStartTime = taskStartTime;
+    }
+
+    public String getTaskEndTime() {
+        return taskEndTime;
+    }
+
+    public void setTaskEndTime(String taskEndTime) {
+        this.taskEndTime = taskEndTime;
     }
 
     public String getAlert() {
@@ -108,14 +117,14 @@ public class Task {
     public static Comparator<Task> TaskNameAscComparator = new Comparator<Task>() {
         @Override
         public int compare(Task t1, Task t2) {
-            return t1.getTaskName().compareTo(t2.getTaskName());
+            return t1.getTaskName().compareToIgnoreCase(t2.getTaskName());
         }
     };
 
     public static Comparator<Task> TaskNameDescComparator = new Comparator<Task>() {
         @Override
         public int compare(Task t1, Task t2) {
-            return t2.getTaskName().compareTo(t1.getTaskName());
+            return t2.getTaskName().compareToIgnoreCase(t1.getTaskName());
         }
     };
 

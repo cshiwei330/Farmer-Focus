@@ -7,17 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 public class ViewTaskActivity extends AppCompatActivity {
 
@@ -33,7 +29,8 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskName = findViewById(R.id.taskViewTaskNameDisplay);
         TextView taskDesc = findViewById(R.id.taskViewTaskDescriptionDisplay);
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
-        TextView taskTime = findViewById(R.id.taskViewTaskTimeDisplay);
+        TextView taskStartTime = findViewById(R.id.taskViewTaskStartTimeDisplay);
+        TextView taskEndTime = findViewById(R.id.taskViewTaskEndTimeDisplay);
         TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
@@ -47,7 +44,8 @@ public class ViewTaskActivity extends AppCompatActivity {
         taskName.setText(task.getTaskName());
         taskDesc.setText(task.getTaskDesc());
         taskDate.setText(task.getTaskDate());
-        taskTime.setText(task.getTaskTime());
+        taskStartTime.setText(task.getTaskStartTime());
+        taskEndTime.setText(task.getTaskEndTime());
         taskAlert.setText(task.getAlert());
 
         backButton.setOnClickListener(new View.OnClickListener() {
