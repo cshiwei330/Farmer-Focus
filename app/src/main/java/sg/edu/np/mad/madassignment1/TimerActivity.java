@@ -1,5 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -17,7 +20,7 @@ import java.util.Locale;
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends DrawerBaseActivity {
-
+    int hour, minute, second;
     //define activity binding
     ActivityTimerBinding activityTimerBinding;
 
@@ -28,6 +31,7 @@ public class TimerActivity extends DrawerBaseActivity {
     private ImageView SetTime;
     private Button mButtonStartPause;
     private Button mButtonReset;
+    private TextView mTimeTextView;
 
     private CountDownTimer mCountDownTimer;
 
@@ -54,6 +58,7 @@ public class TimerActivity extends DrawerBaseActivity {
         SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
+        mTimeTextView = findViewById(R.id.countdown);
 
         // displays numeric keyboard
         // only allow user to key in integers 0 to 9 and not anything else when setting the time
@@ -100,6 +105,14 @@ public class TimerActivity extends DrawerBaseActivity {
                 resetTimer();
             }
         });
+
+        // new
+//        mTimeTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                popTimePicker();
+//            }
+//        });
     }
 
     // set the time on the timer
@@ -201,10 +214,79 @@ public class TimerActivity extends DrawerBaseActivity {
         }
     }
 
+
 //    private class NumericKeyBoardTransformationMethod extends TimerActivity {
 //        public CharSequence getTransformation(CharSequence source, View view) {
 //            return source;
 //        }
+//    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putLong("startTimeInMillis", mStartTimeInMillis);
+        editor.putLong("millisLeft", mTimeLeftInMillis);
+        editor.putBoolean("timerRunning", mTimerRunning);
+        editor.putLong("endTime", mEndTime);
+
+        editor.apply();
+
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+
+        mTimeLeftInMillis = prefs.getLong("millisLeft", mStartTimeInMillis);
+        mTimerRunning = prefs.getBoolean("timerRunning", false);
+
+        updateCountDownText();
+        updateWatchInterface();
+
+        if (mTimerRunning) {
+            mEndTime = prefs.getLong("endTime", 0);
+            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+
+            if (mTimeLeftInMillis < 0) {
+                mTimeLeftInMillis = 0;
+                mTimerRunning = false;
+                updateCountDownText();
+                updateWatchInterface();
+            } else {
+                startTimer();
+            }
+        }
+    }
+
+//    public void popTimePicker()
+//    {
+//        TextView timeTextView = findViewById(R.id.countdown);
+//
+//        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
+//        {
+//            @Override
+//            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
+//            {
+//                hour = selectedHour;
+//                minute = selectedMinute;
+//                //second = selectedSecond;
+//                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",hour, minute));
+//            }
+//        };
+//
+//        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
+//
+//        timePickerDialog.show();
 //    }
 
 }
