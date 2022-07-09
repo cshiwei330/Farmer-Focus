@@ -8,26 +8,44 @@
 
     <ImageView
         android:id="@+id/tasksListIcon"
-        android:layout_width="80dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="TODO"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_checklist_24" />
+
+    <ImageView
+        android:id="@+id/filterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/clearAllTaskButton"
+        app:layout_constraintStart_toStartOf="@+id/toDoListRecycleView"
+        app:layout_constraintTop_toTopOf="@+id/clearAllTaskButton"
+        app:srcCompat="@drawable/ic_baseline_sort_24" />
+
+    <Spinner
+        android:id="@+id/spinnerFilterDropDown"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/filterIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tasksListIcon"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/toDoListRecycleView"
         android:layout_width="342dp"
         android:layout_height="480dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:background="#BECCC0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalTasks" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFilterDropDown" />
 
     <TextView
         android:id="@+id/totalTasks"
@@ -36,15 +54,17 @@
         android:fontFamily="sans-serif-medium"
         android:text="Total:"
         app:layout_constraintStart_toStartOf="@+id/toDoListRecycleView"
-        app:layout_constraintTop_toBottomOf="@+id/tasksListIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/toDoListRecycleView" />
 
     <ImageView
         android:id="@+id/clearAllTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/totalTasks"
-        app:layout_constraintEnd_toEndOf="@+id/toDoListRecycleView"
-        app:layout_constraintTop_toTopOf="@+id/totalTasks"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/toDoListRecycleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerFilterDropDown"
+        app:layout_constraintVertical_bias="0.625"
         app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

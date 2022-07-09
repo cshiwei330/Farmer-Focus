@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="filter_options">
+        <item>Default</item>
+        <item>Task Id Desc</item>
+        <item>Name Asc</item>
+        <item>Name Desc</item>
+        <item>Date Asc</item>
+        <item>Date Desc</item>
+        <item>Completion Status Asc</item>
+        <item>Completion Status Desc</item>
+    </string-array>
+
+</resources>

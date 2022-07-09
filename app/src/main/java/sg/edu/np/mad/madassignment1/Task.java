@@ -2,7 +2,11 @@ package sg.edu.np.mad.madassignment1;
 
 import android.text.format.Time;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 public class Task {
     private int Id;
@@ -73,8 +77,6 @@ public class Task {
         return taskDesc;
     }
 
-
-
     public void setTaskDesc(String taskDesc) {
         this.taskDesc = taskDesc;
     }
@@ -102,4 +104,83 @@ public class Task {
     public void setAlert(String alert) {
         this.alert = alert;
     }
+
+    public static Comparator<Task> TaskNameAscComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.getTaskName().compareTo(t2.getTaskName());
+        }
+    };
+
+    public static Comparator<Task> TaskNameDescComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t2.getTaskName().compareTo(t1.getTaskName());
+        }
+    };
+
+    public static Comparator<Task> TaskIdAscComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.getId() - t2.getId();
+        }
+    };
+
+    public static Comparator<Task> TaskIdDescComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t2.getId() - t1.getId();
+        }
+    };
+
+    public static Comparator<Task> TaskDateAscComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+
+            Date date1 = null;
+            Date date2 = null;
+
+            String t1Date = t1.getTaskDate();
+            String[] splitT1Date = t1Date.split("/");
+
+            String t2Date = t2.getTaskDate();
+            String[] splitT2Date = t2Date.split("/");
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                date1 = sdf.parse(splitT1Date[2] + "-" + splitT1Date[1] + "-" + splitT1Date[0]);
+                date2 = sdf.parse(splitT2Date[2] + "-" + splitT2Date[1] + "-" + splitT2Date[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return date1.compareTo(date2);
+        }
+    };
+
+    public static Comparator<Task> TaskDateDescComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+
+            Date date1 = null;
+            Date date2 = null;
+
+            String t1Date = t1.getTaskDate();
+            String[] splitT1Date = t1Date.split("/");
+
+            String t2Date = t2.getTaskDate();
+            String[] splitT2Date = t2Date.split("/");
+
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                date1 = sdf.parse(splitT1Date[2] + "-" + splitT1Date[1] + "-" + splitT1Date[0]);
+                date2 = sdf.parse(splitT2Date[2] + "-" + splitT2Date[1] + "-" + splitT2Date[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return date2.compareTo(date1);
+        }
+    };
 }
+

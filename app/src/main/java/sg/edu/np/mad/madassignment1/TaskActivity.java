@@ -11,18 +11,25 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTaskBinding;
 
 public class TaskActivity extends DrawerBaseActivity{
+
+    private String TAG = "Task Activity";
 
     //define activity binding
     ActivityTaskBinding activityTaskBinding;
@@ -30,6 +37,8 @@ public class TaskActivity extends DrawerBaseActivity{
     ArrayList<Task> taskList = new ArrayList<>();
 
     public String GLOBAL_PREF = "MyPrefs";
+
+    private Spinner spinnerFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +68,16 @@ public class TaskActivity extends DrawerBaseActivity{
         String username = sharedPreferences.getString("username", "");
         User user = dbHandler.findUser(username);
 
+        // define spinner dropdown for filter options
+        spinnerFilter = findViewById(R.id.spinnerFilterDropDown);
+
+        String[] alertTimes = getResources().getStringArray(R.array.filter_options);
+        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFilter.setAdapter(adapter);
+
         //fill taskList with db data
         taskList = dbHandler.getTaskData(user.getUserID());
-
 
         //set textview to show number of tasks
         setTotalTaskTextView(taskList);
@@ -77,6 +93,41 @@ public class TaskActivity extends DrawerBaseActivity{
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
+
+        spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String filterOption = adapterView.getItemAtPosition(i).toString();
+                if (filterOption.matches("Default")){
+                    Collections.sort(taskList, Task.TaskIdAscComparator);
+                    mAdaptor.notifyDataSetChanged();
+                    Log.v(TAG, "Selected " + filterOption);
+                }
+                else if (filterOption.matches("Task Id Desc")){
+                    Collections.sort(taskList, Task.TaskIdDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Name Asc")){
+                    Collections.sort(taskList, Task.TaskNameAscComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Name Desc")){
+                    Collections.sort(taskList, Task.TaskNameDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Date Asc")){
+                    Collections.sort(taskList, Task.TaskDateAscComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Date Desc")){
+                    Collections.sort(taskList, Task.TaskDateDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         //clear all tasks listener
         clearAllTaskButton.setOnClickListener(new View.OnClickListener() {
