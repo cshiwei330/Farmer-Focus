@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ViewTaskActivity extends AppCompatActivity {
 
+    private String TAG = "ViewTaskActivity";
     Task task;
 
     @Override
@@ -31,6 +33,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
         TextView taskStartTime = findViewById(R.id.taskViewTaskStartTimeDisplay);
         TextView taskEndTime = findViewById(R.id.taskViewTaskEndTimeDisplay);
+        TextView taskDuration = findViewById(R.id.taskViewTaskDurationDisplay);
         TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
@@ -46,6 +49,43 @@ public class ViewTaskActivity extends AppCompatActivity {
         taskDate.setText(task.getTaskDate());
         taskStartTime.setText(task.getTaskStartTime());
         taskEndTime.setText(task.getTaskEndTime());
+
+        double hoursDecimal = task.getTaskDuration() / 60;
+        int hours = (int) hoursDecimal;
+        int minutes = (int) task.getTaskDuration() - (hours * 60);
+
+        Log.v(TAG, "Hours " + String.valueOf(hours));
+        Log.v(TAG, "Mins " + String.valueOf(minutes));
+
+        if (hours == 0 && minutes == 0){
+            taskDuration.setText("No Duration");
+        }
+        else if (hours == 0 && minutes == 1){
+            taskDuration.setText(minutes + " Min ");
+        }
+        else if (hours == 0 && minutes > 1){
+            taskDuration.setText(minutes + " Mins ");
+        }
+        else if (hours == 1 && minutes == 0){
+            taskDuration.setText(hours + " Hour ");
+        }
+        else if (hours == 1 && minutes == 1){
+            taskDuration.setText(hours + " Hour " + minutes + " Min");
+        }
+        else if (hours == 1 && minutes > 1){
+            taskDuration.setText(hours + " Hour " + minutes + " Mins");
+        }
+        else if (hours > 1 && minutes == 0){
+            taskDuration.setText(hours + " Hours ");
+        }
+        else if (hours > 1 && minutes == 1){
+            taskDuration.setText(hours + " Hours " + minutes + " Min");
+        }
+        else {
+            taskDuration.setText(hours + " Hours " + minutes + " Mins");
+        }
+
+
         taskAlert.setText(task.getAlert());
 
         backButton.setOnClickListener(new View.OnClickListener() {

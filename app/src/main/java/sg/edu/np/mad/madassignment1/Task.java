@@ -17,6 +17,7 @@ public class Task {
     private String taskDate;
     private String taskStartTime;
     private String taskEndTime;
+    private double taskDuration;
     private String alert;
 
     private int taskUserID;
@@ -26,7 +27,7 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, String alert, int taskUserID) {
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -35,6 +36,7 @@ public class Task {
         this.taskDate = taskDate;
         this.taskStartTime = taskStartTime;
         this.taskEndTime = taskEndTime;
+        this.taskDuration = taskDuration;
 
         this.alert = alert;
 
@@ -104,6 +106,14 @@ public class Task {
 
     public void setTaskEndTime(String taskEndTime) {
         this.taskEndTime = taskEndTime;
+    }
+
+    public double getTaskDuration() {
+        return taskDuration;
+    }
+
+    public void setTaskDuration(double taskDuration) {
+        this.taskDuration = taskDuration;
     }
 
     public String getAlert() {

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,8 +24,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class AddNewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -34,6 +41,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
     ArrayList<Task> taskList = new ArrayList<>();
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
+    double diffInTime;
     String alert;
 
     public String GLOBAL_PREF = "MyPrefs";
@@ -113,6 +121,26 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setTaskStartTime(startTime);
                     String endTime =  String.format("%02d:%02d",endhour,endminute);
                     newTaskDB.setTaskEndTime(endTime);
+
+                    // Get Task Duration
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+                    try {
+                        Date Date1 = simpleDateFormat.parse(startTime);
+                        Date Date2 = simpleDateFormat.parse(endTime);
+                        long difference = Date2.getTime() - Date1.getTime();
+                        if(difference<0)
+                        {
+                            Date dateMax = simpleDateFormat.parse("24:00");
+                            Date dateMin = simpleDateFormat.parse("00:00");
+                            difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
+                        }
+                        int min = (int) difference / 60000;
+                        diffInTime = min;
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    newTaskDB.setTaskDuration(diffInTime);
                     newTaskDB.setAlert(alert);
                     newTaskDB.setTaskUserID(user.getUserID());
 

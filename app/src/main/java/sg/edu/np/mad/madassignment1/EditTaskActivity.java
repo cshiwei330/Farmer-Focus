@@ -21,7 +21,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
@@ -30,10 +33,10 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
 
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
+    double diffInTime;
 
     String alert;
     private Spinner spinnerAlert;
-    int alertIndex;
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -156,12 +159,31 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                 String finalTaskStartTime = String.format("%02d:%02d", starthour, startminute);
                 String finalTaskEndTime = String.format("%02d:%02d", endhour, endminute);
 
+                // Get Task Duration
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+                try {
+                    Date Date1 = simpleDateFormat.parse(finalTaskStartTime);
+                    Date Date2 = simpleDateFormat.parse(finalTaskEndTime);
+                    long difference = Date2.getTime() - Date1.getTime();
+                    if(difference<0)
+                    {
+                        Date dateMax = simpleDateFormat.parse("24:00");
+                        Date dateMin = simpleDateFormat.parse("00:00");
+                        difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
+                    }
+                    int min = (int) difference / 60000;
+                    diffInTime = min;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
-                    Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate, finalTaskStartTime, finalTaskEndTime, alert, user.getUserID());
+                    Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
+                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, user.getUserID());
 
                     dbHandler.editTask(editedTask);
 
