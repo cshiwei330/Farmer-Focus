@@ -66,6 +66,7 @@ public class TimerActivity extends DrawerBaseActivity {
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
+
         SetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,12 +258,16 @@ public class TimerActivity extends DrawerBaseActivity {
             mEndTime = prefs.getLong("endTime", 0);
             mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
 
-            if (mTimeLeftInMillis < 0) {
-                mTimeLeftInMillis = 0;
+            if (mTimeLeftInMillis < 0)
+            {
+                //mTimeLeftInMillis = 0;
+                mTimeLeftInMillis = mStartTimeInMillis;
                 mTimerRunning = false;
                 updateCountDownText();
                 updateWatchInterface();
-            } else {
+            }
+            else
+            {
                 startTimer();
             }
         }
