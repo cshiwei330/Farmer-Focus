@@ -6,45 +6,45 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
-    ArrayList<Task> data;
+public class TaskRecyclerViewAdaptor extends RecyclerView.Adapter<TaskRecyclerViewHolder> {
+
+    ArrayList<Task> taskData;
     DBHandler dbHandler;
 
-    public MyAdaptor(ArrayList<Task> input) {
-        data = input;
-    }
+    public TaskRecyclerViewAdaptor(ArrayList<Task> input) { taskData = input; }
 
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.to_do_list_layout,parent,false);
+    public TaskRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_layout, parent, false);
         //define dbHandler
-        dbHandler = new DBHandler(item.getContext(), null, null,6);
-        return new MyViewHolder(item);
+        dbHandler = new DBHandler(item.getContext(), null,null,6);
+        return new TaskRecyclerViewHolder(item);
     }
 
-    public void onBindViewHolder(MyViewHolder holder, int position){
-        //define task as t
-        Task t = data.get(position);
+    @Override
+    public void onBindViewHolder(@NonNull TaskRecyclerViewHolder holder, int position) {
+        //defined task as t
+        Task t = taskData.get(position);
 
-        holder.taskName.setText((position+1) + ". " +t.getTaskName());
+        holder.taskName.setText(t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
-        holder.taskDate.setText(t.getTaskDate());
-        holder.taskTime.setText(t.getTaskStartTime());
 
         //if checked, set box to checked
         if (t.getStatus()==1){
             holder.taskCheckBox.setChecked(true);
         }
 
-        //open delete task screen if any element other than checkbox is clicked
+        //when card is selected, bring user to view task Activity
         holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-        holder.taskDate.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
         holder.taskDesc.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-        holder.taskTime.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
 
+
+        //prompt message when task is checked
         holder.taskCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,17 +65,25 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         });
     }
 
-    public int getItemCount(){
-        return data.size();
+
+
+    @Override
+    public int getItemCount() {
+        return taskData.size();
     }
 
     public void clear() {
-        int size = data.size();
-        data.clear();
+        int size = taskData.size();
+        taskData.clear();
         notifyItemRangeRemoved(0, size);
     }
 
-    public void openTaskInfo(MyViewHolder holder, Task t){
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskData = taskList;
+        notifyDataSetChanged();
+    }
+
+    public void openTaskInfo(TaskRecyclerViewHolder holder, Task t){
         Bundle extras = new Bundle();
         Intent myIntent = new Intent(holder.taskName.getContext(), TaskViewActivity.class);
         extras.putInt("task id", t.getId());
@@ -85,5 +93,3 @@ public class MyAdaptor extends RecyclerView.Adapter<MyViewHolder> {
         holder.taskName.getContext().startActivity(myIntent);
     }
 }
-
-

@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,15 +25,12 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AddNewTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class TaskAddNewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private String TAG = "AddNewTaskActivity";
 
@@ -102,7 +98,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     //kill TaskActivity
                     ((ResultReceiver)getIntent().getParcelableExtra("finisher")).send(1, new Bundle());
 
-                    Toast.makeText(AddNewTaskActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskAddNewActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
 
                     // 0 means false = not completed, 1 means true = completed
                     int status = 0;
@@ -148,14 +144,14 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
                     dbHandler.addTask(newTaskDB);
 
                     //start TaskActivity
-                    Intent intent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
+                    Intent intent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
                     startActivity(intent);
 
                     //kill this activity
                     finish();
                 }
                 else {
-                    Toast.makeText(AddNewTaskActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskAddNewActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -164,7 +160,7 @@ public class AddNewTaskActivity extends AppCompatActivity implements DatePickerD
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(AddNewTaskActivity.this, TaskActivity.class);
+                Intent myIntent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
                 startActivity(myIntent);
             }
         });

@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class EditTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class TaskEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private final String TAG = "Edit Task Activity";
 
@@ -188,12 +188,12 @@ public class EditTaskActivity extends AppCompatActivity implements DatePickerDia
                     dbHandler.editTask(editedTask);
 
                     Bundle extras = new Bundle();
-                    Intent myIntent = new Intent(EditTaskActivity.this, ViewTaskActivity.class);
+                    Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
                     extras.putInt("task id", oldTaskId);
                     myIntent.putExtras(extras);
                     startActivity(myIntent);
                 } else {
-                    Toast.makeText(EditTaskActivity.this, "Please enter a valid " + validity + "!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskEditActivity.this, "Please enter a valid " + validity + "!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

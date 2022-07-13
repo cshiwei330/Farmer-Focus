@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditTaskActivity">
+    tools:context=".TaskEditActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,16 +18,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/editTaskIcon"
-                    android:layout_width="85dp"
-                    android:layout_height="77dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_baseline_edit_note_24" />
 
                 <EditText
                     android:id="@+id/editTaskDescDisplay"
@@ -45,12 +35,12 @@
                     android:id="@+id/editTaskName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="20dp"
                     android:text="Task Name:"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskIcon" />
+                    app:layout_constraintTop_toBottomOf="@+id/EditTaskTitle" />
 
                 <EditText
                     android:id="@+id/editTaskNameDisplay"
@@ -142,9 +132,10 @@
                     android:id="@+id/saveDetailsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="24dp"
                     android:text="Save"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
 
@@ -168,6 +159,17 @@
                     android:textSize="34sp"
                     app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/EditTaskTitle"
+                    style="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="156dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Edit Task"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

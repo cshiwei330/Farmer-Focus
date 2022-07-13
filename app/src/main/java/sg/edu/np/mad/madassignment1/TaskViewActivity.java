@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ViewTaskActivity extends AppCompatActivity {
+public class TaskViewActivity extends AppCompatActivity {
 
     private String TAG = "ViewTaskActivity";
     Task task;
@@ -91,7 +91,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
+                Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -100,7 +100,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle extras = new Bundle();
-                Intent myIntent = new Intent(ViewTaskActivity.this, EditTaskActivity.class);
+                Intent myIntent = new Intent(TaskViewActivity.this, TaskEditActivity.class);
                 extras.putInt("task id", newTaskId);
                 myIntent.putExtras(extras);
                 startActivity(myIntent);
@@ -111,17 +111,17 @@ public class ViewTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ViewTaskActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
                 builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dbHandler.deleteTask(task);
-                        Intent myIntent = new Intent(ViewTaskActivity.this, TaskActivity.class);
+                        Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
                         startActivity(myIntent);
 
                         //toast to indicate tasks successfully cleared
-                        Toast.makeText(ViewTaskActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TaskViewActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

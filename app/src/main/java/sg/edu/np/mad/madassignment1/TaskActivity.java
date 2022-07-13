@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTaskBinding;
@@ -80,20 +78,83 @@ public class TaskActivity extends DrawerBaseActivity{
         //fill taskList with db data
         taskList = dbHandler.getTaskData(user.getUserID());
 
-        //set textview to show number of tasks
-        setTotalTaskTextView(taskList);
-
         // toast to indicate to user there are no tasks
         if (taskList.size() == 0){
             Toast.makeText(this, "No Tasks", Toast.LENGTH_LONG).show();
         }
 
-        // initialize recyclerview
-        //set adaptor to MyAdaptor, given taskList
-        MyAdaptor mAdaptor = new MyAdaptor(taskList);
+        // initialize recyclerview for TASKS
+        //set adaptor to TaskRecyclerViewAdaptor, given taskList
+        TaskRecyclerViewAdaptor mAdaptor = new TaskRecyclerViewAdaptor(taskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
+
+        //For Swiping Menu
+        TaskRecyclerTouchListener touchListener = new TaskRecyclerTouchListener(this, recyclerView);
+        touchListener.setClickable(new TaskRecyclerTouchListener.OnRowClickListener() {
+            @Override
+            public void onRowClicked(int position) {
+                //Toast.makeText(getApplicationContext(),taskList.get(position).getTaskName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onIndependentViewClicked(int independentViewID, int position) {
+
+            }
+        }).setSwipeOptionViews(R.id.edit_task, R.id.delete_task)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new TaskRecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+
+                        Task task = taskList.get(position);
+
+                        switch (viewID){
+                            case R.id.edit_task:
+                                Bundle extras = new Bundle();
+                                Intent myIntent = new Intent(TaskActivity.this, TaskEditActivity.class);
+                                extras.putInt("task id", task.getId());
+                                myIntent.putExtras(extras);
+                                startActivity(myIntent);
+
+                            case R.id.delete_task:
+                                AlertDialog.Builder builder = new AlertDialog.Builder(TaskActivity.this);
+                                builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dbHandler.deleteTask(task);
+
+                                        //to "refresh" the change
+                                        Intent myIntent = new Intent(TaskActivity.this, TaskActivity.class);
+                                        startActivity(myIntent);
+
+                                        //toast to indicate tasks successfully cleared
+                                        Toast.makeText(TaskActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                                AlertDialog alert = builder.create();
+                                alert.setTitle("Delete task");
+                                alert.show();
+
+                                //taskList.remove(position);
+                                //mAdaptor.setTaskList(taskList);
+
+                                mAdaptor.notifyDataSetChanged();
+                                break;
+                        }
+
+                    }
+                });
+        recyclerView.addOnItemTouchListener(touchListener);
+
 
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -105,7 +166,6 @@ public class TaskActivity extends DrawerBaseActivity{
                         taskList.add(secondTaskList.get(j));
                     }
                     secondTaskList.clear();
-                    setTotalTaskTextView(taskList);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else{
@@ -143,7 +203,6 @@ public class TaskActivity extends DrawerBaseActivity{
                         for (int j=0; j<secondTaskList.size(); j++){
                             taskList.remove(secondTaskList.get(j));
                         }
-                        setTotalTaskTextView(taskList);
                         mAdaptor.notifyDataSetChanged();
                     }
                     else if (filterOption.matches("Not Completed")){
@@ -155,7 +214,6 @@ public class TaskActivity extends DrawerBaseActivity{
                         for (int j=0; j<secondTaskList.size(); j++){
                             taskList.remove(secondTaskList.get(j));
                         }
-                        setTotalTaskTextView(taskList);
                         mAdaptor.notifyDataSetChanged();
                     }
                 }
@@ -185,9 +243,6 @@ public class TaskActivity extends DrawerBaseActivity{
                         //force clear adaptor
                         mAdaptor.clear();
 
-                        //set textview to show number of tasks
-                        setTotalTaskTextView(taskList);
-
                         //toast to indicate tasks successfully cleared
                         Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
                     }
@@ -210,7 +265,7 @@ public class TaskActivity extends DrawerBaseActivity{
             @Override
             public void onClick(View view) {
                 //create intent to go to AddNewTaskActivity
-                Intent TaskActivityToAddNewTaskActivity = new Intent(TaskActivity.this,AddNewTaskActivity.class);
+                Intent TaskActivityToAddNewTaskActivity = new Intent(TaskActivity.this, TaskAddNewActivity.class);
 
                 //put extra
                 TaskActivityToAddNewTaskActivity.putExtra("finisher", new ResultReceiver(null) {
@@ -228,13 +283,4 @@ public class TaskActivity extends DrawerBaseActivity{
 
     }
 
-    public void setTotalTaskTextView(ArrayList<Task> taskList){
-
-        //define totalTask textview
-        TextView totalTask = findViewById(R.id.totalTasks);
-
-        //set  text to total number of tasks
-        String totalTaskText = "Total: " + String.valueOf(taskList.size());
-        totalTask.setText(totalTaskText);
-    }
 }

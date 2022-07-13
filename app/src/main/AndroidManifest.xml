@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
-            android:name=".EditTaskActivity"
+            android:name=".TaskEditActivity"
             android:exported="false" />
         <activity
             android:name=".RecurringTaskStatsActivity"
@@ -31,10 +31,10 @@
             android:name=".ImagesActivity"
             android:exported="false" />
         <activity
-            android:name=".ViewTaskActivity"
+            android:name=".TaskViewActivity"
             android:exported="false" />
         <activity
-            android:name=".AddNewTaskActivity"
+            android:name=".TaskAddNewActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
