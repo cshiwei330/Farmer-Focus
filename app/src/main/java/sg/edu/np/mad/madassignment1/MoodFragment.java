@@ -1,7 +1,6 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -11,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
