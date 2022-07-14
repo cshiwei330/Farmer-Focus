@@ -1,13 +1,21 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainer;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -29,6 +37,7 @@ public class MoodoftheweekFragment extends Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,16 +84,48 @@ public class MoodoftheweekFragment extends Fragment {
 
                         }
                     }
+                    ImageView articleImage = view.findViewById(R.id.articleImage);
+                    TextView article = view.findViewById(R.id.article);
+                    TextView viewArticle = view.findViewById(R.id.viewArticle);
+                    viewArticle.setPaintFlags(viewArticle.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
                     if (motw.equals("happy")) {
-                        moodStats.setText("In the past week, you have been mostly happy. Keep the positivity coming!");
+                        moodStats.setText("In the past 7 days, you have been mostly happy. \nKeep the positivity coming!");
                     } else if (motw.equals("neutral")) {
-                        moodStats.setText("In the past week, you have been mostly neutral. Spend more time caring for your mental health! Here's an article to help :)");
+                        moodStats.setText("In the past 7 days, you have been mostly neutral. \nSpend more time on your mental health! \nHere's an article to help :)");
+                        articleImage.setImageResource(R.drawable.neutral);
+                        article.setText("Shifting Away From Neutral \nBrooke Guttenberg");
+                        viewArticle.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://albertellis.org/2014/09/shifting-away-neutral/"));
+                                startActivity(browserIntent);
+                                return false;
+                            }
+                        });
                     } else if (motw.equals("sad")) {
-                        moodStats.setText("In the past week, you have been mostly sad. Be kind to yourself. Here are some ways to help. ");
-                    } else if (motw.equals("stressed")) {
-                        moodStats.setText("In the past week, you have been mostly stressed. Take a breather and destress. Here are some ways do so.");
+                        moodStats.setText("In the past 7 days, you have been mostly sad. \nBe kind to yourself. \nHere are some ways to help.");
+                        articleImage.setImageResource(R.drawable.sad);
+                        article.setText("Why am I sad all the time?");
+                        viewArticle.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://au.reachout.com/articles/why-am-i-sad-all-the-time"));
+                                startActivity(browserIntent);
+                                return false;
+                            }
+                        });
                     } else {
-                        moodStats.setText(motw);
+                        moodStats.setText("In the past 7 days, you have been mostly stressed. \nTake a breather and de-stress. \nHere are some ways do so.");
+                        articleImage.setImageResource(R.drawable.stressed);
+                        article.setText("15 Simple Ways to Relieve Stress");
+                        viewArticle.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent motionEvent) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.healthline.com/nutrition/16-ways-relieve-stress-anxiety"));
+                                startActivity(browserIntent);
+                                return false;
+                            }
+                        });
                     }
                 }
             }
