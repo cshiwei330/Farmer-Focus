@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
         <activity
+            android:name=".StopWatchActivity"
+            android:exported="false" />
+        <activity
             android:name=".TaskEditActivity"
             android:exported="false" />
         <activity

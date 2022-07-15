@@ -1,27 +1,23 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.ResultReceiver;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Locale;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
@@ -47,7 +43,6 @@ public class TimerActivity extends DrawerBaseActivity {
     private long mTimeLeftInMillis;
     private long mEndTime;
 
-    private Spinner spinnerFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,6 +145,26 @@ public class TimerActivity extends DrawerBaseActivity {
 //                popTimePicker();
 //            }
 //        });
+
+        // navigate to stopwatch page
+        ImageView StopWatch = findViewById(R.id.StopWatchImg);
+        StopWatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent TimerActivitytoStopWatchActivity = new Intent(TimerActivity.this, StopWatchActivity.class);
+                //put extra
+                TimerActivitytoStopWatchActivity.putExtra("finisher", new ResultReceiver(null) {
+                    @Override
+                    //when result code =1, received from bundle, kill this activity
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        TimerActivity.this.finish();
+                    }
+                });
+                //start activity with result
+                startActivityForResult(TimerActivitytoStopWatchActivity, 1);
+            }
+        });
+
     }
 
     //NEW
@@ -258,9 +273,10 @@ public class TimerActivity extends DrawerBaseActivity {
             SetTime.setVisibility(View.INVISIBLE);
             mTextSetTime.setVisibility(View.INVISIBLE);
             mEditTextInput.setVisibility(View.INVISIBLE);
-            mButtonReset.setVisibility(View.INVISIBLE);
+            //mButtonReset.setVisibility(View.INVISIBLE);
             mButtonStartPause.setText("Pause");
-        } else {
+        }
+        else {
             mTextSetTime.setVisibility(View.VISIBLE);
             SetTime.setVisibility(View.VISIBLE);
             mEditTextInput.setVisibility(View.VISIBLE);
@@ -317,6 +333,14 @@ public class TimerActivity extends DrawerBaseActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 
@@ -334,8 +358,8 @@ public class TimerActivity extends DrawerBaseActivity {
 
             if (mTimeLeftInMillis < 0)
             {
-                mTimeLeftInMillis = 0;
-                //mTimeLeftInMillis = mStartTimeInMillis;
+                //mTimeLeftInMillis = 0;
+                mTimeLeftInMillis = mStartTimeInMillis;
                 mTimerRunning = false;
                 updateCountDownText();
                 updateWatchInterface();
