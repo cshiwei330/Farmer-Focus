@@ -7,17 +7,16 @@
     tools:context=".TimerActivity">
 
 
-    <Button
-        android:id="@+id/editTaskPicker"
-        style="?android:spinnerStyle"
-        android:layout_width="280dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="12dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/UncompletedTaskRecycleView"
+        android:layout_width="289dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:clickable="false"
-        android:text="Select a task"
-        android:textColor="#6E6B6B"
-        android:textSize="20sp"
+        android:layout_marginEnd="98dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -38,10 +37,12 @@
         android:id="@+id/outer_circle"
         android:layout_width="430dp"
         android:layout_height="416dp"
-        android:layout_marginBottom="108dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.641"
         app:srcCompat="@drawable/black_circle"
         app:tint="#ECE6D2" />
 
@@ -67,7 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="84dp"
         android:layout_marginTop="152dp"
+        android:layout_marginBottom="65dp"
         android:text="start"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countdown" />
 
@@ -77,8 +80,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="84dp"
+        android:layout_marginBottom="65dp"
         android:text="reset"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countdown"
         tools:visibility="visible" />

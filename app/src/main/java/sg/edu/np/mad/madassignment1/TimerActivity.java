@@ -1,20 +1,27 @@
 package sg.edu.np.mad.madassignment1;
 
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Locale;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
@@ -40,6 +47,7 @@ public class TimerActivity extends DrawerBaseActivity {
     private long mTimeLeftInMillis;
     private long mEndTime;
 
+    private Spinner spinnerFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +68,41 @@ public class TimerActivity extends DrawerBaseActivity {
         mButtonReset = findViewById(R.id.button_reset);
         mTimeTextView = findViewById(R.id.countdown);
 
+        //NEW
+
+        //define dbHandler
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+
+        // getting stored username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
+        //define recyclerView
+        RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
+
+        //Finding uncompleted tasks
+        //define taskList array
+        ArrayList<Task> taskList = new ArrayList<>();
+        //current taskList with db data
+        taskList = dbHandler.getTaskData(user.getUserID());
+
+        // initialize recyclerview for TASKS
+        //set adaptor to TaskRecyclerViewAdaptor, given taskList
+        TaskRecyclerViewAdaptor mAdaptor = new TaskRecyclerViewAdaptor(taskList);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdaptor);
+
+
+        //NEW
+
         // displays numeric keyboard
         // only allow user to key in integers 0 to 9 and not anything else when setting the time
         mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
-
         SetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +151,44 @@ public class TimerActivity extends DrawerBaseActivity {
 //            }
 //        });
     }
+
+    //NEW
+//    public ArrayList<Task> findUncompletedTasks (ArrayList<Task> taskList){
+//        ArrayList<Task> uncompletedTaskList = new ArrayList<>();
+//
+//        for (int i = 0; i < taskList.size(); i++){ //loop through current taskList to find tasks that are uncompleted
+//            Task task = taskList.get(i);
+//
+//            boolean result = withinAWeek(task.getTaskDate()); //check if task is not complete
+//
+//            if (result){
+//                uncompletedTaskList.add(task); //if true then add to new list
+//            }
+//        }
+//        return uncompletedTaskList; //display this list in the recyclerView
+//    }
+
+
+//    public void uncompleted () {
+//        for (int j=0; j < taskList.size(); j++){
+//            if (taskList.get(j).getStatus() == 1){
+//                secondTaskList.add(taskList.get(j));
+//            }
+//        }
+//        for (int j=0; j<secondTaskList.size(); j++){
+//            taskList.remove(secondTaskList.get(j));
+//        }
+//    }
+
+//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//        String filterOption = adapterView.getItemAtPosition(i).toString();
+//        if (filterOption.matches("Not Completed")){
+//            Collections.sort(taskList, Task.TaskIdAscComparator);
+//        }
+//    }
+
+
+
 
     // set the time on the timer
     private void setTime(long milliseconds) {
@@ -260,8 +334,8 @@ public class TimerActivity extends DrawerBaseActivity {
 
             if (mTimeLeftInMillis < 0)
             {
-                //mTimeLeftInMillis = 0;
-                mTimeLeftInMillis = mStartTimeInMillis;
+                mTimeLeftInMillis = 0;
+                //mTimeLeftInMillis = mStartTimeInMillis;
                 mTimerRunning = false;
                 updateCountDownText();
                 updateWatchInterface();

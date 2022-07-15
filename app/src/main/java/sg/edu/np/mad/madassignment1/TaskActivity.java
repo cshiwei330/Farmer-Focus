@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,7 +55,7 @@ public class TaskActivity extends DrawerBaseActivity{
         DBHandler dbHandler = new DBHandler(this, null, null,6);
 
         //define recyclerView
-        RecyclerView recyclerView = findViewById(R.id.toDoListRecycleView);
+        RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
         // button to clear all tasks
         ImageView clearAllTaskButton = findViewById(R.id.clearAllTaskButton);
         // floating button to go to addnewtask
