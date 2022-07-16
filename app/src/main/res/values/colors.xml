@@ -10,4 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darkBeige">#A29574</color>
     <color name="lightBeige">#EFEAD8</color>
+    <color name="taskCompletionButtonClicked">#C8C0AB</color>
+    <color name="taskCompletionButtonNotClicked">#A29574</color>
 </resources>

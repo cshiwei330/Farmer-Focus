@@ -40,8 +40,8 @@ public class TaskActivity extends DrawerBaseActivity{
 
     private Spinner spinnerFilter;
 
-    private int transparentBrown = Color.argb(30, 162, 149, 116);
-    private int normalBrown = Color.argb(100, 162, 149, 116);
+    private boolean completedTaskButtonClicked = false;
+    private boolean uncompletedTaskButtonClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,9 +208,17 @@ public class TaskActivity extends DrawerBaseActivity{
         });
 
         Button uncompletedTaskButton = findViewById(R.id.uncompletedTaskButton);
+        Button completedTaskButton = findViewById(R.id.completedTaskButton);
         uncompletedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                uncompletedTaskButtonClicked = true;
+                completedTaskButtonClicked = false;
+
+                uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+                completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+
                 if (secondTaskList.size() != 0){
                     for (int j=0; j < secondTaskList.size(); j++){
                         taskList.add(secondTaskList.get(j));
@@ -230,10 +238,16 @@ public class TaskActivity extends DrawerBaseActivity{
             }
         });
 
-        Button completedTaskButton = findViewById(R.id.completedTaskButton);
         completedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                uncompletedTaskButtonClicked = false;
+                completedTaskButtonClicked = true;
+
+                uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+
                 if (secondTaskList.size() != 0){
                     for (int j=0; j < secondTaskList.size(); j++){
                         taskList.add(secondTaskList.get(j));
@@ -252,6 +266,14 @@ public class TaskActivity extends DrawerBaseActivity{
                 mAdaptor.notifyDataSetChanged();
             }
         });
+
+        if (completedTaskButtonClicked == false && uncompletedTaskButtonClicked == false){
+            uncompletedTaskButtonClicked = true;
+            completedTaskButtonClicked = false;
+
+            uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+            completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+        }
 
         //clear all tasks listener
         clearAllTaskButton.setOnClickListener(new View.OnClickListener() {
