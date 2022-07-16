@@ -112,88 +112,193 @@ public class StatsWeekFragment extends Fragment{
             //cal.setTime(today);
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
             //cal.add( Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek );
-            //  int tasksDone = dbHandler.getTaskStatus(today); // gives count of completed tasks
+            int dayItself = dbHandler.getTaskStatus(today); // gives count of completed tasks
 
-
-            for (int i = 0; i < MAX_X_VALUE; i++) {
-
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                cal.get(Calendar.DAY_OF_WEEK); //-3
-                cal.add(Calendar.DAY_OF_WEEK,1);
-                if(dayOfWeek == 5) {
-                    cal.set(Calendar.DAY_OF_WEEK, 1);
-                    int tasksDone2 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry mon = new BarEntry(i, tasksDone2); // mon
-                    valueSet1.add(mon);
-                    cal.set(Calendar.DAY_OF_WEEK, 2);
-                    int tasksDone22 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry tue = new BarEntry(i, tasksDone22); // tues
-                    valueSet1.add(tue);
-                    cal.set(Calendar.DAY_OF_WEEK, 3);
-                    int tasksDone3 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry wed = new BarEntry(i, tasksDone3); // tues
-                    valueSet1.add(wed);
-                    cal.set(Calendar.DAY_OF_WEEK, 4);
-                    int tasksDone4 = dbHandler.getTaskStatus(today);
-                    BarEntry thu = new BarEntry(i, tasksDone4); // tues
-                    valueSet1.add(thu);
-                    cal.set(Calendar.DAY_OF_WEEK, 5);
-                    int tasksDone5 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry fri = new BarEntry(i, tasksDone5); // tues
-                    valueSet1.add(fri);
-                    cal.set(Calendar.DAY_OF_WEEK, 6);
-                    int tasksDone6 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry sat = new BarEntry(i, tasksDone6); // tues
-                    valueSet1.add(sat);
-                    cal.set(Calendar.DAY_OF_WEEK, 7);
-                    int tasksDone7 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry sun = new BarEntry(i, tasksDone7); // tues
-                    valueSet1.add(sun);
-
-                }
-                // think need to do for all?? hardcode or what
-
-                /*if(dayOfWeek == 2) {
-                    cal.set(Calendar.DAY_OF_WEEK, 2);
-                    cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                    cal.add(Calendar.DAY_OF_WEEK, 2);
-                    int tasksDone22 = dbHandler.getTaskStatus(cal.getTime());
-                    BarEntry tue = new BarEntry(i, tasksDone22); // tues
-                    valueSet1.add(tue);
-                }
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                cal.add(Calendar.DAY_OF_WEEK,3);
-                int tasksDone222 = dbHandler.getTaskStatus(cal.getTime());
-                BarEntry wed = new BarEntry(i, tasksDone222); // wed
+            //if mobile date is sunday
+            if (dayOfWeek == 1) {
+                BarEntry sun = new BarEntry(0, dayItself); //sun
+                valueSet1.add(sun);
+                BarEntry mon = new BarEntry(1, 0); //mon
+                valueSet1.add(mon);
+                BarEntry tue = new BarEntry(2, 0); //tue
+                valueSet1.add(tue);
+                BarEntry wed = new BarEntry(3, 0); //wed
                 valueSet1.add(wed);
-
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                cal.add(Calendar.DAY_OF_WEEK,4);
-                int tasksDone2222 = dbHandler.getTaskStatus(cal.getTime());
-                BarEntry thu = new BarEntry(i, tasksDone2222); // thurs
+                BarEntry thu = new BarEntry(4, 0); //thu
                 valueSet1.add(thu);
-
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                cal.add(Calendar.DAY_OF_WEEK,5);
-                int tasksDone22222 = dbHandler.getTaskStatus(cal.getTime());
-                BarEntry fri = new BarEntry(i, tasksDone22222); // fri
+                BarEntry fri = new BarEntry(5, 0); //fri
                 valueSet1.add(fri);
-
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                cal.add(Calendar.DAY_OF_WEEK,6);
-                int tasksDone3 = dbHandler.getTaskStatus(cal.getTime());
-                BarEntry sat = new BarEntry(i, tasksDone3); // sat
+                BarEntry sat = new BarEntry(6, 0); //sat
                 valueSet1.add(sat);
-
-                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek);
-                int tasksDone = dbHandler.getTaskStatus(cal.getTime());
-                BarEntry sun = new BarEntry(i, tasksDone); // sun
-                valueSet1.add(sun);*/
             }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            //if mobile date is monday
+            else if (dayOfWeek == 2) {
+                cal.add(Calendar.DATE, -1);
+                Date sunday = sdf.parse(sdf.format(cal));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                BarEntry mon = new BarEntry(1, dayItself); //mon
+                valueSet1.add(mon);
+                BarEntry tue = new BarEntry(2, 0); //tue
+                valueSet1.add(tue);
+                BarEntry wed = new BarEntry(3, 0); //wed
+                valueSet1.add(wed);
+                BarEntry thu = new BarEntry(4, 0); //thu
+                valueSet1.add(thu);
+                BarEntry fri = new BarEntry(5, 0); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, 0); //sat
+                valueSet1.add(sat);
+            }
+            //if mobile date is tuesday
+            else if (dayOfWeek == 3) {
+                cal.add(Calendar.DATE, -2);
+                Date sunday = sdf.parse(sdf.format(cal));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                cal.add(Calendar.DATE, 1);
+                Date monday = sdf.parse(sdf.format(cal));
+                int tasksDone2 = dbHandler.getTaskStatus(monday);
+                BarEntry mon = new BarEntry(1, tasksDone2); //mon
+                valueSet1.add(mon);
+                BarEntry tue = new BarEntry(1, dayItself); //mon
+                valueSet1.add(tue);
+                BarEntry wed = new BarEntry(3, 0); //wed
+                valueSet1.add(wed);
+                BarEntry thu = new BarEntry(4, 0); //thu
+                valueSet1.add(thu);
+                BarEntry fri = new BarEntry(5, 0); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, 0); //sat
+                valueSet1.add(sat);
+            }
+            //if mobile date is wednesday
+            else if (dayOfWeek == 4) {
+                cal.add(Calendar.DATE, -3);
+                Date sunday = sdf.parse(sdf.format(cal));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                cal.add(Calendar.DATE, 1);
+                Date monday = sdf.parse(sdf.format(cal));
+                int tasksDone2 = dbHandler.getTaskStatus(monday);
+                BarEntry mon = new BarEntry(1, tasksDone2); //mon
+                valueSet1.add(mon);
+                cal.add(Calendar.DATE, 1);
+                Date tuesday = sdf.parse(sdf.format(cal));
+                int tasksDone3 = dbHandler.getTaskStatus(tuesday);
+                BarEntry tue = new BarEntry(2, tasksDone3); //tue
+                valueSet1.add(tue);
+                BarEntry wed = new BarEntry(3, dayItself); //wed
+                valueSet1.add(wed);
+                BarEntry thu = new BarEntry(4, 0); //thu
+                valueSet1.add(thu);
+                BarEntry fri = new BarEntry(5, 0); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, 0); //sat
+                valueSet1.add(sat);
+            }
+            //if mobile date is thursday
+            else if (dayOfWeek == 5) {
+                cal.add(Calendar.DATE, -4);
+                Date sunday = sdf.parse(sdf.format(cal));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                cal.add(Calendar.DATE, 1);
+                Date monday = sdf.parse(sdf.format(cal));
+                int tasksDone2 = dbHandler.getTaskStatus(monday);
+                BarEntry mon = new BarEntry(1, tasksDone2); //mon
+                valueSet1.add(mon);
+                cal.add(Calendar.DATE, 1);
+                Date tuesday = sdf.parse(sdf.format(cal));
+                int tasksDone3 = dbHandler.getTaskStatus(tuesday);
+                BarEntry tue = new BarEntry(2, tasksDone3); //tue
+                valueSet1.add(tue);
+                cal.add(Calendar.DATE, 1);
+                Date wednesday = sdf.parse(sdf.format(cal));
+                int tasksDone4 = dbHandler.getTaskStatus(wednesday);
+                BarEntry wed = new BarEntry(3, tasksDone4); //wed
+                valueSet1.add(wed);
+                BarEntry thu = new BarEntry(4, dayItself); //thu
+                valueSet1.add(thu);
+                BarEntry fri = new BarEntry(5, 0); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, 0); //sat
+                valueSet1.add(sat);
+            }
+            //if mobile date is friday
+            else if (dayOfWeek == 6) {
+                cal.add(Calendar.DATE, -5);
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                cal.add(Calendar.DATE, 1);
+                Date monday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone2 = dbHandler.getTaskStatus(monday);
+                BarEntry mon = new BarEntry(1, tasksDone2); // mon
+                valueSet1.add(mon);
+                cal.add(Calendar.DATE, 1);
+                Date tuesday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone3 = dbHandler.getTaskStatus(tuesday);
+                BarEntry tue = new BarEntry(2, tasksDone3); // tue
+                valueSet1.add(tue);
+                cal.add(Calendar.DATE, 1);
+                Date wednesday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone4 = dbHandler.getTaskStatus(wednesday);
+                BarEntry wed = new BarEntry(3, tasksDone4); // wed
+                valueSet1.add(wed);
+                cal.add(Calendar.DATE, 1);
+                Date thursday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone5 = dbHandler.getTaskStatus(thursday);
+                BarEntry thu = new BarEntry(4, tasksDone5); // thu
+                valueSet1.add(thu);
+                BarEntry fri = new BarEntry(5, dayItself); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, 0); //sat
+                valueSet1.add(sat);
+            }
+            //if mobile date is saturday
+            else {
+                cal.add(Calendar.DATE, -6);
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone1 = dbHandler.getTaskStatus(sunday);
+                BarEntry sun = new BarEntry(0, tasksDone1); // sun
+                valueSet1.add(sun);
+                cal.add(Calendar.DATE, 1);
+                Date monday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone2 = dbHandler.getTaskStatus(monday);
+                BarEntry mon = new BarEntry(1, tasksDone2); // mon
+                valueSet1.add(mon);
+                cal.add(Calendar.DATE, 1);
+                Date tuesday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone3 = dbHandler.getTaskStatus(tuesday);
+                BarEntry tue = new BarEntry(2, tasksDone3); // tue
+                valueSet1.add(tue);
+                cal.add(Calendar.DATE, 1);
+                Date wednesday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone4 = dbHandler.getTaskStatus(wednesday);
+                BarEntry wed = new BarEntry(3, tasksDone4); // wed
+                valueSet1.add(wed);
+                cal.add(Calendar.DATE, 1);
+                Date thursday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone5 = dbHandler.getTaskStatus(thursday);
+                BarEntry thu = new BarEntry(4, tasksDone5); // thu
+                valueSet1.add(thu);
+                cal.add(Calendar.DATE, 1);
+                Date friday = sdf.parse(sdf.format(cal.getTime()));
+                int tasksDone6 = dbHandler.getTaskStatus(friday);
+                BarEntry fri = new BarEntry(5, tasksDone6); //fri
+                valueSet1.add(fri);
+                BarEntry sat = new BarEntry(6, dayItself); //sat
+                valueSet1.add(sat);
+            }
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+            }
 
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, "No. Of Tasks Done");
         //barDataSet1.setColor(Color.rgb(50, 0, 50));
@@ -203,13 +308,13 @@ public class StatsWeekFragment extends Fragment{
 
     private ArrayList getXAxisValues() {
         ArrayList xAxis = new ArrayList<>();
+        xAxis.add("SUN");
         xAxis.add("MON");
         xAxis.add("TUE");
         xAxis.add("WED");
         xAxis.add("THU");
         xAxis.add("FRI");
         xAxis.add("SAT");
-        xAxis.add("SUN");
         return xAxis;
     }
 }
