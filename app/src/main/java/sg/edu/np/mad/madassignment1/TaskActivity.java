@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,6 +39,9 @@ public class TaskActivity extends DrawerBaseActivity{
     public String GLOBAL_PREF = "MyPrefs";
 
     private Spinner spinnerFilter;
+
+    private int transparentBrown = Color.argb(30, 162, 149, 116);
+    private int normalBrown = Color.argb(100, 162, 149, 116);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,34 +198,58 @@ public class TaskActivity extends DrawerBaseActivity{
                         Collections.sort(taskList, Task.TaskDateDescComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
-                    else if (filterOption.matches("Completed")){
-                        for (int j=0; j < taskList.size(); j++){
-                            if (taskList.get(j).getStatus() == 0){
-                                secondTaskList.add(taskList.get(j));
-                            }
-                        }
-                        for (int j=0; j<secondTaskList.size(); j++){
-                            taskList.remove(secondTaskList.get(j));
-                        }
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Not Completed")){
-                        for (int j=0; j < taskList.size(); j++){
-                            if (taskList.get(j).getStatus() == 1){
-                                secondTaskList.add(taskList.get(j));
-                            }
-                        }
-                        for (int j=0; j<secondTaskList.size(); j++){
-                            taskList.remove(secondTaskList.get(j));
-                        }
-                        mAdaptor.notifyDataSetChanged();
-                    }
                 }
 
 
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        Button uncompletedTaskButton = findViewById(R.id.uncompletedTaskButton);
+        uncompletedTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (secondTaskList.size() != 0){
+                    for (int j=0; j < secondTaskList.size(); j++){
+                        taskList.add(secondTaskList.get(j));
+                    }
+                    secondTaskList.clear();
+                    mAdaptor.notifyDataSetChanged();
+                }
+                for (int j=0; j < taskList.size(); j++){
+                    if (taskList.get(j).getStatus() == 1){
+                        secondTaskList.add(taskList.get(j));
+                    }
+                }
+                for (int j=0; j<secondTaskList.size(); j++){
+                    taskList.remove(secondTaskList.get(j));
+                }
+                mAdaptor.notifyDataSetChanged();
+            }
+        });
+
+        Button completedTaskButton = findViewById(R.id.completedTaskButton);
+        completedTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (secondTaskList.size() != 0){
+                    for (int j=0; j < secondTaskList.size(); j++){
+                        taskList.add(secondTaskList.get(j));
+                    }
+                    secondTaskList.clear();
+                    mAdaptor.notifyDataSetChanged();
+                }
+                for (int j=0; j < taskList.size(); j++){
+                    if (taskList.get(j).getStatus() == 0){
+                        secondTaskList.add(taskList.get(j));
+                    }
+                }
+                for (int j=0; j<secondTaskList.size(); j++){
+                    taskList.remove(secondTaskList.get(j));
+                }
+                mAdaptor.notifyDataSetChanged();
             }
         });
 
@@ -281,5 +310,4 @@ public class TaskActivity extends DrawerBaseActivity{
         });
 
     }
-
 }

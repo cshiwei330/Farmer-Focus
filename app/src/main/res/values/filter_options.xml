@@ -8,8 +8,6 @@
         <item>Name Desc</item>
         <item>Date Asc</item>
         <item>Date Desc</item>
-        <item>Completed</item>
-        <item>Not Completed</item>
     </string-array>
 
 </resources>
