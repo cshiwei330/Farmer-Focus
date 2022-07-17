@@ -1,10 +1,14 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -57,12 +61,81 @@ public class HomeActivity extends DrawerBaseActivity {
         //use method
         ArrayList<Task> recentTaskList = findRecentTasks(taskList);
 
-        // initialize recyclerview
-        //set adaptor to MyAdaptor, given recentTaskList
-        MyAdaptor mAdaptor = new MyAdaptor(findRecentTasks(recentTaskList));
+        // toast to indicate to user there are no recent tasks
+        if (recentTaskList.size() == 0){
+            Toast.makeText(this, "No Recent Tasks", Toast.LENGTH_SHORT).show();
+        }
+
+        // initialize recyclerview for TASKS
+        //set adaptor to TaskRecyclerViewAdaptor, given taskList
+        TaskRecyclerViewAdaptor mAdaptor = new TaskRecyclerViewAdaptor(recentTaskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
+
+        //For Swiping Menu
+        TaskRecyclerTouchListener touchListener = new TaskRecyclerTouchListener(this, recyclerView);
+        touchListener.setClickable(new TaskRecyclerTouchListener.OnRowClickListener() {
+            @Override
+            public void onRowClicked(int position) {
+                //Toast.makeText(getApplicationContext(),taskList.get(position).getTaskName(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onIndependentViewClicked(int independentViewID, int position) {
+
+            }
+        }).setSwipeOptionViews(R.id.edit_task, R.id.delete_task)
+                .setSwipeable(R.id.rowFG, R.id.rowBG, new TaskRecyclerTouchListener.OnSwipeOptionsClickListener() {
+                    @Override
+                    public void onSwipeOptionClicked(int viewID, int position) {
+
+                        Task task = recentTaskList.get(position);
+
+                        switch (viewID){
+                            case R.id.edit_task:
+                                Bundle extras = new Bundle();
+                                Intent myIntent = new Intent(HomeActivity.this, TaskEditActivity.class);
+                                extras.putInt("task id", task.getId());
+                                myIntent.putExtras(extras);
+                                startActivity(myIntent);
+                                break;
+
+                            case R.id.delete_task:
+                                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                                builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dbHandler.deleteTask(task);
+
+                                        //to "refresh" the change
+                                        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+                                        startActivity(myIntent);
+
+                                        //toast to indicate tasks successfully cleared
+                                        Toast.makeText(HomeActivity.this, "Deleted Task", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                                AlertDialog alert = builder.create();
+                                alert.setTitle("Delete task");
+                                alert.show();
+                                mAdaptor.notifyDataSetChanged();
+                                break;
+                        }
+
+                    }
+                });
+        recyclerView.addOnItemTouchListener(touchListener);
+
+
 
         //for grass animation
         ImageView grass = findViewById(R.id.grassGif);

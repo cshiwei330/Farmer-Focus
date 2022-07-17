@@ -135,7 +135,7 @@ public class TaskActivity extends DrawerBaseActivity{
                                         startActivity(myIntent);
 
                                         //toast to indicate tasks successfully cleared
-                                        Toast.makeText(TaskActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(TaskActivity.this, "Deleted Task", Toast.LENGTH_LONG).show();
                                     }
                                 });
                                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
