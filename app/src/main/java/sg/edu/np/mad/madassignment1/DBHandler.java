@@ -39,6 +39,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_TASKENDTIME ="TaskEndTime";
     public static String COLUMN_TASKDURATION = "TaskDuration";
     public static String COLUMN_TASKALERT = "TaskAlert";
+    public static String COLUMN_TASKALERTDATETIME = "TaskAlertDateTime";
     public static String COLUMN_TASKUSERID = "taskUserID";
 
     //mood tracker
@@ -77,6 +78,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKENDTIME + " STRING, "
                 + COLUMN_TASKDURATION + " STRING, "
                 + COLUMN_TASKALERT + " STRING, "
+                + COLUMN_TASKALERTDATETIME + " STRING, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
 
@@ -159,6 +161,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_TASKENDTIME, taskData.getTaskEndTime());
         values.put(COLUMN_TASKDURATION, taskData.getTaskDuration());
         values.put(COLUMN_TASKALERT, taskData.getAlert());
+        values.put(COLUMN_TASKALERTDATETIME, taskData.getAlertDateTime());
         values.put(COLUMN_USERID, taskData.getTaskUserID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -185,8 +188,9 @@ public class DBHandler extends SQLiteOpenHelper {
             String taskEndTime = cursor.getString(7);
             double taskDuration = cursor.getDouble(8);
             String taskAlert = cursor.getString(9);
+            String taskAlertDateTime = cursor.getString(10);
 
-            Task newTask = new Task(id, status, name, desc, taskDate,taskStartTime, taskEndTime, taskDuration, taskAlert, userID);
+            Task newTask = new Task(id, status, name, desc, taskDate,taskStartTime, taskEndTime, taskDuration, taskAlert, taskAlertDateTime, userID);
             taskArrayList.add(newTask);
         }
         db.close();
@@ -212,6 +216,7 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setTaskEndTime(cursor.getString(7));
             queryData.setTaskDuration(cursor.getDouble(8));
             queryData.setAlert(cursor.getString(9));
+            queryData.setAlertDateTime(cursor.getString(10));
         }
         else {
             queryData = null;
@@ -245,6 +250,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TASKENDTIME, task.getTaskEndTime());
         contentValues.put(COLUMN_TASKDURATION, task.getTaskDuration());
         contentValues.put(COLUMN_TASKALERT, task.getAlert());
+        contentValues.put(COLUMN_TASKALERTDATETIME, task.getAlertDateTime());
 
         db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
 

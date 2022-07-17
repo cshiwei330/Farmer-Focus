@@ -146,20 +146,6 @@
                     app:layout_constraintStart_toStartOf="@+id/taskViewTaskDurationDisplay"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDurationDisplay" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/deleteTaskButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:backgroundTint="#FF0000"
-                    android:clickable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDisplay"
-                    app:srcCompat="@drawable/ic_baseline_delete_outline_24"
-                    app:tint="#FFFFFF"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
                 <TextView
                     android:id="@+id/taskViewTaskEndTime"
                     android:layout_width="wrap_content"
@@ -198,7 +184,42 @@
                     app:layout_constraintStart_toStartOf="@+id/taskViewDuratioin"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewDuratioin" />
 
+                <TextView
+                    android:id="@+id/viewTaskAlertDateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Alert Date Time:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskAlertDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDisplay" />
+
+                <TextView
+                    android:id="@+id/viewTaskAlertDateTimeDisplay"
+                    android:layout_width="300dp"
+                    android:layout_height="32dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskAlertDateTime"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDateTime" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="#FF0000"
+                    android:clickable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDateTimeDisplay"
+                    app:srcCompat="@drawable/ic_baseline_delete_outline_24"
+                    app:tint="#FFFFFF"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 

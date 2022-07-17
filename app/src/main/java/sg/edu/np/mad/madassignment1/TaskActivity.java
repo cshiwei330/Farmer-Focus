@@ -173,13 +173,12 @@ public class TaskActivity extends DrawerBaseActivity{
                     mAdaptor.notifyDataSetChanged();
                 }
                 else{
-                    if (filterOption.matches("Default")){
-                        Collections.sort(taskList, Task.TaskIdAscComparator);
+                    if (filterOption.matches("Default (Date Asc)")){
+                        Collections.sort(taskList, Task.TaskDateAscComparator);
                         mAdaptor.notifyDataSetChanged();
-                        Log.v(TAG, "Selected " + filterOption);
                     }
-                    else if (filterOption.matches("Task Id Desc")){
-                        Collections.sort(taskList, Task.TaskIdDescComparator);
+                    else if (filterOption.matches("Date Desc")){
+                        Collections.sort(taskList, Task.TaskDateDescComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
                     else if (filterOption.matches("Name Asc")){
@@ -190,12 +189,12 @@ public class TaskActivity extends DrawerBaseActivity{
                         Collections.sort(taskList, Task.TaskNameDescComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
-                    else if (filterOption.matches("Date Asc")){
-                        Collections.sort(taskList, Task.TaskDateAscComparator);
+                    else if (filterOption.matches("Task Creation Date Asc")){
+                        Collections.sort(taskList, Task.TaskIdAscComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
-                    else if (filterOption.matches("Date Desc")){
-                        Collections.sort(taskList, Task.TaskDateDescComparator);
+                    else if (filterOption.matches("Task Creation Date Desc")){
+                        Collections.sort(taskList, Task.TaskIdDescComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
                 }

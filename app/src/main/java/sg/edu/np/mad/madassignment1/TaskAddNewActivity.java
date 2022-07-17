@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -137,7 +138,85 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     }
 
                     newTaskDB.setTaskDuration(diffInTime);
+
                     newTaskDB.setAlert(alert);
+
+                    // Set Task Alert Date Time
+                    DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    try {
+                        String dateReplace = date.replace("/", "-");
+                        String taskDate = dateReplace + " " + startTime +":00";
+                        long millisToSubtract;
+                        Date d = format.parse(taskDate);
+                        if (alert.matches("None")){
+                            newTaskDB.setAlertDateTime(" ");
+                        }
+                        else if (alert.matches("At time of event")){
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("5 minutes before")){
+                            millisToSubtract = 5 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("10 minutes before")){
+                            millisToSubtract = 10 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("15 minutes before")){
+                            millisToSubtract = 15 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("30 minutes before")){
+                            millisToSubtract = 30 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("1 hour before")){
+                            millisToSubtract = 60 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else if (alert.matches("1 day before")){
+                            millisToSubtract = 1440 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                        else {
+                            millisToSubtract = 10080 * 60000;
+                            d.setTime(d.getTime() - millisToSubtract);
+                            taskDate = String.valueOf(d);
+                            newTaskDB.setAlertDateTime(taskDate);
+                            Log.v(TAG, "Alert is: " + alert);
+                            Log.v(TAG, "Modified Task Date: " + taskDate);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
                     newTaskDB.setTaskUserID(user.getUserID());
 
                     //add new task to db

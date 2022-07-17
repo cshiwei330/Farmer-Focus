@@ -177,13 +177,80 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     e.printStackTrace();
                 }
 
+                DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                String dateReplace = finalTaskDate.replace("/", "-");
+                String taskDate = dateReplace + " " + finalTaskStartTime +":00";
+                try {
+                    long millisToSubtract;
+                    Date d = format.parse(taskDate);
+                    if (alert.matches("None")){
+                        taskDate = " ";
+                    }
+                    else if (alert.matches("At time of event")){
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("5 minutes before")){
+                        millisToSubtract = 5 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("10 minutes before")){
+                        millisToSubtract = 10 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("15 minutes before")){
+                        millisToSubtract = 15 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("30 minutes before")){
+                        millisToSubtract = 30 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("1 hour before")){
+                        millisToSubtract = 60 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else if (alert.matches("1 day before")){
+                        millisToSubtract = 1440 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                    else {
+                        millisToSubtract = 10080 * 60000;
+                        d.setTime(d.getTime() - millisToSubtract);
+                        taskDate = String.valueOf(d);
+                        Log.v(TAG, "Alert is: " + alert);
+                        Log.v(TAG, "Modified Task Date: " + taskDate);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
-                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, user.getUserID());
+                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, user.getUserID());
 
                     dbHandler.editTask(editedTask);
 

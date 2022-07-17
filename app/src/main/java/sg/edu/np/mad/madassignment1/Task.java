@@ -1,6 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.text.format.Time;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Task {
+
+    private String TAG = "Task Class";
+
     private int Id;
     private int status;
     private String taskName;
@@ -19,6 +23,7 @@ public class Task {
     private String taskEndTime;
     private double taskDuration;
     private String alert;
+    private String alertDateTime;
 
     private int taskUserID;
 
@@ -27,7 +32,7 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert, int taskUserID) {
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert, String alertDateTime, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -39,6 +44,7 @@ public class Task {
         this.taskDuration = taskDuration;
 
         this.alert = alert;
+        this.alertDateTime = alertDateTime;
 
         this.taskUserID = taskUserID;
 
@@ -122,6 +128,14 @@ public class Task {
 
     public void setAlert(String alert) {
         this.alert = alert;
+    }
+
+    public String getAlertDateTime() {
+        return alertDateTime;
+    }
+
+    public void setAlertDateTime(String alertDateTime) {
+        this.alertDateTime = alertDateTime;
     }
 
     public static Comparator<Task> TaskNameAscComparator = new Comparator<Task>() {
