@@ -54,6 +54,9 @@
     <string name="CalenderForward"><![CDATA[->]]></string>
     <string name="textview">TextView</string>
     <string name="farmer_focus">Farmer Focus</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 
 </resources>
