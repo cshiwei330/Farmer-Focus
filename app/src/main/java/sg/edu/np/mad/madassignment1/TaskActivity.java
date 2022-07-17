@@ -120,6 +120,7 @@ public class TaskActivity extends DrawerBaseActivity{
                                 extras.putInt("task id", task.getId());
                                 myIntent.putExtras(extras);
                                 startActivity(myIntent);
+                                break;
 
                             case R.id.delete_task:
                                 AlertDialog.Builder builder = new AlertDialog.Builder(TaskActivity.this);
