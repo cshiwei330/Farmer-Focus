@@ -93,12 +93,7 @@ public class StatsWeekFragment extends Fragment{
         chart.getAxisRight().setDrawLabels(false);
         chart.getAxisRight().setDrawAxisLine(false);
 
-
-
-
         chart.invalidate();
-
-
         return view;
     }
 
@@ -109,9 +104,7 @@ public class StatsWeekFragment extends Fragment{
         try {
             Date today = sdf.parse(sdf.format(new Date()));
             Calendar cal = Calendar.getInstance();
-            //cal.setTime(today);
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-            //cal.add( Calendar.DAY_OF_WEEK, Calendar.SUNDAY - dayOfWeek );
             int dayItself = dbHandler.getTaskStatus(today); // gives count of completed tasks
 
             //if mobile date is sunday
@@ -134,7 +127,7 @@ public class StatsWeekFragment extends Fragment{
             //if mobile date is monday
             else if (dayOfWeek == 2) {
                 cal.add(Calendar.DATE, -1);
-                Date sunday = sdf.parse(sdf.format(cal));
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone1 = dbHandler.getTaskStatus(sunday);
                 BarEntry sun = new BarEntry(0, tasksDone1); // sun
                 valueSet1.add(sun);
@@ -154,16 +147,16 @@ public class StatsWeekFragment extends Fragment{
             //if mobile date is tuesday
             else if (dayOfWeek == 3) {
                 cal.add(Calendar.DATE, -2);
-                Date sunday = sdf.parse(sdf.format(cal));
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone1 = dbHandler.getTaskStatus(sunday);
                 BarEntry sun = new BarEntry(0, tasksDone1); // sun
                 valueSet1.add(sun);
                 cal.add(Calendar.DATE, 1);
-                Date monday = sdf.parse(sdf.format(cal));
+                Date monday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone2 = dbHandler.getTaskStatus(monday);
                 BarEntry mon = new BarEntry(1, tasksDone2); //mon
                 valueSet1.add(mon);
-                BarEntry tue = new BarEntry(1, dayItself); //mon
+                BarEntry tue = new BarEntry(2, dayItself); //tue
                 valueSet1.add(tue);
                 BarEntry wed = new BarEntry(3, 0); //wed
                 valueSet1.add(wed);
@@ -177,17 +170,17 @@ public class StatsWeekFragment extends Fragment{
             //if mobile date is wednesday
             else if (dayOfWeek == 4) {
                 cal.add(Calendar.DATE, -3);
-                Date sunday = sdf.parse(sdf.format(cal));
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone1 = dbHandler.getTaskStatus(sunday);
                 BarEntry sun = new BarEntry(0, tasksDone1); // sun
                 valueSet1.add(sun);
                 cal.add(Calendar.DATE, 1);
-                Date monday = sdf.parse(sdf.format(cal));
+                Date monday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone2 = dbHandler.getTaskStatus(monday);
                 BarEntry mon = new BarEntry(1, tasksDone2); //mon
                 valueSet1.add(mon);
                 cal.add(Calendar.DATE, 1);
-                Date tuesday = sdf.parse(sdf.format(cal));
+                Date tuesday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone3 = dbHandler.getTaskStatus(tuesday);
                 BarEntry tue = new BarEntry(2, tasksDone3); //tue
                 valueSet1.add(tue);
@@ -203,22 +196,22 @@ public class StatsWeekFragment extends Fragment{
             //if mobile date is thursday
             else if (dayOfWeek == 5) {
                 cal.add(Calendar.DATE, -4);
-                Date sunday = sdf.parse(sdf.format(cal));
+                Date sunday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone1 = dbHandler.getTaskStatus(sunday);
                 BarEntry sun = new BarEntry(0, tasksDone1); // sun
                 valueSet1.add(sun);
                 cal.add(Calendar.DATE, 1);
-                Date monday = sdf.parse(sdf.format(cal));
+                Date monday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone2 = dbHandler.getTaskStatus(monday);
                 BarEntry mon = new BarEntry(1, tasksDone2); //mon
                 valueSet1.add(mon);
                 cal.add(Calendar.DATE, 1);
-                Date tuesday = sdf.parse(sdf.format(cal));
+                Date tuesday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone3 = dbHandler.getTaskStatus(tuesday);
                 BarEntry tue = new BarEntry(2, tasksDone3); //tue
                 valueSet1.add(tue);
                 cal.add(Calendar.DATE, 1);
-                Date wednesday = sdf.parse(sdf.format(cal));
+                Date wednesday = sdf.parse(sdf.format(cal.getTime()));
                 int tasksDone4 = dbHandler.getTaskStatus(wednesday);
                 BarEntry wed = new BarEntry(3, tasksDone4); //wed
                 valueSet1.add(wed);

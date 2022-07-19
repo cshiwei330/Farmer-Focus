@@ -46,9 +46,9 @@ public class MoodoftheweekFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_moodoftheweek, container, false);
         TextView moodStats = view.findViewById(R.id.moodStats);
-        //find out the max no of mood entered the past week
-        //set text
-        //link to article
+        ImageView articleImage = view.findViewById(R.id.articleImage);
+        TextView article = view.findViewById(R.id.article);
+        TextView viewArticle = view.findViewById(R.id.viewArticle);
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
@@ -84,9 +84,6 @@ public class MoodoftheweekFragment extends Fragment {
 
                         }
                     }
-                    ImageView articleImage = view.findViewById(R.id.articleImage);
-                    TextView article = view.findViewById(R.id.article);
-                    TextView viewArticle = view.findViewById(R.id.viewArticle);
                     viewArticle.setPaintFlags(viewArticle.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
                     if (motw.equals("happy")) {
                         moodStats.setText("In the past 7 days, you have been mostly happy. \nKeep the positivity coming!");
@@ -131,6 +128,9 @@ public class MoodoftheweekFragment extends Fragment {
             }
             else{
                 moodStats.setText("You have yet to enter a mood in the past week!");
+                articleImage.setVisibility(View.GONE);
+                article.setVisibility(View.GONE);
+                viewArticle.setVisibility(View.GONE);
             }
 
         } catch (ParseException e) {
