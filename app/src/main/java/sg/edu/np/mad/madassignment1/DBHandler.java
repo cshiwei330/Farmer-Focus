@@ -40,6 +40,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_TASKDURATION = "TaskDuration";
     public static String COLUMN_TASKALERT = "TaskAlert";
     public static String COLUMN_TASKALERTDATETIME = "TaskAlertDateTime";
+    public static String COLUMN_TASKTYPE = "TaskType";
+    public static String COLUMN_TASKREPEAT = "TaskRepeat";
     public static String COLUMN_TASKUSERID = "taskUserID";
 
     //mood tracker
@@ -79,6 +81,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKDURATION + " STRING, "
                 + COLUMN_TASKALERT + " STRING, "
                 + COLUMN_TASKALERTDATETIME + " STRING, "
+                + COLUMN_TASKTYPE + " STRING, "
+                + COLUMN_TASKREPEAT + " STRING, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
 
@@ -162,6 +166,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_TASKDURATION, taskData.getTaskDuration());
         values.put(COLUMN_TASKALERT, taskData.getAlert());
         values.put(COLUMN_TASKALERTDATETIME, taskData.getAlertDateTime());
+        values.put(COLUMN_TASKTYPE, taskData.getTaskType());
+        values.put(COLUMN_TASKREPEAT, taskData.getRepeat());
         values.put(COLUMN_USERID, taskData.getTaskUserID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -175,7 +181,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Task> taskArrayList = new ArrayList<>();
         String query = "SELECT * FROM " + TASKS + " WHERE " + COLUMN_USERID + "=" + userID;
-        //Cursor cursor = db.rawQuery("select * from " + TASKS, null);
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
@@ -183,14 +188,16 @@ public class DBHandler extends SQLiteOpenHelper {
             String name = cursor.getString(2);
             String desc = cursor.getString(3);
 
-            String taskDate = cursor.getString(5);
-            String taskStartTime = cursor.getString(6);
-            String taskEndTime = cursor.getString(7);
-            double taskDuration = cursor.getDouble(8);
-            String taskAlert = cursor.getString(9);
-            String taskAlertDateTime = cursor.getString(10);
+            String taskDate = cursor.getString(4);
+            String taskStartTime = cursor.getString(5);
+            String taskEndTime = cursor.getString(6);
+            double taskDuration = cursor.getDouble(7);
+            String taskAlert = cursor.getString(8);
+            String taskAlertDateTime = cursor.getString(9);
+            String taskType = cursor.getString(10);
+            String taskRepeat = cursor.getString(11);
 
-            Task newTask = new Task(id, status, name, desc, taskDate,taskStartTime, taskEndTime, taskDuration, taskAlert, taskAlertDateTime, userID);
+            Task newTask = new Task(id, status, name, desc, taskDate, taskStartTime, taskEndTime, taskDuration, taskAlert, taskAlertDateTime, taskType, taskRepeat, userID);
             taskArrayList.add(newTask);
         }
         db.close();
@@ -217,6 +224,8 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setTaskDuration(cursor.getDouble(8));
             queryData.setAlert(cursor.getString(9));
             queryData.setAlertDateTime(cursor.getString(10));
+            queryData.setTaskType(cursor.getString(11));
+            queryData.setRepeat(cursor.getString(12));
         }
         else {
             queryData = null;
@@ -251,6 +260,8 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TASKDURATION, task.getTaskDuration());
         contentValues.put(COLUMN_TASKALERT, task.getAlert());
         contentValues.put(COLUMN_TASKALERTDATETIME, task.getAlertDateTime());
+        contentValues.put(COLUMN_TASKTYPE, task.getTaskType());
+        contentValues.put(COLUMN_TASKREPEAT, task.getRepeat());
 
         db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
 

@@ -17,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="890dp">
 
                 <EditText
                     android:id="@+id/editTaskDescDisplay"
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="Alert:"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/editTaskEndTimePicker"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskEndTimePicker" />
 
@@ -132,12 +132,15 @@
                     android:id="@+id/saveDetailsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
                     android:text="Save"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintHorizontal_bias="0.51"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskRepeatSpinnerDropDown"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -145,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="Task End Time:"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/editTaskStartTimePicker"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskStartTimePicker" />
 
@@ -170,6 +174,25 @@
                     android:text="Edit Task"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Repeat:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskAlertDropDown"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
+
+                <Spinner
+                    android:id="@+id/editTaskRepeatSpinnerDropDown"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView10"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

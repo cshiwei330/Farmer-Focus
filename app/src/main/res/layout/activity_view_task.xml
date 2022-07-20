@@ -20,7 +20,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="885dp">
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/backButton"
@@ -59,12 +59,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="76dp"
-                    android:layout_marginTop="108dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Name:"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskTypeDisplay" />
 
                 <TextView
                     android:id="@+id/taskViewTaskStartTime"
@@ -79,7 +79,7 @@
                 <TextView
                     android:id="@+id/taskViewTaskNameDisplay"
                     android:layout_width="232dp"
-                    android:layout_height="31dp"
+                    android:layout_height="32dp"
                     android:layout_marginTop="1dp"
                     android:text="TextView"
                     android:textSize="20sp"
@@ -208,15 +208,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
                     android:backgroundTint="#FF0000"
                     android:clickable="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDateTimeDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskRepeatDisplay"
                     app:srcCompat="@drawable/ic_baseline_delete_outline_24"
                     app:tint="#FFFFFF"
                     tools:ignore="SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/viewTaskTypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="80dp"
+                    android:text="Task Type:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/viewTaskTypeDisplay"
+                    android:layout_width="232dp"
+                    android:layout_height="32dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskTypeTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskTypeTextView" />
+
+                <TextView
+                    android:id="@+id/viewTaskRepeatTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Repeat:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskAlertDateTimeDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskAlertDateTimeDisplay" />
+
+                <TextView
+                    android:id="@+id/viewTaskRepeatDisplay"
+                    android:layout_width="232dp"
+                    android:layout_height="32dp"
+                    android:text="TextView"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/viewTaskRepeatTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/viewTaskRepeatTextView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -36,6 +36,8 @@ public class TaskViewActivity extends AppCompatActivity {
         TextView taskDuration = findViewById(R.id.taskViewTaskDurationDisplay);
         TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         TextView taskAlertDateTime = findViewById(R.id.viewTaskAlertDateTimeDisplay);
+        TextView taskType = findViewById(R.id.viewTaskTypeDisplay);
+        TextView taskRepeat = findViewById(R.id.viewTaskRepeatDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
         FloatingActionButton editTaskButton = findViewById(R.id.editTaskButton);
@@ -57,7 +59,7 @@ public class TaskViewActivity extends AppCompatActivity {
 
         // Set Task Duration
         if (hours == 0 && minutes == 0){
-            taskDuration.setText("No Duration");
+            taskDuration.setText("0 mins");
         }
         else if (hours == 0 && minutes == 1){
             taskDuration.setText(minutes + " Min ");
@@ -89,11 +91,15 @@ public class TaskViewActivity extends AppCompatActivity {
 
         // Set Task Date Time
         if (task.getAlertDateTime().matches(" ")){
-            taskAlertDateTime.setText("No Alert");
+            taskAlertDateTime.setText("None");
         }
         else {
             taskAlertDateTime.setText(task.getAlertDateTime());
         }
+
+        taskType.setText(task.getTaskType());
+
+        taskRepeat.setText(task.getRepeat());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

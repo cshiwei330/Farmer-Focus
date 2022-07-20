@@ -24,6 +24,8 @@ public class Task {
     private double taskDuration;
     private String alert;
     private String alertDateTime;
+    private String taskType;
+    private String repeat;
 
     private int taskUserID;
 
@@ -32,7 +34,8 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert, String alertDateTime, int taskUserID) {
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert,
+                String alertDateTime, String taskType, String repeat, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -45,6 +48,9 @@ public class Task {
 
         this.alert = alert;
         this.alertDateTime = alertDateTime;
+
+        this.taskType = taskType;
+        this.repeat = repeat;
 
         this.taskUserID = taskUserID;
 
@@ -136,6 +142,22 @@ public class Task {
 
     public void setAlertDateTime(String alertDateTime) {
         this.alertDateTime = alertDateTime;
+    }
+
+    public String getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
+    }
+
+    public String getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(String repeat) {
+        this.repeat = repeat;
     }
 
     public static Comparator<Task> TaskNameAscComparator = new Comparator<Task>() {

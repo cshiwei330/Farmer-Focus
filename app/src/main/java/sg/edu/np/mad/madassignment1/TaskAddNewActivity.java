@@ -39,11 +39,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
     double diffInTime;
-    String alert;
+    String alert, taskType, repeat;
 
     public String GLOBAL_PREF = "MyPrefs";
 
-    private Spinner spinnerAlert;
+    private Spinner spinnerAlert, spinnerTaskType, spinnerRepeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,10 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         ImageView backButton = findViewById(R.id.addNewTaskBackButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
+        spinnerTaskType = findViewById(R.id.taskTypeSpinnerDropDown);
+        spinnerRepeat = findViewById(R.id.repeatSpinnerDropDown);
 
+        // Alert Times Spinner DropDown
         String[] alertTimes = getResources().getStringArray(R.array.alert_times);
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -75,6 +78,47 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        // Task Type Spinner DropDown
+        String[] taskTypes = getResources().getStringArray(R.array.task_type_options);
+        ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, taskTypes);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTaskType.setAdapter(adapter1);
+
+        spinnerTaskType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                taskType = adapterView.getItemAtPosition(i).toString();
+                if (taskType.matches("Choose Task Type")){
+                    taskType = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
+        // Repeat Spinner DropDown
+        String[] repeatOptions = getResources().getStringArray(R.array.task_repeat_options);
+        ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatOptions);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRepeat.setAdapter(adapter2);
+
+        spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                repeat = adapterView.getItemAtPosition(i).toString();
+                if (repeat.matches("Choose Repeat Option")){
+                    repeat = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         //define database
         DBHandler dbHandler = new DBHandler(this, null, null,6);
@@ -217,6 +261,10 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         e.printStackTrace();
                     }
 
+                    newTaskDB.setTaskType(taskType);
+
+                    newTaskDB.setRepeat(repeat);
+
                     newTaskDB.setTaskUserID(user.getUserID());
 
                     //add new task to db
@@ -318,6 +366,15 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         }
         if (alert == null){
             return "alert";
+        }
+        if (taskType == null){
+            return "task type";
+        }
+        if (repeat == null){
+            return "repeat";
+        }
+        if (taskType.matches("Recurring") && repeat.matches("None")){
+            return "a valid repeat option since recurring task is selected";
         }
 
         return "VALID";

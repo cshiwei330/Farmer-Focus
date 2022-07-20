@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="task_type_options">
+        <item>Choose Task Type</item>
+        <item>Event</item>
+        <item>Recurring</item>
+    </string-array>
+</resources>

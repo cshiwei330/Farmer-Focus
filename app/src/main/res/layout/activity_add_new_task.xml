@@ -17,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="1205dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="61dp">
 
@@ -30,6 +30,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+
+                <Spinner
+                    android:id="@+id/taskTypeSpinnerDropDown"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:minHeight="48dp"
+                    app:layout_constraintStart_toStartOf="@+id/taskTypeTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/taskTypeTextView"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <Button
                     android:id="@+id/editTaskDatePicker"
@@ -50,7 +60,7 @@
                     android:id="@+id/newTaskNameActivity"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
@@ -64,19 +74,19 @@
                     android:id="@+id/taskNameTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="92dp"
+                    android:layout_marginTop="28dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Name:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/newTaskNameActivity"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/taskTypeSpinnerDropDown"
+                    app:layout_constraintTop_toBottomOf="@+id/taskTypeSpinnerDropDown" />
 
                 <EditText
                     android:id="@+id/newTaskDescActivity"
                     android:layout_width="280dp"
 
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:inputType="textMultiLine"
                     android:minHeight="48dp"
@@ -134,18 +144,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
+                    android:layout_marginBottom="40dp"
                     android:backgroundTint="#7E9278"
                     android:text="Create New Task"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.487"
+                    app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
+                    app:layout_constraintTop_toBottomOf="@+id/repeatSpinnerDropDown" />
 
                 <Spinner
                     android:id="@+id/editTaskAlertDropDown"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     android:minHeight="48dp"
                     app:layout_constraintStart_toStartOf="@+id/addNewTaskAlert"
                     app:layout_constraintTop_toBottomOf="@+id/addNewTaskAlert"
@@ -186,6 +198,35 @@
                     android:textSize="34sp"
                     app:layout_constraintStart_toStartOf="@+id/newTaskEndTime"
                     app:layout_constraintTop_toBottomOf="@+id/newTaskEndTime" />
+
+                <TextView
+                    android:id="@+id/taskTypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="66dp"
+                    android:text="Task Type:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/repeatSpinnerDropDown"
+                    android:layout_width="280dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:text="Repeat:"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskAlertDropDown"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

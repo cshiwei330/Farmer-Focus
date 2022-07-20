@@ -35,8 +35,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     int year, month, dayOfMonth;
     double diffInTime;
 
-    String alert;
-    private Spinner spinnerAlert;
+    String alert, repeat;
+    private Spinner spinnerAlert, spinnerRepeat;
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -55,6 +55,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         Button saveDetailsButton = findViewById(R.id.saveDetailsButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
+        spinnerRepeat = findViewById(R.id.editTaskRepeatSpinnerDropDown);
 
         // receive from bundle
         Intent receivingEnd = getIntent();
@@ -94,12 +95,37 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
+        // Repeat Spinner DropDown
+        String[] repeatOptions = getResources().getStringArray(R.array.task_repeat_options);
+        ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatOptions);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRepeat.setAdapter(adapter2);
+
+        spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                repeat = adapterView.getItemAtPosition(i).toString();
+                if (repeat.matches("Choose Repeat Option")){
+                    repeat = null;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         saveDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (alert == null){
                     alert = currentTask.getAlert();
+                }
+
+                if (repeat == null){
+                    repeat = currentTask.getRepeat();
                 }
 
                 String finalTaskName = newTaskName.getText().toString();
@@ -244,13 +270,15 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     e.printStackTrace();
                 }
 
+                String taskType = currentTask.getTaskType();
+
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
-                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, user.getUserID());
+                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, user.getUserID());
 
                     dbHandler.editTask(editedTask);
 
@@ -341,7 +369,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         if (alert == null) {
             return "alert";
         }
-
         return "VALID";
     }
 }
