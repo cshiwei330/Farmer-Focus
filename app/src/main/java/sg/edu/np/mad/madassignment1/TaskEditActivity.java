@@ -111,9 +111,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 alert = adapterView.getItemAtPosition(i).toString();
-                if (alert.matches("Choose Alert")){
-                    alert = null;
-                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -148,9 +145,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 repeat = adapterView.getItemAtPosition(i).toString();
-                if (repeat.matches("Choose Repeat Option")){
-                    repeat = null;
-                }
             }
 
             @Override
@@ -415,9 +409,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         }
         if (year == 0 || month == 0 || dayOfMonth == 0) {
             return "date";
-        }
-        if (alert == null) {
-            return "alert";
         }
         return "VALID";
     }
