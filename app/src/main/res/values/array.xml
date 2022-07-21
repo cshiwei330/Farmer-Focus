@@ -2,7 +2,6 @@
 <resources>
 
     <string-array name="alert_times">
-        <item>Choose Alert</item>
         <item>None</item>
         <item>At time of event</item>
         <item>5 minutes before</item>

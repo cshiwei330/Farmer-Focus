@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -32,13 +33,16 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     private final String TAG = "Edit Task Activity";
 
     int starthour, startminute, endhour, endminute;
-    int year, month, dayOfMonth;
+    int year, month, dayOfMonth, alertIndex, repeatIndex;
     double diffInTime;
 
     String alert, repeat;
     private Spinner spinnerAlert, spinnerRepeat;
 
     public String GLOBAL_PREF = "MyPrefs";
+
+    ArrayList<String> alertOptionsList = new ArrayList<>();
+    ArrayList<String> repeatOptionsList = new ArrayList<>();
 
     DBHandler dbHandler = new DBHandler(this, null, null, 6);
 
@@ -77,11 +81,32 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         newTaskStartTime.setText(currentTask.getTaskStartTime());
         newTaskEndTime.setText(currentTask.getTaskEndTime());
 
+
+
+
+        // Spinner for alert times option
         String[] alertTimes = getResources().getStringArray(R.array.alert_times);
         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, alertTimes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAlert.setAdapter(adapter);
 
+        // add all alert times into the optionList
+        for (int i=0; i< alertTimes.length; i++){
+            alertOptionsList.add(alertTimes[i]);
+        }
+
+        // get index for the option in the optionsList
+        for (int i=0; i<alertOptionsList.size(); i++) {
+            if (alertOptionsList.get(i).matches(currentTask.getAlert())) {
+                alertIndex = i;
+                break;
+            }
+        }
+
+        // set default value of the spinner to be original value from database
+        spinnerAlert.setSelection(alertIndex);
+
+        // get the user's choice if edited
         spinnerAlert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -95,11 +120,29 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
-        // Repeat Spinner DropDown
+
+
+
+        // Spinner for repeat options
         String[] repeatOptions = getResources().getStringArray(R.array.task_repeat_options);
         ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatOptions);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRepeat.setAdapter(adapter2);
+
+        // add all alert times into the optionList
+        for (int i=0; i< repeatOptions.length; i++){
+            repeatOptionsList.add(repeatOptions[i]);
+        }
+
+        // get index for the option in the optionsList
+        for (int i=0; i<repeatOptionsList.size(); i++) {
+            if (repeatOptionsList.get(i).matches(currentTask.getRepeat())) {
+                repeatIndex = i;
+                break;
+            }
+        }
+
+        spinnerRepeat.setSelection(repeatIndex);
 
         spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -116,6 +159,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             }
         });
 
+
+
+        // Save edited details
         saveDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -296,6 +342,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
     }
 
+
+    // Set Date
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, selectedYear);
@@ -312,6 +360,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         textView.setText(currentDateString);
     }
 
+    // Set Start Time
     public void popStartTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.editTaskStartTimePicker);
@@ -333,6 +382,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         timePickerDialog.show();
     }
 
+    // Set End Time
     public void popEndTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.editTaskEndTimePicker);
