@@ -289,7 +289,10 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     Task t = new Task(id, status, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
                             alert, taskDate, taskType, repeat, user.getUserID());
 
-                    setAlarm(t);
+                    // Only set notification if alert is not None
+                    if (t.getAlert().matches("None") == false){
+                        setAlarm(t);
+                    }
 
                     //start TaskActivity
                     Intent intent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
