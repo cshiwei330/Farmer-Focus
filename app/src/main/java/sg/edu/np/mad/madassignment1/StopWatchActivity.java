@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.SystemClock;
@@ -22,7 +23,6 @@ public class StopWatchActivity extends AppCompatActivity {
     private Button mButtonReset2;
     private TextView mTimeTextView;
 
-    private boolean mTimerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,38 @@ public class StopWatchActivity extends AppCompatActivity {
         else {
             mButtonStartPause2.setText("Start");
         }
+    }
+
+    //SHARED PREFERENCES
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        //editor.putLong("startTimeInMillis", mStartTimeInMillis);
+        //editor.putLong("millisLeft", mTimeLeftInMillis);
+        editor.putBoolean("timerRunning", running);
+        //editor.putLong("endTime", mEndTime);
+
+        editor.apply();
+
+//        if (chronometer != null) {
+//            chronometer.cancel();
+//        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+
+        running = prefs.getBoolean("timerRunning", false);
+
+        updateWatchInterface();
+
     }
 
 }

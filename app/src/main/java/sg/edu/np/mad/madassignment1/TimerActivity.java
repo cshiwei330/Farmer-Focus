@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,12 +18,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
 
-public class TimerActivity extends DrawerBaseActivity {
+public class TimerActivity extends DrawerBaseActivity{
     int hour, minute, second;
     //define activity binding
     ActivityTimerBinding activityTimerBinding;
@@ -43,6 +45,7 @@ public class TimerActivity extends DrawerBaseActivity {
     private long mTimeLeftInMillis;
     private long mEndTime;
 
+    Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,8 @@ public class TimerActivity extends DrawerBaseActivity {
         mButtonReset = findViewById(R.id.button_reset);
         mTimeTextView = findViewById(R.id.countdown);
 
+
+
         //NEW
 
         //define dbHandler
@@ -73,22 +78,26 @@ public class TimerActivity extends DrawerBaseActivity {
         String username = sharedPreferences.getString("username", "");
         User user = dbHandler.findUser(username);
 
+        Intent receivingEnd = getIntent();
+        int newTaskId = receivingEnd.getIntExtra("task id", 0);
+        task = dbHandler.findTask(newTaskId);
+
         //define recyclerView
-        RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
+        //RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
 
         //Finding uncompleted tasks
         //define taskList array
-        ArrayList<Task> taskList = new ArrayList<>();
-        //current taskList with db data
-        taskList = dbHandler.getTaskData(user.getUserID());
+//        ArrayList<Task> taskList = new ArrayList<>();
+//        //current taskList with db data
+//        taskList = dbHandler.getTaskData(user.getUserID());
 
         // initialize recyclerview for TASKS
-        //set adaptor to TaskRecyclerViewAdaptor, given taskList
-        TaskRecyclerViewAdaptor mAdaptor = new TaskRecyclerViewAdaptor(taskList);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdaptor);
-
+        //set adaptor to TimerRecyclerViewAdaptor, given taskList
+//        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(taskList);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setAdapter(mAdaptor);
+        //setTime(dbHandler.findTask(TaskId)); // use method from dbHandler to get task using taskId
 
         //NEW
 
@@ -165,6 +174,25 @@ public class TimerActivity extends DrawerBaseActivity {
             }
         });
 
+        // navigate to task list page to select task
+        ImageView SelectTask = findViewById(R.id.selectTaskImg);
+        SelectTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
+                //put extra
+                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
+                    @Override
+                    //when result code =1, received from bundle, kill this activity
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        TimerActivity.this.finish();
+                    }
+                });
+                //start activity with result
+                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
+            }
+        });
+
     }
 
     //NEW
@@ -211,6 +239,20 @@ public class TimerActivity extends DrawerBaseActivity {
         resetTimer();
         closeKeyboard();
     }
+
+//    private void setTime(Task t) {
+//        // receive from bundle
+//        Intent receivingEnd = getIntent();
+//        int TaskId = receivingEnd.getIntExtra("task id", -1);
+//        double milliseconds = (t.getTaskDuration() * 60000.0);
+//        long millis = (new Double(milliseconds)).longValue();
+//        //Double.valueOf(milliseconds).longValue();
+//        mStartTimeInMillis = millis;
+//        resetTimer();
+//        closeKeyboard();
+//    }
+
+
 
     // start the timer
     private void startTimer() {
@@ -282,11 +324,11 @@ public class TimerActivity extends DrawerBaseActivity {
             mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
 
-            if (mTimeLeftInMillis < 1000) {
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-            } else {
-                mButtonStartPause.setVisibility(View.VISIBLE);
-            }
+//            if (mTimeLeftInMillis < 1000) {
+//                mButtonStartPause.setVisibility(View.INVISIBLE);
+//            } else {
+//                mButtonStartPause.setVisibility(View.VISIBLE);
+//            }
 
             if (mTimeLeftInMillis < mStartTimeInMillis) {
                 mButtonReset.setVisibility(View.VISIBLE);
@@ -320,7 +362,7 @@ public class TimerActivity extends DrawerBaseActivity {
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putLong("startTimeInMillis", mStartTimeInMillis);
+        //editor.putLong("startTimeInMillis", mStartTimeInMillis);
         editor.putLong("millisLeft", mTimeLeftInMillis);
         editor.putBoolean("timerRunning", mTimerRunning);
         editor.putLong("endTime", mEndTime);
@@ -332,13 +374,6 @@ public class TimerActivity extends DrawerBaseActivity {
         }
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-
-    }
 
     @Override
     protected void onStart() {
@@ -371,25 +406,19 @@ public class TimerActivity extends DrawerBaseActivity {
         }
     }
 
-//    public void popTimePicker()
+
+//    @Override
+//    public void onItemClick(int position, Task t)
 //    {
-//        TextView timeTextView = findViewById(R.id.countdown);
+//        Log.v("test", "1");
+//        Toast.makeText(TimerActivity.this, "Task selected", Toast.LENGTH_SHORT).show();
+//        double milliseconds = (t.getTaskDuration() * 60000.0);
+//        mStartTimeInMillis = (new Double(milliseconds)).longValue();
+//        //Double.valueOf(milliseconds).longValue();
+//        //mStartTimeInMillis = millis;
+//        resetTimer(); // update count down text method inside resetTimer
 //
-//        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener()
-//        {
-//            @Override
-//            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute)
-//            {
-//                hour = selectedHour;
-//                minute = selectedMinute;
-//                //second = selectedSecond;
-//                timeTextView.setText(String.format(Locale.getDefault(), "%02d:%02d:%02d",hour, minute));
-//            }
-//        };
-//
-//        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
-//
-//        timePickerDialog.show();
 //    }
+
 
 }
