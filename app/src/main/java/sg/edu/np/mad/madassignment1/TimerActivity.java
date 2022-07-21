@@ -81,6 +81,7 @@ public class TimerActivity extends DrawerBaseActivity{
         Intent receivingEnd = getIntent();
         int newTaskId = receivingEnd.getIntExtra("task id", 0);
         task = dbHandler.findTask(newTaskId);
+        //setTime(task);
 
         //define recyclerView
         //RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
@@ -107,24 +108,24 @@ public class TimerActivity extends DrawerBaseActivity{
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
-        SetTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String input = mEditTextInput.getText().toString();
-                if (input.length() == 0) {
-                    Toast.makeText(TimerActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                long millisInput = Long.parseLong(input) * 60000; // change to minutes
-                if (millisInput <= 0) {
-                    Toast.makeText(TimerActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                setTime(millisInput);
-                mEditTextInput.setText("");
-            }
-        });
+//        SetTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String input = mEditTextInput.getText().toString();
+//                if (input.length() == 0) {
+//                    Toast.makeText(TimerActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                long millisInput = Long.parseLong(input) * 60000; // change to minutes
+//                if (millisInput <= 0) {
+//                    Toast.makeText(TimerActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//
+//                setTime(millisInput);
+//                mEditTextInput.setText("");
+//            }
+//        });
 
         // if timer is running, start button changes to become pause, else, start button will remain unchanged
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
@@ -234,22 +235,21 @@ public class TimerActivity extends DrawerBaseActivity{
 
 
     // set the time on the timer
-    private void setTime(long milliseconds) {
-        mStartTimeInMillis = milliseconds;
-        resetTimer();
-        closeKeyboard();
-    }
+//    private void setTime(long milliseconds) {
+//        mStartTimeInMillis = milliseconds;
+//        resetTimer();
+//        closeKeyboard();
+//    }
 
 //    private void setTime(Task t) {
 //        // receive from bundle
-//        Intent receivingEnd = getIntent();
-//        int TaskId = receivingEnd.getIntExtra("task id", -1);
+//        //Intent receivingEnd = getIntent();
+//        //int TaskId = receivingEnd.getIntExtra("task id", -1);
 //        double milliseconds = (t.getTaskDuration() * 60000.0);
-//        long millis = (new Double(milliseconds)).longValue();
+//        mStartTimeInMillis = (new Double(milliseconds)).longValue();
 //        //Double.valueOf(milliseconds).longValue();
-//        mStartTimeInMillis = millis;
 //        resetTimer();
-//        closeKeyboard();
+//        //closeKeyboard();
 //    }
 
 

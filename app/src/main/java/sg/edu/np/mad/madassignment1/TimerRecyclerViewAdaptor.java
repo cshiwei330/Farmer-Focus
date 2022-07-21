@@ -25,7 +25,7 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
 
     @Override
     public TimerRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_layout, parent, false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.timertask_layout, parent, false);
         //define dbHandler
         dbHandler = new DBHandler(item.getContext(), null,null,6);
         return new TimerRecyclerViewHolder(item);
@@ -42,7 +42,7 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
 
 
         //when card is selected, bring user to TimerActivity
-        holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
+        //holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
         holder.taskDesc.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
 
 
@@ -51,6 +51,7 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "Setting time for " + t.getTaskName() + "...", Toast.LENGTH_SHORT).show();
+                openTaskInfo(holder, t);
 
                 t.getTaskDuration();
                 //openTaskInfo(holder, t);
