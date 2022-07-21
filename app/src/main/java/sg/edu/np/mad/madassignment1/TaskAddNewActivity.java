@@ -337,7 +337,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
     }
 
@@ -438,6 +437,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         }
         if (taskType.matches("Recurring") && repeat.matches("None")){
             return "a valid repeat option since recurring task is selected";
+        }
+        if ((taskType.matches("Event") && repeat.matches("Weekly")) || (taskType.matches("Event") && repeat.matches("Monthly"))) {
+            return "an event task cannot be repeated.";
         }
 
         return "VALID";
