@@ -9,6 +9,8 @@
         <item>Task Creation Date Asc</item> // Task Id asc
         <item>Task Creation Date Desc</item> // Task id desc
         <item>Task Alert Date Time Asc</item>
+        <item>Event Tasks</item>
+        <item>Recurring Tasks</item>
     </string-array>
 
 </resources>

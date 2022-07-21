@@ -188,14 +188,14 @@ public class DBHandler extends SQLiteOpenHelper {
             String name = cursor.getString(2);
             String desc = cursor.getString(3);
 
-            String taskDate = cursor.getString(4);
-            String taskStartTime = cursor.getString(5);
-            String taskEndTime = cursor.getString(6);
-            double taskDuration = cursor.getDouble(7);
-            String taskAlert = cursor.getString(8);
-            String taskAlertDateTime = cursor.getString(9);
-            String taskType = cursor.getString(10);
-            String taskRepeat = cursor.getString(11);
+            String taskDate = cursor.getString(5);
+            String taskStartTime = cursor.getString(6);
+            String taskEndTime = cursor.getString(7);
+            double taskDuration = cursor.getDouble(8);
+            String taskAlert = cursor.getString(9);
+            String taskAlertDateTime = cursor.getString(10);
+            String taskType = cursor.getString(11);
+            String taskRepeat = cursor.getString(12);
 
             Task newTask = new Task(id, status, name, desc, taskDate, taskStartTime, taskEndTime, taskDuration, taskAlert, taskAlertDateTime, taskType, taskRepeat, userID);
             taskArrayList.add(newTask);
@@ -217,15 +217,16 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setStatus(cursor.getInt(1));
             queryData.setTaskName(cursor.getString(2));
             queryData.setTaskDesc(cursor.getString(3));
-            queryData.setTaskDate(cursor.getString(4));
-            queryData.setTaskStartTime(cursor.getString(5));
-            queryData.setTaskEndTime(cursor.getString(6));
-            queryData.setTaskDuration(cursor.getDouble(7));
-            queryData.setAlert(cursor.getString(8));
-            queryData.setAlertDateTime(cursor.getString(9));
-            queryData.setTaskType(cursor.getString(10));
-            queryData.setRepeat(cursor.getString(11));
-            queryData.setTaskUserID(cursor.getInt(12));
+            queryData.setTaskUserID(cursor.getInt(4));
+            queryData.setTaskDate(cursor.getString(5));
+            queryData.setTaskStartTime(cursor.getString(6));
+            queryData.setTaskEndTime(cursor.getString(7));
+            queryData.setTaskDuration(cursor.getDouble(8));
+            queryData.setAlert(cursor.getString(9));
+            queryData.setAlertDateTime(cursor.getString(10));
+            queryData.setTaskType(cursor.getString(11));
+            queryData.setRepeat(cursor.getString(12));
+
         }
         else {
             queryData = null;

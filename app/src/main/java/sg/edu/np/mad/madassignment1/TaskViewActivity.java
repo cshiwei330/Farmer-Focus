@@ -97,7 +97,8 @@ public class TaskViewActivity extends AppCompatActivity {
             taskAlertDateTime.setText(task.getAlertDateTime());
         }
 
-        taskType.setText(task.getTaskType());
+        String taskTypeFromDB = task.getTaskType();
+        taskType.setText(taskTypeFromDB);
 
         taskRepeat.setText(task.getRepeat());
 
