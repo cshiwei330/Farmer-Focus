@@ -21,6 +21,8 @@
                 android:resource="@xml/today_task_widget_info" />
         </receiver>
 
+        <receiver android:name=".AlarmReceiver"/>
+
         <activity
             android:name=".StopWatchActivity"
             android:exported="false" />

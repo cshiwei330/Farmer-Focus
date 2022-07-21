@@ -3,10 +3,16 @@ package sg.edu.np.mad.madassignment1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
@@ -31,6 +37,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import sg.edu.np.mad.madassignment1.databinding.ActivityMainBinding;
+
 public class TaskAddNewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private String TAG = "AddNewTaskActivity";
@@ -39,16 +47,24 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth;
     double diffInTime;
-    String alert, taskType, repeat;
+    String alert, taskType, repeat, startTime, taskDate;
 
     public String GLOBAL_PREF = "MyPrefs";
 
     private Spinner spinnerAlert, spinnerTaskType, spinnerRepeat;
 
+    private ActivityMainBinding binding;
+
+    private AlarmManager alarmManager;
+
+    private PendingIntent pendingIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_add_new_task);
+        createNotificationChannel();
 
         //define elements in fragment
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
@@ -158,7 +174,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
                     String date = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
                     newTaskDB.setTaskDate(date);
-                    String startTime =  String.format("%02d:%02d",starthour,startminute);
+                    startTime =  String.format("%02d:%02d",starthour,startminute);
                     newTaskDB.setTaskStartTime(startTime);
                     String endTime =  String.format("%02d:%02d",endhour,endminute);
                     newTaskDB.setTaskEndTime(endTime);
@@ -189,7 +205,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     try {
                         String dateReplace = date.replace("/", "-");
-                        String taskDate = dateReplace + " " + startTime +":00";
+                        taskDate = dateReplace + " " + startTime +":00";
                         long millisToSubtract;
                         Date d = format.parse(taskDate);
                         if (alert.matches("None")){
@@ -270,6 +286,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     //add new task to db
                     dbHandler.addTask(newTaskDB);
 
+                    Task t = new Task(id, status, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
+                            alert, taskDate, taskType, repeat, user.getUserID());
+
+                    setAlarm(t);
+
                     //start TaskActivity
                     Intent intent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
                     startActivity(intent);
@@ -291,6 +312,45 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                 startActivity(myIntent);
             }
         });
+    }
+
+    private void setAlarm(Task t) {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Bundle extras = new Bundle();
+        Intent myIntent = new Intent(this, AlarmReceiver.class);
+        extras.putString("task name", t.getTaskName());
+        extras.putString("task alert", t.getAlert());
+        myIntent.putExtras(extras);
+
+        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
+
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date Date1 = null;
+        long timeInMilliseconds = 0;
+        try {
+            Date1 = format.parse(startTime);
+            timeInMilliseconds = Date1.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+    }
+
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "taskalertnotificationchannel";
+            String description = "Channel for Alarm Manager";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("taskalertnotification", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
     }
 
     @Override

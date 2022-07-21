@@ -217,15 +217,15 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setStatus(cursor.getInt(1));
             queryData.setTaskName(cursor.getString(2));
             queryData.setTaskDesc(cursor.getString(3));
-            queryData.setTaskUserID(cursor.getInt(4));
-            queryData.setTaskDate(cursor.getString(5));
-            queryData.setTaskStartTime(cursor.getString(6));
-            queryData.setTaskEndTime(cursor.getString(7));
-            queryData.setTaskDuration(cursor.getDouble(8));
-            queryData.setAlert(cursor.getString(9));
-            queryData.setAlertDateTime(cursor.getString(10));
-            queryData.setTaskType(cursor.getString(11));
-            queryData.setRepeat(cursor.getString(12));
+            queryData.setTaskDate(cursor.getString(4));
+            queryData.setTaskStartTime(cursor.getString(5));
+            queryData.setTaskEndTime(cursor.getString(6));
+            queryData.setTaskDuration(cursor.getDouble(7));
+            queryData.setAlert(cursor.getString(8));
+            queryData.setAlertDateTime(cursor.getString(9));
+            queryData.setTaskType(cursor.getString(10));
+            queryData.setRepeat(cursor.getString(11));
+            queryData.setTaskUserID(cursor.getInt(12));
         }
         else {
             queryData = null;
