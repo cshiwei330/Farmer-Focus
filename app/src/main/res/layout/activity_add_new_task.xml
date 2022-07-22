@@ -31,16 +31,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
-                <Spinner
-                    android:id="@+id/taskTypeSpinnerDropDown"
-                    android:layout_width="280dp"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:minHeight="48dp"
-                    app:layout_constraintStart_toStartOf="@+id/taskTypeTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/taskTypeTextView"
-                    tools:ignore="SpeakableTextPresentCheck" />
-
                 <Button
                     android:id="@+id/editTaskDatePicker"
                     style="?android:spinnerStyle"
@@ -74,12 +64,13 @@
                     android:id="@+id/taskNameTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="90dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Name:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/taskTypeSpinnerDropDown"
-                    app:layout_constraintTop_toBottomOf="@+id/taskTypeSpinnerDropDown" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/newTaskDescActivity"
@@ -198,17 +189,6 @@
                     android:textSize="34sp"
                     app:layout_constraintStart_toStartOf="@+id/newTaskEndTime"
                     app:layout_constraintTop_toBottomOf="@+id/newTaskEndTime" />
-
-                <TextView
-                    android:id="@+id/taskTypeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
-                    android:layout_marginTop="66dp"
-                    android:text="Task Type:"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
                     android:id="@+id/repeatSpinnerDropDown"

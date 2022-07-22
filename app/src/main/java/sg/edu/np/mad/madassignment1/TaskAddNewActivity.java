@@ -51,7 +51,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
     public String GLOBAL_PREF = "MyPrefs";
 
-    private Spinner spinnerAlert, spinnerTaskType, spinnerRepeat;
+    private Spinner spinnerAlert, spinnerRepeat;
 
     private ActivityMainBinding binding;
 
@@ -73,7 +73,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         ImageView backButton = findViewById(R.id.addNewTaskBackButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
-        spinnerTaskType = findViewById(R.id.taskTypeSpinnerDropDown);
         spinnerRepeat = findViewById(R.id.repeatSpinnerDropDown);
 
         // Alert Times Spinner DropDown
@@ -95,24 +94,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-        // Task Type Spinner DropDown
-        String[] taskTypes = getResources().getStringArray(R.array.task_type_options);
-        ArrayAdapter adapter1 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, taskTypes);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTaskType.setAdapter(adapter1);
 
-        spinnerTaskType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                taskType = adapterView.getItemAtPosition(i).toString();
-                if (taskType.matches("Choose Task Type")){
-                    taskType = null;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
 
         // Repeat Spinner DropDown
         String[] repeatOptions = getResources().getStringArray(R.array.task_repeat_options);
@@ -124,8 +106,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 repeat = adapterView.getItemAtPosition(i).toString();
-                if (repeat.matches("Choose Repeat Option")){
-                    repeat = null;
+                if (repeat.matches("Weekly") || repeat.matches("Monthly")){
+                    taskType = "Recurring";
+                }
+                else {
+                    taskType = "Event";
                 }
             }
 

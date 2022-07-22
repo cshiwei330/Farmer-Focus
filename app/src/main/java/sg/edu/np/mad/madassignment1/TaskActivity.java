@@ -328,7 +328,6 @@ public class TaskActivity extends DrawerBaseActivity{
                         dbHandler.deleteAllTask(user.getUserID());
                         //replace taskList with empty dbHandler
                         taskList = dbHandler.getTaskData(user.getUserID());
-                        Log.v("GOD",String.valueOf(taskList.size()));
                         //force clear adaptor
                         mAdaptor.clear();
 
