@@ -134,8 +134,8 @@
                     android:id="@+id/createNewTaskButtonActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
                     android:backgroundTint="#7E9278"
                     android:text="Create New Task"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -207,6 +207,17 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/editTaskAlertDropDown"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="* Optional"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/taskDescTextView3"
+                    app:layout_constraintStart_toEndOf="@+id/taskDescTextView3"
+                    app:layout_constraintTop_toTopOf="@+id/taskDescTextView3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
