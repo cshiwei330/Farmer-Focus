@@ -36,7 +36,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     int year, month, dayOfMonth, alertIndex, repeatIndex;
     double diffInTime;
 
-    String alert, repeat;
+    String alert, repeat, taskType;
     private Spinner spinnerAlert, spinnerRepeat;
 
     public String GLOBAL_PREF = "MyPrefs";
@@ -145,6 +145,12 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 repeat = adapterView.getItemAtPosition(i).toString();
+                if (repeat.matches("Weekly") || repeat.matches("Monthly")){
+                    taskType = "Recurring";
+                }
+                else {
+                    taskType = currentTask.getTaskType();
+                }
             }
 
             @Override
@@ -310,8 +316,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     e.printStackTrace();
                 }
 
-                String taskType = currentTask.getTaskType();
-
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
@@ -332,7 +336,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
-
 
     }
 
