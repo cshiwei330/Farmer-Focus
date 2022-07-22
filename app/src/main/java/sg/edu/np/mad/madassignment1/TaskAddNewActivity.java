@@ -1,5 +1,6 @@
 package sg.edu.np.mad.madassignment1;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -28,6 +29,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.github.mikephil.charting.utils.Utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -304,7 +307,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+        }
+        else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+        }
     }
 
     private void createNotificationChannel() {
