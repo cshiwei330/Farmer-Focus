@@ -33,10 +33,8 @@ public class TaskViewActivity extends AppCompatActivity {
         TextView taskDate = findViewById(R.id.taskViewTaskDateDisplay);
         TextView taskStartTime = findViewById(R.id.taskViewTaskStartTimeDisplay);
         TextView taskEndTime = findViewById(R.id.taskViewTaskEndTimeDisplay);
-        TextView taskDuration = findViewById(R.id.taskViewTaskDurationDisplay);
         TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         TextView taskAlertDateTime = findViewById(R.id.viewTaskAlertDateTimeDisplay);
-        TextView taskType = findViewById(R.id.viewTaskTypeDisplay);
         TextView taskRepeat = findViewById(R.id.viewTaskRepeatDisplay);
         ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
@@ -53,39 +51,6 @@ public class TaskViewActivity extends AppCompatActivity {
         taskStartTime.setText(task.getTaskStartTime());
         taskEndTime.setText(task.getTaskEndTime());
 
-        double hoursDecimal = task.getTaskDuration() / 60;
-        int hours = (int) hoursDecimal;
-        int minutes = (int) task.getTaskDuration() - (hours * 60);
-
-        // Set Task Duration
-        if (hours == 0 && minutes == 0){
-            taskDuration.setText("0 mins");
-        }
-        else if (hours == 0 && minutes == 1){
-            taskDuration.setText(minutes + " Min ");
-        }
-        else if (hours == 0 && minutes > 1){
-            taskDuration.setText(minutes + " Mins ");
-        }
-        else if (hours == 1 && minutes == 0){
-            taskDuration.setText(hours + " Hour ");
-        }
-        else if (hours == 1 && minutes == 1){
-            taskDuration.setText(hours + " Hour " + minutes + " Min");
-        }
-        else if (hours == 1 && minutes > 1){
-            taskDuration.setText(hours + " Hour " + minutes + " Mins");
-        }
-        else if (hours > 1 && minutes == 0){
-            taskDuration.setText(hours + " Hours ");
-        }
-        else if (hours > 1 && minutes == 1){
-            taskDuration.setText(hours + " Hours " + minutes + " Min");
-        }
-        else {
-            taskDuration.setText(hours + " Hours " + minutes + " Mins");
-        }
-
         // Set Task Alert
         taskAlert.setText(task.getAlert());
 
@@ -96,9 +61,6 @@ public class TaskViewActivity extends AppCompatActivity {
         else {
             taskAlertDateTime.setText(task.getAlertDateTime());
         }
-
-        String taskTypeFromDB = task.getTaskType();
-        taskType.setText(taskTypeFromDB);
 
         taskRepeat.setText(task.getRepeat());
 

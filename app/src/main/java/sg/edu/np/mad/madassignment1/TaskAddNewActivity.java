@@ -164,25 +164,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     String endTime =  String.format("%02d:%02d",endhour,endminute);
                     newTaskDB.setTaskEndTime(endTime);
 
-                    // Get Task Duration
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
-                    try {
-                        Date Date1 = simpleDateFormat.parse(startTime);
-                        Date Date2 = simpleDateFormat.parse(endTime);
-                        long difference = Date2.getTime() - Date1.getTime();
-                        if(difference<0)
-                        {
-                            Date dateMax = simpleDateFormat.parse("24:00");
-                            Date dateMin = simpleDateFormat.parse("00:00");
-                            difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
-                        }
-                        int min = (int) difference / 60000;
-                        diffInTime = min;
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    newTaskDB.setTaskDuration(diffInTime);
+                    newTaskDB.setTaskDuration(0);
 
                     newTaskDB.setAlert(alert);
 

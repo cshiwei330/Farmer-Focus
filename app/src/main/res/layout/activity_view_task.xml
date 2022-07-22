@@ -59,12 +59,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="76dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="80dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Name:"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewTaskTypeDisplay" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/taskViewTaskStartTime"
@@ -143,8 +143,8 @@
                     android:layout_marginTop="30dp"
                     android:text="Alert:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskDurationDisplay"
-                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskDurationDisplay" />
+                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskEndTimeDisplay"
+                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskEndTimeDisplay" />
 
                 <TextView
                     android:id="@+id/taskViewTaskEndTime"
@@ -164,25 +164,6 @@
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="@+id/taskViewTaskEndTime"
                     app:layout_constraintTop_toBottomOf="@+id/taskViewTaskEndTime" />
-
-                <TextView
-                    android:id="@+id/taskViewDuratioin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="Task Duration:"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/taskViewTaskEndTimeDisplay"
-                    app:layout_constraintTop_toBottomOf="@+id/taskViewTaskEndTimeDisplay" />
-
-                <TextView
-                    android:id="@+id/taskViewTaskDurationDisplay"
-                    android:layout_width="232dp"
-                    android:layout_height="31dp"
-                    android:text="TextView"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/taskViewDuratioin"
-                    app:layout_constraintTop_toBottomOf="@+id/taskViewDuratioin" />
 
                 <TextView
                     android:id="@+id/viewTaskAlertDateTime"
@@ -219,26 +200,6 @@
                     app:srcCompat="@drawable/ic_baseline_delete_outline_24"
                     app:tint="#FFFFFF"
                     tools:ignore="SpeakableTextPresentCheck" />
-
-                <TextView
-                    android:id="@+id/viewTaskTypeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="76dp"
-                    android:layout_marginTop="80dp"
-                    android:text="Task Type:"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/viewTaskTypeDisplay"
-                    android:layout_width="232dp"
-                    android:layout_height="32dp"
-                    android:text="TextView"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@+id/viewTaskTypeTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/viewTaskTypeTextView" />
 
                 <TextView
                     android:id="@+id/viewTaskRepeatTextView"
