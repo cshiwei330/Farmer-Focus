@@ -315,7 +315,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public int getTaskStatus(Date date) throws ParseException {
         SQLiteDatabase db = this.getWritableDatabase();
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dateParsed = sdf.format(date);
         String getTaskStatus = "SELECT " + COLUMN_TASKSTATUS + " FROM " + TASKS + " WHERE " + COLUMN_TASKSTATUS + " = " + "1"
@@ -326,4 +325,19 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return count;
     }
+
+    /*public ArrayList<Task> getTaskList(){
+        ArrayList<Task> recurring_task = new ArrayList<Task> {};
+        SQLiteDatabase db = this.getWritableDatabase();
+        String countTask = "SELECT * FROM "+ TASKS + " WHERE " + COLUMN_TASKTYPE + " = " + "Recurring";
+        Cursor cursor = db.rawQuery(countTask,null);
+        while (cursor.moveToNext()){
+            String taskid = cursor.getString(0);
+            String mood = cursor.getString(1);
+            Task newTaskEntry = new Task();
+            recurring_task. add(newTaskEntry);
+        }
+        db.close();
+        return recurring_task;
+    }*/
 }

@@ -7,12 +7,12 @@
     tools:context=".StatisticsActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/dotwContainerView"
+        android:id="@+id/dataOfTheWeek"
         android:name="sg.edu.np.mad.madassignment1.StatsWeekFragment"
-        android:layout_width="337dp"
+        android:layout_width="340dp"
         android:layout_height="250dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,15 +20,28 @@
         tools:layout="@layout/fragment_stats_week" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/motwContainerView"
+        android:id="@+id/moodOfTheWeek"
         android:name="sg.edu.np.mad.madassignment1.MoodoftheweekFragment"
-        android:layout_width="339dp"
+        android:layout_width="340dp"
         android:layout_height="200dp"
         android:layout_marginStart="37dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dotwContainerView"
+        app:layout_constraintTop_toBottomOf="@+id/dataOfTheWeek"
         tools:layout="@layout/fragment_moodoftheweek" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/searchTaskContainer"
+        android:name="sg.edu.np.mad.madassignment1.StatsSearchTaskFragment"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="37dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moodOfTheWeek"
+        tools:layout="@layout/fragment_stats_search_task" />
 </androidx.constraintlayout.widget.ConstraintLayout>

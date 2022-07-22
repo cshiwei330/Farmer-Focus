@@ -87,6 +87,9 @@ public class MoodoftheweekFragment extends Fragment {
                     viewArticle.setPaintFlags(viewArticle.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
                     if (motw.equals("happy")) {
                         moodStats.setText("In the past 7 days, you have been mostly happy. \nKeep the positivity coming!");
+                        articleImage.setVisibility(View.GONE);
+                        article.setVisibility(View.GONE);
+                        viewArticle.setVisibility(View.GONE);
                     } else if (motw.equals("neutral")) {
                         moodStats.setText("In the past 7 days, you have been mostly neutral. \nSpend more time on your mental health! \nHere's an article to help :)");
                         articleImage.setImageResource(R.drawable.neutral);

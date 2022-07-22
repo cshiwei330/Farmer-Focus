@@ -37,7 +37,7 @@
             android:name=".TaskEditActivity"
             android:exported="false" />
         <activity
-            android:name=".RecurringTaskStatsActivity"
+            android:name=".StatsRecurringTaskActivity"
             android:exported="false" />
         <activity
             android:name=".StatisticsActivity"
