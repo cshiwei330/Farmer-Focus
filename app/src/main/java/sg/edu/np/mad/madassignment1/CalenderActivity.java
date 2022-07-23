@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -36,7 +37,11 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     private Calendar calendar;
     private Date currentDate;
 
-    private CalenderAdaptor calenderAdaptor;
+//    private CalenderAdaptor calenderAdaptor;
+
+    private HourAdapter hourAdapter;
+    private ListView hourListView;
+
     private CalenderViewAdaptor calendarViewAdapter;
     private RecyclerView recyclerView;
 
@@ -61,7 +66,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         //get task data from database
         taskList = dbHandler.getTaskData(user.getUserID());
-
+/*
         //define recyclerView
         recyclerView = findViewById(R.id.calenderToDoListRecycleView);
 
@@ -74,8 +79,17 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         recyclerView.setLayoutManager(LayoutManager);
         recyclerView.setAdapter(calenderAdaptor);
 
+        hourAdapter = new HourAdapter(this, initHourTasksList(), taskList);
+        ListView hourListView = findViewById(R.id.hourListView);
+        hourListView.setAdapter(hourAdapter);
+
         //set recycler view to be invisible until a date has been selected
         recyclerView.setVisibility(View.GONE);
+*/
+        hourAdapter = new HourAdapter(this, initHourTasksList(), taskList);
+        hourListView = findViewById(R.id.hourListView);
+        hourListView.setAdapter(hourAdapter);
+        hourListView.setVisibility(View.GONE);
 
         //calenderView
         //initialize views
@@ -91,6 +105,20 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         setMonthView();
 
     }
+    //create list of hourTasks with hour 0:00 - 23:00, null tasks, length = 24
+    public ArrayList<HourTasks> initHourTasksList(){
+
+        ArrayList<HourTasks> hourTasksList = new ArrayList<>();
+
+        for (int i = 0; i < 23; i++) {
+            String hour = String.valueOf(i) + ":00";
+            ArrayList<Task> empty = new ArrayList<Task>();
+            HourTasks ht = new HourTasks(hour,empty);
+            hourTasksList.add(ht);
+        }
+        return hourTasksList;
+    }
+
     //initialize views for calenderView
     private void initWidgets()
     {
@@ -177,9 +205,14 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         //if not a blank date cell is clicked
         if(!dayText.equals(""))
         {
+//            //set recycler view to be visible when a date has been selected
+//            if (recyclerView.getVisibility()== View.GONE){
+//                recyclerView.setVisibility(View.VISIBLE);
+//            }
+
             //set recycler view to be visible when a date has been selected
-            if (recyclerView.getVisibility()== View.GONE){
-                recyclerView.setVisibility(View.VISIBLE);
+            if (hourListView.getVisibility()== View.GONE){
+                hourListView.setVisibility(View.VISIBLE);
             }
 
             //set date format
@@ -194,7 +227,8 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
             //set shading and todolist filters
             calendarViewAdapter.getFilter().filter(stringDate);
-            calenderAdaptor.getFilter().filter(stringDate);
+            //calenderAdaptor.getFilter().filter(stringDate);
+            hourAdapter.getFilter().filter(stringDate);
             Log.v("Calender button clicked",stringDate);
 
 
@@ -225,4 +259,5 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         }
         return tasksInThisMonth;
     }
+
 }
