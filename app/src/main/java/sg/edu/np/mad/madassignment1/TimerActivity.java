@@ -1,5 +1,6 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,17 +16,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends DrawerBaseActivity{
-    int hour, minute, second;
+    private final String TAG = "Timer Activity";
+    int starthour, startminute, endhour, endminute;
+    int year, month, dayOfMonth;
+    String alert, taskType, repeat, startTime, taskDate;
+    double diffInTime;
+    ArrayList<Task> taskList = new ArrayList<>();
+
     //define activity binding
     ActivityTimerBinding activityTimerBinding;
 
@@ -36,6 +47,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private ImageView SetTime;
     private Button mButtonStartPause;
     private Button mButtonReset;
+    private Button mButtonGiveUp;
     private TextView mTimeTextView;
 
     private CountDownTimer mCountDownTimer;
@@ -65,7 +77,7 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
         mTimeTextView = findViewById(R.id.countdown);
-
+        mButtonGiveUp = findViewById(R.id.giveUpBtn);
 
 
         //NEW
@@ -78,27 +90,43 @@ public class TimerActivity extends DrawerBaseActivity{
         String username = sharedPreferences.getString("username", "");
         User user = dbHandler.findUser(username);
 
-        Intent receivingEnd = getIntent();
-        int newTaskId = receivingEnd.getIntExtra("task id", 0);
-        task = dbHandler.findTask(newTaskId);
-        //setTime(task);
+        //get task data from database
+        taskList = dbHandler.getTaskData(user.getUserID());
 
-        //define recyclerView
-        //RecyclerView recyclerView = findViewById(R.id.UncompletedTaskRecycleView);
+        // receiving from bundle
+//        Intent receivingEnd = getIntent();
+//        int oldTaskId = receivingEnd.getIntExtra("task id", -1);
+        //Task currentTask = dbHandler.findTask(oldTaskId);
+        //Log.v(TAG, currentTask.getTaskEndTime());
+        //task = dbHandler.findTask(oldTaskId);
 
-        //Finding uncompleted tasks
-        //define taskList array
-//        ArrayList<Task> taskList = new ArrayList<>();
-//        //current taskList with db data
-//        taskList = dbHandler.getTaskData(user.getUserID());
 
-        // initialize recyclerview for TASKS
-        //set adaptor to TimerRecyclerViewAdaptor, given taskList
-//        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(taskList);
-//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(mLayoutManager);
-//        recyclerView.setAdapter(mAdaptor);
-        //setTime(dbHandler.findTask(TaskId)); // use method from dbHandler to get task using taskId
+        // receive from bundle
+//        Intent receivingEnd = getIntent();
+//        int oldTaskId = receivingEnd.getIntExtra("task id", 0);
+
+        // if extras is not null receive from bundle and set time
+        SetTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    int taskId = extras.getInt("task id", -1);
+                    task = dbHandler.findTask(taskId);
+
+                    setTime(task);
+                }
+            }
+        });
+
+//        Bundle extras  = getIntent().getExtras();
+//        if (extras != null) {
+//            int taskId = extras.getInt("task id", -1);
+//            task = dbHandler.findTask(taskId);
+//
+//            setTime(task);
+//    }
+
 
         //NEW
 
@@ -116,7 +144,7 @@ public class TimerActivity extends DrawerBaseActivity{
 //                    Toast.makeText(TimerActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
-//                long millisInput = Long.parseLong(input) * 60000; // change to minutes
+//                long millisInput = Long.parseLong(input) * 60000; // change to milliseconds
 //                if (millisInput <= 0) {
 //                    Toast.makeText(TimerActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
 //                    return;
@@ -133,7 +161,8 @@ public class TimerActivity extends DrawerBaseActivity{
             public void onClick(View view) {
                 if (mTimerRunning) {
                     pauseTimer();
-                } else {
+                }
+                else {
                     startTimer();
                 }
             }
@@ -155,6 +184,38 @@ public class TimerActivity extends DrawerBaseActivity{
 //                popTimePicker();
 //            }
 //        });
+
+        // give up button (stop doing the task)
+        mButtonGiveUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
+                builder.setTitle("Are you sure to give up?");
+                builder.setMessage("It seems like you have not sat through the entire duration of the task but " +
+                        "it's normal to complete the task before the duration is up." +
+                        "\n\nWould you like to stop doing the task?");
+                builder.setCancelable(true);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        // pause timer
+                        pauseTimer();
+                        // get duration
+                        // edit task duration column
+                        // mark task as completed
+                        Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("No", new
+                        DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int id){
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog promptTaskCompleted = builder.create();
+                promptTaskCompleted.show();
+            }
+        });
 
         // navigate to stopwatch page
         ImageView StopWatch = findViewById(R.id.StopWatchImg);
@@ -193,6 +254,7 @@ public class TimerActivity extends DrawerBaseActivity{
                 startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
             }
         });
+
 
     }
 
@@ -241,16 +303,29 @@ public class TimerActivity extends DrawerBaseActivity{
 //        closeKeyboard();
 //    }
 
-//    private void setTime(Task t) {
-//        // receive from bundle
-//        //Intent receivingEnd = getIntent();
-//        //int TaskId = receivingEnd.getIntExtra("task id", -1);
-//        double milliseconds = (t.getTaskDuration() * 60000.0);
-//        mStartTimeInMillis = (new Double(milliseconds)).longValue();
-//        //Double.valueOf(milliseconds).longValue();
-//        resetTimer();
-//        //closeKeyboard();
-//    }
+    private void setTime(Task t) {
+        // Get Task Duration
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+        try {
+            Date Date1 = simpleDateFormat.parse(t.getTaskStartTime());
+            Date Date2 = simpleDateFormat.parse(t.getTaskEndTime());
+            long difference = Date2.getTime() - Date1.getTime();
+            if(difference<0)
+            {
+                Date dateMax = simpleDateFormat.parse("24:00");
+                Date dateMin = simpleDateFormat.parse("00:00");
+                difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
+            }
+            double milliseconds = (double) difference;
+//            long millis = (new Double(milliseconds)).longValue();
+//            mStartTimeInMillis = millis;
+            mStartTimeInMillis = new Double(milliseconds).longValue(); // get task duration
+            resetTimer(); // set the time in countdown textView
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -284,6 +359,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
     private void resetTimer() {
         mTimeLeftInMillis = mStartTimeInMillis;
+        //mTimeLeftInMillis = 0;
         updateCountDownText();
         updateWatchInterface();
     }
@@ -362,7 +438,7 @@ public class TimerActivity extends DrawerBaseActivity{
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        //editor.putLong("startTimeInMillis", mStartTimeInMillis);
+        editor.putLong("startTimeInMillis", mStartTimeInMillis);
         editor.putLong("millisLeft", mTimeLeftInMillis);
         editor.putBoolean("timerRunning", mTimerRunning);
         editor.putLong("endTime", mEndTime);

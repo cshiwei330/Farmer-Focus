@@ -2,6 +2,7 @@ package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,9 +80,10 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
 
     public void openTaskInfo(TimerRecyclerViewHolder holder, Task t){
         Bundle extras = new Bundle();
-        Intent myIntent = new Intent(holder.taskName.getContext(), TimerActivity.class);
         extras.putInt("task id", t.getId());
+        Log.v("test", String.valueOf(t.getId()));
 
+        Intent myIntent = new Intent(holder.taskName.getContext(), TimerActivity.class);
         myIntent.putExtras(extras);
 
         holder.taskName.getContext().startActivity(myIntent);

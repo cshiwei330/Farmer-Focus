@@ -86,7 +86,7 @@ public class TaskRecyclerViewAdaptor extends RecyclerView.Adapter<TaskRecyclerVi
     public void openTaskInfo(TaskRecyclerViewHolder holder, Task t){
         Bundle extras = new Bundle();
         Intent myIntent = new Intent(holder.taskName.getContext(), TaskViewActivity.class);
-        extras.putInt("task id", t.getId());
+        extras.putInt("Task id", t.getId());
 
         myIntent.putExtras(extras);
 
