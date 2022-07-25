@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+//import me.relex.circleindicator.CircleIndicator;
 import sg.edu.np.mad.madassignment1.databinding.ActivityFarmBinding;
 import sg.edu.np.mad.madassignment1.databinding.ActivityTaskBinding;
 
@@ -34,7 +35,12 @@ public class FarmActivity extends DrawerBaseActivity {
 
         FragmentPagerAdapter adapterViewPager;
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+//        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+//        indicator.setViewPager(vpPager);
+
         adapterViewPager = new PagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
+
+
     }
 }
