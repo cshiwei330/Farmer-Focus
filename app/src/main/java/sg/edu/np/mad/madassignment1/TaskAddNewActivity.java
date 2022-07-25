@@ -299,9 +299,14 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 //                            alertDateTime = String.valueOf(alertD);
 //                            alertDateTimeList.add(alertDateTime);
 //                        }
-
-
-                        for (int i=0; i<52; i++) {
+                        int numberOfTimes;
+                        if (repeat.matches("Weekly")) {
+                            numberOfTimes = 51;
+                        }
+                        else {
+                            numberOfTimes = 11;
+                        }
+                        for (int i=0; i<numberOfTimes; i++) {
 
                             // Set Task Id, Status, Name; Desc
                             id = id + 1;
@@ -328,7 +333,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             if (t.getAlert().matches("None") == false){
                                 setAlarm(t);
                             }
-
                         }
                     }
                     //start TaskActivity
