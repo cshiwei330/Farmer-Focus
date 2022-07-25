@@ -56,6 +56,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private long mStartTimeInMillis;
     private long mTimeLeftInMillis;
     private long mEndTime;
+    private long mDuration;
 
     Task task;
 
@@ -70,8 +71,8 @@ public class TimerActivity extends DrawerBaseActivity{
         allocateActivityTitle("Timer");
 
         //timer
-        mTextSetTime = findViewById(R.id.textview_setTime);
-        mEditTextInput = findViewById(R.id.edit_text_minutes);
+//        mTextSetTime = findViewById(R.id.textview_setTime);
+//        mEditTextInput = findViewById(R.id.edit_text_minutes);
         mTextViewCountDown = findViewById(R.id.countdown);
         SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
@@ -132,7 +133,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
         // displays numeric keyboard
         // only allow user to key in integers 0 to 9 and not anything else when setting the time
-        mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        //mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
@@ -168,8 +169,7 @@ public class TimerActivity extends DrawerBaseActivity{
             }
         });
 
-        // reset the timer (this button will only be shown once countdown timer has started and after the user
-        // clicked the pause button)
+        // reset the timer
         mButtonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,6 +200,7 @@ public class TimerActivity extends DrawerBaseActivity{
                         // pause timer
                         pauseTimer();
                         // get duration
+                        mDuration = mStartTimeInMillis - System.currentTimeMillis();
                         // edit task duration column
                         // mark task as completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
@@ -237,23 +238,23 @@ public class TimerActivity extends DrawerBaseActivity{
         });
 
         // navigate to task list page to select task
-        ImageView SelectTask = findViewById(R.id.selectTaskImg);
-        SelectTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
-                //put extra
-                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        TimerActivity.this.finish();
-                    }
-                });
-                //start activity with result
-                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
-            }
-        });
+//        ImageView SelectTask = findViewById(R.id.selectTaskImg);
+//        SelectTask.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
+//                //put extra
+//                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
+//                    @Override
+//                    //when result code =1, received from bundle, kill this activity
+//                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+//                        TimerActivity.this.finish();
+//                    }
+//                });
+//                //start activity with result
+//                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
+//            }
+//        });
 
 
     }
@@ -317,8 +318,6 @@ public class TimerActivity extends DrawerBaseActivity{
                 difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
             }
             double milliseconds = (double) difference;
-//            long millis = (new Double(milliseconds)).longValue();
-//            mStartTimeInMillis = millis;
             mStartTimeInMillis = new Double(milliseconds).longValue(); // get task duration
             resetTimer(); // set the time in countdown textView
         }
@@ -388,16 +387,16 @@ public class TimerActivity extends DrawerBaseActivity{
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
-            SetTime.setVisibility(View.INVISIBLE);
-            mTextSetTime.setVisibility(View.INVISIBLE);
-            mEditTextInput.setVisibility(View.INVISIBLE);
+            //SetTime.setVisibility(View.INVISIBLE);
+            //mTextSetTime.setVisibility(View.INVISIBLE);
+            //mEditTextInput.setVisibility(View.INVISIBLE);
             //mButtonReset.setVisibility(View.INVISIBLE);
             mButtonStartPause.setText("Pause");
         }
         else {
-            mTextSetTime.setVisibility(View.VISIBLE);
-            SetTime.setVisibility(View.VISIBLE);
-            mEditTextInput.setVisibility(View.VISIBLE);
+            //mTextSetTime.setVisibility(View.VISIBLE);
+            //SetTime.setVisibility(View.VISIBLE);
+            //mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
 
 //            if (mTimeLeftInMillis < 1000) {
