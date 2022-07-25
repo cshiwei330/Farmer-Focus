@@ -317,13 +317,15 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     e.printStackTrace();
                 }
 
+                int recurringId = currentTask.getRecurringId();
+
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
-                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, user.getUserID());
+                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, user.getUserID());
 
                     dbHandler.editTask(editedTask);
 

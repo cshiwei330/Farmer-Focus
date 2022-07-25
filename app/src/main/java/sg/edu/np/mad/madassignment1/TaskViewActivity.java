@@ -41,7 +41,7 @@ public class TaskViewActivity extends AppCompatActivity {
         FloatingActionButton editTaskButton = findViewById(R.id.editTaskButton);
 
         Intent receivingEnd = getIntent();
-        int newTaskId = receivingEnd.getIntExtra("task id", 0);
+        int newTaskId = receivingEnd.getIntExtra("Task id", 0);
 
         task = dbHandler.findTask(newTaskId);
 
