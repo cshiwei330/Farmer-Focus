@@ -36,7 +36,6 @@ public class TaskViewActivity extends AppCompatActivity {
         TextView taskAlert = findViewById(R.id.viewTaskAlertDisplay);
         TextView taskAlertDateTime = findViewById(R.id.viewTaskAlertDateTimeDisplay);
         TextView taskRepeat = findViewById(R.id.viewTaskRepeatDisplay);
-        ImageView backButton = findViewById(R.id.backButton);
         FloatingActionButton deleteTaskButton = findViewById(R.id.deleteTaskButton);
         FloatingActionButton editTaskButton = findViewById(R.id.editTaskButton);
 
@@ -63,14 +62,6 @@ public class TaskViewActivity extends AppCompatActivity {
         }
 
         taskRepeat.setText(task.getRepeat());
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
-                startActivity(myIntent);
-            }
-        });
 
         editTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override

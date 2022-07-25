@@ -38,6 +38,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
     ArrayList<Task> taskList = new ArrayList<>();
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth, recurringId;
-    long millisToAdd;
+    long millisToAdd, millisToSubtract;
     double diffInTime;
     String alert, taskType, repeat, startTime, taskDate, date, endTime, strDate, alertDateTime;
     Date d;
@@ -162,7 +163,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     // Set Task Alert DateTime
                     DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     taskDate = date + " " + startTime +":00";
-                    long millisToSubtract;
                     try {
                         d = format.parse(taskDate);
                         if (alert.matches("None")){
@@ -252,21 +252,25 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     // Add remaining 51 recurring task to DB
                     if (taskType.matches("Recurring")) {
 
-                        // Check interval to add for each task date and task alert datetime
+                        // Decides how many tasks to add
+                        // For weekly, it will add 52 tasks
+                        // For monthly, it will add 12 tasks
+                        // Note: Both will add 1 year worth of tasks
+                        int numberOfTimes;
                         if (repeat.matches("Weekly")) {
-                            millisToAdd = 604800000;
-                        }
-                        else if (repeat.matches("Monthly")){
-                            millisToAdd = 2629800 * 1000;
+                            numberOfTimes = 51;
                         }
                         else {
-                            alertDateTime = " ";
+                            numberOfTimes = 11;
                         }
+
 
                         // List of taskDates
                         String startDateString = dayOfMonth + "-" + month + "-" + year;
-                        Date taskDateRecurring = null;
+
                         ArrayList<String> taskDateList = new ArrayList<>();
+
+                        Date taskDateRecurring = null;
 
                         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         try {
@@ -275,37 +279,42 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             e.printStackTrace();
                         }
 
-                        for (int i=0; i<52; i++) {
-                            taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
-                            strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
-                            strDate = strDate.replace("/", "-");
-                            taskDateList.add(strDate);
+                        // Check interval to add for each task date and task alert datetime
+                        if (repeat.matches("Weekly")) {
+                            millisToAdd = 604800000;
+                            for (int i=0; i<numberOfTimes; i++) {
+                                taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
+                                strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
+                                strDate = strDate.replace("/", "-");
+                                taskDateList.add(strDate);
+                            }
                         }
-
+                        else { // if (repeat.matches("Monthly"))
+                            for (int i=0; i<numberOfTimes; i++) {
+                                taskDateRecurring.setMonth(taskDateRecurring.getMonth() + 1);
+                                strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
+                                strDate = strDate.replace("/", "-");
+                                taskDateList.add(strDate);
+                            }
+                        }
 
                         // List of alertDateTime
                         DateFormat alertDateTimeFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
                         ArrayList<String> alertDateTimeList = new ArrayList<>();
                         Date alertD = d;
-//                        try {
-//                            alertD = alertDateTimeFormat.parse(taskDate);
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
+                        try {
+                            alertD = alertDateTimeFormat.parse(taskDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
 
-//                        for (int i=0; i<52; i++) {
-//                            alertD.setTime(alertD.getTime() + millisToAdd);
-//                            alertDateTime = String.valueOf(alertD);
-//                            alertDateTimeList.add(alertDateTime);
-//                        }
-                        int numberOfTimes;
-                        if (repeat.matches("Weekly")) {
-                            numberOfTimes = 51;
+                        for (int i=0; i<52; i++) {
+                            alertD.setMonth(alertD.getMonth() + 1);
+                            alertDateTime = String.valueOf(alertD);
+                            alertDateTimeList.add(alertDateTime);
                         }
-                        else {
-                            numberOfTimes = 11;
-                        }
+
                         for (int i=0; i<numberOfTimes; i++) {
 
                             // Set Task Id, Status, Name; Desc
@@ -319,7 +328,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             newTaskDB.setTaskEndTime(endTime);
                             newTaskDB.setTaskDuration(0);
                             newTaskDB.setAlert(alert);
-                            newTaskDB.setAlertDateTime(" ");//alertDateTimeList.get(i)
+                            newTaskDB.setAlertDateTime(alertDateTimeList.get(i));
                             newTaskDB.setTaskType(taskType);
                             newTaskDB.setRepeat(repeat);
                             newTaskDB.setRecurringId(newRecurringId);
