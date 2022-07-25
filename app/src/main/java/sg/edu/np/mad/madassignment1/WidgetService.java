@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -48,6 +47,15 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
+            // getting stored username
+            SharedPreferences sharedPreferences = context.getSharedPreferences(dbHandler.GLOBAL_PREF, 0);
+            String username = sharedPreferences.getString("username", "");
+            User user = dbHandler.findUser(username);
+
+            // Fill taskList with current db data
+            ArrayList<Task> taskList = new ArrayList<>();
+            taskList = dbHandler.getTaskData((user.getUserID()));
+            todayTaskList = findTodayTasks(taskList);
         }
 
         @Override
@@ -66,7 +74,7 @@ public class WidgetService extends RemoteViewsService {
             @SuppressLint("RemoteViewLayout") RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_today_task_item);
 
             remoteView.setTextViewText(R.id.widgetTaskName, t.getTaskName());
-            remoteView.setTextViewText(R.id.widgetTaskTime, t.getTaskStartTime());
+            //remoteView.setTextViewText(R.id.widgetTaskTime, t.getTaskStartTime());
 
 
             return remoteView;

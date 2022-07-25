@@ -18,24 +18,19 @@ import java.util.Date;
 public class WidgetProvider extends AppWidgetProvider {
 
     public String GLOBAL_PREF = "MyPrefs";
+    private Context context;
+    private DBHandler dbHandler;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId, String GLOBAL_PREF) {
-
-        // For List View
-        Intent serviceIntent = new Intent(context, WidgetService.class);
-        RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
-        mainView.setRemoteAdapter(R.id.widgetListView, serviceIntent);
-        mainView.setEmptyView(R.id.widgetListView, R.id.empty);
+                                int appWidgetId, String GLOBAL_PREF, DBHandler dbHandler) {
 
         //Task Number
-
-        DBHandler dbHandler = new DBHandler(context,null,null,6);
         ArrayList<Task> todayTaskList = new ArrayList<>();
 
         // getting stored username
         SharedPreferences sharedPreferences = context.getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
+        dbHandler = new DBHandler(context, null, null, 6);
         User user = dbHandler.findUser(username);
 
         // Fill taskList with current db data
@@ -45,7 +40,13 @@ public class WidgetProvider extends AppWidgetProvider {
 
         // To see how many tasks
         int taskNo = todayTaskList.size();
+        RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
         mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(taskNo)));
+
+        // For List View
+        Intent serviceIntent = new Intent(context, WidgetService.class);
+        mainView.setRemoteAdapter(R.id.widgetListView, serviceIntent);
+        mainView.setEmptyView(R.id.widgetListView, R.id.empty);
 
 
         // Add New Task Button
@@ -55,13 +56,15 @@ public class WidgetProvider extends AppWidgetProvider {
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, mainView);
+
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId, GLOBAL_PREF);
+            updateAppWidget(context, appWidgetManager, appWidgetId, GLOBAL_PREF, dbHandler);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
