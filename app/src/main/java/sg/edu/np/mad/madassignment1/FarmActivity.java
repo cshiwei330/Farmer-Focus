@@ -1,6 +1,8 @@
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
@@ -29,5 +31,10 @@ public class FarmActivity extends DrawerBaseActivity {
         setContentView(activityFarmBinding.getRoot());
         //set title
         allocateActivityTitle("My Farm");
+
+        FragmentPagerAdapter adapterViewPager;
+        ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
+        adapterViewPager = new PagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
     }
 }
