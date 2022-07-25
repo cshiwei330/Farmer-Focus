@@ -11,6 +11,8 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -42,6 +44,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_TASKALERTDATETIME = "TaskAlertDateTime";
     public static String COLUMN_TASKTYPE = "TaskType";
     public static String COLUMN_TASKREPEAT = "TaskRepeat";
+    public static String COLUMN_RECURRINGID = "RecurringId";
     public static String COLUMN_TASKUSERID = "taskUserID";
 
     //mood tracker
@@ -83,6 +86,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKALERTDATETIME + " STRING, "
                 + COLUMN_TASKTYPE + " STRING, "
                 + COLUMN_TASKREPEAT + " STRING, "
+                + COLUMN_RECURRINGID + " INTEGER, "
                 + "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
                 + ")";
 
@@ -168,6 +172,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_TASKALERTDATETIME, taskData.getAlertDateTime());
         values.put(COLUMN_TASKTYPE, taskData.getTaskType());
         values.put(COLUMN_TASKREPEAT, taskData.getRepeat());
+        values.put(COLUMN_RECURRINGID, taskData.getRecurringId());
         values.put(COLUMN_USERID, taskData.getTaskUserID());
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -196,8 +201,10 @@ public class DBHandler extends SQLiteOpenHelper {
             String taskAlertDateTime = cursor.getString(10);
             String taskType = cursor.getString(11);
             String taskRepeat = cursor.getString(12);
+            int recurringId = cursor.getInt(13);
 
-            Task newTask = new Task(id, status, name, desc, taskDate, taskStartTime, taskEndTime, taskDuration, taskAlert, taskAlertDateTime, taskType, taskRepeat, userID);
+            Task newTask = new Task(id, status, name, desc, taskDate, taskStartTime, taskEndTime, taskDuration, taskAlert,
+                    taskAlertDateTime, taskType, taskRepeat, recurringId, userID);
             taskArrayList.add(newTask);
         }
         db.close();
@@ -226,6 +233,7 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setAlertDateTime(cursor.getString(10));
             queryData.setTaskType(cursor.getString(11));
             queryData.setRepeat(cursor.getString(12));
+            queryData.setRecurringId(cursor.getInt(13));
 
         }
         else {
@@ -263,6 +271,7 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TASKALERTDATETIME, task.getAlertDateTime());
         contentValues.put(COLUMN_TASKTYPE, task.getTaskType());
         contentValues.put(COLUMN_TASKREPEAT, task.getRepeat());
+        contentValues.put(COLUMN_RECURRINGID, task.getRecurringId());
 
         db.update("TASKS", contentValues, COLUMN_TASKID + " = ?", new String[]{String.valueOf(task.getId())});
 
@@ -324,6 +333,23 @@ public class DBHandler extends SQLiteOpenHelper {
         int count = cursor.getCount();
         db.close();
         return count;
+    }
+
+    public int returnHighestRecurringId(int userId) {
+        ArrayList<Task> taskList =  getTaskData(userId);
+        ArrayList<Integer> recurringIdList = new ArrayList<>();
+
+        if (taskList.size() == 0) {
+            return 0;
+        }
+
+        for (int i=0; i<taskList.size(); i++) {
+            int idToAdd =  taskList.get(i).getRecurringId();
+            recurringIdList.add(idToAdd);
+        }
+
+        Collections.sort(recurringIdList, Collections.reverseOrder());
+        return recurringIdList.get(0);
     }
 
     /*public ArrayList<Task> getTaskList(){

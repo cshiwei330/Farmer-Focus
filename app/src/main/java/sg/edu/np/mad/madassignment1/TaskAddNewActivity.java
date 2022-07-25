@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,13 +33,16 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.utils.Utils;
 
+import java.net.HttpCookie;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityMainBinding;
 
@@ -48,9 +52,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
     ArrayList<Task> taskList = new ArrayList<>();
     int starthour, startminute, endhour, endminute;
-    int year, month, dayOfMonth;
+    int year, month, dayOfMonth, recurringId;
+    long millisToAdd;
     double diffInTime;
-    String alert, taskType, repeat, startTime, taskDate;
+    String alert, taskType, repeat, startTime, taskDate, date, endTime, strDate, alertDateTime;
+    Date d;
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -73,7 +79,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
-        ImageView backButton = findViewById(R.id.addNewTaskBackButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
         spinnerRepeat = findViewById(R.id.repeatSpinnerDropDown);
@@ -149,125 +154,186 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
                     Toast.makeText(TaskAddNewActivity.this, "Task Created", Toast.LENGTH_SHORT).show();
 
-                    // 0 means false = not completed, 1 means true = completed
-                    int status = 0;
-                    int id = taskList.size() + 1;
-
-                    //populate new task fields
-                    Task newTaskDB = new Task();
-                    newTaskDB.setId(id);
-                    newTaskDB.setStatus(status);
-                    newTaskDB.setTaskName(newTaskNameString);
-                    newTaskDB.setTaskDesc(newTaskDescString);
-
-                    String date = String.format("%02d/%02d/%02d",dayOfMonth,month,year);
-                    newTaskDB.setTaskDate(date);
                     startTime =  String.format("%02d:%02d",starthour,startminute);
-                    newTaskDB.setTaskStartTime(startTime);
-                    String endTime =  String.format("%02d:%02d",endhour,endminute);
-                    newTaskDB.setTaskEndTime(endTime);
+                    endTime =  String.format("%02d:%02d",endhour,endminute);
 
-                    newTaskDB.setTaskDuration(0);
+                    date = dayOfMonth + "-" + month + "-" + year;
 
-                    newTaskDB.setAlert(alert);
-
-                    // Set Task Alert Date Time
+                    // Set Task Alert DateTime
                     DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    taskDate = date + " " + startTime +":00";
+                    long millisToSubtract;
                     try {
-                        String dateReplace = date.replace("/", "-");
-                        taskDate = dateReplace + " " + startTime +":00";
-                        long millisToSubtract;
-                        Date d = format.parse(taskDate);
+                        d = format.parse(taskDate);
                         if (alert.matches("None")){
-                            newTaskDB.setAlertDateTime(" ");
+                            taskDate = " ";
                         }
                         else if (alert.matches("At time of event")){
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("5 minutes before")){
                             millisToSubtract = 5 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("10 minutes before")){
                             millisToSubtract = 10 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("15 minutes before")){
                             millisToSubtract = 15 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("30 minutes before")){
                             millisToSubtract = 30 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("1 hour before")){
                             millisToSubtract = 60 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else if (alert.matches("1 day before")){
                             millisToSubtract = 1440 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                         else {
                             millisToSubtract = 10080 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
                             taskDate = String.valueOf(d);
-                            newTaskDB.setAlertDateTime(taskDate);
-                            Log.v(TAG, "Alert is: " + alert);
-                            Log.v(TAG, "Modified Task Date: " + taskDate);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
+                    // Add Event Task To List or 1st of recurring task
+                    // 0 means false = not completed, 1 means true = completed
+
+                    int id = taskList.size() + 1;
+
+                    int maxRecurringId = dbHandler.returnHighestRecurringId(user.getUserID());
+                    int newRecurringId = maxRecurringId + 1;
+
+                    //populate new task fields
+                    Task newTaskDB = new Task();
+                    newTaskDB.setId(id);
+                    newTaskDB.setStatus(0);
+                    newTaskDB.setTaskName(newTaskNameString);
+                    newTaskDB.setTaskDesc(newTaskDescString);
+                    newTaskDB.setTaskDate(date);
+                    newTaskDB.setTaskStartTime(startTime);
+                    newTaskDB.setTaskEndTime(endTime);
+                    newTaskDB.setTaskDuration(0);
+                    newTaskDB.setAlert(alert);
+                    newTaskDB.setAlertDateTime(taskDate);
                     newTaskDB.setTaskType(taskType);
-
                     newTaskDB.setRepeat(repeat);
-
                     newTaskDB.setTaskUserID(user.getUserID());
-
-                    //add new task to db
+                    if (taskType.matches("Eventt")){
+                        newTaskDB.setRecurringId(0);
+                    }
+                    else {
+                        newTaskDB.setRecurringId(newRecurringId);
+                    }
                     dbHandler.addTask(newTaskDB);
-
-                    Task t = new Task(id, status, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
-                            alert, taskDate, taskType, repeat, user.getUserID());
-
+                    Task t = new Task(id, 0, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
+                            alert, taskDate, taskType, repeat, recurringId, user.getUserID());
                     // Only set notification if alert is not None
                     if (t.getAlert().matches("None") == false){
                         setAlarm(t);
                     }
 
+
+
+                    // Add remaining 51 recurring task to DB
+                    if (taskType.matches("Recurring")) {
+
+                        // Check interval to add for each task date and task alert datetime
+                        if (repeat.matches("Weekly")) {
+                            millisToAdd = 604800000;
+                        }
+                        else if (repeat.matches("Monthly")){
+                            millisToAdd = 2629800 * 1000;
+                        }
+                        else {
+                            alertDateTime = " ";
+                        }
+
+                        // List of taskDates
+                        String startDateString = dayOfMonth + "-" + month + "-" + year;
+                        Date taskDateRecurring = null;
+                        ArrayList<String> taskDateList = new ArrayList<>();
+
+                        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                        try {
+                            taskDateRecurring = dateFormat.parse(startDateString);
+                        }catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        for (int i=0; i<52; i++) {
+                            taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
+                            strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
+                            strDate = strDate.replace("/", "-");
+                            taskDateList.add(strDate);
+                        }
+
+
+                        // List of alertDateTime
+                        DateFormat alertDateTimeFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+                        ArrayList<String> alertDateTimeList = new ArrayList<>();
+                        Date alertD = d;
+//                        try {
+//                            alertD = alertDateTimeFormat.parse(taskDate);
+//                        } catch (ParseException e) {
+//                            e.printStackTrace();
+//                        }
+
+//                        for (int i=0; i<52; i++) {
+//                            alertD.setTime(alertD.getTime() + millisToAdd);
+//                            alertDateTime = String.valueOf(alertD);
+//                            alertDateTimeList.add(alertDateTime);
+//                        }
+
+
+                        for (int i=0; i<52; i++) {
+
+                            // Set Task Id, Status, Name; Desc
+                            id = id + 1;
+                            newTaskDB.setId(id);
+                            newTaskDB.setStatus(0);
+                            newTaskDB.setTaskName(newTaskNameString);
+                            newTaskDB.setTaskDesc(newTaskDescString);
+                            newTaskDB.setTaskDate(taskDateList.get(i));
+                            newTaskDB.setTaskStartTime(startTime);
+                            newTaskDB.setTaskEndTime(endTime);
+                            newTaskDB.setTaskDuration(0);
+                            newTaskDB.setAlert(alert);
+                            newTaskDB.setAlertDateTime(" ");//alertDateTimeList.get(i)
+                            newTaskDB.setTaskType(taskType);
+                            newTaskDB.setRepeat(repeat);
+                            newTaskDB.setRecurringId(newRecurringId);
+                            newTaskDB.setTaskUserID(user.getUserID());
+                            dbHandler.addTask(newTaskDB);
+
+                            t = new Task(id, 0, newTaskNameString, newTaskDescString, strDate, startTime, endTime, diffInTime,
+                                    alert, alertDateTime, taskType, repeat, recurringId, user.getUserID());
+
+                            // Only set notification if alert is not None
+                            if (t.getAlert().matches("None") == false){
+                                setAlarm(t);
+                            }
+
+                        }
+                    }
                     //start TaskActivity
                     Intent intent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
                     startActivity(intent);
-
                     //kill this activity
                     finish();
                 }
@@ -275,14 +341,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     Toast.makeText(TaskAddNewActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-        });
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
-                startActivity(myIntent);
             }
         });
     }
