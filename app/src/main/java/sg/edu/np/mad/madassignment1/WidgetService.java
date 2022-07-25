@@ -34,14 +34,14 @@ public class WidgetService extends RemoteViewsService {
         public void onCreate() {
 
             // getting stored username
-            SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-            String username = sharedPreferences.getString("username", "");
-            User user = dbHandler.findUser(username);
+            //SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+            //String username = sharedPreferences.getString("username", "");
+            //User user = dbHandler.findUser(username);
 
             // Fill taskList with current db data
-            ArrayList<Task> taskList = new ArrayList<>();
-            taskList = dbHandler.getTaskData((user.getUserID()));
-            todayTaskList = findTodayTasks(taskList);
+            //ArrayList<Task> taskList = new ArrayList<>();
+            //taskList = dbHandler.getTaskData((user.getUserID()));
+            //todayTaskList = findTodayTasks(taskList);
 
         }
 
@@ -121,7 +121,7 @@ public class WidgetService extends RemoteViewsService {
         public boolean isToday(String date) { //task.getTaskDate will be a string
             try {
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
                 Date dateToValidate = sdf.parse(date); //convert the string to a Date
 
                 // current date with same formatting as dateToValidate

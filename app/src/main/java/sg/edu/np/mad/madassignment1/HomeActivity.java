@@ -164,7 +164,7 @@ public class HomeActivity extends DrawerBaseActivity {
     public boolean withinAWeek (String date) { //task.getTaskDate will be a string
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
             Date dateToValidate = sdf.parse(date); //convert the string to a Date
 
             // current date with same formatting as dateToValidate
