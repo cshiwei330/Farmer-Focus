@@ -74,7 +74,7 @@ public class WidgetService extends RemoteViewsService {
             @SuppressLint("RemoteViewLayout") RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_today_task_item);
 
             remoteView.setTextViewText(R.id.widgetTaskName, t.getTaskName());
-            //remoteView.setTextViewText(R.id.widgetTaskTime, t.getTaskStartTime());
+            remoteView.setTextViewText(R.id.widgetTaskTime, t.getTaskStartTime());
 
 
             return remoteView;
