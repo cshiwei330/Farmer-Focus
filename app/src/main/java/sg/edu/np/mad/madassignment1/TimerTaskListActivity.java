@@ -52,8 +52,6 @@ public class TimerTaskListActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Display "Back" msg
-                Toast.makeText(TimerTaskListActivity.this, "Back to Timer", Toast.LENGTH_SHORT).show();
 
                 Intent TimerTaskListActivityToTimerActivity = new Intent(TimerTaskListActivity.this, TimerActivity.class);
                 //put extra
@@ -64,6 +62,9 @@ public class TimerTaskListActivity extends AppCompatActivity {
                         TimerTaskListActivity.this.finish();
                     }
                 });
+
+                // Display "Back" msg
+                Toast.makeText(TimerTaskListActivity.this, "Back to Timer", Toast.LENGTH_SHORT).show();
 
                 //start activity with result
                 startActivityForResult(TimerTaskListActivityToTimerActivity, 1);

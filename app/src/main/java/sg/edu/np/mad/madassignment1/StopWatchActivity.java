@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class StopWatchActivity extends AppCompatActivity {
 
@@ -80,6 +81,8 @@ public class StopWatchActivity extends AppCompatActivity {
                         StopWatchActivity.this.finish();
                     }
                 });
+                // Display "Back" msg
+                Toast.makeText(StopWatchActivity.this, "Back to Timer", Toast.LENGTH_SHORT).show();
                 //start activity with result
                 startActivityForResult(StopWatchActivityToTimerActivity, 1);
             }
