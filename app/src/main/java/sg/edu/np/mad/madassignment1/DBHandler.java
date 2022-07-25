@@ -352,18 +352,32 @@ public class DBHandler extends SQLiteOpenHelper {
         return recurringIdList.get(0);
     }
 
-    /*public ArrayList<Task> getTaskList(){
-        ArrayList<Task> recurring_task = new ArrayList<Task> {};
+    public ArrayList<Task> getRecurringTaskData(int userID){
+        ArrayList<Task> recurring_task = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String countTask = "SELECT * FROM "+ TASKS + " WHERE " + COLUMN_TASKTYPE + " = " + "Recurring";
+        String countTask = "SELECT * FROM "+ TASKS + " GROUP BY " + COLUMN_RECURRINGID + " HAVING COUNT( " + COLUMN_RECURRINGID + ") " + " > 1";
         Cursor cursor = db.rawQuery(countTask,null);
         while (cursor.moveToNext()){
-            String taskid = cursor.getString(0);
-            String mood = cursor.getString(1);
-            Task newTaskEntry = new Task();
-            recurring_task. add(newTaskEntry);
+            int id = cursor.getInt(0);
+            int status = cursor.getInt(1);
+            String name = cursor.getString(2);
+            String desc = cursor.getString(3);
+
+            String taskDate = cursor.getString(5);
+            String taskStartTime = cursor.getString(6);
+            String taskEndTime = cursor.getString(7);
+            double taskDuration = cursor.getDouble(8);
+            String taskAlert = cursor.getString(9);
+            String taskAlertDateTime = cursor.getString(10);
+            String taskType = cursor.getString(11);
+            String taskRepeat = cursor.getString(12);
+            int recurringId = cursor.getInt(13);
+
+            Task newTask = new Task(id, status, name, desc, taskDate, taskStartTime, taskEndTime, taskDuration, taskAlert,
+                    taskAlertDateTime, taskType, taskRepeat, recurringId, userID);
+            recurring_task.add(newTask);
         }
         db.close();
         return recurring_task;
-    }*/
+    }
 }

@@ -36,8 +36,6 @@ import java.util.Objects;
 
 public class StatsWeekFragment extends Fragment{
     Context thisContext;
-    private static final int MAX_X_VALUE = 7;
-    private static final float BAR_WIDTH = 0.2f;
 
     public StatsWeekFragment() {
         // Required empty public constructor
@@ -60,11 +58,8 @@ public class StatsWeekFragment extends Fragment{
         BarChart chart = view.findViewById(R.id.chart);
 
         BarData data = new BarData(getDataSet(dbHandler));
-        //data.setBarWidth(1000f);
         chart.setData(data);
         chart.getBarData().setBarWidth(0.5f);
-        //chart.
-        //chart.setDescription(NoOfTaskChart);
         chart.animateXY(2000, 2000);
         //setting up x axis
         XAxis xAxis = chart.getXAxis();
@@ -82,7 +77,6 @@ public class StatsWeekFragment extends Fragment{
                 return (String) getXAxisValues().get((int) value);
             }
         });
-        //xAxis.setValueFormatter(new IndexAxisValueFormatter(DAYS));
         //setting up y axis
         YAxis yAxis = chart.getAxisLeft();
         yAxis.setLabelCount(10);
@@ -98,7 +92,6 @@ public class StatsWeekFragment extends Fragment{
     }
 
     private IBarDataSet getDataSet(DBHandler dbHandler) {
-        //ArrayList<BarDataSet> dataSets = null;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
         try {
@@ -294,7 +287,6 @@ public class StatsWeekFragment extends Fragment{
             }
 
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, "No. Of Tasks Done");
-        //barDataSet1.setColor(Color.rgb(50, 0, 50));
 
         return barDataSet1;
     }
