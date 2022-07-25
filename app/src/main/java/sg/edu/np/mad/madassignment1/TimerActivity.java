@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,10 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +30,7 @@ public class TimerActivity extends DrawerBaseActivity{
     int year, month, dayOfMonth;
     String alert, taskType, repeat, startTime, taskDate;
     double diffInTime;
+    long duration;
     ArrayList<Task> taskList = new ArrayList<>();
 
     //define activity binding
@@ -200,9 +196,12 @@ public class TimerActivity extends DrawerBaseActivity{
                         // pause timer
                         pauseTimer();
                         // get duration
-                        mDuration = mStartTimeInMillis - System.currentTimeMillis();
-                        // edit task duration column
+                        getDuration();
+                        // edit task duration column in db
+
                         // mark task as completed
+
+                        // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -305,7 +304,7 @@ public class TimerActivity extends DrawerBaseActivity{
 //    }
 
     private void setTime(Task t) {
-        // Get Task Duration
+        // Get Task Duration (set by user)
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
         try {
             Date Date1 = simpleDateFormat.parse(t.getTaskStartTime());
@@ -318,12 +317,19 @@ public class TimerActivity extends DrawerBaseActivity{
                 difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
             }
             double milliseconds = (double) difference;
-            mStartTimeInMillis = new Double(milliseconds).longValue(); // get task duration
+            mStartTimeInMillis = new Double(milliseconds).longValue(); // get initial task duration (what user sets)
+            mDuration = mStartTimeInMillis - mTimeLeftInMillis; // get how long user does the task for
             resetTimer(); // set the time in countdown textView
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private long getDuration() {
+        // get duration (how much time user spends on doing the tasks)
+        mDuration = mStartTimeInMillis - mTimeLeftInMillis;
+        return mDuration;
     }
 
 

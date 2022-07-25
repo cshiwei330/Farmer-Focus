@@ -11,6 +11,7 @@ import android.os.ResultReceiver;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -51,6 +52,9 @@ public class TimerTaskListActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Display "Back" msg
+                Toast.makeText(TimerTaskListActivity.this, "Back to Timer", Toast.LENGTH_SHORT).show();
+
                 Intent TimerTaskListActivityToTimerActivity = new Intent(TimerTaskListActivity.this, TimerActivity.class);
                 //put extra
                 TimerTaskListActivityToTimerActivity.putExtra("finisher", new ResultReceiver(null) {
@@ -60,6 +64,7 @@ public class TimerTaskListActivity extends AppCompatActivity {
                         TimerTaskListActivity.this.finish();
                     }
                 });
+
                 //start activity with result
                 startActivityForResult(TimerTaskListActivityToTimerActivity, 1);
             }
