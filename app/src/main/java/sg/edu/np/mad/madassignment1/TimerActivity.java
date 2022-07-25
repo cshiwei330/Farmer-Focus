@@ -488,18 +488,5 @@ public class TimerActivity extends DrawerBaseActivity{
     }
 
 
-//    @Override
-//    public void onItemClick(int position, Task t)
-//    {
-//        Log.v("test", "1");
-//        Toast.makeText(TimerActivity.this, "Task selected", Toast.LENGTH_SHORT).show();
-//        double milliseconds = (t.getTaskDuration() * 60000.0);
-//        mStartTimeInMillis = (new Double(milliseconds)).longValue();
-//        //Double.valueOf(milliseconds).longValue();
-//        //mStartTimeInMillis = millis;
-//        resetTimer(); // update count down text method inside resetTimer
-//
-//    }
-
 
 }
