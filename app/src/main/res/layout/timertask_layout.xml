@@ -127,8 +127,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/task_name"
-                tools:text="Task Time"
+                tools:text="Start Time"
                 app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/end_time"
+                android:layout_width="38dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="End Time" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

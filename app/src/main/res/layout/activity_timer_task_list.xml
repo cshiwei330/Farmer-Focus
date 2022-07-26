@@ -18,8 +18,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/UncompletedTaskRecycleView"
-        android:layout_width="309dp"
-        android:layout_height="457dp"
+        android:layout_width="318dp"
+        android:layout_height="595dp"
         android:layout_marginStart="51dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="51dp"

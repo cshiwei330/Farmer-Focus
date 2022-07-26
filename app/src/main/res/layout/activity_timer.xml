@@ -26,7 +26,7 @@
         android:layout_width="340dp"
         android:layout_height="100dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
@@ -139,18 +139,7 @@
         app:srcCompat="@drawable/hollow_circle"
         app:tint="#A29574" />
 
-    <ImageView
-        android:id="@+id/StopWatchImg"
-        android:layout_width="64dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="#A29574"
-        app:srcCompat="@drawable/ic_menu_timer_24" />
-
-<!--    <ImageView-->
+    <!--    <ImageView-->
 <!--        android:id="@+id/selectTaskImg"-->
 <!--        android:layout_width="96dp"-->
 <!--        android:layout_height="59dp"-->
@@ -160,10 +149,21 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:srcCompat="@drawable/tasklist" />-->
 
+    <ImageView
+        android:id="@+id/StopWatchImg"
+        android:layout_width="64dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_timer_24"
+        app:tint="#A29574" />
+
     <Button
         android:id="@+id/giveUpBtn"
         android:layout_width="110dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="140dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="150dp"
@@ -179,6 +179,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_start_pause"
         app:layout_constraintVertical_bias="0.414" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="62dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="132dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ntimer"
+        app:tint="#ECE6D2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="57dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="168dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#C89D7C"
+        app:srcCompat="@drawable/line" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
