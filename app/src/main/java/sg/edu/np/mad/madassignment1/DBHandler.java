@@ -322,12 +322,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int getTaskStatus(Date date) throws ParseException {
+    public int getTaskStatus(Date date, int userID) throws ParseException {
         SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String dateParsed = sdf.format(date);
-        String getTaskStatus = "SELECT " + COLUMN_TASKSTATUS + " FROM " + TASKS + " WHERE " + COLUMN_TASKSTATUS + " = " + "1"
-               + " AND " + COLUMN_TASKDATE + " = " + " \"" + dateParsed + "\"";
+        String getTaskStatus = "SELECT " + COLUMN_TASKSTATUS + " FROM " + TASKS + " WHERE " + COLUMN_TASKSTATUS + " = 1"
+               + " AND " + COLUMN_TASKDATE + " = " + " \"" + dateParsed + "\"" + " AND " + COLUMN_USERID + " = " + userID;
         //select column task status from tasks where taskstatus == 1 (complete)
         Cursor cursor = db.rawQuery(getTaskStatus, null);
         int count = cursor.getCount();

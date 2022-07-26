@@ -309,21 +309,28 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         // For monthly, it will add 12 tasks
                         // Note: Both will add 1 year worth of tasks
                         int numberOfTimes;
+//                        if (repeat.matches("Weekly")) {
+//                            if (repeatDuration.matches("1 Month")) {
+//                                numberOfTimes = 3;
+//                            }
+//                            else {
+//                                numberOfTimes = 51;
+//                            }
+//                        }
+//                        else {
+//                            if (repeatDuration.matches("1 Month")) {
+//                                numberOfTimes = 0;
+//                            }
+//                            else {
+//                                numberOfTimes = 0;
+//                            }
+//                        }
+
                         if (repeat.matches("Weekly")) {
-                            if (repeatDuration.matches("1 Month")) {
-                                numberOfTimes = 3;
-                            }
-                            else {
-                                numberOfTimes = 51;
-                            }
+                            numberOfTimes = 52;
                         }
                         else {
-                            if (repeatDuration.matches("1 Month")) {
-                                numberOfTimes = 0;
-                            }
-                            else {
-                                numberOfTimes = 0;
-                            }
+                            numberOfTimes = 12;
                         }
 
 
