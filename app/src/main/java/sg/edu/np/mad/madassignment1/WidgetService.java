@@ -1,12 +1,17 @@
 package sg.edu.np.mad.madassignment1;
 
+import static java.lang.Integer.valueOf;
+
 import android.annotation.SuppressLint;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,13 +33,15 @@ public class WidgetService extends RemoteViewsService {
         public WidgetRemoteViewsFactory(Context context) {
             this.context = context;
             this.dbHandler = new DBHandler(context,null,null,6);
+
         }
 
         @Override
         public void onCreate() {
 
+
             // getting stored username
-            //SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+            //SharedPreferences sharedPreferences = context.getSharedPreferences(dbHandler.GLOBAL_PREF, 0);
             //String username = sharedPreferences.getString("username", "");
             //User user = dbHandler.findUser(username);
 
@@ -47,15 +54,23 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
+
+            todayTaskList.clear();
+
             // getting stored username
             SharedPreferences sharedPreferences = context.getSharedPreferences(dbHandler.GLOBAL_PREF, 0);
             String username = sharedPreferences.getString("username", "");
             User user = dbHandler.findUser(username);
 
-            // Fill taskList with current db data
-            ArrayList<Task> taskList = new ArrayList<>();
-            taskList = dbHandler.getTaskData((user.getUserID()));
-            todayTaskList = findTodayTasks(taskList);
+            try {
+                todayTaskList = dbHandler.getTodayTaskData(user.getUserID());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+/*
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            int appWidgetId = 27;
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);*/
         }
 
         @Override
@@ -100,7 +115,7 @@ public class WidgetService extends RemoteViewsService {
             return true;
         }
 
-        public ArrayList<Task> findTodayTasks(ArrayList<Task> taskList){
+/*        public ArrayList<Task> findTodayTasks(ArrayList<Task> taskList){
 
             ArrayList<Task> recentTaskList = new ArrayList<>();
 
@@ -139,6 +154,6 @@ public class WidgetService extends RemoteViewsService {
                 e.printStackTrace();
                 return false;
             }
-        }
+        }*/
     }
 }

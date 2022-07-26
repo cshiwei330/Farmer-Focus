@@ -389,11 +389,29 @@ public class DBHandler extends SQLiteOpenHelper {
         return recurring_task;
     }
 
-//    public void changeRecurringTaskDate (Task t){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        // edit Task status
-//        String changeRecurringTaskDate = "UPDATE " + TASKS + " SET " + COLUMN_TASKSTATUS + " = " + "\""+ taskStatus.getStatus()+ "\""  + " WHERE " + COLUMN_TASKID + " = " + "\""+ taskStatus.getId()+ "\"";
-//        db.execSQL(changeRecurringTaskDate);
-//        db.close();
-//    }
+    public ArrayList<Task> getTodayTaskData(int userID) throws ParseException {
+
+        ArrayList<Task> taskList = getTaskData(userID);
+        ArrayList<Task> todayTaskList = new ArrayList<>();
+
+        for (int i = 0; i < taskList.size(); i++){ //loop thru current taskList to find tasks that are today
+            Task task = taskList.get(i);
+
+            try{
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
+                Date dateToValidate = sdf.parse(task.getTaskDate()); //convert the string to a Date
+
+                // current date with same formatting as dateToValidate
+                Date today = sdf.parse(sdf.format(new Date()));
+
+                if (dateToValidate.compareTo(today)==0){ // check if tasks that are today
+                    todayTaskList.add(task); //if true then add to new list;
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return todayTaskList;
+    }
 }
