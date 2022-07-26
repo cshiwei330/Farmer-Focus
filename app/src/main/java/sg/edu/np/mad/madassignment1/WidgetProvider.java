@@ -99,45 +99,4 @@ public class WidgetProvider extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    /*public static ArrayList<Task> findTodayTasks(ArrayList<Task> taskList){
-
-        ArrayList<Task> recentTaskList = new ArrayList<>();
-
-        for (int i = 0; i < taskList.size(); i++){ //loop thru current taskList to find tasks that are upcoming
-            Task task = taskList.get(i);
-
-            boolean result = isToday(task.getTaskDate()); //check if task date is within a week
-
-            if (result){
-                recentTaskList.add(task); //if true then add to new list
-            }
-
-        }
-
-        return recentTaskList;
-    }
-
-    public static boolean isToday(String date) { //task.getTaskDate will be a string
-        try {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
-            Date dateToValidate = sdf.parse(date); //convert the string to a Date
-
-            // current date with same formatting as dateToValidate
-            Date today = sdf.parse(sdf.format(new Date()));
-
-            //.getTime() returns a Date so comparison can be made
-            if (dateToValidate.compareTo(today)==0){ //tasks that are today are considered within a week
-                return true;
-            }
-            else {
-                return false;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
-
 }

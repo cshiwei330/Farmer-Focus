@@ -337,6 +337,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                     dbHandler.editTask(editedTask);
 
+
                     Bundle extras = new Bundle();
                     Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
                     extras.putInt("Task id", oldTaskId);

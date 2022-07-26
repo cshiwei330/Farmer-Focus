@@ -4,6 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,11 +19,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -122,6 +127,10 @@ public class TaskActivity extends DrawerBaseActivity{
                                 extras.putInt("task id", task.getId());
                                 myIntent.putExtras(extras);
                                 startActivity(myIntent);
+
+                                // update widget
+                                updateWidgets(getApplicationContext(), dbHandler, user);
+
                                 break;
 
                             case R.id.delete_task:
@@ -138,6 +147,9 @@ public class TaskActivity extends DrawerBaseActivity{
 
                                         //toast to indicate tasks successfully cleared
                                         Toast.makeText(TaskActivity.this, "Deleted Task", Toast.LENGTH_LONG).show();
+
+                                        // update widget
+                                        updateWidgets(getApplicationContext(), dbHandler, user);
                                     }
                                 });
                                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -333,6 +345,9 @@ public class TaskActivity extends DrawerBaseActivity{
 
                         //toast to indicate tasks successfully cleared
                         Toast.makeText(TaskActivity.this, "Tasks Cleared", Toast.LENGTH_LONG).show();
+
+                        // update widget
+                        updateWidgets(getApplicationContext(), dbHandler, user);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -368,6 +383,24 @@ public class TaskActivity extends DrawerBaseActivity{
 
             }
         });
+
+    }
+
+    public void updateWidgets (Context context, DBHandler dbHandler, User user){
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+
+        RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
+        try {
+            mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(dbHandler.getTodayTaskData(user.getUserID()).size())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        appWidgetManager.updateAppWidget(thisWidget, mainView);
+
 
     }
 }

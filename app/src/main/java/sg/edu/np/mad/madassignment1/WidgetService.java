@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 public class WidgetService extends RemoteViewsService {
 
     public String GLOBAL_PREF = "MyPrefs";
+    private String TAG = "WidgetService";
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
@@ -39,22 +41,21 @@ public class WidgetService extends RemoteViewsService {
         @Override
         public void onCreate() {
 
-
             // getting stored username
-            //SharedPreferences sharedPreferences = context.getSharedPreferences(dbHandler.GLOBAL_PREF, 0);
-            //String username = sharedPreferences.getString("username", "");
-            //User user = dbHandler.findUser(username);
+            SharedPreferences sharedPreferences = context.getSharedPreferences(dbHandler.GLOBAL_PREF, 0);
+            String username = sharedPreferences.getString("username", "");
+            User user = dbHandler.findUser(username);
 
-            // Fill taskList with current db data
-            //ArrayList<Task> taskList = new ArrayList<>();
-            //taskList = dbHandler.getTaskData((user.getUserID()));
-            //todayTaskList = findTodayTasks(taskList);
+            try {
+                todayTaskList = dbHandler.getTodayTaskData(user.getUserID());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
         }
 
         @Override
         public void onDataSetChanged() {
-
             todayTaskList.clear();
 
             // getting stored username
@@ -86,11 +87,10 @@ public class WidgetService extends RemoteViewsService {
         @Override
         public RemoteViews getViewAt(int position) {
             Task t = todayTaskList.get(position);
-            @SuppressLint("RemoteViewLayout") RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_today_task_item);
+            RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_today_task_item);
 
             remoteView.setTextViewText(R.id.widgetTaskName, t.getTaskName());
             remoteView.setTextViewText(R.id.widgetTaskTime, t.getTaskStartTime());
-
 
             return remoteView;
         }

@@ -1,10 +1,15 @@
 package sg.edu.np.mad.madassignment1;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -99,6 +105,10 @@ public class HomeActivity extends DrawerBaseActivity {
                                 extras.putInt("task id", task.getId());
                                 myIntent.putExtras(extras);
                                 startActivity(myIntent);
+
+                                // update widget
+                                updateWidgets(getApplicationContext(), dbHandler, user);
+
                                 break;
 
                             case R.id.delete_task:
@@ -115,6 +125,9 @@ public class HomeActivity extends DrawerBaseActivity {
 
                                         //toast to indicate tasks successfully cleared
                                         Toast.makeText(HomeActivity.this, "Deleted Task", Toast.LENGTH_LONG).show();
+
+                                        // update widget
+                                        updateWidgets(getApplicationContext(), dbHandler, user);
                                     }
                                 });
                                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -190,5 +203,22 @@ public class HomeActivity extends DrawerBaseActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void updateWidgets (Context context, DBHandler dbHandler, User user){
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+
+        RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
+        try {
+            mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(dbHandler.getTodayTaskData(user.getUserID()).size())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        appWidgetManager.updateAppWidget(thisWidget, mainView);
+
     }
 }

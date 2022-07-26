@@ -10,9 +10,14 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -26,6 +31,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -297,6 +303,26 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         newTaskDB.setRecurringId(newRecurringId);
                     }
                     dbHandler.addTask(newTaskDB);
+
+                    // UPDATE WIDGET ------------------------------------------------------------------------------
+
+                    Context context = getApplicationContext();
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                    ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
+                    int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+                    appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+
+                    RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
+                    try {
+                        mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(dbHandler.getTodayTaskData(user.getUserID()).size())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    appWidgetManager.updateAppWidget(thisWidget, mainView);
+
+                    //--------------------------------------------------------------------------------------------
+
+
                     Task t = new Task(id, 0, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
                             alert, taskDate, taskType, repeat, recurringId, repeatDuration, user.getUserID());
                     // Only set notification if alert is not None
@@ -461,9 +487,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             }
                         }
                     }
+
                     //start TaskActivity
                     Intent intent = new Intent(TaskAddNewActivity.this, TaskActivity.class);
                     startActivity(intent);
+
                     //kill this activity
                     finish();
                 }
