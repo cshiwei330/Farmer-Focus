@@ -188,7 +188,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     else {
                         date = dayOfMonth + "-" + month + "-" + year;
                     }
-                    Log.v(TAG, "date: " + date);
 
 
 
@@ -243,8 +242,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
-                    Log.v(TAG, String.valueOf(d));
 
                     if (taskDate.matches(" ") == false) {
                         ArrayList<String> monthsList = new ArrayList<>(
@@ -394,11 +391,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             }
 
                             for (int i=0; i<numberOfTimes; i++) {
-
                                 alertD.setTime(alertD.getTime() + millisToAdd);
                                 alertDateTime = String.valueOf(alertD);
                                 alertDateTimeList.add(alertDateTime);
                             }
+
+                            Log.v(TAG, "List: " + String.valueOf(alertDateTimeList.size()));
 
                             for (int i=0; i<alertDateTimeList.size(); i++){
                                 ArrayList<String> monthsList = new ArrayList<>(
@@ -423,10 +421,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 alertDateTimeRightFormatList.add(alertDateTime);
                             }
 
+                            Log.v(TAG, "List Right Format: " + String.valueOf(alertDateTimeRightFormatList.size()));
+
                         }
                         else {
                             for (int i=0; i<numberOfTimes; i++) {
-                                alertDateTimeList.add(" ");
+                                alertDateTimeRightFormatList.add(" ");
                             }
                         }
 
