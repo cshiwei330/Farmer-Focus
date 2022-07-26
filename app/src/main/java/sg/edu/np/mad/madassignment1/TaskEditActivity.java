@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class TaskEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -47,6 +48,10 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
     ArrayList<String> alertOptionsList = new ArrayList<>();
     ArrayList<String> repeatOptionsList = new ArrayList<>();
+
+    // get all recurring tasks
+    ArrayList<Task> recurringTaskList = new ArrayList<>();
+    ArrayList<Task> futureRecurringTaskList = new ArrayList<>();
 
     DBHandler dbHandler = new DBHandler(this, null, null, 6);
 
@@ -329,12 +334,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
                             finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, recurringDuration, user.getUserID());
 
-                    if (taskType.matches("Recurring")) {
-                        // Check if date changes
-                        // If yes, date all recurring task dates
-                        // If no, leave it
-                    }
-
                     dbHandler.editTask(editedTask);
 
                     Bundle extras = new Bundle();
@@ -466,5 +465,14 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             return "date";
         }
         return "VALID";
+    }
+
+    public static long getDateDiff(SimpleDateFormat format, String oldDate, String newDate) {
+        try {
+            return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - format.parse(oldDate).getTime(), TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
