@@ -35,9 +35,6 @@ public class FarmActivity extends DrawerBaseActivity {
 
         FragmentPagerAdapter adapterViewPager;
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
-//        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-//        indicator.setViewPager(vpPager);
-
         adapterViewPager = new PagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 

@@ -3,6 +3,8 @@ package sg.edu.np.mad.madassignment1;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ public class SiloFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_silo, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.SiloFragmentTextView);
-        tvLabel.setText(page + " -- " + title);
+        tvLabel.setText(page + " -- " + title + "THIS IS SILO");
         return view;
     }
 }
