@@ -235,7 +235,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     }
                 }
 
-                String finalTaskDate = String.format("%02d/%02d/%02d", dayOfMonth, month, year);
+                String finalTaskDate = String.format("%02d-%02d-%02d", dayOfMonth, month, year);
                 finalTaskStartTime = String.format("%02d:%02d", starthour, startminute);
                 String finalTaskEndTime = String.format("%02d:%02d", endhour, endminute);
 
@@ -329,9 +329,11 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
                             finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, recurringDuration, user.getUserID());
 
-//                    if (taskType.matches("Recurring")) {
-//
-//                    }
+                    if (taskType.matches("Recurring")) {
+                        // Check if date changes
+                        // If yes, date all recurring task dates
+                        // If no, leave it
+                    }
 
                     dbHandler.editTask(editedTask);
 
@@ -345,8 +347,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
-
     }
+
+
 
 
     private void setAlarm(Task t) {
