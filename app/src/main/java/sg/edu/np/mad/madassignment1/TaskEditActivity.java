@@ -71,7 +71,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
         // receive from bundle
         Intent receivingEnd = getIntent();
-        int oldTaskId = receivingEnd.getIntExtra("task id", 0);
+        int oldTaskId = receivingEnd.getIntExtra("Task id", 0);
 
         // shared preferences to get username
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
@@ -319,19 +319,23 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                 int recurringId = currentTask.getRecurringId();
 
+                String recurringDuration = currentTask.getRecurringDuration();
+
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
                 if (validity.equals("VALID")) {
 
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
-                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, user.getUserID());
+                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, recurringDuration, user.getUserID());
+
+//                    if (taskType.matches("Recurring")) {}
 
                     dbHandler.editTask(editedTask);
 
                     Bundle extras = new Bundle();
                     Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
-                    extras.putInt("task id", oldTaskId);
+                    extras.putInt("Task id", oldTaskId);
                     myIntent.putExtras(extras);
                     startActivity(myIntent);
                 } else {
@@ -339,8 +343,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
-
     }
+
+
 
 
     private void setAlarm(Task t) {

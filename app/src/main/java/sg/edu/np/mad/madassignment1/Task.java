@@ -29,6 +29,8 @@ public class Task {
 
     private int recurringId;
 
+    private String recurringDuration;
+
     private int taskUserID;
 
     public Task() {
@@ -37,7 +39,7 @@ public class Task {
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
     public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert,
-                String alertDateTime, String taskType, String repeat, int recurringId, int taskUserID) {
+                String alertDateTime, String taskType, String repeat, int recurringId, String recurringDuration, int taskUserID) {
         this.Id = Id;
         this.status = status;
         this.taskName = taskName;
@@ -55,6 +57,8 @@ public class Task {
         this.repeat = repeat;
 
         this.recurringId = recurringId;
+
+        this.recurringDuration = recurringDuration;
 
         this.taskUserID = taskUserID;
 
@@ -170,6 +174,14 @@ public class Task {
 
     public void setRecurringId(int recurringId) {
         this.recurringId = recurringId;
+    }
+
+    public String getRecurringDuration() {
+        return recurringDuration;
+    }
+
+    public void setRecurringDuration(String recurringDuration) {
+        this.recurringDuration = recurringDuration;
     }
 
     public static Comparator<Task> TaskNameAscComparator = new Comparator<Task>() {

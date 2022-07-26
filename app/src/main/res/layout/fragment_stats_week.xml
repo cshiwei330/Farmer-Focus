@@ -12,7 +12,5 @@
         android:layout_height="match_parent"
         android:background="@drawable/roundedcontainer" />
 
-
-
 </FrameLayout>
 

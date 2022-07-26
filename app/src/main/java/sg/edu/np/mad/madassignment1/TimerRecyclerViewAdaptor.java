@@ -39,6 +39,8 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
 
         holder.taskName.setText(t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
+        //holder.taskTime.setText(t.getTaskDuration());
+        holder.taskTime.setText(t.getTaskStartTime()); // change to getTaskDuration()
 
 
 
@@ -82,17 +84,14 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
         Bundle extras = new Bundle();
         extras.putInt("task id", t.getId());
         Log.v("test", String.valueOf(t.getId()));
+        Log.v("testTaskID", String.valueOf(extras));
 
         Intent myIntent = new Intent(holder.taskName.getContext(), TimerActivity.class);
         myIntent.putExtras(extras);
 
         holder.taskName.getContext().startActivity(myIntent);
-    }
 
-//    public interface OnItemListener
-//    {
-//        void onItemClick(int position, Task t);
-//    }
+    }
 
 
 }

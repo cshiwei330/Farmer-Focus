@@ -53,7 +53,7 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
         //getting task data
         ArrayList<Task> recurringTask = dbHandler.getRecurringTaskData(user.getUserID());
         ArrayList<String> taskNames = new ArrayList<>();
-        ArrayList<Integer> timeTaken = new ArrayList<>();
+        ArrayList<Long> timeTaken = new ArrayList<>();
         for (int i = 0; i < recurringTask.size(); i++) {
             taskNames.add(recurringTask.get(i).getTaskName());
         }
@@ -68,10 +68,11 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                     String task = searchTask.getText().toString();
                     for (int i = 0; i < recurringTask.size(); i++) {
                         if(recurringTask.get(i).getTaskName().equals(task)) {
-                            timeTaken.add((int)recurringTask.get(i).getTaskDuration());
+                            timeTaken.add((long)recurringTask.get(i).getTaskDuration());
+                            Long aLong = timeTaken.get(0);
                         }
                     }
-                    ArrayList<Integer> last7Durations = new ArrayList<>();
+                    ArrayList<Long> last7Durations = new ArrayList<>();
                     last7Durations.addAll(timeTaken.subList(Math.max(timeTaken.size() - 7, 0), timeTaken.size()));
 
                     BarChart chart = findViewById(R.id.chart);
@@ -79,6 +80,8 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                     chart.setData(data);
                     chart.getBarData().setBarWidth(0.5f);
                     chart.animateXY(2000, 2000);
+                    //setting chart description to be not visible
+                    chart.getDescription().setEnabled(false);
                     //setting up x axis
                     XAxis xAxis = chart.getXAxis();
                     xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -113,7 +116,7 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
     // display last 7 durations
     // if not enough for last 7, show all the durations
     // for each task, get diff duration list
-    private IBarDataSet getDataSet(DBHandler dbHandler, ArrayList<Integer> duration) {
+    private IBarDataSet getDataSet(DBHandler dbHandler, ArrayList<Long> duration) {
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
 
         //if there are full 7 values in the list
@@ -255,7 +258,8 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
 
 
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, "Time taken each attempt");
-        //barDataSet1.setColor(Color.rgb(50, 0, 50));
+        barDataSet1.setDrawValues(false);
+        barDataSet1.setColor(Color.rgb(162, 149, 116));
 
         return barDataSet1;
     }
