@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -56,12 +57,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
     int year, month, dayOfMonth, recurringId;
     long millisToAdd, millisToSubtract;
     double diffInTime;
-    String alert, taskType, repeat, startTime, taskDate, date, endTime, strDate, alertDateTime;
+    String alert, taskType, repeat, startTime, taskDate, date, endTime, strDate, alertDateTime, repeatDuration;
     Date d;
 
     public String GLOBAL_PREF = "MyPrefs";
 
-    private Spinner spinnerAlert, spinnerRepeat;
+    private Spinner spinnerAlert, spinnerRepeat, spinnerRepeatDuration;
 
     private ActivityMainBinding binding;
 
@@ -76,6 +77,17 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         setContentView(R.layout.activity_add_new_task);
         createNotificationChannel();
 
+        //define database
+        DBHandler dbHandler = new DBHandler(this, null, null,6);
+
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
+        //get task data from database
+        taskList = dbHandler.getTaskData(user.getUserID());
+
         //define elements in fragment
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
@@ -83,6 +95,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
         spinnerRepeat = findViewById(R.id.repeatSpinnerDropDown);
+        spinnerRepeatDuration = findViewById(R.id.spinnerRepeatDuration);
 
         // Alert Times Spinner DropDown
         String[] alertTimes = getResources().getStringArray(R.array.alert_times);
@@ -129,17 +142,23 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+//        String[] repeatDurationOptions = getResources().getStringArray(R.array.repeat_duration_options);
+//        ArrayAdapter adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatDurationOptions);
+//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerRepeatDuration.setAdapter(adapter3);
+//
+//        spinnerRepeatDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                repeatDuration = adapterView.getItemAtPosition(i).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
-        //define database
-        DBHandler dbHandler = new DBHandler(this, null, null,6);
-
-        // shared preferences to get username
-        SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
-        String username = sharedPreferences.getString("username", "");
-        User user = dbHandler.findUser(username);
-
-        //get task data from database
-        taskList = dbHandler.getTaskData(user.getUserID());
 
         //confirm create new task button listener
         createNewTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -158,13 +177,22 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     startTime =  String.format("%02d:%02d",starthour,startminute);
                     endTime =  String.format("%02d:%02d",endhour,endminute);
 
-                    date = dayOfMonth + "-" + month + "-" + year;
+                    if (month < 10) {
+                        date = dayOfMonth + "-" + "0" + month + "-" + year;
+                    }
+                    else {
+                        date = dayOfMonth + "-" + month + "-" + year;
+                    }
+
+
 
                     // Set Task Alert DateTime
-                    DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    DateFormat taskAlertFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     taskDate = date + " " + startTime +":00";
+
                     try {
-                        d = format.parse(taskDate);
+                        d = taskAlertFormat.parse(taskDate);
+
                         if (alert.matches("None")){
                             taskDate = " ";
                         }
@@ -174,7 +202,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         else if (alert.matches("5 minutes before")){
                             millisToSubtract = 5 * 60000;
                             d.setTime(d.getTime() - millisToSubtract);
-                            taskDate = String.valueOf(d);
+                            taskDate = d.toString();
                         }
                         else if (alert.matches("10 minutes before")){
                             millisToSubtract = 10 * 60000;
@@ -209,6 +237,30 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+
+                    if (taskDate.matches(" ") == false) {
+                        ArrayList<String> monthsList = new ArrayList<>(
+                                Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec")
+                        );
+                        String[] taskDateSplit = taskDate.split(" ");
+                        int monthIndexInt = -1;
+                        String monthIndex;
+                        for (int i=0; i<monthsList.size(); i++) {
+                            if (taskDateSplit[1].matches(monthsList.get(i))) {
+                                monthIndexInt = i;
+                                break;
+                            }
+                        }
+                        if (monthIndexInt < 10) {
+                            monthIndex = "0" + monthIndexInt;
+                        }
+                        else {
+                            monthIndex = String.valueOf(monthIndexInt);
+                        }
+                        taskDate = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                        Log.v(TAG, taskDate);
+                    }
+
 
                     // Add Event Task To List or 1st of recurring task
                     // 0 means false = not completed, 1 means true = completed
@@ -249,7 +301,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
 
 
-                    // Add remaining 51 recurring task to DB
+                    // Add remaining tasks to DB based on indicated duration
                     if (taskType.matches("Recurring")) {
 
                         // Decides how many tasks to add
@@ -258,10 +310,20 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         // Note: Both will add 1 year worth of tasks
                         int numberOfTimes;
                         if (repeat.matches("Weekly")) {
-                            numberOfTimes = 51;
+                            if (repeatDuration.matches("1 Month")) {
+                                numberOfTimes = 3;
+                            }
+                            else {
+                                numberOfTimes = 51;
+                            }
                         }
                         else {
-                            numberOfTimes = 11;
+                            if (repeatDuration.matches("1 Month")) {
+                                numberOfTimes = 0;
+                            }
+                            else {
+                                numberOfTimes = 0;
+                            }
                         }
 
 
@@ -372,18 +434,17 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date Date1 = null;
         long timeInMilliseconds = 0;
+        Log.v(TAG, "t.getAlertDateTime: " + t.getAlertDateTime());
+
         try {
-            Date1 = format.parse(startTime);
+            Date1 = format.parse(t.getAlertDateTime());
             timeInMilliseconds = Date1.getTime();
+            Log.v(TAG, String.valueOf(timeInMilliseconds));
         } catch (ParseException e) {
+            Log.v(TAG, "Not found");
             e.printStackTrace();
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
-        else {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
     }
 
     private void createNotificationChannel() {
