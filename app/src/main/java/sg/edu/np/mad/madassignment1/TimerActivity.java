@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,10 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +30,7 @@ public class TimerActivity extends DrawerBaseActivity{
     int year, month, dayOfMonth;
     String alert, taskType, repeat, startTime, taskDate;
     double diffInTime;
+    long duration;
     ArrayList<Task> taskList = new ArrayList<>();
 
     //define activity binding
@@ -56,6 +52,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private long mStartTimeInMillis;
     private long mTimeLeftInMillis;
     private long mEndTime;
+    private long mDuration;
 
     Task task;
 
@@ -70,8 +67,8 @@ public class TimerActivity extends DrawerBaseActivity{
         allocateActivityTitle("Timer");
 
         //timer
-        mTextSetTime = findViewById(R.id.textview_setTime);
-        mEditTextInput = findViewById(R.id.edit_text_minutes);
+//        mTextSetTime = findViewById(R.id.textview_setTime);
+//        mEditTextInput = findViewById(R.id.edit_text_minutes);
         mTextViewCountDown = findViewById(R.id.countdown);
         SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
@@ -132,7 +129,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
         // displays numeric keyboard
         // only allow user to key in integers 0 to 9 and not anything else when setting the time
-        mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+        //mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         // after the user have entered their preferred timing for countdown in "edit_text_minutes",
         // they should click on the image view represented by a green tick, to set the time
@@ -168,8 +165,7 @@ public class TimerActivity extends DrawerBaseActivity{
             }
         });
 
-        // reset the timer (this button will only be shown once countdown timer has started and after the user
-        // clicked the pause button)
+        // reset the timer
         mButtonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,8 +196,12 @@ public class TimerActivity extends DrawerBaseActivity{
                         // pause timer
                         pauseTimer();
                         // get duration
-                        // edit task duration column
+                        getDuration();
+                        // edit task duration column in db
+
                         // mark task as completed
+
+                        // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -237,23 +237,23 @@ public class TimerActivity extends DrawerBaseActivity{
         });
 
         // navigate to task list page to select task
-        ImageView SelectTask = findViewById(R.id.selectTaskImg);
-        SelectTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
-                //put extra
-                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        TimerActivity.this.finish();
-                    }
-                });
-                //start activity with result
-                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
-            }
-        });
+//        ImageView SelectTask = findViewById(R.id.selectTaskImg);
+//        SelectTask.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
+//                //put extra
+//                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
+//                    @Override
+//                    //when result code =1, received from bundle, kill this activity
+//                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+//                        TimerActivity.this.finish();
+//                    }
+//                });
+//                //start activity with result
+//                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
+//            }
+//        });
 
 
     }
@@ -304,7 +304,7 @@ public class TimerActivity extends DrawerBaseActivity{
 //    }
 
     private void setTime(Task t) {
-        // Get Task Duration
+        // Get Task Duration (set by user)
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
         try {
             Date Date1 = simpleDateFormat.parse(t.getTaskStartTime());
@@ -317,14 +317,19 @@ public class TimerActivity extends DrawerBaseActivity{
                 difference=(dateMax.getTime() -Date1.getTime() )+(Date2.getTime()-dateMin.getTime());
             }
             double milliseconds = (double) difference;
-//            long millis = (new Double(milliseconds)).longValue();
-//            mStartTimeInMillis = millis;
-            mStartTimeInMillis = new Double(milliseconds).longValue(); // get task duration
+            mStartTimeInMillis = new Double(milliseconds).longValue(); // get initial task duration (what user sets)
+            mDuration = mStartTimeInMillis - mTimeLeftInMillis; // get how long user does the task for
             resetTimer(); // set the time in countdown textView
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private long getDuration() {
+        // get duration (how much time user spends on doing the tasks)
+        mDuration = mStartTimeInMillis - mTimeLeftInMillis;
+        return mDuration;
     }
 
 
@@ -388,16 +393,16 @@ public class TimerActivity extends DrawerBaseActivity{
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
-            SetTime.setVisibility(View.INVISIBLE);
-            mTextSetTime.setVisibility(View.INVISIBLE);
-            mEditTextInput.setVisibility(View.INVISIBLE);
+            //SetTime.setVisibility(View.INVISIBLE);
+            //mTextSetTime.setVisibility(View.INVISIBLE);
+            //mEditTextInput.setVisibility(View.INVISIBLE);
             //mButtonReset.setVisibility(View.INVISIBLE);
             mButtonStartPause.setText("Pause");
         }
         else {
-            mTextSetTime.setVisibility(View.VISIBLE);
-            SetTime.setVisibility(View.VISIBLE);
-            mEditTextInput.setVisibility(View.VISIBLE);
+            //mTextSetTime.setVisibility(View.VISIBLE);
+            //SetTime.setVisibility(View.VISIBLE);
+            //mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
 
 //            if (mTimeLeftInMillis < 1000) {
@@ -482,19 +487,6 @@ public class TimerActivity extends DrawerBaseActivity{
         }
     }
 
-
-//    @Override
-//    public void onItemClick(int position, Task t)
-//    {
-//        Log.v("test", "1");
-//        Toast.makeText(TimerActivity.this, "Task selected", Toast.LENGTH_SHORT).show();
-//        double milliseconds = (t.getTaskDuration() * 60000.0);
-//        mStartTimeInMillis = (new Double(milliseconds)).longValue();
-//        //Double.valueOf(milliseconds).longValue();
-//        //mStartTimeInMillis = millis;
-//        resetTimer(); // update count down text method inside resetTimer
-//
-//    }
 
 
 }

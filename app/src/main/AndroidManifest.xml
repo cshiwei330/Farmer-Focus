@@ -4,15 +4,19 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/appicon"
+        android:label="@string/farmer_focus"
+        android:roundIcon="@mipmap/appicon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MADAssignment1">
+        <activity
+            android:name=".TimerSearchTaskFragment"
+            android:exported="false" />
 
         <service
             android:name=".WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
         <receiver
             android:name=".WidgetProvider"
             android:exported="true">

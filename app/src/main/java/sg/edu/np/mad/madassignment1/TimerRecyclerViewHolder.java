@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TimerRecyclerViewHolder extends RecyclerView.ViewHolder {
     public final TextView taskName;
     public final TextView taskDesc;
+    public final TextView taskTime;
     //private final TimerRecyclerViewAdaptor.OnItemListener onItemListener;
 
     public TimerRecyclerViewHolder(@NonNull View itemView){
         super(itemView);
         taskName = itemView.findViewById(R.id.task_name);
         taskDesc = itemView.findViewById(R.id.task_desc);
+        taskTime = itemView.findViewById(R.id.task_time);
         //this.onItemListener = onItemListener;
         //itemView.setOnClickListener(this);
     }

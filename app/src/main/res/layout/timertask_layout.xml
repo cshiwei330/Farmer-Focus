@@ -66,6 +66,8 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_baseline_delete_outline_24"
                     app:tint="@android:color/white" />
+
+
             </LinearLayout>
         </RelativeLayout>
 
@@ -116,6 +118,17 @@
                 app:layout_constraintStart_toStartOf="@+id/task_name"
                 app:layout_constraintTop_toBottomOf="@+id/task_name"
                 tools:text="Task Description" />
+
+            <TextView
+                android:id="@+id/task_time"
+                android:layout_width="52dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/task_name"
+                tools:text="Task Time"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

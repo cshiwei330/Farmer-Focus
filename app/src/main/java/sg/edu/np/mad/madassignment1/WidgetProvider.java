@@ -50,9 +50,9 @@ public class WidgetProvider extends AppWidgetProvider {
 
 
         // Add New Task Button
-        Intent buttonIntent = new Intent(context, TaskAddNewActivity.class);
-        PendingIntent pendingButtonIntent = PendingIntent.getActivity(context,0, buttonIntent,0);
-        mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, pendingButtonIntent);
+        //Intent buttonIntent = new Intent(context, TaskAddNewActivity.class);
+        //PendingIntent pendingButtonIntent = PendingIntent.getActivity(context,0, buttonIntent,0);
+        //mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, pendingButtonIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, mainView);
@@ -102,7 +102,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public static boolean isToday(String date) { //task.getTaskDate will be a string
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); //set the date formatter
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
             Date dateToValidate = sdf.parse(date); //convert the string to a Date
 
             // current date with same formatting as dateToValidate
