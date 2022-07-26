@@ -388,4 +388,12 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return recurring_task;
     }
+
+//    public void changeRecurringTaskDate (Task t){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        // edit Task status
+//        String changeRecurringTaskDate = "UPDATE " + TASKS + " SET " + COLUMN_TASKSTATUS + " = " + "\""+ taskStatus.getStatus()+ "\""  + " WHERE " + COLUMN_TASKID + " = " + "\""+ taskStatus.getId()+ "\"";
+//        db.execSQL(changeRecurringTaskDate);
+//        db.close();
+//    }
 }
