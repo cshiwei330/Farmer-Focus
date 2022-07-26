@@ -14,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class StopWatchActivity extends AppCompatActivity {
+import sg.edu.np.mad.madassignment1.databinding.ActivityStopWatchBinding;
+
+public class StopWatchActivity extends DrawerBaseActivity {
+    ActivityStopWatchBinding activityStopWatchBinding;
 
     private Chronometer chronometer;
     private long pauseOffset;
@@ -29,6 +32,12 @@ public class StopWatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stop_watch);
+        //inflate according to activity binding to show
+        activityStopWatchBinding = ActivityStopWatchBinding.inflate(getLayoutInflater());
+        //set view to this activity
+        setContentView(activityStopWatchBinding.getRoot());
+        //set title
+        allocateActivityTitle("Stop Watch");
 
         // Stopwatch
         mButtonStartPause2 = findViewById(R.id.button_start_pause2);
@@ -68,7 +77,7 @@ public class StopWatchActivity extends AppCompatActivity {
         });
 
         // navigate back to timer activity
-        ImageView Timer = findViewById(R.id.backToTimer);
+        ImageView Timer = findViewById(R.id.timerImg);
         Timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,8 +90,6 @@ public class StopWatchActivity extends AppCompatActivity {
                         StopWatchActivity.this.finish();
                     }
                 });
-                // Display "Back" msg
-                Toast.makeText(StopWatchActivity.this, "Back to Timer", Toast.LENGTH_SHORT).show();
                 //start activity with result
                 startActivityForResult(StopWatchActivityToTimerActivity, 1);
             }
