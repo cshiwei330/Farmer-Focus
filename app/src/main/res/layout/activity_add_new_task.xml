@@ -229,6 +229,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/repeatDurationTextView"
                     tools:ignore="SpeakableTextPresentCheck" />
 
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="* will be set to None if repeat is none"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/repeatDurationTextView"
+                    app:layout_constraintStart_toEndOf="@+id/repeatDurationTextView"
+                    app:layout_constraintTop_toTopOf="@+id/repeatDurationTextView" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

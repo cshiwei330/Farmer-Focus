@@ -1,10 +1,14 @@
 package sg.edu.np.mad.madassignment1;
 
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -12,12 +16,14 @@ import androidx.core.app.NotificationManagerCompat;
 public class AlarmReceiver extends BroadcastReceiver {
 
     private String taskAlert, taskTitle, taskDesc;
+    private int taskId;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
         taskAlert = intent.getStringExtra("task alert");
         taskDesc = intent.getStringExtra("task name");
+        taskId = intent.getIntExtra("task id", -1);
 
         if (taskAlert.matches("At time of event")){
             taskTitle = "Task";
@@ -46,7 +52,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent i = new Intent(context, TaskActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "taskalertnotification")
                 .setSmallIcon(R.drawable.barn_icon)
@@ -56,8 +63,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
-
+        Notification notification;
+        notification = builder.build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(123, builder.build());
+        notificationManagerCompat.notify(200, builder.build());
     }
 }
