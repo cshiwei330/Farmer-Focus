@@ -13,7 +13,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TimerTaskListActivity extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
@@ -39,10 +42,12 @@ public class TimerTaskListActivity extends AppCompatActivity {
         ArrayList<Task> taskList = new ArrayList<>();
         //current taskList with db data
         taskList = dbHandler.getTaskData(user.getUserID());
+        //use method
+        ArrayList<Task> recentTaskList = findRecentTasks(taskList);
 
         // initialize recyclerview for TASKS
         //set adaptor to TaskRecyclerViewAdaptor, given taskList
-        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(taskList);
+        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(recentTaskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
@@ -70,5 +75,55 @@ public class TimerTaskListActivity extends AppCompatActivity {
                 startActivityForResult(TimerTaskListActivityToTimerActivity, 1);
             }
         });
+    }
+
+    //NEW
+    public ArrayList<Task> findRecentTasks (ArrayList<Task> taskList){
+
+        ArrayList<Task> recentTaskList = new ArrayList<>();
+
+        for (int i = 0; i < taskList.size(); i++){ //loop through current taskList to find tasks that are upcoming (within the following week)
+            Task task = taskList.get(i);
+
+            boolean result = withinAWeek(task.getTaskDate()); //check if task date is within a week
+
+            if (result){
+                recentTaskList.add(task); //if true then add to new list
+            }
+
+        }
+
+        return recentTaskList; //display this list in the recyclerView
+    }
+
+    public boolean withinAWeek (String date) {
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
+            Date dateToValidate = sdf.parse(date); //convert the string to a Date
+
+            // current date with same formatting as dateToValidate
+            Date today = sdf.parse(sdf.format(new Date()));
+
+            // current date after 1 week
+            Calendar currentDateAfter1Week = Calendar.getInstance();
+            currentDateAfter1Week.add(Calendar.DAY_OF_MONTH, 7);
+
+            //.getTime() returns a Date so comparison can be made
+            if (dateToValidate.after(today) && dateToValidate.before(currentDateAfter1Week.getTime())){ //define the date range
+                //ok everything is fine, date in range
+                return true;
+            }
+            else if (dateToValidate.compareTo(today)==0){ //tasks that are today are considered within a week
+                return true;
+            }
+            else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

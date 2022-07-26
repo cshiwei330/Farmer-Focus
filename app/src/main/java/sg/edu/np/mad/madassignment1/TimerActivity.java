@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -15,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -99,10 +102,29 @@ public class TimerActivity extends DrawerBaseActivity{
 
 
         // receive from bundle
-//        Intent receivingEnd = getIntent();
-//        int oldTaskId = receivingEnd.getIntExtra("task id", 0);
+//        Bundle extras = getIntent().getExtras();
+//        //Log.v("testID", String.valueOf(extras));
+//        int taskId = extras.getInt("task id", -1);
+//        Log.v("testing1", String.valueOf(taskId));
+//        task = dbHandler.findTask(taskId);
+//        setTime(task);
+
+        Intent received = getIntent();
+        Bundle taskId = received.getBundleExtra("task id");
+        Log.v("testing1", String.valueOf(taskId));
+
+
+//        Bundle extras = getIntent().getExtras();
+//        if (extras != null) {
+//            int taskId = extras.getInt("task id", -1);
+//            task = dbHandler.findTask(taskId);
+//
+//            setTime(task);
+//        }
+
 
         // if extras is not null receive from bundle and set time
+        //showTime(task);
         SetTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +137,7 @@ public class TimerActivity extends DrawerBaseActivity{
                 }
             }
         });
+
 
 //        Bundle extras  = getIntent().getExtras();
 //        if (extras != null) {
@@ -187,17 +210,21 @@ public class TimerActivity extends DrawerBaseActivity{
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
                 builder.setTitle("Are you sure to give up?");
-                builder.setMessage("It seems like you have not sat through the entire duration of the task but " +
-                        "it's normal to complete the task before the duration is up." +
+                builder.setMessage("It seems like you have not sat through the entire duration set for the task " +
+                        //"it's normal to complete the task before the duration is up." +
                         "\n\nWould you like to stop doing the task?");
                 builder.setCancelable(true);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
+                        mTextViewCountDown.setText("00:00");
                         // pause timer
                         pauseTimer();
                         // get duration
                         getDuration();
                         // edit task duration column in db
+                        Task TaskDuration = new Task();
+                        TaskDuration.setTaskDuration(getDuration());
+                        dbHandler.editTask(TaskDuration);
 
                         // mark task as completed
 
@@ -258,21 +285,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
     }
 
-    //NEW
-//    public ArrayList<Task> findUncompletedTasks (ArrayList<Task> taskList){
-//        ArrayList<Task> uncompletedTaskList = new ArrayList<>();
-//
-//        for (int i = 0; i < taskList.size(); i++){ //loop through current taskList to find tasks that are uncompleted
-//            Task task = taskList.get(i);
-//
-//            boolean result = withinAWeek(task.getTaskDate()); //check if task is not complete
-//
-//            if (result){
-//                uncompletedTaskList.add(task); //if true then add to new list
-//            }
-//        }
-//        return uncompletedTaskList; //display this list in the recyclerView
-//    }
+
 
 
 //    public void uncompleted () {
@@ -303,8 +316,10 @@ public class TimerActivity extends DrawerBaseActivity{
 //        closeKeyboard();
 //    }
 
+
     private void setTime(Task t) {
         // Get Task Duration (set by user)
+        Log.v("test", "testing");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
         try {
             Date Date1 = simpleDateFormat.parse(t.getTaskStartTime());
