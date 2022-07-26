@@ -68,7 +68,7 @@ public class TaskViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle extras = new Bundle();
                 Intent myIntent = new Intent(TaskViewActivity.this, TaskEditActivity.class);
-                extras.putInt("task id", newTaskId);
+                extras.putInt("Task id", newTaskId);
                 myIntent.putExtras(extras);
                 startActivity(myIntent);
             }

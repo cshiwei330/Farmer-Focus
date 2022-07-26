@@ -71,7 +71,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
         // receive from bundle
         Intent receivingEnd = getIntent();
-        int oldTaskId = receivingEnd.getIntExtra("task id", 0);
+        int oldTaskId = receivingEnd.getIntExtra("Task id", 0);
 
         // shared preferences to get username
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
@@ -331,7 +331,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                     Bundle extras = new Bundle();
                     Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
-                    extras.putInt("task id", oldTaskId);
+                    extras.putInt("Task id", oldTaskId);
                     myIntent.putExtras(extras);
                     startActivity(myIntent);
                 } else {
