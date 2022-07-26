@@ -293,7 +293,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     }
                     dbHandler.addTask(newTaskDB);
                     Task t = new Task(id, 0, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
-                            alert, taskDate, taskType, repeat, recurringId, user.getUserID());
+                            alert, taskDate, taskType, repeat, recurringId, repeatDuration, user.getUserID());
                     // Only set notification if alert is not None
                     if (t.getAlert().matches("None") == false){
                         setAlarm(t);
@@ -405,7 +405,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             dbHandler.addTask(newTaskDB);
 
                             t = new Task(id, 0, newTaskNameString, newTaskDescString, strDate, startTime, endTime, diffInTime,
-                                    alert, alertDateTime, taskType, repeat, recurringId, user.getUserID());
+                                    alert, alertDateTime, taskType, repeat, recurringId, repeatDuration, user.getUserID());
 
                             // Only set notification if alert is not None
                             if (t.getAlert().matches("None") == false){
