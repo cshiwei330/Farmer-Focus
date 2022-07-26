@@ -329,9 +329,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     Task editedTask = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
                             finalTaskStartTime, finalTaskEndTime, diffInTime, alert, taskDate, taskType, repeat, recurringId, recurringDuration, user.getUserID());
 
-//                    if (taskType.matches("Recurring")) {
-//
-//                    }
+//                    if (taskType.matches("Recurring")) {}
 
                     dbHandler.editTask(editedTask);
 
@@ -345,8 +343,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
-
     }
+
+
 
 
     private void setAlarm(Task t) {

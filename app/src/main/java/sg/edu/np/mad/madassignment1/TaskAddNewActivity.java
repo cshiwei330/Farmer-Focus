@@ -142,22 +142,27 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
-//        String[] repeatDurationOptions = getResources().getStringArray(R.array.repeat_duration_options);
-//        ArrayAdapter adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatDurationOptions);
-//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerRepeatDuration.setAdapter(adapter3);
-//
-//        spinnerRepeatDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                repeatDuration = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+        String[] repeatDurationOptions = getResources().getStringArray(R.array.repeat_duration_options);
+        ArrayAdapter adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatDurationOptions);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRepeatDuration.setAdapter(adapter3);
+
+        spinnerRepeatDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (repeat.matches("None")) {
+                    repeatDuration = "None";
+                }
+                else {
+                    repeatDuration = adapterView.getItemAtPosition(i).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         //confirm create new task button listener
@@ -183,6 +188,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     else {
                         date = dayOfMonth + "-" + month + "-" + year;
                     }
+                    Log.v(TAG, "date: " + date);
 
 
 
@@ -238,9 +244,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         e.printStackTrace();
                     }
 
+                    Log.v(TAG, String.valueOf(d));
+
                     if (taskDate.matches(" ") == false) {
                         ArrayList<String> monthsList = new ArrayList<>(
-                                Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec")
+                                Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                         );
                         String[] taskDateSplit = taskDate.split(" ");
                         int monthIndexInt = -1;
@@ -252,13 +260,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             }
                         }
                         if (monthIndexInt < 10) {
-                            monthIndex = "0" + monthIndexInt;
+                            monthIndex = "0" + (monthIndexInt+1);
                         }
                         else {
-                            monthIndex = String.valueOf(monthIndexInt);
+                            monthIndex = String.valueOf(monthIndexInt+1);
                         }
                         taskDate = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
-                        Log.v(TAG, taskDate);
                     }
 
 
@@ -284,8 +291,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setAlertDateTime(taskDate);
                     newTaskDB.setTaskType(taskType);
                     newTaskDB.setRepeat(repeat);
+                    newTaskDB.setRecurringDuration(repeatDuration);
                     newTaskDB.setTaskUserID(user.getUserID());
-                    if (taskType.matches("Eventt")){
+                    if (taskType.matches("Event")){
                         newTaskDB.setRecurringId(0);
                     }
                     else {
@@ -305,9 +313,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     if (taskType.matches("Recurring")) {
 
                         // Decides how many tasks to add
-                        // For weekly, it will add 52 tasks
-                        // For monthly, it will add 12 tasks
-                        // Note: Both will add 1 year worth of tasks
                         int numberOfTimes;
                         if (repeat.matches("Weekly")) {
                             if (repeatDuration.matches("1 Month")) {
@@ -327,7 +332,14 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         }
 
                         // List of taskDates
-                        String startDateString = dayOfMonth + "-" + month + "-" + year;
+                        String startDateString;
+                        if (month < 10) {
+                            startDateString = dayOfMonth + "-" + "0"+ month + "-" + year;
+                        }
+                        else {
+                            startDateString = dayOfMonth + "-" + month + "-" + year;
+                        }
+
 
                         ArrayList<String> taskDateList = new ArrayList<>();
 
@@ -359,22 +371,65 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             }
                         }
 
+
+
+
+
+
                         // List of alertDateTime
                         DateFormat alertDateTimeFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
                         ArrayList<String> alertDateTimeList = new ArrayList<>();
-                        Date alertD = d;
-                        try {
-                            alertD = alertDateTimeFormat.parse(taskDate);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        ArrayList<String> alertDateTimeRightFormatList = new ArrayList<>();
+                        Date alertD = null;
+                        Date alertDRightFormat = null;
+
+
+                        if (taskDate.matches(" ") == false) {
+
+                            try {
+                                alertD = alertDateTimeFormat.parse(taskDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            for (int i=0; i<numberOfTimes; i++) {
+
+                                alertD.setTime(alertD.getTime() + millisToAdd);
+                                alertDateTime = String.valueOf(alertD);
+                                alertDateTimeList.add(alertDateTime);
+                            }
+
+                            for (int i=0; i<alertDateTimeList.size(); i++){
+                                ArrayList<String> monthsList = new ArrayList<>(
+                                        Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+                                );
+                                String[] taskDateSplit = String.valueOf(alertD).split(" ");
+                                int monthIndexInt = -1;
+                                String monthIndex;
+                                for (int j=0; j<monthsList.size(); j++) {
+                                    if (taskDateSplit[1].matches(monthsList.get(j))) {
+                                        monthIndexInt = j;
+                                        break;
+                                    }
+                                }
+                                if (monthIndexInt < 10) {
+                                    monthIndex = "0" + (monthIndexInt+1);
+                                }
+                                else {
+                                    monthIndex = String.valueOf(monthIndexInt+1);
+                                }
+                                alertDateTime = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                                alertDateTimeRightFormatList.add(alertDateTime);
+                            }
+
+                        }
+                        else {
+                            for (int i=0; i<numberOfTimes; i++) {
+                                alertDateTimeList.add(" ");
+                            }
                         }
 
-                        for (int i=0; i<52; i++) {
-                            alertD.setMonth(alertD.getMonth() + 1);
-                            alertDateTime = String.valueOf(alertD);
-                            alertDateTimeList.add(alertDateTime);
-                        }
 
                         for (int i=0; i<numberOfTimes; i++) {
 
@@ -389,10 +444,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             newTaskDB.setTaskEndTime(endTime);
                             newTaskDB.setTaskDuration(0);
                             newTaskDB.setAlert(alert);
-                            newTaskDB.setAlertDateTime(alertDateTimeList.get(i));
+                            newTaskDB.setAlertDateTime(alertDateTimeRightFormatList.get(i));
                             newTaskDB.setTaskType(taskType);
                             newTaskDB.setRepeat(repeat);
                             newTaskDB.setRecurringId(newRecurringId);
+                            newTaskDB.setRecurringDuration(repeatDuration);
                             newTaskDB.setTaskUserID(user.getUserID());
                             dbHandler.addTask(newTaskDB);
 
