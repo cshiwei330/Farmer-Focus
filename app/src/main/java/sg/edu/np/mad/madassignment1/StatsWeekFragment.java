@@ -63,6 +63,8 @@ public class StatsWeekFragment extends Fragment{
         chart.setData(data);
         chart.getBarData().setBarWidth(0.5f);
         chart.animateXY(2000, 2000);
+        //setting chart description to be not visible
+        chart.getDescription().setEnabled(false);
         //setting up x axis
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -296,6 +298,8 @@ public class StatsWeekFragment extends Fragment{
             }
 
         BarDataSet barDataSet1 = new BarDataSet(valueSet1, "No. Of Tasks Done");
+        barDataSet1.setDrawValues(false);
+        barDataSet1.setColor(Color.rgb(162, 149, 116));
 
         return barDataSet1;
     }

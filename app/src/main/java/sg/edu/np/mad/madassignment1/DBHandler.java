@@ -355,7 +355,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<Task> getRecurringTaskData(int userID){
         ArrayList<Task> recurring_task = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String countTask = "SELECT * FROM "+ TASKS + " GROUP BY " + COLUMN_RECURRINGID + " HAVING COUNT( " + COLUMN_RECURRINGID + ") " + " > 1";
+        String countTask = "SELECT * FROM "+ TASKS + " GROUP BY " + COLUMN_RECURRINGID +
+                " HAVING COUNT(" + COLUMN_RECURRINGID + ") " + " > 1" + " AND " + COLUMN_USERID + " = " + userID;
         Cursor cursor = db.rawQuery(countTask,null);
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
