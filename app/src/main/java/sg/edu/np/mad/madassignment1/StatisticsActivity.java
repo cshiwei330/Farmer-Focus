@@ -2,7 +2,9 @@ package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityStatisticsBinding;
 
@@ -20,7 +22,11 @@ public class StatisticsActivity extends DrawerBaseActivity {
         allocateActivityTitle("Statistics");
 
 
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Long taskDuration = extras.getLong("task duration", -1);
+            Log.v("task DURATION", String.valueOf(taskDuration));
+        }
 
     }
 }

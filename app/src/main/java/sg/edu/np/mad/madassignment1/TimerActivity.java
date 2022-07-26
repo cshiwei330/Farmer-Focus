@@ -56,6 +56,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private long mTimeLeftInMillis;
     private long mEndTime;
     private long mDuration;
+    private long mTimeTaken;
 
     Task task;
 
@@ -220,7 +221,10 @@ public class TimerActivity extends DrawerBaseActivity{
                         // pause timer
                         pauseTimer();
                         // get duration
-                        getDuration();
+                        mTimeTaken = getDuration();
+                        // send bundles over to stats
+                        Bundle extras = new Bundle();
+                        extras.putLong("task duration", mTimeTaken);
                         // edit task duration column in db
                         Task TaskDuration = new Task();
                         TaskDuration.setTaskDuration(getDuration());
