@@ -126,7 +126,7 @@ public class TaskActivity extends DrawerBaseActivity{
                             case R.id.edit_task:
                                 Bundle extras = new Bundle();
                                 Intent myIntent = new Intent(TaskActivity.this, TaskEditActivity.class);
-                                extras.putInt("task id", task.getId());
+                                extras.putInt("Task id", task.getId());
                                 myIntent.putExtras(extras);
                                 startActivity(myIntent);
 
