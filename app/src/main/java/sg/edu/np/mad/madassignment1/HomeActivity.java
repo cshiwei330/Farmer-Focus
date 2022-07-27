@@ -94,7 +94,7 @@ public class HomeActivity extends DrawerBaseActivity {
         }).setSwipeOptionViews(R.id.edit_task, R.id.delete_task)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new TaskRecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
-                    public void onSwipeOptionClicked(int viewID, int position) {
+                    public void onSwipeOptionClicked(int viewID, int position) throws ParseException {
 
                         Task task = recentTaskList.get(position);
 
@@ -107,7 +107,7 @@ public class HomeActivity extends DrawerBaseActivity {
                                 startActivity(myIntent);
 
                                 // update widget
-                                updateWidgets(getApplicationContext(), dbHandler, user);
+                                updateWidgets(getApplicationContext(), dbHandler, user, task);
 
                                 break;
 
@@ -127,7 +127,11 @@ public class HomeActivity extends DrawerBaseActivity {
                                         Toast.makeText(HomeActivity.this, "Deleted Task", Toast.LENGTH_LONG).show();
 
                                         // update widget
-                                        updateWidgets(getApplicationContext(), dbHandler, user);
+                                        try {
+                                            updateWidgets(getApplicationContext(), dbHandler, user, task);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 });
                                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -205,20 +209,30 @@ public class HomeActivity extends DrawerBaseActivity {
         }
     }
 
-    public void updateWidgets (Context context, DBHandler dbHandler, User user){
+    public void updateWidgets (Context context, DBHandler dbHandler, User user, Task task) throws ParseException {
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
+        // current date with same formatting as task.getDate()
+        Date today = sdf.parse(sdf.format(new Date()));
+        Date dateToValidate = sdf.parse(task.getTaskDate()); //convert the string to a Date
 
-        RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
-        try {
-            mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(dbHandler.getTodayTaskData(user.getUserID()).size())));
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        //update the widget if task date is today
+        if (dateToValidate.compareTo(today)==0){
+
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName thisWidget = new ComponentName(context, WidgetProvider.class);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widgetListView);
+
+            RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
+            try {
+                mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(dbHandler.getTodayTaskData(user.getUserID()).size())));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            appWidgetManager.updateAppWidget(thisWidget, mainView);
+
         }
-        appWidgetManager.updateAppWidget(thisWidget, mainView);
-
     }
 }

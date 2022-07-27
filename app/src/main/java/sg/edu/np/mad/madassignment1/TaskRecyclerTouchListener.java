@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -363,8 +364,13 @@ public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListen
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mSwipeCloseListener != null)
-                    mSwipeCloseListener.onSwipeOptionsClosed();
+                if (mSwipeCloseListener != null) {
+                    try {
+                        mSwipeCloseListener.onSwipeOptionsClosed();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
                 translateAnimator.removeAllListeners();
             }
 
@@ -439,8 +445,13 @@ public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListen
                 if (mSwipeCloseListener != null) {
                     if (animateType == Animation.OPEN)
                         mSwipeCloseListener.onSwipeOptionsOpened();
-                    else if (animateType == Animation.CLOSE)
-                        mSwipeCloseListener.onSwipeOptionsClosed();
+                    else if (animateType == Animation.CLOSE) {
+                        try {
+                            mSwipeCloseListener.onSwipeOptionsClosed();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
                 translateAnimator.removeAllListeners();
             }
@@ -736,7 +747,7 @@ public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListen
                             final int downPosition = touchedPosition;
                             closeVisibleBG(new OnSwipeListener() {
                                 @Override
-                                public void onSwipeOptionsClosed() {
+                                public void onSwipeOptionsClosed() throws ParseException {
                                     mBgClickListener.onSwipeOptionClicked(optionID, downPosition);
                                 }
 
@@ -903,7 +914,7 @@ public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListen
     }
 
     public interface OnSwipeOptionsClickListener {
-        void onSwipeOptionClicked(int viewID, int position);
+        void onSwipeOptionClicked(int viewID, int position) throws ParseException;
     }
 
     public interface RecyclerTouchListenerHelper {
@@ -911,7 +922,7 @@ public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListen
     }
 
     public interface OnSwipeListener {
-        void onSwipeOptionsClosed();
+        void onSwipeOptionsClosed() throws ParseException;
 
         void onSwipeOptionsOpened();
     }
