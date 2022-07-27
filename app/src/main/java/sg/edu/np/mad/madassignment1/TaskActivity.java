@@ -270,7 +270,7 @@ public class TaskActivity extends DrawerBaseActivity{
             uncompletedTaskButtonClicked = true;
             completedTaskButtonClicked = false;
 
-            uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+            uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
             completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
         }
 
