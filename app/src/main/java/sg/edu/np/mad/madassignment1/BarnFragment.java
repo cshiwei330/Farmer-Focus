@@ -33,12 +33,15 @@ public class BarnFragment extends Fragment {
     private AlertDialog dialog;
     private TextView barnTaskPopUpTitle;
     private RecyclerView barnTaskPopUpRecyclerView;
-    private Button upgradeButon;
+    private Button upgradeButton;
     private TextView barnTaskPopUpSubTitle;
     private ArrayList<Task> taskList = new ArrayList<>();
     private DBHandler dbHandler;
     private int[] barnUpgradeRequirement = new int[]{0,5,7,9};
     private ArrayList<Integer> farmData;
+    private ImageView barnImage;
+    private int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+
 
 
     public String GLOBAL_PREF = "MyPrefs";
@@ -97,8 +100,7 @@ public class BarnFragment extends Fragment {
         taskList = getFilteredCompleteTaskList(user.getUserID());
 
         //set barn image
-        ImageView barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
-        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+        barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
         barnImage.setImageResource(imageList[farmData.get(0)]);
 
         //barn image clicked
@@ -109,38 +111,22 @@ public class BarnFragment extends Fragment {
                 Toast.makeText(v.getContext(),
                         "BARN IMAGE CLICKED",
                         Toast.LENGTH_LONG).show();
-                createBarnTaskPopUp();
+                createBarnTaskPopUp(user);
             }
         });
 
-        //upgrade clicked
-        upgradeButon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //close dialog
-                dialog.dismiss();
 
-                //update database and local data
-                farmData.set(0, farmData.get(0)+1);
-                dbHandler.upgradeBarn(user.getUserID(), farmData.get(0));
-
-                //play gif and set new barnImage
-                //code goes here
-
-
-            }
-        });
 
         return view;
     }
 
-    public void createBarnTaskPopUp(){
+    public void createBarnTaskPopUp(User user){
         dialogBuilder = new AlertDialog.Builder(this.getContext());
         final View BarnTaskPopupView = getLayoutInflater().inflate(R.layout.popup_barn_tasks, null);
 
         barnTaskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpTitle);
         barnTaskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpRecyclerView);
-        upgradeButon = (Button) BarnTaskPopupView.findViewById(R.id.UpgradeButton);
+        upgradeButton = (Button) BarnTaskPopupView.findViewById(R.id.UpgradeButton);
         barnTaskPopUpSubTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpSubTitle);
 
         //set decorative line separator between viewHolders
@@ -148,18 +134,18 @@ public class BarnFragment extends Fragment {
 
         //get currently required number of completed tasks to upgrade
         int req = barnUpgradeRequirement[farmData.get(0)];
-        int reqTaskLeft = taskList.size()-req;
+        int reqTaskLeft = req-taskList.size();
 
         //set texts
         barnTaskPopUpSubTitle.setText("Event Tasks Completed: "+ taskList.size());
 
-        if (reqTaskLeft>-1){
-            barnTaskPopUpTitle.setText("Next Upgrade: "+ reqTaskLeft + "Tasks");
-            upgradeButon.setVisibility(View.GONE);
+        if (reqTaskLeft>0){
+            barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Tasks");
+            upgradeButton.setVisibility(View.GONE);
         }
         else {
             barnTaskPopUpTitle.setVisibility(View.INVISIBLE);
-            upgradeButon.setVisibility(View.VISIBLE);
+            upgradeButton.setVisibility(View.VISIBLE);
         }
 
         // initialize recyclerview for TASKS
@@ -174,6 +160,25 @@ public class BarnFragment extends Fragment {
         dialog = dialogBuilder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+
+        //upgrade clicked
+        upgradeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //close dialog
+                dialog.dismiss();
+
+                //update database and local data
+                farmData.set(0, farmData.get(0)+1);
+                dbHandler.upgradeBarn(user.getUserID(), farmData.get(0));
+
+                //play gif and set new barnImage
+                //TODO: create gif
+                //code goes here
+                barnImage.setImageResource(imageList[farmData.get(0)]);
+
+            }
+        });
     }
 
     public ArrayList<Task> getFilteredCompleteTaskList(int userID){
@@ -184,7 +189,7 @@ public class BarnFragment extends Fragment {
 
         AlltaskList = dbHandler.getTaskData(userID);
         for (Task t:AlltaskList){
-            if (t.getStatus()!=0 && t.getTaskType() != "Recurring"){
+            if (t.getStatus()!=0 && t.getTaskType().equals("Event")){
                 completedTaskList.add(t);
             }
         }
