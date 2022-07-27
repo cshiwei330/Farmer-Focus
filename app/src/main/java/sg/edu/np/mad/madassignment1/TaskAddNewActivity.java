@@ -529,7 +529,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             Log.v(TAG, "Not found");
             e.printStackTrace();
         }
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent); //
     }
 
     private void createNotificationChannel() {
