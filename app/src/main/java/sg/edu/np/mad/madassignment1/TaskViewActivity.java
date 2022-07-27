@@ -16,10 +16,16 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class TaskViewActivity extends AppCompatActivity {
 
     private String TAG = "ViewTaskActivity";
+
     Task task;
+
+    ArrayList<Task> allTasks = new ArrayList<>();
+    ArrayList<Task> tasksToDeleteList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,30 +84,105 @@ public class TaskViewActivity extends AppCompatActivity {
         deleteTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (task.getTaskType().matches("Recurring")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
+                    builder.setMessage("Would you like to delete this task only or this task including all future recurring task?").setCancelable(true);
+                    builder.setPositiveButton("Current And All Future Tasks", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // AlertDialog to confirm if user really wants to delete current and all future tasks
+                            AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
+                            builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
-                builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
-                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dbHandler.deleteTask(task);
-                        Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
-                        startActivity(myIntent);
+                                    allTasks = dbHandler.getTaskData(task.getTaskUserID());
 
-                        //toast to indicate tasks successfully cleared
-                        Toast.makeText(TaskViewActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
+                                    for (int j=0; j<allTasks.size(); j++) {
+                                        if (allTasks.get(j).getRecurringId() == task.getRecurringId() && allTasks.get(j).getId() >= task.getId()){
+                                            tasksToDeleteList.add(allTasks.get(j));
+                                        }
+                                    }
 
-                AlertDialog alert = builder.create();
-                alert.setTitle("Delete task");
-                alert.show();
+                                    for (int k=0; k<tasksToDeleteList.size(); k++) {
+                                        dbHandler.deleteTask(tasksToDeleteList.get(k));
+                                    }
+                                    Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
+                                    startActivity(myIntent);
+
+                                    //toast to indicate tasks successfully cleared
+                                    Toast.makeText(TaskViewActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.setTitle("Delete task");
+                            alert.show();
+                        }
+                    });
+                    builder.setNegativeButton("Just This Task", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
+                            builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dbHandler.deleteTask(task);
+                                    Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
+                                    startActivity(myIntent);
+
+                                    //toast to indicate tasks successfully cleared
+                                    Toast.makeText(TaskViewActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.setTitle("Delete task");
+                            alert.show();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.setTitle("Delete Option");
+                    alert.show();
+                }
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TaskViewActivity.this);
+                    builder.setMessage("Warning! This action is irreversible. Are you sure you want to delete this task?").setCancelable(true);
+                    builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dbHandler.deleteTask(task);
+                            Intent myIntent = new Intent(TaskViewActivity.this, TaskActivity.class);
+                            startActivity(myIntent);
+
+                            //toast to indicate tasks successfully cleared
+                            Toast.makeText(TaskViewActivity.this, "Task Cleared", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+
+                    AlertDialog alert = builder.create();
+                    alert.setTitle("Delete task");
+                    alert.show();
+                }
             }
         });
 
