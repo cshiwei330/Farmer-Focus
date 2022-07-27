@@ -96,8 +96,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
         Task currentTask = dbHandler.findTask(oldTaskId);
 
-        Log.v(TAG, currentTask.getTaskEndTime());
-
         // set old task details
         newTaskName.setText(currentTask.getTaskName());
         newTaskDesc.setText(currentTask.getTaskDesc());
