@@ -37,7 +37,7 @@
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/hour_cell.xml" value="0.3625" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/main_drawer_header.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/task_layout.xml" value="0.21240942028985507" />
-        <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/timertask_layout.xml" value="0.2252650176678445" />
+        <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/timertask_layout.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/to_do_list_layout.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/today_task_widget.xml" value="0.3625" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/widget_provider_layout.xml" value="0.3625" />
@@ -116,27 +116,43 @@
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_moodoftheweek.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_stats_week.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/mipmap-anydpi-v26/appicon.xml" value="0.1785" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/drawable/barn_popup_background.xml" value="0.5475" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/drawable/border.xml" value="0.419" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/drawable/roundedcontainer.xml" value="0.419" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/drawable/widget_rounded_container.xml" value="0.419" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_account_settings.xml" value="0.333786231884058" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_add_new_task.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_calender.xml" value="0.5" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_drawer_base.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_farm.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_home.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_login_page.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_main.xml" value="0.44655797101449274" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_settings.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_task.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/activity_task_viewer.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/calender_cell.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/calender_cell_with_event.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/calender_to_do_list_layout.xml" value="0.5" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/content_layout.xml" value="0.1" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_add_new_task.xml" value="0.2695035460992908" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_barn.xml" value="0.25" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_calender.xml" value="0.42901554404145076" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_date_picker.xml" value="0.48686594202898553" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_home.xml" value="0.16111111111111112" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_silo.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_task.xml" value="0.42988929889298894" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/main_drawer_header.xml" value="0.416213768115942" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/myfarm_barn_task_view_holder.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/popup_barn_tasks.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/select_tassk_container.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/task_layout.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/timertask_layout.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/to_do_list_layout.xml" value="0.5" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/widget_provider_layout.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/widget_today_task_item.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/menu/main_drawer_menu.xml" value="0.5456410256410257" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/xml/shape_rectangle_rounded.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-working 26jun/app/src/main/res/layout/activity_drawer_base.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-working 26jun/app/src/main/res/layout/content_layout.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-working 26jun/app/src/main/res/layout/main_drawer_header.xml" value="0.24682971014492755" />

@@ -83,6 +83,8 @@ public class BarnFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 
@@ -92,6 +94,8 @@ public class BarnFragment extends Fragment {
 
         barnTaskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpTitle);
         barnTaskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpRecyclerView);
+
+        barnTaskPopUpTitle.setText("Event Tasks Completed: "+ taskList.size());
 
         // initialize recyclerview for TASKS
         //set adaptor to TaskRecyclerViewAdaptor, given taskList

@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/task_name"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/task_desc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Task Name" />
 
-    <TextView
-        android:id="@+id/task_desc"
-        style="@style/TextAppearance.AppCompat.Medium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:lines="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/task_name"
-        app:layout_constraintTop_toBottomOf="@+id/task_name"
-        tools:text="Task Description" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/task_time"
-        android:layout_width="52dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_name"
-        tools:text="Task Time"
-        app:layout_constraintVertical_bias="1.0" />
+        <TextView
+            android:id="@+id/task_desc"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="200dp"
+            android:layout_height="47dp"
+            app:layout_constraintStart_toStartOf="@+id/task_name"
+            app:layout_constraintTop_toBottomOf="@+id/task_name"
+            tools:text="Task Description"
+            android:maxLines="2"
+            android:ellipsize="end"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/task_time"
+            android:layout_width="78dp"
+            android:layout_height="33dp"
+            app:layout_constraintStart_toStartOf="@+id/task_date"
+            app:layout_constraintTop_toBottomOf="@+id/task_date"
+            tools:text="Task Time" />
+
+        <TextView
+            android:id="@+id/task_date"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@+id/task_name"
+            app:layout_constraintTop_toTopOf="@+id/task_name"
+            tools:text="Task Date" />
+
+        <TextView
+            android:id="@+id/task_name"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Task Name" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="WHAT"
+            app:layout_constraintStart_toEndOf="@+id/task_date"
+            app:layout_constraintTop_toTopOf="@+id/task_date" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

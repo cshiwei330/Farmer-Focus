@@ -53,22 +53,22 @@ public class WidgetProvider extends AppWidgetProvider {
         mainView.setRemoteAdapter(R.id.widgetListView, serviceIntent);
         mainView.setEmptyView(R.id.widgetListView, R.id.empty);
 
-        /*// launch app when widget is clicked
+        // launch app when widget is clicked
         Intent configIntent = new Intent(context, HomeActivity.class);
         PendingIntent launchAppPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
-        mainView.setOnClickPendingIntent(R.id.widgetListView, launchAppPendingIntent);
         mainView.setOnClickPendingIntent(R.id.widgetTaskNo, launchAppPendingIntent);
         mainView.setOnClickPendingIntent(R.id.widgetTodayText, launchAppPendingIntent);
         mainView.setOnClickPendingIntent(R.id.widgetDivider, launchAppPendingIntent);
+        mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, launchAppPendingIntent);
 
 
-        // Add New Task Button
-        Intent buttonIntent = new Intent(context, TaskAddNewActivity.class);
+        /*// Add New Task Button
+        Intent buttonIntent = new Intent(context, HomeActivity.class);
         PendingIntent pendingButtonIntent = PendingIntent.getActivity(context,0, buttonIntent,0);
         mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, pendingButtonIntent);*/
 
         // Instruct the widget manager to update the widget
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);
+        //appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);
 
         appWidgetManager.updateAppWidget(appWidgetId, mainView);
 
