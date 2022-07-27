@@ -21,7 +21,7 @@ public class Task {
     private String taskDate;
     private String taskStartTime;
     private String taskEndTime;
-    private double taskDuration;
+    private long taskDuration;
     private String alert;
     private String alertDateTime;
     private String taskType;
@@ -38,7 +38,7 @@ public class Task {
 
 
 //    public Task(int Id, int status, String taskName, String taskDesc, int taskHour, int taskMinute, int taskYear, int taskMonth, int taskDayOfMonth) {
-    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, double taskDuration, String alert,
+    public Task(int Id, int status, String taskName, String taskDesc, String taskDate, String taskStartTime, String taskEndTime, long taskDuration, String alert,
                 String alertDateTime, String taskType, String repeat, int recurringId, String recurringDuration, int taskUserID) {
         this.Id = Id;
         this.status = status;
@@ -132,7 +132,7 @@ public class Task {
         return taskDuration;
     }
 
-    public void setTaskDuration(double taskDuration) {
+    public void setTaskDuration(long taskDuration) {
         this.taskDuration = taskDuration;
     }
 

@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.ResultReceiver;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.bumptech.glide.Glide;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,6 +51,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private Button mButtonReset;
     private Button mButtonGiveUp;
     private TextView mTimeTextView;
+    private ImageView sheep;
 
     private CountDownTimer mCountDownTimer;
 
@@ -78,6 +82,7 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
+        sheep = findViewById(R.id.sheepGif);
 
 
         //NEW
@@ -92,6 +97,13 @@ public class TimerActivity extends DrawerBaseActivity{
 
         //get task data from database
         taskList = dbHandler.getTaskData(user.getUserID());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
+        builder.setTitle("Would you like to start the timer now?");
+        builder.setMessage("Select yes if you would like to start the timer for the task " +
+                "which you have chosen." +
+                "\n\nWould you like to start doing the task?");
+        builder.setCancelable(true);
 
         // receiving from bundle
 //        Intent receivingEnd = getIntent();
@@ -221,15 +233,20 @@ public class TimerActivity extends DrawerBaseActivity{
                         pauseTimer();
                         // get duration
                         mTimeTaken = getDuration();
+
+
                         // send bundles over to stats
-                        Bundle extras = new Bundle();
-                        extras.putLong("task duration", mTimeTaken);
+//                        Bundle extras = new Bundle();
+//                        extras.putLong("task duration", mTimeTaken);
+
                         // edit task duration column in db
-                        Task TaskDuration = new Task();
-                        TaskDuration.setTaskDuration(getDuration());
-                        dbHandler.editTask(TaskDuration);
+                        task.setTaskDuration(mTimeTaken);
+                        dbHandler.updateDuration(task);
+
 
                         // mark task as completed
+                        task.setStatus(1);
+                        dbHandler.changeTaskStatus(task);
 
                         // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
@@ -265,6 +282,10 @@ public class TimerActivity extends DrawerBaseActivity{
                 startActivityForResult(TimerActivitytoStopWatchActivity, 1);
             }
         });
+
+        //for sheep animation
+        ImageView sheep = findViewById(R.id.sheepGif);
+        Glide.with(this).load(R.drawable.sheep).into(sheep);
 
         // navigate to task list page to select task
 //        ImageView SelectTask = findViewById(R.id.selectTaskImg);
@@ -372,6 +393,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
         mTimerRunning = true;
         updateWatchInterface();
+
     }
 
     private void pauseTimer() {
@@ -417,25 +439,24 @@ public class TimerActivity extends DrawerBaseActivity{
             //mButtonReset.setVisibility(View.INVISIBLE);
             mButtonStartPause.setText("Pause");
             mButtonGiveUp.setVisibility(View.VISIBLE);
+            sheep.setVisibility(View.VISIBLE);
+            SetTime.setVisibility(View.INVISIBLE);
+
         }
         else {
             //mTextSetTime.setVisibility(View.VISIBLE);
             //SetTime.setVisibility(View.VISIBLE);
             //mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
+            SetTime.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.INVISIBLE);
+            sheep.setVisibility(View.INVISIBLE);
 
 //            if (mTimeLeftInMillis < 1000) {
-//                mButtonStartPause.setVisibility(View.INVISIBLE);
-//            } else {
-//                mButtonStartPause.setVisibility(View.VISIBLE);
+//                MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.drawable.ala)
 //            }
 
-//            if (mTimeLeftInMillis < mStartTimeInMillis) {
-//                mButtonReset.setVisibility(View.VISIBLE);
-//            } else {
-//                mButtonReset.setVisibility(View.VISIBLE);
-//            }
+
         }
     }
 

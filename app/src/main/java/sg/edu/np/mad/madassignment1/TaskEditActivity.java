@@ -42,7 +42,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth, alertIndex, repeatIndex;
-    double diffInTime;
+    long diffInTime;
 
     private String alert, repeat, taskType, finalTaskStartTime, strDate, taskDate, finalTaskDesc, strAlertDateTime;
     private Spinner spinnerAlert, spinnerRepeat;
