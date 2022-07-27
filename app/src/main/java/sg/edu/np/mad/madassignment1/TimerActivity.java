@@ -504,6 +504,9 @@ public class TimerActivity extends DrawerBaseActivity{
                 startTimer();
             }
         }
+        else {
+            mTextViewCountDown.setText("00:00");
+        }
     }
 
 
