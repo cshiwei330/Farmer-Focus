@@ -10,12 +10,14 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +33,13 @@ public class BarnFragment extends Fragment {
     private AlertDialog dialog;
     private TextView barnTaskPopUpTitle;
     private RecyclerView barnTaskPopUpRecyclerView;
+    private Button upgradeButon;
+    private TextView barnTaskPopUpSubTitle;
     private ArrayList<Task> taskList = new ArrayList<>();
+    private DBHandler dbHandler;
+    private int[] barnUpgradeRequirement = new int[]{0,5,7,9};
+    private ArrayList<Integer> farmData;
+
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -60,18 +68,40 @@ public class BarnFragment extends Fragment {
         tvLabel.setText(page + " -- " + title + "THIS IS BARN");
 
         //define dbHandler
-        DBHandler dbHandler = new DBHandler(this.getContext(), null, null,6);
+        dbHandler = new DBHandler(this.getContext(), null, null,6);
 
         // shared preferences to get username
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
         User user = dbHandler.findUser(username);
 
-        //fill taskList with db data
+        //get farm data
+        //index0 = barnLevel
+        //index1 = siloLevel
+        farmData = new ArrayList<Integer>();
+        farmData = dbHandler.findFarm(user.getUserID());
 
-        taskList = dbHandler.getTaskData(user.getUserID());
+        //check farm data is valid
+        try {
+            if (farmData.get(0) == null || farmData.get(1) == null){
+                dbHandler.addFarm(user);
+                farmData = dbHandler.findFarm(user.getUserID());
+            }
+        }
+        catch (IndexOutOfBoundsException e){
+            dbHandler.addFarm(user);
+            farmData = dbHandler.findFarm(user.getUserID());
+        }
 
+        //get tasks
+        taskList = getFilteredCompleteTaskList(user.getUserID());
+
+        //set barn image
         ImageView barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
+        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+        barnImage.setImageResource(imageList[farmData.get(0)]);
+
+        //barn image clicked
         barnImage.setClickable(true);
         barnImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +113,23 @@ public class BarnFragment extends Fragment {
             }
         });
 
+        //upgrade clicked
+        upgradeButon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //close dialog
+                dialog.dismiss();
 
+                //update database and local data
+                farmData.set(0, farmData.get(0)+1);
+                dbHandler.upgradeBarn(user.getUserID(), farmData.get(0));
+
+                //play gif and set new barnImage
+                //code goes here
+
+
+            }
+        });
 
         return view;
     }
@@ -94,8 +140,27 @@ public class BarnFragment extends Fragment {
 
         barnTaskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpTitle);
         barnTaskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpRecyclerView);
+        upgradeButon = (Button) BarnTaskPopupView.findViewById(R.id.UpgradeButton);
+        barnTaskPopUpSubTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpSubTitle);
 
-        barnTaskPopUpTitle.setText("Event Tasks Completed: "+ taskList.size());
+        //set decorative line separator between viewHolders
+        //barnTaskPopUpRecyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
+
+        //get currently required number of completed tasks to upgrade
+        int req = barnUpgradeRequirement[farmData.get(0)];
+        int reqTaskLeft = taskList.size()-req;
+
+        //set texts
+        barnTaskPopUpSubTitle.setText("Event Tasks Completed: "+ taskList.size());
+
+        if (reqTaskLeft>-1){
+            barnTaskPopUpTitle.setText("Next Upgrade: "+ reqTaskLeft + "Tasks");
+            upgradeButon.setVisibility(View.GONE);
+        }
+        else {
+            barnTaskPopUpTitle.setVisibility(View.INVISIBLE);
+            upgradeButon.setVisibility(View.VISIBLE);
+        }
 
         // initialize recyclerview for TASKS
         //set adaptor to TaskRecyclerViewAdaptor, given taskList
@@ -109,5 +174,20 @@ public class BarnFragment extends Fragment {
         dialog = dialogBuilder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+    }
+
+    public ArrayList<Task> getFilteredCompleteTaskList(int userID){
+        //fill taskList with db data
+
+        ArrayList<Task> AlltaskList = new ArrayList<Task>();
+        ArrayList<Task> completedTaskList = new ArrayList<Task>();
+
+        AlltaskList = dbHandler.getTaskData(userID);
+        for (Task t:AlltaskList){
+            if (t.getStatus()!=0 && t.getTaskType() != "Recurring"){
+                completedTaskList.add(t);
+            }
+        }
+        return  completedTaskList;
     }
 }

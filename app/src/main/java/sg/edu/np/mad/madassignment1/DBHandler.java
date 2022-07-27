@@ -53,6 +53,12 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String COLUMN_MOODDATE = "MoodDate";
     public static String COLUMN_MOOD = "Mood";
 
+    //farm
+    public static String FARM = "Farm";
+    public static String COLUMN_BARNLEVEL = "BarnLevel";
+    public static String COLUMN_SILOLEVEL = "SiloLevel";
+    public static String COLUMN_SILONUMBER = "SiloNumber";
+
     public static int DATABASE_VERSION = 6;
 
     public String GLOBAL_PREF = "MyPrefs";
@@ -96,10 +102,20 @@ public class DBHandler extends SQLiteOpenHelper {
         String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "(" + COLUMN_MOODDATE + " TEXT," + COLUMN_MOOD + " TEXT" + ")";
         // CREATE TABLE MoodTracker ( MoodDate TEXT, Mood TEXT )
 
+        // FOR MY FARM
+        String CREATE_DATABASE_MY_FARM = "CREATE TABLE " + FARM + "("
+                + COLUMN_USERID + " INTEGER, "
+                + COLUMN_BARNLEVEL + " INTEGER, "
+                + COLUMN_SILOLEVEL + " INTEGER "
+                + ")";
+        // CREATE TABLE Farm ( UserID TEXT, BarnLevel INTEGER, SiloLevel INTEGER)
+
+
         //execute sql commands
         db.execSQL(CREATE_DATABASE);
         db.execSQL(CREATE_DATABASE_TASK);
         db.execSQL(CREATE_DATABASE_MOODTRACKER);
+        db.execSQL(CREATE_DATABASE_MY_FARM);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
@@ -413,5 +429,39 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return todayTaskList;
+    }
+
+    public void addFarm(User userData){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERID, userData.getUserID());
+        values.put(COLUMN_BARNLEVEL, 0);
+        values.put(COLUMN_SILOLEVEL, 0);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(FARM, null, values);
+        db.close();
+    }
+
+    public ArrayList<Integer> findFarm(int userID){
+        String query = "SELECT * FROM " + FARM + " WHERE " + COLUMN_USERID + "=" + userID;
+        // select * from Farm where UserId = "??"
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Integer>farmData = new ArrayList<Integer>();
+
+        if(cursor.moveToFirst()){
+            farmData.add(cursor.getInt(1));
+            farmData.add(cursor.getInt(2));
+        }
+        return farmData;
+    }
+
+    public void upgradeBarn(Integer userID, Integer upgradeLevel){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // upgrade barn
+        String update = "UPDATE " + FARM + " SET " + COLUMN_BARNLEVEL + " = " + "\""+ upgradeLevel+ "\""  + " WHERE " + COLUMN_USERID + " = " + "\""+ userID+ "\"";
+        db.execSQL(update);
+        db.close();
     }
 }
