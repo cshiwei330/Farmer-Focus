@@ -4,12 +4,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 public class PagerAdapter extends FragmentPagerAdapter {
-    private static int NUM_ITEMS = 4;
+    private static int NUM_ITEMS = 2;
 
     public PagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
+
+    private String[] pageTitles = new String[]{"My Barn", "My Silo"};
 
     // Returns total number of pages
     @Override
@@ -22,13 +26,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
-                return BarnFragment.newInstance(0, "Page # 1");
+                return BarnFragment.newInstance(0, pageTitles[0]);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return BarnFragment.newInstance(1, "Page # 2");
-            case 2: // Fragment # 1 - This will show SecondFragment
-                return SiloFragment.newInstance(2, "Page # 3");
-            case 3: // Fragment # 1 - This will show SecondFragment
-                return SiloFragment.newInstance(2, "Page # 4");
+                return BarnFragment.newInstance(1, pageTitles[1]);
             default:
                 return null;
         }
@@ -39,7 +39,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     // Returns the page title for the top indicator
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page " + position;
+        return pageTitles[position];
     }
 
 }

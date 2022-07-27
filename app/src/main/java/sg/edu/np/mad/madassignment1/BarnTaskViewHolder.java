@@ -17,7 +17,7 @@ public class BarnTaskViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         taskName = itemView.findViewById(R.id.task_name);
         taskDesc = itemView.findViewById(R.id.task_desc);
-        //taskDate = itemView.findViewById(R.id.taskDate);
+        taskDate = itemView.findViewById(R.id.task_date);
         taskTime = itemView.findViewById(R.id.task_time);
     }
 }
