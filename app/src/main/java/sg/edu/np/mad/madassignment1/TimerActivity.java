@@ -192,7 +192,7 @@ public class TimerActivity extends DrawerBaseActivity{
             @Override
             public void onClick(View view) {
                 if (mTimerRunning) {
-                    pauseTimer();
+                    //pauseTimer();
                 }
                 else {
                     startTimer();
@@ -437,7 +437,7 @@ public class TimerActivity extends DrawerBaseActivity{
             //mTextSetTime.setVisibility(View.INVISIBLE);
             //mEditTextInput.setVisibility(View.INVISIBLE);
             //mButtonReset.setVisibility(View.INVISIBLE);
-            mButtonStartPause.setText("Pause");
+            //mButtonStartPause.setText("Pause");
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             SetTime.setVisibility(View.INVISIBLE);
