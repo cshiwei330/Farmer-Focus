@@ -234,11 +234,6 @@ public class TimerActivity extends DrawerBaseActivity{
                         // get duration
                         mTimeTaken = getDuration();
 
-
-                        // send bundles over to stats
-//                        Bundle extras = new Bundle();
-//                        extras.putLong("task duration", mTimeTaken);
-
                         // edit task duration column in db
                         task.setTaskDuration(mTimeTaken);
                         dbHandler.updateDuration(task);

@@ -25,7 +25,6 @@ public class StopWatchActivity extends DrawerBaseActivity {
 
     private Button mButtonStartPause2;
     private Button mButtonReset2;
-    private TextView mTimeTextView;
 
 
     @Override
