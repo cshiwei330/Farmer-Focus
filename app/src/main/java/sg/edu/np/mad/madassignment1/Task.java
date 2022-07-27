@@ -128,7 +128,7 @@ public class Task {
         this.taskEndTime = taskEndTime;
     }
 
-    public double getTaskDuration() {
+    public long getTaskDuration() {
         return taskDuration;
     }
 

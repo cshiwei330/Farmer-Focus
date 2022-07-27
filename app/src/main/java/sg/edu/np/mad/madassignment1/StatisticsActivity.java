@@ -20,13 +20,5 @@ public class StatisticsActivity extends DrawerBaseActivity {
         setContentView(activityStatisticsBinding.getRoot());
         //set title
         allocateActivityTitle("Statistics");
-
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            Long taskDuration = extras.getLong("task duration", -1);
-            Log.v("task DURATION", String.valueOf(taskDuration));
-        }
-
     }
 }
