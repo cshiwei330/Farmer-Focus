@@ -350,7 +350,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 numberOfTimes = 0;
                             }
                             else {
-                                numberOfTimes = 0;
+                                numberOfTimes = 11;
                             }
                         }
 
@@ -377,7 +377,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
                         // Check interval to add for each task date and task alert datetime
                         if (repeat.matches("Weekly")) {
-                            millisToAdd = 604800000;
+                            millisToAdd = 604800000L;
                             for (int i=0; i<numberOfTimes; i++) {
                                 taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
                                 strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
@@ -387,7 +387,8 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         }
                         else { // if (repeat.matches("Monthly"))
                             for (int i=0; i<numberOfTimes; i++) {
-                                taskDateRecurring.setMonth(taskDateRecurring.getMonth() + 1);
+                                millisToAdd = 2629800000L;
+                                taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
                                 strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
                                 strDate = strDate.replace("/", "-");
                                 taskDateList.add(strDate);
@@ -419,6 +420,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             for (int i=0; i<numberOfTimes; i++) {
                                 alertD.setTime(alertD.getTime() + millisToAdd);
                                 alertDateTime = String.valueOf(alertD);
+                                Log.v(TAG, "alertDateTime: " + alertDateTime);
                                 alertDateTimeList.add(alertDateTime);
                             }
 
@@ -428,7 +430,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 ArrayList<String> monthsList = new ArrayList<>(
                                         Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                                 );
-                                String[] taskDateSplit = String.valueOf(alertD).split(" ");
+                                String[] taskDateSplit = String.valueOf(alertDateTimeList.get(i)).split(" ");
                                 int monthIndexInt = -1;
                                 String monthIndex;
                                 for (int j=0; j<monthsList.size(); j++) {
