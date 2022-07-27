@@ -76,7 +76,6 @@ public class TimerActivity extends DrawerBaseActivity{
         mTextViewCountDown = findViewById(R.id.countdown);
         SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
 
@@ -190,12 +189,12 @@ public class TimerActivity extends DrawerBaseActivity{
         });
 
         // reset the timer
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetTimer();
-            }
-        });
+//        mButtonReset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                resetTimer();
+//            }
+//        });
 
         // new
 //        mTimeTextView.setOnClickListener(new View.OnClickListener() {
@@ -417,12 +416,14 @@ public class TimerActivity extends DrawerBaseActivity{
             //mEditTextInput.setVisibility(View.INVISIBLE);
             //mButtonReset.setVisibility(View.INVISIBLE);
             mButtonStartPause.setText("Pause");
+            mButtonGiveUp.setVisibility(View.VISIBLE);
         }
         else {
             //mTextSetTime.setVisibility(View.VISIBLE);
             //SetTime.setVisibility(View.VISIBLE);
             //mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
+            mButtonGiveUp.setVisibility(View.INVISIBLE);
 
 //            if (mTimeLeftInMillis < 1000) {
 //                mButtonStartPause.setVisibility(View.INVISIBLE);
@@ -430,11 +431,11 @@ public class TimerActivity extends DrawerBaseActivity{
 //                mButtonStartPause.setVisibility(View.VISIBLE);
 //            }
 
-            if (mTimeLeftInMillis < mStartTimeInMillis) {
-                mButtonReset.setVisibility(View.VISIBLE);
-            } else {
-                mButtonReset.setVisibility(View.VISIBLE);
-            }
+//            if (mTimeLeftInMillis < mStartTimeInMillis) {
+//                mButtonReset.setVisibility(View.VISIBLE);
+//            } else {
+//                mButtonReset.setVisibility(View.VISIBLE);
+//            }
         }
     }
 
@@ -503,6 +504,9 @@ public class TimerActivity extends DrawerBaseActivity{
             {
                 startTimer();
             }
+        }
+        else {
+            mTextViewCountDown.setText("00:00");
         }
     }
 
