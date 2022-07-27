@@ -18,6 +18,14 @@
         app:layout_constraintTop_toTopOf="@+id/textView13" />
 
     <TextView
+        android:id="@+id/barnTaskPopUpSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Event Tasks Completed: ##"
+        app:layout_constraintStart_toStartOf="@+id/barnTaskPopUpTitle"
+        app:layout_constraintTop_toBottomOf="@+id/barnTaskPopUpTitle" />
+
+    <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Event Tasks Completed: ##"
+        android:text="Next Upgrade: ## Tasks"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +57,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-
-
+    <Button
+        android:id="@+id/UpgradeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="UPGRADE available"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
