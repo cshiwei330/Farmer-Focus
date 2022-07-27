@@ -38,6 +38,9 @@ public class TaskRecyclerViewAdaptor extends RecyclerView.Adapter<TaskRecyclerVi
         if (t.getStatus()==1){
             holder.taskCheckBox.setChecked(true);
         }
+        else {
+            holder.taskCheckBox.setChecked(false);
+        }
 
         //when card is selected, bring user to view task Activity
         holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
