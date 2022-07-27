@@ -28,7 +28,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 0: // Fragment # 0 - This will show FirstFragment
                 return BarnFragment.newInstance(0, pageTitles[0]);
             case 1: // Fragment # 0 - This will show FirstFragment different title
-                return BarnFragment.newInstance(1, pageTitles[1]);
+                return SiloFragment.newInstance(1, pageTitles[1]);
             default:
                 return null;
         }
