@@ -31,12 +31,6 @@ import java.util.Locale;
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends DrawerBaseActivity{
-    private final String TAG = "Timer Activity";
-    int starthour, startminute, endhour, endminute;
-    int year, month, dayOfMonth;
-    String alert, taskType, repeat, startTime, taskDate;
-    double diffInTime;
-    long duration;
     ArrayList<Task> taskList = new ArrayList<>();
 
     //define activity binding
@@ -46,7 +40,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private EditText mEditTextInput;
     private TextView mTextViewCountDown;
     private TextView mTextSetTime;
-    private ImageView SetTime;
+    //private ImageView SetTime;
     private Button mButtonStartPause;
     private Button mButtonReset;
     private Button mButtonGiveUp;
@@ -78,7 +72,7 @@ public class TimerActivity extends DrawerBaseActivity{
 //        mTextSetTime = findViewById(R.id.textview_setTime);
 //        mEditTextInput = findViewById(R.id.edit_text_minutes);
         mTextViewCountDown = findViewById(R.id.countdown);
-        SetTime = findViewById(R.id.GreenTick);
+        //SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
@@ -136,19 +130,18 @@ public class TimerActivity extends DrawerBaseActivity{
 
 
         // if extras is not null receive from bundle and set time
-        //showTime(task);
-        SetTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    int taskId = extras.getInt("task id", -1);
-                    task = dbHandler.findTask(taskId);
-
-                    setTime(task);
-                }
-            }
-        });
+//        SetTime.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Bundle extras = getIntent().getExtras();
+//                if (extras != null) {
+//                    int taskId = extras.getInt("task id", -1);
+//                    task = dbHandler.findTask(taskId);
+//
+//                    setTime(task);
+//                }
+//            }
+//        });
 
 
 //        Bundle extras  = getIntent().getExtras();
@@ -191,6 +184,16 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    int taskId = extras.getInt("task id", -1);
+                    task = dbHandler.findTask(taskId);
+
+                    setTime(task);
+                }
+                else {
+                    Toast.makeText(TimerActivity.this, "Please select a task", Toast.LENGTH_SHORT).show();
+                }
                 if (mTimerRunning) {
                     //pauseTimer();
                 }
@@ -199,22 +202,6 @@ public class TimerActivity extends DrawerBaseActivity{
                 }
             }
         });
-
-        // reset the timer
-//        mButtonReset.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                resetTimer();
-//            }
-//        });
-
-        // new
-//        mTimeTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popTimePicker();
-//            }
-//        });
 
         // give up button (stop doing the task)
         mButtonGiveUp.setOnClickListener(new View.OnClickListener() {
@@ -229,15 +216,16 @@ public class TimerActivity extends DrawerBaseActivity{
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         mTextViewCountDown.setText("00:00");
+
                         // pause timer
                         pauseTimer();
+
                         // get duration
                         mTimeTaken = getDuration();
 
                         // edit task duration column in db
                         task.setTaskDuration(mTimeTaken);
                         dbHandler.updateDuration(task);
-
 
                         // mark task as completed
                         task.setStatus(1);
@@ -382,6 +370,9 @@ public class TimerActivity extends DrawerBaseActivity{
             @Override
             public void onFinish() {
                 mTimerRunning = false;
+                // timer alarm plays for 16 sec after time runs out
+                MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
+                ring.start();
                 updateWatchInterface();
             }
         }.start();
@@ -435,7 +426,8 @@ public class TimerActivity extends DrawerBaseActivity{
             //mButtonStartPause.setText("Pause");
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
-            SetTime.setVisibility(View.INVISIBLE);
+            //SetTime.setVisibility(View.INVISIBLE);
+
 
         }
         else {
@@ -443,13 +435,14 @@ public class TimerActivity extends DrawerBaseActivity{
             //SetTime.setVisibility(View.VISIBLE);
             //mEditTextInput.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
-            SetTime.setVisibility(View.VISIBLE);
+            //SetTime.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.INVISIBLE);
             sheep.setVisibility(View.INVISIBLE);
 
-//            if (mTimeLeftInMillis < 1000) {
-//                MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.drawable.ala)
-//            }
+            if (mTimeLeftInMillis < 1000) {
+                //MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
+                //ring.start();
+            }
 
 
         }
@@ -463,13 +456,6 @@ public class TimerActivity extends DrawerBaseActivity{
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-
-//    private class NumericKeyBoardTransformationMethod extends TimerActivity {
-//        public CharSequence getTransformation(CharSequence source, View view) {
-//            return source;
-//        }
-//    }
 
 
     @Override
