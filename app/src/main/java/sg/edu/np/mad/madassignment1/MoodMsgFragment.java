@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class moodmsgFragment extends Fragment {
+public class MoodMsgFragment extends Fragment {
 
 
-    public moodmsgFragment() {
+    public MoodMsgFragment() {
         // Required empty public constructor
     }
 

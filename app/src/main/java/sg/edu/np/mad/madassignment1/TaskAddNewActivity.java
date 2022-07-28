@@ -500,7 +500,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     finish();
                 }
                 else {
-                    Toast.makeText(TaskAddNewActivity.this, "Please enter a valid "+validity+"!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TaskAddNewActivity.this, "Please enter a task "+validity+"!", Toast.LENGTH_SHORT).show();
                 }
 
             }

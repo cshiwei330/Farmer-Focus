@@ -3,6 +3,7 @@ package sg.edu.np.mad.madassignment1;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,9 @@ import java.util.Date;
 
 public class MoodoftheweekFragment extends Fragment {
     Context thisContext;
+    public String GLOBAL_PREF = "MyPrefs";
+
+
 
     public MoodoftheweekFragment() {
         // Required empty public constructor
@@ -42,7 +46,14 @@ public class MoodoftheweekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         thisContext = container.getContext();
+
+
         sg.edu.np.mad.madassignment1.DBHandler dbHandler = new sg.edu.np.mad.madassignment1.DBHandler(thisContext, null, null, 1);
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = thisContext.getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_moodoftheweek, container, false);
         TextView moodStats = view.findViewById(R.id.moodStats);
@@ -58,7 +69,7 @@ public class MoodoftheweekFragment extends Fragment {
             Calendar pastWeek = Calendar.getInstance();
             pastWeek.add(Calendar.DAY_OF_MONTH, -7);
 
-            ArrayList<Mood> moodList = dbHandler.getMoodData();
+            ArrayList<Mood> moodList = dbHandler.getMoodData(user.getUserID());
 
             if(moodList.size() > 0) {
                 Date moodDate = sdf.parse(moodList.get(0).getDate());
