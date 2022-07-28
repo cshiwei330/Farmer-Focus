@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/task_desc"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="194dp"
+            android:layout_height="37dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/task_name"
+            app:layout_constraintTop_toBottomOf="@+id/task_name"
+            tools:text="Task Description" />
+
+        <TextView
+            android:id="@+id/task_name"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Task Name" />
+
+        <TextView
+            android:id="@+id/times_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="100"
+            android:textSize="34sp"
+            app:layout_constraintStart_toEndOf="@+id/task_name"
+            app:layout_constraintTop_toTopOf="@+id/task_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
