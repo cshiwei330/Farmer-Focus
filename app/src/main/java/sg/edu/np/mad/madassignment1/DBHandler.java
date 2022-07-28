@@ -52,6 +52,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String MOODTRACKER = "MoodTracker";
     public static String COLUMN_MOODDATE = "MoodDate";
     public static String COLUMN_MOOD = "Mood";
+    public static String COLUMN_MOODUSERID = "moodUserID";
 
     //farm
     public static String FARM = "Farm";
@@ -99,8 +100,13 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ")";
 
         // FOR MOOD TRACKER
-        String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "(" + COLUMN_MOODDATE + " TEXT," + COLUMN_MOOD + " TEXT" + ")";
-        // CREATE TABLE MoodTracker ( MoodDate TEXT, Mood TEXT )
+        String CREATE_DATABASE_MOODTRACKER = "CREATE TABLE " + MOODTRACKER + "("
+                + COLUMN_MOODDATE + " TEXT, "
+                + COLUMN_MOOD + " TEXT, "
+                + COLUMN_USERID + " INTEGER "
+                //+ "FOREIGN KEY ("+COLUMN_USERID+") REFERENCES "+ACCOUNTS +" ("+COLUMN_USERID+")"
+                + ")";
+        // CREATE TABLE MoodTracker ( MoodDate TEXT, Mood TEXT, UserID INTEGER)
 
         // FOR MY FARM
         String CREATE_DATABASE_MY_FARM = "CREATE TABLE " + FARM + "("
@@ -312,22 +318,23 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_MOODDATE, moodData.getDate());
         values.put(COLUMN_MOOD, moodData.getMood());
+        values.put(COLUMN_USERID, moodData.getMoodUserID());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(MOODTRACKER, null, values);
-        //Log.v(TAG, "Added to db");
         db.close();
     }
 
     // put mood data into list
-    public ArrayList<Mood> getMoodData() {
+    public ArrayList<Mood> getMoodData(int userID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Mood> moodArrayList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from " + MOODTRACKER, null);
+        String query = "SELECT * FROM " + MOODTRACKER + " WHERE " + COLUMN_USERID + "=" + userID;
+        Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()){
             String date = cursor.getString(0);
             String mood = cursor.getString(1);
-            Mood newMoodEntry = new Mood(date, mood);
+            Mood newMoodEntry = new Mood(date, mood, userID);
             moodArrayList.add(newMoodEntry);
         }
         db.close();

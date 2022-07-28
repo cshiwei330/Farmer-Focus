@@ -1,6 +1,7 @@
 package sg.edu.np.mad.madassignment1;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MoodFragment extends Fragment {
+
+    public String GLOBAL_PREF = "MyPrefs";
 
     public MoodFragment() {
         // Required empty public constructor
@@ -39,9 +42,14 @@ public class MoodFragment extends Fragment {
         //define dbHandler
         DBHandler dbHandler = new DBHandler(getActivity(), null, null,6);
 
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
         //fill moodList with db data
         ArrayList<Mood> moodList = new ArrayList<>();
-        moodList = dbHandler.getMoodData();
+        moodList = dbHandler.getMoodData(user.getUserID());
 
         // set date string to today's date
         String date = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
@@ -56,10 +64,10 @@ public class MoodFragment extends Fragment {
                 String mood = "happy";
 
                 // to find out if entry of mood already exist for today
-                Mood existingEntry = moodToBeChanged(finalMoodList, date);
+                Mood existingEntry = moodToBeChanged(finalMoodList, date, user.getUserID());
                 // if not yet, create the entry and add to database
                 if (existingEntry == null){
-                    addEntryToDB(date, mood, dbHandler);
+                    addEntryToDB(date, mood, dbHandler, user.getUserID());
                     switchingFragmentWithBundle(mood);
                 }
                 //if already have entry, prompt user abt it
@@ -85,10 +93,10 @@ public class MoodFragment extends Fragment {
                 String mood = "neutral";
 
                 // to find out if entry of mood already exist for today
-                Mood existingEntry = moodToBeChanged(finalMoodList, date);
+                Mood existingEntry = moodToBeChanged(finalMoodList, date, user.getUserID());
                 // if not yet, create the entry and add to database
                 if (existingEntry == null){
-                    addEntryToDB(date, mood, dbHandler);
+                    addEntryToDB(date, mood, dbHandler, user.getUserID());
                     switchingFragmentWithBundle(mood);
                 }
                 //if already have entry, prompt user abt it
@@ -115,10 +123,10 @@ public class MoodFragment extends Fragment {
                 String mood = "sad";
 
                 /// to find out if entry of mood already exist for today
-                Mood existingEntry = moodToBeChanged(finalMoodList, date);
+                Mood existingEntry = moodToBeChanged(finalMoodList, date, user.getUserID());
                 // if not yet, create the entry and add to database
                 if (existingEntry == null){
-                    addEntryToDB(date, mood, dbHandler);
+                    addEntryToDB(date, mood, dbHandler, user.getUserID());
                     switchingFragmentWithBundle(mood);
                 }
                 //if already have entry, prompt user abt it
@@ -144,10 +152,10 @@ public class MoodFragment extends Fragment {
                 String mood = "stressed";
 
                 // to find out if entry of mood already exist for today
-                Mood existingEntry = moodToBeChanged(finalMoodList, date);
+                Mood existingEntry = moodToBeChanged(finalMoodList, date, user.getUserID());
                 // if not yet, create the entry and add to database
                 if (existingEntry == null){
-                    addEntryToDB(date, mood, dbHandler);
+                    addEntryToDB(date, mood, dbHandler, user.getUserID());
                     switchingFragmentWithBundle(mood);
                 }
                 //if already have entry, prompt user abt it
@@ -168,10 +176,10 @@ public class MoodFragment extends Fragment {
         return view;
     }
 
-    public void addEntryToDB (String date, String mood, DBHandler dbHandler){
+    public void addEntryToDB (String date, String mood, DBHandler dbHandler, Integer userID){
 
         //create Mood object
-        Mood newEntry = new Mood(date, mood);
+        Mood newEntry = new Mood(date, mood, userID);
 
         //add new task to db
         dbHandler.addMood(newEntry);
@@ -189,7 +197,7 @@ public class MoodFragment extends Fragment {
         fragmentTransaction.commit();
     }
 
-    public Mood moodToBeChanged (ArrayList<Mood> moodList, String today){
+    public Mood moodToBeChanged (ArrayList<Mood> moodList, String today, Integer userID){
 
         Mood changeMood = null; //set mood object to be null
 
@@ -198,7 +206,7 @@ public class MoodFragment extends Fragment {
 
             String entryDate = mood.getDate();
 
-            if (entryDate.equals(today)){       //if there's already a entry, return the mood Object
+            if (entryDate.equals(today) && (mood.getMoodUserID()==userID)){       //if there's already a entry, return the mood Object
                 changeMood = mood;
                 break;
             }
