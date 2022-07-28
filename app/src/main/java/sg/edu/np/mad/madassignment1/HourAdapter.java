@@ -122,7 +122,7 @@ public class HourAdapter extends ArrayAdapter<HourTasks> implements Filterable {
                         taskIDs.add(t.getId());
                     }
 
-                    extras.putIntegerArrayList("task id", taskIDs);
+                    extras.putIntegerArrayList("Task id", taskIDs);
 
                     myIntent.putExtras(extras);
 
@@ -222,7 +222,7 @@ public class HourAdapter extends ArrayAdapter<HourTasks> implements Filterable {
     public void openTaskInfo(View convertView, Task t){
         Bundle extras = new Bundle();
         Intent myIntent = new Intent(convertView.getContext(), TaskViewActivity.class);
-        extras.putInt("task id", t.getId());
+        extras.putInt("Task id", t.getId());
 
         myIntent.putExtras(extras);
 
