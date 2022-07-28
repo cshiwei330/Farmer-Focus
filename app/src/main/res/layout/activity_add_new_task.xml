@@ -17,7 +17,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="1205dp"
+                android:layout_height="855dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="61dp">
 
@@ -26,11 +26,10 @@
                     style="?android:spinnerStyle"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:clickable="true"
                     android:onClick="onDateClick"
                     android:text="Select a date!"
-                    android:textColor="@color/black"
+                    android:textColor="#615F5F"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/taskDatePickerTextView"
@@ -40,7 +39,6 @@
                     android:id="@+id/newTaskNameActivity"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
@@ -54,11 +52,12 @@
                     android:id="@+id/taskNameTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
-                    android:layout_marginTop="90dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="32dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Name:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +66,6 @@
                     android:layout_width="280dp"
 
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:inputType="textMultiLine"
                     android:minHeight="48dp"
@@ -85,6 +83,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Description:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/newTaskDescActivity"
                     app:layout_constraintTop_toBottomOf="@+id/newTaskNameActivity" />
 
@@ -96,6 +95,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Date:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/newTaskDescActivity"
                     app:layout_constraintTop_toBottomOf="@+id/newTaskDescActivity" />
 
@@ -107,6 +107,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="Task Start Time:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/editTaskDatePicker"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
 
@@ -117,28 +118,27 @@
                     android:layout_marginTop="28dp"
                     android:text="Alert:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/newTaskEndTimePicker"
-                    app:layout_constraintTop_toBottomOf="@+id/newTaskEndTimePicker" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/editTaskStartTimePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskStartTimePicker" />
 
                 <Button
                     android:id="@+id/createNewTaskButtonActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:backgroundTint="#7E9278"
+                    android:layout_marginTop="28dp"
                     android:text="Create New Task"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinnerRepeatDuration" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerRepeatDuration"
+                    app:layout_constraintVertical_bias="0.032" />
 
                 <Spinner
                     android:id="@+id/editTaskAlertDropDown"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:minHeight="48dp"
                     app:layout_constraintStart_toStartOf="@+id/addNewTaskAlert"
                     app:layout_constraintTop_toBottomOf="@+id/addNewTaskAlert"
@@ -146,10 +146,10 @@
 
                 <TextView
                     android:id="@+id/editTaskStartTimePicker"
-                    android:layout_width="280dp"
+                    android:layout_width="120dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
                     android:onClick="popStartTimePicker"
                     android:text="00:00"
                     android:textAlignment="center"
@@ -162,29 +162,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="Task End Time:"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/editTaskStartTimePicker"
-                    app:layout_constraintTop_toBottomOf="@+id/editTaskStartTimePicker" />
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/editTaskDatePicker"
+                    app:layout_constraintTop_toBottomOf="@+id/editTaskDatePicker" />
 
                 <TextView
                     android:id="@+id/newTaskEndTimePicker"
-                    android:layout_width="280dp"
+                    android:layout_width="120dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     android:clickable="true"
+                    android:gravity="center_horizontal|center_vertical"
                     android:onClick="popEndTimePicker"
                     android:text="00:00"
                     android:textAlignment="center"
                     android:textSize="34sp"
-                    app:layout_constraintStart_toStartOf="@+id/newTaskEndTime"
+                    app:layout_constraintEnd_toEndOf="@+id/newTaskEndTime"
                     app:layout_constraintTop_toBottomOf="@+id/newTaskEndTime" />
 
                 <Spinner
                     android:id="@+id/repeatSpinnerDropDown"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                     tools:ignore="SpeakableTextPresentCheck" />
@@ -196,6 +197,7 @@
                     android:layout_marginTop="28dp"
                     android:text="Repeat:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/editTaskAlertDropDown"
                     app:layout_constraintTop_toBottomOf="@+id/editTaskAlertDropDown" />
 
@@ -217,6 +219,7 @@
                     android:layout_marginTop="28dp"
                     android:text="Repeat Duration:"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/repeatSpinnerDropDown"
                     app:layout_constraintTop_toBottomOf="@+id/repeatSpinnerDropDown" />
 
@@ -224,7 +227,6 @@
                     android:id="@+id/spinnerRepeatDuration"
                     android:layout_width="280dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@+id/repeatDurationTextView"
                     app:layout_constraintTop_toBottomOf="@+id/repeatDurationTextView"
                     tools:ignore="SpeakableTextPresentCheck" />
