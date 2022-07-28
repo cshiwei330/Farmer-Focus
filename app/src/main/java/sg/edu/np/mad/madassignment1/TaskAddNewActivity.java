@@ -291,7 +291,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setTaskDate(date);
                     newTaskDB.setTaskStartTime(startTime);
                     newTaskDB.setTaskEndTime(endTime);
-                    //newTaskDB.setTaskDuration(0);
                     newTaskDB.setAlert(alert);
                     newTaskDB.setAlertDateTime(taskDate);
                     newTaskDB.setTaskType(taskType);
