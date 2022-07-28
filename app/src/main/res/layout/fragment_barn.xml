@@ -54,6 +54,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/tree_barn"
+            android:layout_width="157dp"
+            android:layout_height="216dp"
+            android:src="@drawable/tree"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="78dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

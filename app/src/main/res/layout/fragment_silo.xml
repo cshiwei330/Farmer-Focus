@@ -19,5 +19,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/siloImage1"
+            android:layout_width="79dp"
+            android:layout_height="66dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/siloImage2"
+            android:layout_width="69dp"
+            android:layout_height="88dp"
+            app:layout_constraintStart_toEndOf="@+id/siloImage1"
+            app:layout_constraintTop_toTopOf="@+id/siloImage1"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/siloImage4"
+            android:layout_width="87dp"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toEndOf="@+id/siloImage3"
+            app:layout_constraintTop_toTopOf="@+id/siloImage1"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/siloImage3"
+            android:layout_width="79dp"
+            android:layout_height="69dp"
+            app:layout_constraintStart_toEndOf="@+id/siloImage2"
+            app:layout_constraintTop_toTopOf="@+id/siloImage1"
+            tools:src="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -105,8 +105,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // FOR MY FARM
         String CREATE_DATABASE_MY_FARM = "CREATE TABLE " + FARM + "("
                 + COLUMN_USERID + " INTEGER, "
-                + COLUMN_BARNLEVEL + " INTEGER, "
-                + COLUMN_SILOLEVEL + " INTEGER "
+                + COLUMN_BARNLEVEL + " STRING, "
+                + COLUMN_SILOLEVEL + " STRING "
                 + ")";
         // CREATE TABLE Farm ( UserID TEXT, BarnLevel INTEGER, SiloLevel INTEGER)
 
@@ -442,25 +442,25 @@ public class DBHandler extends SQLiteOpenHelper {
     public void addFarm(User userData){
         ContentValues values = new ContentValues();
         values.put(COLUMN_USERID, userData.getUserID());
-        values.put(COLUMN_BARNLEVEL, 0);
-        values.put(COLUMN_SILOLEVEL, 0);
+        values.put(COLUMN_BARNLEVEL, "0");
+        values.put(COLUMN_SILOLEVEL, "0:0:0:0");
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(FARM, null, values);
         db.close();
     }
 
-    public ArrayList<Integer> findFarm(int userID){
+    public ArrayList<String> findFarm(int userID){
         String query = "SELECT * FROM " + FARM + " WHERE " + COLUMN_USERID + "=" + userID;
         // select * from Farm where UserId = "??"
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<Integer>farmData = new ArrayList<Integer>();
+        ArrayList<String>farmData = new ArrayList<String>();
 
         if(cursor.moveToFirst()){
-            farmData.add(cursor.getInt(1));
-            farmData.add(cursor.getInt(2));
+            farmData.add(cursor.getString(1));
+            farmData.add(cursor.getString(2));
         }
         return farmData;
     }
