@@ -29,13 +29,7 @@ public class MoodoftheweekFragment extends Fragment {
     Context thisContext;
     public String GLOBAL_PREF = "MyPrefs";
 
-    //define dbHandler
-    DBHandler dbHandler = new DBHandler(getActivity(), null, null,6);
 
-    // shared preferences to get username
-    SharedPreferences sharedPreferences = getContext().getSharedPreferences(GLOBAL_PREF, 0);
-    String username = sharedPreferences.getString("username", "");
-    User user = dbHandler.findUser(username);
 
     public MoodoftheweekFragment() {
         // Required empty public constructor
@@ -52,7 +46,14 @@ public class MoodoftheweekFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         thisContext = container.getContext();
+
+
         sg.edu.np.mad.madassignment1.DBHandler dbHandler = new sg.edu.np.mad.madassignment1.DBHandler(thisContext, null, null, 1);
+        // shared preferences to get username
+        SharedPreferences sharedPreferences = thisContext.getSharedPreferences(GLOBAL_PREF, 0);
+        String username = sharedPreferences.getString("username", "");
+        User user = dbHandler.findUser(username);
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_moodoftheweek, container, false);
         TextView moodStats = view.findViewById(R.id.moodStats);
