@@ -104,27 +104,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--    <ImageView-->
-<!--        android:id="@+id/selectTaskImg"-->
-<!--        android:layout_width="96dp"-->
-<!--        android:layout_height="59dp"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginBottom="13dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/outer_circle"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:srcCompat="@drawable/tasklist" />-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/GreenTick"-->
-<!--        android:layout_width="30dp"-->
-<!--        android:layout_height="35dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.498"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.613"-->
-<!--        app:srcCompat="@drawable/tick" />-->
 
     <ImageView
         android:id="@+id/inner_circle"
@@ -152,19 +131,13 @@
 
     <Button
         android:id="@+id/giveUpBtn"
-        android:layout_width="110dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="36dp"
-        android:background="#00FFFFFF"
-        android:endColor="@color/darkBeige"
+        android:layout_width="145dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="100dp"
         android:text="Give up"
-
-        android:textColor="@color/darkBeige"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -193,12 +166,11 @@
         android:id="@+id/sheepGif"
         android:layout_width="135dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="44dp"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="128dp"
+        android:background="#A29574"
         android:backgroundTint="#0CFFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/giveUpBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/sheep" />
 

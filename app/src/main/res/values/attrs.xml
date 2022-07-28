@@ -4,4 +4,6 @@
         <attr name="appWidgetInnerRadius" format="dimension" />
         <attr name="appWidgetRadius" format="dimension" />
     </declare-styleable>
+    <attr name="widgetTaskName" format="string" />
+    <attr name="widgetTaskTime" format="string" />
 </resources>
