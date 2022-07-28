@@ -33,6 +33,7 @@ public class TaskRecyclerViewAdaptor extends RecyclerView.Adapter<TaskRecyclerVi
 
         holder.taskName.setText(t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
+        holder.taskDate.setText(t.getTaskDate());
 
         //if checked, set box to checked
         if (t.getStatus()==1){
