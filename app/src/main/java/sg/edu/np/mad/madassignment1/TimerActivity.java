@@ -267,58 +267,10 @@ public class TimerActivity extends DrawerBaseActivity{
         ImageView sheep = findViewById(R.id.sheepGif);
         Glide.with(this).load(R.drawable.sheep).into(sheep);
 
-        // navigate to task list page to select task
-//        ImageView SelectTask = findViewById(R.id.selectTaskImg);
-//        SelectTask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent TimerActivityToTimerTaskListActivity = new Intent(TimerActivity.this, TimerTaskListActivity.class);
-//                //put extra
-//                TimerActivityToTimerTaskListActivity.putExtra("finisher", new ResultReceiver(null) {
-//                    @Override
-//                    //when result code =1, received from bundle, kill this activity
-//                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-//                        TimerActivity.this.finish();
-//                    }
-//                });
-//                //start activity with result
-//                startActivityForResult(TimerActivityToTimerTaskListActivity, 1);
-//            }
-//        });
-
 
     }
 
 
-
-
-//    public void uncompleted () {
-//        for (int j=0; j < taskList.size(); j++){
-//            if (taskList.get(j).getStatus() == 1){
-//                secondTaskList.add(taskList.get(j));
-//            }
-//        }
-//        for (int j=0; j<secondTaskList.size(); j++){
-//            taskList.remove(secondTaskList.get(j));
-//        }
-//    }
-
-//    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//        String filterOption = adapterView.getItemAtPosition(i).toString();
-//        if (filterOption.matches("Not Completed")){
-//            Collections.sort(taskList, Task.TaskIdAscComparator);
-//        }
-//    }
-
-
-
-
-    // set the time on the timer
-//    private void setTime(long milliseconds) {
-//        mStartTimeInMillis = milliseconds;
-//        resetTimer();
-//        closeKeyboard();
-//    }
 
 
     private void setTime(Task t) {
