@@ -77,8 +77,8 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     String task = searchTask.getText().toString();
                     for (int i = 0; i < recurringTask.size(); i++) {
-                        if(recurringTask.get(i).getTaskName().equals(task) && recurringTask.get(i).getTaskDuration() != 0) {
-                            long timeInMin = recurringTask.get(i).getTaskDuration() / 60000;
+                        long timeInMin = recurringTask.get(i).getTaskDuration() / 60000;
+                        if(recurringTask.get(i).getTaskName().equals(task) && timeInMin != 0) {
                             timeTaken.add(timeInMin);
                         }
                     }
@@ -106,7 +106,6 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                     YAxis yAxis = chart.getAxisLeft();
                     yAxis.setLabelCount(10);
                     yAxis.setStartAtZero(true);
-                    //yAxis.setAxisMaxValue(10);
                     yAxis.setDrawGridLines(false);
                     //making sure there is only one y axis
                     chart.getAxisRight().setDrawLabels(false);
@@ -260,7 +259,7 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
         }
 
 
-        BarDataSet barDataSet1 = new BarDataSet(valueSet1, "Time taken each attempt");
+        BarDataSet barDataSet1 = new BarDataSet(valueSet1, "Time taken each attempt (min)");
         barDataSet1.setDrawValues(false);
         barDataSet1.setColor(Color.rgb(162, 149, 116));
 
