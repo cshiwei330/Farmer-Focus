@@ -4,7 +4,7 @@
     android:id="@+id/widget_container"
     style="@style/Widget.MADAssignment1.AppWidget.Container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/widget_rounded_container"
     android:theme="@style/Theme.MADAssignment1.AppWidgetContainer">
 
