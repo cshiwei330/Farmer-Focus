@@ -25,6 +25,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
 
     private Button mButtonStartPause2;
     private Button mButtonReset2;
+    private Button mButtonTimer;
 
 
     @Override
@@ -42,6 +43,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
         mButtonStartPause2 = findViewById(R.id.button_start_pause2);
         mButtonReset2 = findViewById(R.id.button_reset2);
         chronometer = findViewById(R.id.chronometer);
+        mButtonTimer = findViewById(R.id.timer2);
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -75,9 +77,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
             }
         });
 
-        // navigate back to timer activity
-        ImageView Timer = findViewById(R.id.timerImg);
-        Timer.setOnClickListener(new View.OnClickListener() {
+        mButtonTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent StopWatchActivityToTimerActivity = new Intent(StopWatchActivity.this, TimerActivity.class);
@@ -91,8 +91,10 @@ public class StopWatchActivity extends DrawerBaseActivity {
                 });
                 //start activity with result
                 startActivityForResult(StopWatchActivityToTimerActivity, 1);
+
             }
         });
+
     }
 
     private void startChronometer() {

@@ -44,6 +44,8 @@ public class TimerActivity extends DrawerBaseActivity{
     private Button mButtonStartPause;
     private Button mButtonReset;
     private Button mButtonGiveUp;
+    private Button mButtonStopwatch;
+    private Button mButtonTimer;
     private TextView mTimeTextView;
     private ImageView sheep;
 
@@ -74,6 +76,8 @@ public class TimerActivity extends DrawerBaseActivity{
         mTextViewCountDown = findViewById(R.id.countdown);
         //SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
+        mButtonStopwatch = findViewById(R.id.Stopwatch);
+        mButtonTimer = findViewById(R.id.Timer);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
@@ -244,11 +248,15 @@ public class TimerActivity extends DrawerBaseActivity{
             }
         });
 
-        // navigate to stopwatch page
-        ImageView StopWatch = findViewById(R.id.StopWatchImg);
-        StopWatch.setOnClickListener(new View.OnClickListener() {
+
+        //for sheep animation
+        ImageView sheep = findViewById(R.id.sheepGif);
+        Glide.with(this).load(R.drawable.sheep).into(sheep);
+
+        mButtonStopwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
                 Intent TimerActivitytoStopWatchActivity = new Intent(TimerActivity.this, StopWatchActivity.class);
                 //put extra
                 TimerActivitytoStopWatchActivity.putExtra("finisher", new ResultReceiver(null) {
@@ -262,10 +270,6 @@ public class TimerActivity extends DrawerBaseActivity{
                 startActivityForResult(TimerActivitytoStopWatchActivity, 1);
             }
         });
-
-        //for sheep animation
-        ImageView sheep = findViewById(R.id.sheepGif);
-        Glide.with(this).load(R.drawable.sheep).into(sheep);
 
 
     }
