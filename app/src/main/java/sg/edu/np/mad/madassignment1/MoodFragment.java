@@ -189,7 +189,7 @@ public class MoodFragment extends Fragment {
         // To know what message to display
         Bundle b = new Bundle();
         b.putString("key", message);
-        Fragment messageFrag = new moodmsgFragment();
+        Fragment messageFrag = new MoodMsgFragment();
         messageFrag.setArguments(b);
         // switch fragments
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
