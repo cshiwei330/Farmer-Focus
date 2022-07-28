@@ -517,49 +517,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         });
     }
 
-
-
-
-//    private void setAlarm(Task t) {
-//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//
-//        Bundle extras = new Bundle();
-//        Intent myIntent = new Intent(this, AlarmReceiver.class);
-//        extras.putString("task name", t.getTaskName());
-//        extras.putString("task alert", t.getAlert());
-//        myIntent.putExtras(extras);
-//
-//        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
-//
-//        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        Date Date1 = null;
-//        long timeInMilliseconds = 0;
-//        try {
-//            Date1 = format.parse(finalTaskStartTime);
-//            timeInMilliseconds = Date1.getTime();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-//        }
-//        else {
-//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-//        }
-//    }
-//
-    public void cancelNotification(Task t) {
-        Bundle extras = new Bundle();
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        extras.putString("task name", t.getTaskName());
-        extras.putString("task alert", t.getAlert());
-        intent.putExtras(extras);
-        PendingIntent pending = PendingIntent.getBroadcast(getBaseContext(), t.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Cancel notification
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(pending);
-    }
-
     // Set Date
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
         Calendar c = Calendar.getInstance();

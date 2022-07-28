@@ -20,7 +20,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     private String taskAlert, taskTitle, taskDesc;
     private int taskId;
     NotificationManagerCompat notificationManagerCompat;
-
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -56,10 +55,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent i = new Intent(context, TaskActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,taskId,intent,PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,taskId,i,PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "taskalertnotification")
-                .setSmallIcon(R.drawable.barn_icon)
+                .setSmallIcon(R.drawable.appiconround)
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
                 .setAutoCancel(false)

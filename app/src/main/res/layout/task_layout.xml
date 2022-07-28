@@ -102,13 +102,10 @@
             <TextView
                 android:id="@+id/task_name"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="203dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/task_desc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/task_checkBox"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Task Name" />
@@ -128,6 +125,19 @@
                 app:layout_constraintStart_toStartOf="@+id/task_name"
                 app:layout_constraintTop_toBottomOf="@+id/task_name"
                 tools:text="Task Description" />
+
+            <TextView
+                android:id="@+id/task_date_recyclerview"
+                android:layout_width="107dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="30dp"
+                android:text="TextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/task_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/task_name"
+                app:layout_constraintTop_toTopOf="@+id/task_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

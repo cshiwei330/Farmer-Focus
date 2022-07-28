@@ -58,7 +58,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static String FARM = "Farm";
     public static String COLUMN_BARNLEVEL = "BarnLevel";
     public static String COLUMN_SILOLEVEL = "SiloLevel";
-    public static String COLUMN_SILONUMBER = "SiloNumber";
 
     public static int DATABASE_VERSION = 6;
 
@@ -476,6 +475,14 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         // upgrade barn
         String update = "UPDATE " + FARM + " SET " + COLUMN_BARNLEVEL + " = " + "\""+ upgradeLevel+ "\""  + " WHERE " + COLUMN_USERID + " = " + "\""+ userID+ "\"";
+        db.execSQL(update);
+        db.close();
+    }
+
+    public void buildSilo(Integer userID, String siloString){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // upgrade silo
+        String update = "UPDATE " + FARM + " SET " + COLUMN_SILOLEVEL + " = " + "\""+ siloString+ "\""  + " WHERE " + COLUMN_USERID + " = " + "\""+ userID+ "\"";
         db.execSQL(update);
         db.close();
     }

@@ -126,10 +126,10 @@ public class BarnFragment extends Fragment {
         dialogBuilder = new AlertDialog.Builder(this.getContext());
         final View BarnTaskPopupView = getLayoutInflater().inflate(R.layout.popup_barn_tasks, null);
 
-        barnTaskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpTitle);
-        barnTaskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpRecyclerView);
-        upgradeButton = (Button) BarnTaskPopupView.findViewById(R.id.UpgradeButton);
-        barnTaskPopUpSubTitle = (TextView) BarnTaskPopupView.findViewById(R.id.barnTaskPopUpSubTitle);
+        barnTaskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.BarntaskPopUpTitle);
+        barnTaskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.BarnTaskPopUpRecyclerView);
+        upgradeButton = (Button) BarnTaskPopupView.findViewById(R.id.BarnUpgradeButton);
+        barnTaskPopUpSubTitle = (TextView) BarnTaskPopupView.findViewById(R.id.BarnTaskPopUpSubTitle);
 
         //set decorative line separator between viewHolders
         //barnTaskPopUpRecyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
@@ -141,14 +141,22 @@ public class BarnFragment extends Fragment {
         //set texts
         barnTaskPopUpSubTitle.setText("Event Tasks Completed: "+ taskList.size());
 
-        if (reqTaskLeft>0){
-            barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Tasks");
-            upgradeButton.setVisibility(View.GONE);
+        if (Integer.valueOf(farmData.get(0))<4){
+            if (reqTaskLeft>0){
+                barnTaskPopUpTitle.setVisibility(View.VISIBLE);
+                barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Tasks");
+                upgradeButton.setVisibility(View.GONE);
+            }
+            else {
+                barnTaskPopUpTitle.setVisibility(View.INVISIBLE);
+                upgradeButton.setVisibility(View.VISIBLE);
+            }
         }
-        else {
-            barnTaskPopUpTitle.setVisibility(View.INVISIBLE);
-            upgradeButton.setVisibility(View.VISIBLE);
+        else{
+            barnTaskPopUpTitle.setVisibility(View.VISIBLE);
+            barnTaskPopUpTitle.setText("Next Upgrade: Maximum Reached!");
         }
+
 
         // initialize recyclerview for TASKS
         //set adaptor to TaskRecyclerViewAdaptor, given taskList

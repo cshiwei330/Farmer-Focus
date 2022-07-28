@@ -18,12 +18,21 @@
         app:layout_constraintTop_toTopOf="@+id/textView13" />
 
     <TextView
-        android:id="@+id/BarnTaskPopUpSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Event Tasks Completed: ##"
-        app:layout_constraintStart_toStartOf="@+id/BarntaskPopUpTitle"
-        app:layout_constraintTop_toBottomOf="@+id/BarntaskPopUpTitle" />
+        android:id="@+id/SiloTaskPopUpSubTitle"
+        android:layout_width="333dp"
+        android:layout_height="20dp"
+        android:text="Upgrade Silo: Complete ## More Recurring Tasks"
+        app:layout_constraintStart_toStartOf="@+id/SilotaskPopUpTitle"
+        app:layout_constraintTop_toBottomOf="@+id/SiloTaskPopUpSubTitle2" />
+
+    <TextView
+        android:id="@+id/SiloTaskPopUpSubTitle2"
+        android:layout_width="287dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="8dp"
+        android:text="New Silo: Create ## More Recurring Tasks"
+        app:layout_constraintStart_toStartOf="@+id/SilotaskPopUpTitle"
+        app:layout_constraintTop_toBottomOf="@+id/SilotaskPopUpTitle" />
 
     <TextView
         android:id="@+id/textView13"
@@ -31,17 +40,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="40dp"
-        android:text="Completed On:"
+        android:text="Times Completed:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BarnTaskPopUpSubTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/SiloTaskPopUpSubTitle" />
 
     <TextView
-        android:id="@+id/BarntaskPopUpTitle"
+        android:id="@+id/SilotaskPopUpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Next Upgrade: Complete ## More Tasks"
+        android:text="Recurring Tasks Completed: ##"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +58,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/BarnTaskPopUpRecyclerView"
+        android:id="@+id/SiloTaskPopUpRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
@@ -59,13 +68,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
-        android:id="@+id/BarnUpgradeButton"
+        android:id="@+id/SiloUpgradeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UPGRADE available"
-        app:layout_constraintBottom_toBottomOf="@+id/BarntaskPopUpTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/SiloTaskPopUpSubTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/SiloHeightUpgradebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="upgrade available"
+        app:layout_constraintBottom_toBottomOf="@+id/SiloTaskPopUpSubTitle"
+        tools:layout_editor_absoluteX="109dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
