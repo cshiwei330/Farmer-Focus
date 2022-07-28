@@ -4,13 +4,9 @@ import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +17,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -38,7 +36,7 @@ public class BarnFragment extends Fragment {
     private ArrayList<Task> taskList = new ArrayList<>();
     private DBHandler dbHandler;
     private int[] barnUpgradeRequirement = new int[]{0,5,7,9};
-    private ArrayList<Integer> farmData;
+    private ArrayList<String> farmData;
     private ImageView barnImage;
     private int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
 
@@ -81,7 +79,7 @@ public class BarnFragment extends Fragment {
         //get farm data
         //index0 = barnLevel
         //index1 = siloLevel
-        farmData = new ArrayList<Integer>();
+        farmData = new ArrayList<String>();
         farmData = dbHandler.findFarm(user.getUserID());
 
         //check farm data is valid
@@ -101,7 +99,11 @@ public class BarnFragment extends Fragment {
 
         //set barn image
         barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
-        barnImage.setImageResource(imageList[farmData.get(0)]);
+        barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
+
+        //background trees
+        ImageView treeImage = view.findViewById(R.id.tree_barn);
+        Glide.with(this.getContext()).load(R.drawable.tree).into(treeImage);
 
         //barn image clicked
         barnImage.setClickable(true);
@@ -133,7 +135,7 @@ public class BarnFragment extends Fragment {
         //barnTaskPopUpRecyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
 
         //get currently required number of completed tasks to upgrade
-        int req = barnUpgradeRequirement[farmData.get(0)];
+        int req = barnUpgradeRequirement[Integer.valueOf(farmData.get(0))];
         int reqTaskLeft = req-taskList.size();
 
         //set texts
@@ -169,13 +171,13 @@ public class BarnFragment extends Fragment {
                 dialog.dismiss();
 
                 //update database and local data
-                farmData.set(0, farmData.get(0)+1);
-                dbHandler.upgradeBarn(user.getUserID(), farmData.get(0));
+                farmData.set(0, String.valueOf(Integer.valueOf(farmData.get(0))+1));
+                dbHandler.upgradeBarn(user.getUserID(), Integer.valueOf(farmData.get(0)));
 
                 //play gif and set new barnImage
                 //TODO: create gif
                 //code goes here
-                barnImage.setImageResource(imageList[farmData.get(0)]);
+                barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
 
             }
         });
