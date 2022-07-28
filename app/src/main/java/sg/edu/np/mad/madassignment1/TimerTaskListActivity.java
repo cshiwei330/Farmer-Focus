@@ -21,6 +21,10 @@ import java.util.Date;
 public class TimerTaskListActivity extends AppCompatActivity {
     public String GLOBAL_PREF = "MyPrefs";
 
+    //define taskList array
+    ArrayList<Task> taskList = new ArrayList<>();
+    ArrayList<Task> secondTaskList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +47,12 @@ public class TimerTaskListActivity extends AppCompatActivity {
         //current taskList with db data
         taskList = dbHandler.getTaskData(user.getUserID());
         //use method
-        ArrayList<Task> recentTaskList = findRecentTasks(taskList);
+        //ArrayList<Task> recentTaskList = findRecentTasks(taskList);
+        ArrayList<Task> uncompletedTaskList = findUncompletedTasks(taskList);
 
         // initialize recyclerview for TASKS
         //set adaptor to TaskRecyclerViewAdaptor, given taskList
-        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(recentTaskList);
+        TimerRecyclerViewAdaptor mAdaptor = new TimerRecyclerViewAdaptor(taskList);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdaptor);
@@ -125,5 +130,27 @@ public class TimerTaskListActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<Task> findUncompletedTasks (ArrayList<Task> taskList){
+
+        ArrayList<Task> uncompletedTaskList = new ArrayList<>();
+
+        if (secondTaskList.size() != 0){
+            for (int j=0; j < secondTaskList.size(); j++){
+                taskList.add(secondTaskList.get(j));
+            }
+            secondTaskList.clear();
+        }
+        for (int j=0; j < taskList.size(); j++){
+            if (taskList.get(j).getStatus() == 1){
+                secondTaskList.add(taskList.get(j));
+            }
+        }
+        for (int j=0; j<secondTaskList.size(); j++){
+            taskList.remove(secondTaskList.get(j));
+        }
+
+        return uncompletedTaskList; //display this list in the recyclerView
     }
 }

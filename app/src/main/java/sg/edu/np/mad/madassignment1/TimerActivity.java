@@ -92,12 +92,6 @@ public class TimerActivity extends DrawerBaseActivity{
         //get task data from database
         taskList = dbHandler.getTaskData(user.getUserID());
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
-        builder.setTitle("Would you like to start the timer now?");
-        builder.setMessage("Select yes if you would like to start the timer for the task " +
-                "which you have chosen." +
-                "\n\nWould you like to start doing the task?");
-        builder.setCancelable(true);
 
         // receiving from bundle
 //        Intent receivingEnd = getIntent();
@@ -192,6 +186,9 @@ public class TimerActivity extends DrawerBaseActivity{
                     setTime(task);
                 }
                 else {
+                    //to "refresh" the change
+                    Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
+                    startActivity(myIntent);
                     Toast.makeText(TimerActivity.this, "Please select a task", Toast.LENGTH_SHORT).show();
                 }
                 if (mTimerRunning) {
@@ -373,6 +370,15 @@ public class TimerActivity extends DrawerBaseActivity{
                 // timer alarm plays for 16 sec after time runs out
                 MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
                 ring.start();
+
+                //define dbHandler
+                DBHandler dbHandler = new DBHandler(TimerActivity.this, null, null,6);
+                // mark task as completed
+                task.setStatus(1);
+                dbHandler.changeTaskStatus(task);
+
+                // show msg tat task is completed
+                Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
                 updateWatchInterface();
             }
         }.start();
@@ -388,9 +394,9 @@ public class TimerActivity extends DrawerBaseActivity{
         updateWatchInterface();
     }
 
+
     private void resetTimer() {
         mTimeLeftInMillis = mStartTimeInMillis;
-        //mTimeLeftInMillis = 0;
         updateCountDownText();
         updateWatchInterface();
     }
@@ -419,31 +425,15 @@ public class TimerActivity extends DrawerBaseActivity{
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
-            //SetTime.setVisibility(View.INVISIBLE);
-            //mTextSetTime.setVisibility(View.INVISIBLE);
-            //mEditTextInput.setVisibility(View.INVISIBLE);
-            //mButtonReset.setVisibility(View.INVISIBLE);
-            //mButtonStartPause.setText("Pause");
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
-            //SetTime.setVisibility(View.INVISIBLE);
-
-
+            mButtonStartPause.setVisibility(View.INVISIBLE);
         }
         else {
-            //mTextSetTime.setVisibility(View.VISIBLE);
-            //SetTime.setVisibility(View.VISIBLE);
-            //mEditTextInput.setVisibility(View.VISIBLE);
+            mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
-            //SetTime.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.INVISIBLE);
             sheep.setVisibility(View.INVISIBLE);
-
-            if (mTimeLeftInMillis < 1000) {
-                //MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
-                //ring.start();
-            }
-
 
         }
     }
@@ -496,7 +486,6 @@ public class TimerActivity extends DrawerBaseActivity{
 
             if (mTimeLeftInMillis < 0)
             {
-                //mTimeLeftInMillis = 0;
                 mTimeLeftInMillis = mStartTimeInMillis;
                 mTimerRunning = false;
                 updateCountDownText();
