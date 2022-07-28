@@ -263,53 +263,44 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     d = format.parse(taskDate);
                     if (alert.matches("None")){
                         taskDate = " ";
-                        cancelNotification(currentTask);
                     }
                     else if (alert.matches("At time of event")){
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("5 minutes before")){
                         millisToSubtract = 5 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("10 minutes before")){
                         millisToSubtract = 10 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("15 minutes before")){
                         millisToSubtract = 15 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("30 minutes before")){
                         millisToSubtract = 30 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("1 hour before")){
                         millisToSubtract = 60 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("1 day before")){
                         millisToSubtract = 1440 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else {
                         millisToSubtract = 10080 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -500,45 +491,45 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
 
 
-    private void setAlarm(Task t) {
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Bundle extras = new Bundle();
-        Intent myIntent = new Intent(this, AlarmReceiver.class);
-        extras.putString("task name", t.getTaskName());
-        extras.putString("task alert", t.getAlert());
-        myIntent.putExtras(extras);
-
-        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
-
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date Date1 = null;
-        long timeInMilliseconds = 0;
-        try {
-            Date1 = format.parse(finalTaskStartTime);
-            timeInMilliseconds = Date1.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
-        else {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
-    }
-
-    public void cancelNotification(Task t) {
-        Bundle extras = new Bundle();
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        extras.putString("task name", t.getTaskName());
-        extras.putString("task alert", t.getAlert());
-        intent.putExtras(extras);
-        PendingIntent pending = PendingIntent.getBroadcast(this, t.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // Cancel notification
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(pending);
-    }
+//    private void setAlarm(Task t) {
+//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//
+//        Bundle extras = new Bundle();
+//        Intent myIntent = new Intent(this, AlarmReceiver.class);
+//        extras.putString("task name", t.getTaskName());
+//        extras.putString("task alert", t.getAlert());
+//        myIntent.putExtras(extras);
+//
+//        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
+//
+//        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        Date Date1 = null;
+//        long timeInMilliseconds = 0;
+//        try {
+//            Date1 = format.parse(finalTaskStartTime);
+//            timeInMilliseconds = Date1.getTime();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+//        }
+//        else {
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+//        }
+//    }
+//
+//    public void cancelNotification(Task t) {
+//        Bundle extras = new Bundle();
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        extras.putString("task name", t.getTaskName());
+//        extras.putString("task alert", t.getAlert());
+//        intent.putExtras(extras);
+//        PendingIntent pending = PendingIntent.getBroadcast(this, t.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        // Cancel notification
+//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.cancel(pending);
+//    }
 
     // Set Date
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {

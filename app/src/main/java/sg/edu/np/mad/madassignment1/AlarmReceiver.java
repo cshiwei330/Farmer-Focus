@@ -19,6 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private String taskAlert, taskTitle, taskDesc;
     private int taskId;
+    NotificationManagerCompat notificationManagerCompat;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -66,7 +67,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify((int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE), builder.build());
+        notificationManagerCompat = NotificationManagerCompat.from(context);
+        notificationManagerCompat.notify(taskId, builder.build());
     }
 }

@@ -1,7 +1,9 @@
 package sg.edu.np.mad.madassignment1;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.AlarmManager;
@@ -514,7 +516,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         extras.putString("task alert", t.getAlert());
         myIntent.putExtras(extras);
 
-        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
+        pendingIntent = PendingIntent.getBroadcast(TaskAddNewActivity.this, t.getId(), myIntent,PendingIntent.FLAG_IMMUTABLE);
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date Date1 = null;
@@ -529,8 +531,23 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             Log.v(TAG, "Not found");
             e.printStackTrace();
         }
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent); //
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
     }
+
+//    public void cancelNotification(Task t) {
+//        Bundle extras = new Bundle();
+//        Intent intent = new Intent(TaskAddNewActivity.addNewTaskContext, AlarmReceiver.class);
+//        extras.putString("task name", t.getTaskName());
+//        extras.putString("task alert", t.getAlert());
+//        intent.putExtras(extras);
+//        PendingIntent pending = PendingIntent.getBroadcast(TaskAddNewActivity.addNewTaskContext, t.getId(), intent, PendingIntent.FLAG_IMMUTABLE);
+//        // Cancel notification
+//        alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.cancel(pending);
+//
+//        NotificationManagerCompat.from(this).cancel(t.getId());
+//
+//    }
 
     private void createNotificationChannel() {
 
