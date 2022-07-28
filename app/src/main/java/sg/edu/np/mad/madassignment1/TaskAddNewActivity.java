@@ -282,6 +282,20 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     int maxRecurringId = dbHandler.returnHighestRecurringId(user.getUserID());
                     int newRecurringId = maxRecurringId + 1;
 
+                    if (repeat.matches("None") && (repeatDuration.matches("1 Month") || repeatDuration.matches("1 Year"))) {
+                        Log.v(TAG, "Repeat: None and Repeat Duration is 1 Month or 1 Year");
+                        repeatDuration = "None";
+                        taskType = "Event";
+                        Toast.makeText(TaskAddNewActivity.this, "Repeat Duration set to None as there is no repeat frequency indicated.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (repeatDuration.matches("None") && (repeat.matches("Weekly") || repeat.matches("Monthly"))) {
+                        Log.v(TAG, "Repeat: Weekly or Monthly and Repeat Duration is None");
+                        repeat = "None";
+                        taskType = "Event";
+                        Toast.makeText(TaskAddNewActivity.this, "Repeat set to None as there is no repeat duration indicated.", Toast.LENGTH_SHORT).show();
+                    }
+
                     //populate new task fields
                     Task newTaskDB = new Task();
                     newTaskDB.setId(id);
@@ -510,12 +524,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Bundle extras = new Bundle();
-        Intent myIntent = new Intent(getBaseContext(), AlarmReceiver.class);
+        Intent myIntent = new Intent(TaskAddNewActivity.this, AlarmReceiver.class);
         extras.putString("task name", t.getTaskName());
         extras.putString("task alert", t.getAlert());
         myIntent.putExtras(extras);
 
-        pendingIntent = PendingIntent.getBroadcast(getBaseContext(), t.getId(), myIntent,PendingIntent.FLAG_IMMUTABLE);
+        pendingIntent = PendingIntent.getBroadcast(TaskAddNewActivity.this, t.getId(), myIntent,PendingIntent.FLAG_IMMUTABLE);
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date Date1 = null;
@@ -532,21 +546,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         }
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
     }
-
-//    public void cancelNotification(Task t) {
-//        Bundle extras = new Bundle();
-//        Intent intent = new Intent(TaskAddNewActivity.addNewTaskContext, AlarmReceiver.class);
-//        extras.putString("task name", t.getTaskName());
-//        extras.putString("task alert", t.getAlert());
-//        intent.putExtras(extras);
-//        PendingIntent pending = PendingIntent.getBroadcast(TaskAddNewActivity.addNewTaskContext, t.getId(), intent, PendingIntent.FLAG_IMMUTABLE);
-//        // Cancel notification
-//        alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.cancel(pending);
-//
-//        NotificationManagerCompat.from(this).cancel(t.getId());
-//
-//    }
 
     private void createNotificationChannel() {
 
