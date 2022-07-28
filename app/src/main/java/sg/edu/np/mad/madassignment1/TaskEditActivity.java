@@ -55,12 +55,15 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     // get all recurring tasks
     ArrayList<Task> recurringTaskList = new ArrayList<>();
     ArrayList<Task> recurringFutureTaskList = new ArrayList<>();
+    ArrayList<Integer> recurringTasksId = new ArrayList<>();
 
     // updating taskDate
     ArrayList<String> taskDateList = new ArrayList<>();
     Date taskDateRecurring = null;
     Date d;
     ArrayList<String> newAlertDateTimeList = new ArrayList<>();
+
+    String[] taskDateSplit;
 
     // updating alertDateTime
 
@@ -258,58 +261,50 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 String dateReplace = finalTaskDate.replace("/", "-");
                 taskDate = dateReplace + " " + finalTaskStartTime +":00";
+                Log.v(TAG, "finalTaskStartTime: " + finalTaskStartTime);
                 try {
                     long millisToSubtract;
                     d = format.parse(taskDate);
                     if (alert.matches("None")){
                         taskDate = " ";
-                        cancelNotification(currentTask);
                     }
                     else if (alert.matches("At time of event")){
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("5 minutes before")){
                         millisToSubtract = 5 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("10 minutes before")){
                         millisToSubtract = 10 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("15 minutes before")){
                         millisToSubtract = 15 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("30 minutes before")){
                         millisToSubtract = 30 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("1 hour before")){
                         millisToSubtract = 60 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else if (alert.matches("1 day before")){
                         millisToSubtract = 1440 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                     else {
                         millisToSubtract = 10080 * 60000;
                         d.setTime(d.getTime() - millisToSubtract);
                         taskDate = String.valueOf(d);
-                        setAlarm(currentTask);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -321,7 +316,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     ArrayList<String> monthsList = new ArrayList<>(
                             Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                     );
-                    String[] taskDateSplit = taskDate.split(" ");
+                    Log.v(TAG, "taskDate: " + taskDate);
+                    taskDateSplit = taskDate.split(" ");
                     int monthIndexInt = -1;
                     String monthIndex;
                     for (int i=0; i<monthsList.size(); i++) {
@@ -399,10 +395,12 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                 // Add all task objects with the same recurringId as currentTask to recurringFutureTaskList
                                 for (int j=0; j<recurringTaskList.size(); j++) {
                                     if (recurringTaskList.get(j).getRecurringId() == currentTask.getRecurringId() && recurringTaskList.get(j).getId() > currentTask.getId()){
-                                        Log.v(TAG, "recurringTaskId" + recurringTaskList.get(j).getId());
                                         recurringFutureTaskList.add(recurringTaskList.get(j));
                                     }
                                 }
+
+                                Log.v(TAG, "Final Task Date: " + finalTaskDate);
+                                Log.v(TAG, "currentTask.getTaskDate(): " + currentTask.getTaskDate());
 
                                 // Check if taskDate changed
                                 if (finalTaskDate.matches(currentTask.getTaskDate()) == false) {
@@ -420,6 +418,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                             taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
                                             strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
                                             strDate = strDate.replace("/", "-");
+                                            Log.v(TAG, "strDate: " + strDate);
                                             taskDateList.add(strDate);
 
                                             if (taskDate.matches(" ") == false) {
@@ -427,6 +426,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                                                 try {
                                                     String dateReplace = recurringFutureTaskList.get(j).getAlertDateTime();
+                                                    Log.v(TAG, "alertDateTIme when changed" + recurringFutureTaskList.get(j).getAlertDateTime());
                                                     d = format.parse(dateReplace);
                                                     d.setTime(d.getTime() + millisToAdd);
                                                     strAlertDateTime = d.toString();
@@ -434,7 +434,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                                     ArrayList<String> monthsList = new ArrayList<>(
                                                             Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                                                     );
-                                                    String[] taskDateSplit = String.valueOf(strAlertDateTime).split(" ");
+                                                    String[] taskDateSplitSecond = String.valueOf(strAlertDateTime).split(" ");
                                                     int monthIndexInt = -1;
                                                     String monthIndex;
                                                     for (int k=0; k<monthsList.size(); k++) {
@@ -449,7 +449,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                                     else {
                                                         monthIndex = String.valueOf(monthIndexInt+1);
                                                     }
-                                                    strAlertDateTime = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                                                    Log.v(TAG, "taskDateSplit[3]" + taskDateSplit[3]);
+                                                    strAlertDateTime = taskDateSplitSecond[2] + "-" + monthIndex + "-" + taskDateSplitSecond[5] + " " + taskDateSplit[3];
+                                                    Log.v(TAG, "strAlertDateTime: " + strAlertDateTime);
                                                     newAlertDateTimeList.add(strAlertDateTime);
                                                 }
                                                 catch (ParseException e) {
@@ -468,13 +470,31 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                             e.printStackTrace();
                                         }
                                     }
+                                    Log.v(TAG, "taskDateList size: " + taskDateList.size());
 
-                                    for (int j=0; j<recurringFutureTaskList.size(); j++){
-                                        Task task = new Task(recurringFutureTaskList.get(j).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, taskDateList.get(j),
-                                                finalTaskStartTime, finalTaskEndTime, diffInTime, alert, newAlertDateTimeList.get(j), taskType, repeat, recurringId, recurringDuration, user.getUserID());
+                                    for (int k=0; k<recurringFutureTaskList.size(); k++){
+                                        Log.v(TAG, "taskDateList.get(k): " + taskDateList.get(k));
+                                        Task task = new Task(recurringFutureTaskList.get(k).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, taskDateList.get(k),
+                                                finalTaskStartTime, finalTaskEndTime, diffInTime, alert, newAlertDateTimeList.get(k), taskType, repeat, recurringId, recurringDuration, user.getUserID());
                                         dbHandler.editTask(task);
                                     }
 
+                                }
+                                else {
+                                    String alertDateTime = finalTaskDate + " " + taskDateSplit[3] + ":00";
+                                    // Edit the current task
+                                    Task task = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
+                                            finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
+                                    dbHandler.editTask(task);
+
+                                    // Edit the rest of the task
+                                    for (int j=0; j<recurringFutureTaskList.size(); j++) {
+                                        Log.v(TAG, "taskDateSplit[3]: " + taskDateSplit[3]);
+                                        alertDateTime = recurringFutureTaskList.get(j).getTaskDate() + " " + taskDateSplit[3];
+                                        Task restTask = new Task(recurringFutureTaskList.get(j).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, recurringFutureTaskList.get(j).getTaskDate(),
+                                                finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
+                                        dbHandler.editTask(restTask);
+                                    }
                                 }
                                 Bundle extras = new Bundle();
                                 Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
@@ -500,41 +520,41 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
 
 
-    private void setAlarm(Task t) {
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
-        Bundle extras = new Bundle();
-        Intent myIntent = new Intent(this, AlarmReceiver.class);
-        extras.putString("task name", t.getTaskName());
-        extras.putString("task alert", t.getAlert());
-        myIntent.putExtras(extras);
-
-        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
-
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date Date1 = null;
-        long timeInMilliseconds = 0;
-        try {
-            Date1 = format.parse(finalTaskStartTime);
-            timeInMilliseconds = Date1.getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
-        else {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
-        }
-    }
-
+//    private void setAlarm(Task t) {
+//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//
+//        Bundle extras = new Bundle();
+//        Intent myIntent = new Intent(this, AlarmReceiver.class);
+//        extras.putString("task name", t.getTaskName());
+//        extras.putString("task alert", t.getAlert());
+//        myIntent.putExtras(extras);
+//
+//        pendingIntent = PendingIntent.getBroadcast(this, t.getId(), myIntent,0);
+//
+//        DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        Date Date1 = null;
+//        long timeInMilliseconds = 0;
+//        try {
+//            Date1 = format.parse(finalTaskStartTime);
+//            timeInMilliseconds = Date1.getTime();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+//        }
+//        else {
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+//        }
+//    }
+//
     public void cancelNotification(Task t) {
         Bundle extras = new Bundle();
-        Intent intent = new Intent(this, AlarmReceiver.class);
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         extras.putString("task name", t.getTaskName());
         extras.putString("task alert", t.getAlert());
         intent.putExtras(extras);
-        PendingIntent pending = PendingIntent.getBroadcast(this, t.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pending = PendingIntent.getBroadcast(getBaseContext(), t.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         // Cancel notification
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pending);

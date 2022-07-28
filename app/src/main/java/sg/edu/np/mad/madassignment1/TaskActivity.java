@@ -1,9 +1,12 @@
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,6 +54,8 @@ public class TaskActivity extends DrawerBaseActivity{
 
     private boolean completedTaskButtonClicked = false;
     private boolean uncompletedTaskButtonClicked = false;
+
+    AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -342,6 +347,11 @@ public class TaskActivity extends DrawerBaseActivity{
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        for (int j=0; j<taskList.size(); j++) {
+                            cancelNotification(taskList.get(j));
+                        }
+
                         //delete all task entries
                         dbHandler.deleteAllTask(user.getUserID());
                         //replace taskList with empty dbHandler
@@ -429,5 +439,20 @@ public class TaskActivity extends DrawerBaseActivity{
             appWidgetManager.updateAppWidget(thisWidget, mainView);
 
         }
+    }
+
+    public void cancelNotification(Task t) {
+        Bundle extras = new Bundle();
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        extras.putString("task name", t.getTaskName());
+        extras.putString("task alert", t.getAlert());
+        intent.putExtras(extras);
+        PendingIntent pending = PendingIntent.getBroadcast(this, t.getId(), intent, PendingIntent.FLAG_IMMUTABLE);
+        // Cancel notification
+        alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pending);
+
+        NotificationManagerCompat.from(this).cancelAll();
+
     }
 }
