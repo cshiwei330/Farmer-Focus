@@ -511,12 +511,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Bundle extras = new Bundle();
-        Intent myIntent = new Intent(this, AlarmReceiver.class);
+        Intent myIntent = new Intent(getBaseContext(), AlarmReceiver.class);
         extras.putString("task name", t.getTaskName());
         extras.putString("task alert", t.getAlert());
         myIntent.putExtras(extras);
 
-        pendingIntent = PendingIntent.getBroadcast(TaskAddNewActivity.this, t.getId(), myIntent,PendingIntent.FLAG_IMMUTABLE);
+        pendingIntent = PendingIntent.getBroadcast(getBaseContext(), t.getId(), myIntent,PendingIntent.FLAG_IMMUTABLE);
 
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date Date1 = null;
