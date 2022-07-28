@@ -19,4 +19,22 @@
         <item name="android:background">?android:attr/colorBackground</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
+
+    <style name="ListItem">
+        <item name="widgetTaskName"></item>
+        <item name="widgetTaskTime"></item>
+    </style>
+    <style name="ListItem.Preview1">
+        <item name="widgetTaskName">Fake Title 1</item>
+        <item name="widgetTaskTime">Fake content 1</item>
+    </style>
+    <style name="ListItem.Preview2">
+        <item name="widgetTaskName">Fake title 2</item>
+        <item name="widgetTaskTime">Fake content 2</item>
+    </style>
+    <style name="ListItem.Preview3">
+        <item name="widgetTaskName">Fake title 3</item>
+        <item name="widgetTaskTime">Fake content 3</item>
+    </style>
+
 </resources>
