@@ -62,9 +62,6 @@
             android:name=".TimerActivity"
             android:exported="false" />
         <activity
-            android:name=".ComingSoonActivity"
-            android:exported="false" />
-        <activity
             android:name=".ImagesActivity"
             android:exported="false" />
         <activity
