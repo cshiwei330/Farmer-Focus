@@ -19,7 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SiloFragment extends Fragment {
@@ -45,6 +48,9 @@ public class SiloFragment extends Fragment {
     private int[] siloHeightUpgradeRequirement = new int[]{1,5,7,9,12,15,18,21,24};
     //requirement to build more silos
     private int[] siloNumUpgradeRequirement = new int[]{1,3,4,5};
+
+    private boolean newSiloAvailable = false;
+    private boolean newHeightAvailable = false;
 
     private ArrayList<String> farmData;
     private ImageView siloImage1,siloImage2,siloImage3;
@@ -145,7 +151,7 @@ public class SiloFragment extends Fragment {
         taskPopUpTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SilotaskPopUpTitle);
         taskPopUpRecyclerView = (RecyclerView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpRecyclerView);
         upgradeButton = (Button) SiloTaskPopupView.findViewById(R.id.SiloUpgradeButton);
-        upgradeButtonHeight = (Button) SiloTaskPopupView.findViewById(R.id.SiloHeightUpgradebutton);
+//        upgradeButtonHeight = (Button) SiloTaskPopupView.findViewById(R.id.SiloHeightUpgradebutton);
         taskPopUpSubTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle);
         taskPopUpSubTitle2 = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle2);
 
@@ -162,13 +168,16 @@ public class SiloFragment extends Fragment {
         int totalRecurringTaskCompletedNum = 0;
         for (ArrayList<Task> uniqueRecurring:taskList) {
             for (Task t:uniqueRecurring){
-                if (t.getStatus()==0){
+                if (t.getStatus()==1){
                     totalRecurringTaskCompletedNum += 1;
                 }
             }
         }
         taskPopUpTitle.setText("Recurring Tasks Completed: "+ totalRecurringTaskCompletedNum);
 
+        newSiloAvailable = false;
+        newHeightAvailable = false;
+        upgradeButton.setVisibility(View.GONE);
 
         //new silo
         //get total silos built
@@ -189,12 +198,13 @@ public class SiloFragment extends Fragment {
             if (newSiloReqLeft>0){
                 taskPopUpSubTitle2.setVisibility(View.VISIBLE);
                 taskPopUpSubTitle2.setText("New Silo: Create "+ newSiloReqLeft + " More Recurring Tasks");
-                upgradeButton.setVisibility(View.GONE);
+//                upgradeButton.setVisibility(View.GONE);
             }
 
             else{
                 taskPopUpSubTitle2.setVisibility(View.INVISIBLE);
-                upgradeButton.setVisibility(View.VISIBLE);
+//                upgradeButton.setVisibility(View.VISIBLE);
+                newSiloAvailable = true;
             }
 
         }
@@ -214,6 +224,7 @@ public class SiloFragment extends Fragment {
         }
 
         //if total level is 8>, max level is reached
+        //individual level of a silo is max 3
         if(totalSiloLevel<9){
 
             //if there is an upgradable silo available
@@ -225,22 +236,30 @@ public class SiloFragment extends Fragment {
                 if(heightUpgradReqLeft>0){
                     taskPopUpSubTitle.setVisibility(View.VISIBLE);
                     taskPopUpSubTitle.setText("Upgrade Silo: Complete " + heightUpgradReqLeft + " More Recurring Tasks");
-                    upgradeButtonHeight.setVisibility(View.GONE);
+//                    upgradeButtonHeight.setVisibility(View.GONE);
                 }
 
                 else{
                     taskPopUpSubTitle.setVisibility(View.INVISIBLE);
-                    upgradeButtonHeight.setVisibility(View.VISIBLE);
+//                    upgradeButtonHeight.setVisibility(View.VISIBLE);
+                    newHeightAvailable = true;
                 }
             }
             else {
-                taskPopUpTitle.setVisibility(View.VISIBLE);
-                taskPopUpTitle.setText("Upgrade Silo: Build More Silos First");
+                taskPopUpSubTitle.setVisibility(View.VISIBLE);
+                taskPopUpSubTitle.setText("Upgrade Silo: Build More Silos First");
             }
         }
         else{
-            taskPopUpTitle.setVisibility(View.VISIBLE);
-            taskPopUpTitle.setText("Upgrade Silo: Maximum Reached!");
+            taskPopUpSubTitle.setVisibility(View.VISIBLE);
+            taskPopUpSubTitle.setText("Upgrade Silo: Maximum Reached!");
+        }
+
+        //if upgrade is available make all subTitles disappear and button to appear
+        if (newSiloAvailable||newHeightAvailable){
+            taskPopUpSubTitle.setVisibility(View.INVISIBLE);
+            taskPopUpSubTitle2.setVisibility(View.INVISIBLE);
+            upgradeButton.setVisibility(View.VISIBLE);
         }
 
         // initialize recyclerview for TASKS
@@ -262,17 +281,42 @@ public class SiloFragment extends Fragment {
                 //close dialog
                 dialog.dismiss();
 
-                //update database and local data
-                //+1 to the silo level if it is 0
+                //determine what type of upgrade is happening
+                //build silo takes always happens first when available
+
                 //get index of changed silo, set to insane number so it fails spectacularly
                 int index = -9999;
-                for (int i = 0; i < siloLevel.size(); i++) {
 
-                    if(siloLevel.get(i)==0){
-                        siloLevel.set(i,1);
-                        index = i;
-                        break;
+                if (newSiloAvailable){
+                    //update database and local data
+                    //+1 to the silo level if it is 0
+                    for (int i = 0; i < siloLevel.size(); i++) {
+
+                        if(siloLevel.get(i)==0){
+                            siloLevel.set(i,1);
+                            index = i;
+                            break;
+                        }
                     }
+                    newSiloAvailable = false;
+                }
+
+                else if (newHeightAvailable){
+                    //update database and local data
+                    //+1 to the silo with the lowest level
+
+                    //get lowest silo level
+                    int lowestSiloLevel = Collections.min(siloLevel);
+
+                    for (int i = 0; i < siloLevel.size(); i++) {
+
+                        if(siloLevel.get(i)==lowestSiloLevel){
+                            siloLevel.set(i,siloLevel.get(i)+1);
+                            index = i;
+                            break;
+                        }
+                    }
+                    newHeightAvailable = false;
                 }
 
                 //recreate string of silo data for database
@@ -298,6 +342,7 @@ public class SiloFragment extends Fragment {
         ArrayList<Task> uniqueRecurringTasks = new ArrayList<Task>();
         ArrayList<Integer> recurringTasksID = new ArrayList<Integer>();
 
+        //get all recurringID
         allTaskList = dbHandler.getTaskData(userID);
         for (Task t:allTaskList){
             if (t.getTaskType().equals("Recurring")){
@@ -305,19 +350,24 @@ public class SiloFragment extends Fragment {
             }
         }
 
+        //get unique recurringID
         Set<Integer> uniqueRecurringTaskID = new HashSet<Integer>(recurringTasksID);
+        //get number of unique recurring tasks
         int uniqueRecurringTaskNum = uniqueRecurringTaskID.size();
 
+        //array of unique recurring tasks put into a bigger array
         ArrayList<ArrayList<Task>> arrayOfArrayOfRecurringTasks = new ArrayList<ArrayList<Task>>();
 
-
+        //loop and create a new array for each unique recurring task
         for (int j = 0; j < uniqueRecurringTaskNum; j++) {
 
             arrayOfArrayOfRecurringTasks.add(new ArrayList<Task>());
 
+            //loop through all tasks
             for (int i = 0; i < allTaskList.size(); i++) {
 
-                if (allTaskList.get(i).getTaskType().equals("Recurring") && allTaskList.get(i).getRecurringId() == j) {
+                //if task is recurring and is the same recurring id, add task
+                if (allTaskList.get(i).getTaskType().equals("Recurring") && allTaskList.get(i).getRecurringId() == j+1) {
                     arrayOfArrayOfRecurringTasks.get(j).add(allTaskList.get(i));
                 }
             }

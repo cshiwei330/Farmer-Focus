@@ -41,7 +41,7 @@
             android:id="@+id/times_completed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:text="100"
             android:textSize="34sp"
             app:layout_constraintStart_toEndOf="@+id/task_name"

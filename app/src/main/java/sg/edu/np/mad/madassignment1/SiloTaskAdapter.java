@@ -30,7 +30,15 @@ public class SiloTaskAdapter extends RecyclerView.Adapter<SiloTaskViewHolder> {
         holder.taskName.setText(recurringUnique.get(0).getTaskName());
         holder.taskDesc.setText(recurringUnique.get(0).getTaskDesc());
 
-        holder.timesCompleted.setText(recurringUnique.size());
+        //get number of completed
+        int numCompleted = 0;
+        for (Task t:recurringUnique) {
+            if (t.getStatus()==1){
+                numCompleted += 1;
+            }
+        }
+
+        holder.timesCompleted.setText(String.valueOf(numCompleted));
     }
 
     @Override
