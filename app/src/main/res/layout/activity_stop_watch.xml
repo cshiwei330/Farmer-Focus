@@ -96,7 +96,7 @@
         android:inputType="number"
         android:text="00:00"
         android:textColor="#0C0B0B"
-        android:textSize="60sp"
+        android:textSize="51sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
