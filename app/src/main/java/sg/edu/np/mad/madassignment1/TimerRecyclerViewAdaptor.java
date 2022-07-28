@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -89,6 +90,13 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
 
         Intent myIntent = new Intent(holder.taskName.getContext(), TimerActivity.class);
         myIntent.putExtras(extras);
+
+//        AlertDialog.Builder builder = new AlertDialog.Builder(holder.taskName.getContext());
+//        builder.setTitle("Would you like to start the timer now?");
+//        builder.setMessage("Select yes if you would like to start the timer for the task " +
+//                "which you have chosen." +
+//                "\n\nWould you like to start doing the task?");
+//        builder.setCancelable(true);
 
         holder.taskName.getContext().startActivity(myIntent);
 

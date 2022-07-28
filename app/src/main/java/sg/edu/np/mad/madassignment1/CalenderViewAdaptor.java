@@ -72,7 +72,7 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
                 FilterResults filterResults = new FilterResults();
 
                 String stringDate = constraint.toString();
-                String[] stringArray = stringDate.split("/");
+                String[] stringArray = stringDate.split("-");
 
                 filterResults.values = stringArray[0];
 

@@ -216,10 +216,10 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             }
 
             //set date format
-            SimpleDateFormat df = new SimpleDateFormat("MM/yyyy", Locale.getDefault());
+            SimpleDateFormat df = new SimpleDateFormat("MM-yyyy", Locale.getDefault());
             //apply date format to current date
             String dateString = df.format(currentDate);
-            String stringDate = dayText+"/"+dateString;
+            String stringDate = dayText+"-"+dateString;
 
             //set text to see how many tasks
             int numberOfSameDateTasks = tasksWhiteList(stringDate,taskList).size();
@@ -252,7 +252,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     public ArrayList<String> tasksThisMonth(ArrayList<Task> taskList){
         ArrayList<String> tasksInThisMonth = new ArrayList<>();
         for(Task task: taskList){
-            String[] dateArr = task.getTaskDate().split("/",3);
+            String[] dateArr = task.getTaskDate().split("-",3);
             if(Integer.parseInt(dateArr[2]) == (calendar.get(Calendar.YEAR)) && Integer.parseInt(dateArr[1]) == (calendar.get(Calendar.MONTH)+1)){
                 tasksInThisMonth.add(dateArr[0]);
             }

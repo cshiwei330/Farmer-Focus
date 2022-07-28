@@ -88,7 +88,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + COLUMN_TASKDATE + " STRING, "
                 + COLUMN_TASKSTARTTIME + " STRING, "
                 + COLUMN_TASKENDTIME + " STRING, "
-                + COLUMN_TASKDURATION + " STRING, "
+                + COLUMN_TASKDURATION + " LONG, "
                 + COLUMN_TASKALERT + " STRING, "
                 + COLUMN_TASKALERTDATETIME + " STRING, "
                 + COLUMN_TASKTYPE + " STRING, "
@@ -174,6 +174,13 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateDuration(Task t){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String update = "UPDATE " + TASKS + " SET " + COLUMN_TASKDURATION + " = " + "\"" + t.getTaskDuration() + "\"" + " WHERE " + COLUMN_TASKID + " = " + "\"" + t.getId() + "\"";
+        db.execSQL(update);
+        db.close();
+    }
+
     // adding task data into task table created
     public void addTask(Task taskData){
         ContentValues values = new ContentValues();
@@ -215,7 +222,7 @@ public class DBHandler extends SQLiteOpenHelper {
             String taskDate = cursor.getString(5);
             String taskStartTime = cursor.getString(6);
             String taskEndTime = cursor.getString(7);
-            double taskDuration = cursor.getDouble(8);
+            long taskDuration = cursor.getLong(8);
             String taskAlert = cursor.getString(9);
             String taskAlertDateTime = cursor.getString(10);
             String taskType = cursor.getString(11);
@@ -248,7 +255,7 @@ public class DBHandler extends SQLiteOpenHelper {
             queryData.setTaskDate(cursor.getString(5));
             queryData.setTaskStartTime(cursor.getString(6));
             queryData.setTaskEndTime(cursor.getString(7));
-            queryData.setTaskDuration(cursor.getDouble(8));
+            queryData.setTaskDuration(cursor.getLong(8));
             queryData.setAlert(cursor.getString(9));
             queryData.setAlertDateTime(cursor.getString(10));
             queryData.setTaskType(cursor.getString(11));
@@ -377,8 +384,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList<Task> getRecurringTaskData(int userID){
         ArrayList<Task> recurring_task = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String countTask = "SELECT * FROM "+ TASKS + " GROUP BY " + COLUMN_RECURRINGID +
-                " HAVING COUNT(" + COLUMN_RECURRINGID + ") " + " > 1" + " AND " + COLUMN_USERID + " = " + userID;
+        String countTask = "SELECT * FROM "+ TASKS + " WHERE " + COLUMN_TASKNAME +
+                " IN(" + " SELECT " + COLUMN_TASKNAME + " FROM " + TASKS + " GROUP BY " + COLUMN_TASKNAME + " HAVING COUNT(*) > 1)" +
+                " AND " + COLUMN_USERID + " = " + userID;
         Cursor cursor = db.rawQuery(countTask,null);
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
@@ -389,7 +397,7 @@ public class DBHandler extends SQLiteOpenHelper {
             String taskDate = cursor.getString(5);
             String taskStartTime = cursor.getString(6);
             String taskEndTime = cursor.getString(7);
-            double taskDuration = cursor.getDouble(8);
+            long taskDuration = cursor.getLong(8);
             String taskAlert = cursor.getString(9);
             String taskAlertDateTime = cursor.getString(10);
             String taskType = cursor.getString(11);

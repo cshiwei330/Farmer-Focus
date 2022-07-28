@@ -64,7 +64,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
     int starthour, startminute, endhour, endminute;
     int year, month, dayOfMonth, recurringId;
     long millisToAdd, millisToSubtract;
-    double diffInTime;
+    long diffInTime;
     String alert, taskType, repeat, startTime, taskDate, date, endTime, strDate, alertDateTime, repeatDuration;
     Date d;
 
@@ -291,7 +291,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setTaskDate(date);
                     newTaskDB.setTaskStartTime(startTime);
                     newTaskDB.setTaskEndTime(endTime);
-                    newTaskDB.setTaskDuration(0);
+                    //newTaskDB.setTaskDuration(0);
                     newTaskDB.setAlert(alert);
                     newTaskDB.setAlertDateTime(taskDate);
                     newTaskDB.setTaskType(taskType);
@@ -472,7 +472,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             newTaskDB.setTaskDate(taskDateList.get(i));
                             newTaskDB.setTaskStartTime(startTime);
                             newTaskDB.setTaskEndTime(endTime);
-                            newTaskDB.setTaskDuration(0);
+                            //newTaskDB.setTaskDuration(0);
                             newTaskDB.setAlert(alert);
                             newTaskDB.setAlertDateTime(alertDateTimeRightFormatList.get(i));
                             newTaskDB.setTaskType(taskType);

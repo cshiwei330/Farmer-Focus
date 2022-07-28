@@ -1,12 +1,15 @@
 package sg.edu.np.mad.madassignment1;
 
 import androidx.annotation.Dimension;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.fonts.Font;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,12 +31,14 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityRecurringTaskStatsBinding;
 
 public class StatsRecurringTaskActivity extends DrawerBaseActivity {
     ActivityRecurringTaskStatsBinding activityRecurringTaskStatsBinding;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +57,17 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
 
         //getting task data
         ArrayList<Task> recurringTask = dbHandler.getRecurringTaskData(user.getUserID());
+        Log.v("size of recurringTask", String.valueOf(recurringTask.size()));
         ArrayList<String> taskNames = new ArrayList<>();
+        ArrayList<String> noDuplicates;
         ArrayList<Long> timeTaken = new ArrayList<>();
         for (int i = 0; i < recurringTask.size(); i++) {
             taskNames.add(recurringTask.get(i).getTaskName());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, taskNames);
+        noDuplicates = (ArrayList<String>) taskNames.stream().distinct().collect(Collectors.toList());
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, noDuplicates);
         AutoCompleteTextView searchTask = findViewById(R.id.searchTasks);
         searchTask.setAdapter(adapter);
 
@@ -67,16 +77,16 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     String task = searchTask.getText().toString();
                     for (int i = 0; i < recurringTask.size(); i++) {
-                        if(recurringTask.get(i).getTaskName().equals(task)) {
-                            timeTaken.add((long)recurringTask.get(i).getTaskDuration());
-                            Long aLong = timeTaken.get(0);
+                        if(recurringTask.get(i).getTaskName().equals(task) && recurringTask.get(i).getTaskDuration() != 0) {
+                            long timeInMin = recurringTask.get(i).getTaskDuration() / 60000;
+                            timeTaken.add(timeInMin);
                         }
                     }
                     ArrayList<Long> last7Durations = new ArrayList<>();
                     last7Durations.addAll(timeTaken.subList(Math.max(timeTaken.size() - 7, 0), timeTaken.size()));
 
                     BarChart chart = findViewById(R.id.chart);
-                    BarData data = new BarData(getDataSet(dbHandler, last7Durations));
+                    BarData data = new BarData(getDataSet(last7Durations));
                     chart.setData(data);
                     chart.getBarData().setBarWidth(0.5f);
                     chart.animateXY(2000, 2000);
@@ -107,16 +117,9 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
                 return false;
             }
         });
-
-
     }
 
-    // get task
-    // get durations
-    // display last 7 durations
-    // if not enough for last 7, show all the durations
-    // for each task, get diff duration list
-    private IBarDataSet getDataSet(DBHandler dbHandler, ArrayList<Long> duration) {
+    private IBarDataSet getDataSet(ArrayList<Long> duration) {
         ArrayList<BarEntry> valueSet1 = new ArrayList<>();
 
         //if there are full 7 values in the list
@@ -138,102 +141,102 @@ public class StatsRecurringTaskActivity extends DrawerBaseActivity {
         }
         //if there are 6 values in the list
         else if (duration.size() == 6) {
-            BarEntry six = new BarEntry(1, duration.get(0)); //6 attempts ago
+            BarEntry six = new BarEntry(0, duration.get(0)); //6 attempts ago
             valueSet1.add(six);
-            BarEntry five = new BarEntry(2, duration.get(1)); //5 attempts ago
+            BarEntry five = new BarEntry(1, duration.get(1)); //5 attempts ago
             valueSet1.add(five);
-            BarEntry four = new BarEntry(3, duration.get(2)); //4 attempts ago
+            BarEntry four = new BarEntry(2, duration.get(2)); //4 attempts ago
             valueSet1.add(four);
-            BarEntry three = new BarEntry(4, duration.get(3)); //3 attempts ago
+            BarEntry three = new BarEntry(3, duration.get(3)); //3 attempts ago
             valueSet1.add(three);
-            BarEntry two = new BarEntry(5, duration.get(4)); //2 attempts ago
+            BarEntry two = new BarEntry(4, duration.get(4)); //2 attempts ago
             valueSet1.add(two);
-            BarEntry one = new BarEntry(6, duration.get(5)); //1 attempt ago
+            BarEntry one = new BarEntry(5, duration.get(5)); //1 attempt ago
             valueSet1.add(one);
             BarEntry none = new BarEntry(6, 0); //not enough data
             valueSet1.add(none);
         }
         //if there are 5 values in the list
         else if (duration.size() == 5) {
-            BarEntry five = new BarEntry(2, duration.get(0)); //5 attempts ago
+            BarEntry five = new BarEntry(0, duration.get(0)); //5 attempts ago
             valueSet1.add(five);
-            BarEntry four = new BarEntry(3, duration.get(1)); //4 attempts ago
+            BarEntry four = new BarEntry(1, duration.get(1)); //4 attempts ago
             valueSet1.add(four);
-            BarEntry three = new BarEntry(4, duration.get(2)); //3 attempts ago
+            BarEntry three = new BarEntry(2, duration.get(2)); //3 attempts ago
             valueSet1.add(three);
-            BarEntry two = new BarEntry(5, duration.get(3)); //2 attempts ago
+            BarEntry two = new BarEntry(3, duration.get(3)); //2 attempts ago
             valueSet1.add(two);
-            BarEntry one = new BarEntry(6, duration.get(4)); //1 attempt ago
+            BarEntry one = new BarEntry(4, duration.get(4)); //1 attempt ago
             valueSet1.add(one);
-            BarEntry none = new BarEntry(6, 0); //not enough data
+            BarEntry none = new BarEntry(5, 0); //not enough data
             valueSet1.add(none);
             BarEntry none1 = new BarEntry(6, 0); //not enough data
             valueSet1.add(none1);
         }
         //if there are 4 values in the list
         else if (duration.size() == 4) {
-            BarEntry four = new BarEntry(3, duration.get(0)); //4 attempts ago
+            BarEntry four = new BarEntry(0, duration.get(0)); //4 attempts ago
             valueSet1.add(four);
-            BarEntry three = new BarEntry(4, duration.get(1)); //3 attempts ago
+            BarEntry three = new BarEntry(1, duration.get(1)); //3 attempts ago
             valueSet1.add(three);
-            BarEntry two = new BarEntry(5, duration.get(2)); //2 attempts ago
+            BarEntry two = new BarEntry(2, duration.get(2)); //2 attempts ago
             valueSet1.add(two);
-            BarEntry one = new BarEntry(6, duration.get(3)); //1 attempt ago
+            BarEntry one = new BarEntry(3, duration.get(3)); //1 attempt ago
             valueSet1.add(one);
-            BarEntry none = new BarEntry(6, 0); //not enough data
+            BarEntry none = new BarEntry(4, 0); //not enough data
             valueSet1.add(none);
-            BarEntry none1 = new BarEntry(6, 0); //not enough data
+            BarEntry none1 = new BarEntry(5, 0); //not enough data
             valueSet1.add(none1);
             BarEntry none2 = new BarEntry(6, 0); //not enough data
             valueSet1.add(none2);
         }
         //if there are 3 values in the list
         else if (duration.size() == 3) {
-            BarEntry three = new BarEntry(4, duration.get(0)); //3 attempts ago
+            BarEntry three = new BarEntry(0, duration.get(0)); //3 attempts ago
             valueSet1.add(three);
-            BarEntry two = new BarEntry(5, duration.get(1)); //2 attempts ago
+            BarEntry two = new BarEntry(1, duration.get(1)); //2 attempts ago
             valueSet1.add(two);
-            BarEntry one = new BarEntry(6, duration.get(2)); //1 attempt ago
+            BarEntry one = new BarEntry(2, duration.get(2)); //1 attempt ago
             valueSet1.add(one);
-            BarEntry none = new BarEntry(6, 0); //not enough data
+            BarEntry none = new BarEntry(3, 0); //not enough data
             valueSet1.add(none);
-            BarEntry none1 = new BarEntry(6, 0); //not enough data
+            BarEntry none1 = new BarEntry(4, 0); //not enough data
             valueSet1.add(none1);
-            BarEntry none2 = new BarEntry(6, 0); //not enough data
+            BarEntry none2 = new BarEntry(5, 0); //not enough data
             valueSet1.add(none2);
             BarEntry none3 = new BarEntry(6, 0); //not enough data
             valueSet1.add(none3);
         }
         //if there are 2 values in the list
         else if (duration.size() == 2) {
-            BarEntry two = new BarEntry(5, duration.get(0)); //2 attempts ago
+            BarEntry two = new BarEntry(0, duration.get(0)); //2 attempts ago
             valueSet1.add(two);
-            BarEntry one = new BarEntry(6, duration.get(1)); //1 attempt ago
+            BarEntry one = new BarEntry(1, duration.get(1)); //1 attempt ago
             valueSet1.add(one);
-            BarEntry none = new BarEntry(6, 0); //not enough data
+            BarEntry none = new BarEntry(2, 0); //not enough data
             valueSet1.add(none);
-            BarEntry none1 = new BarEntry(6, 0); //not enough data
+            BarEntry none1 = new BarEntry(3, 0); //not enough data
             valueSet1.add(none1);
-            BarEntry none2 = new BarEntry(6, 0); //not enough data
+            BarEntry none2 = new BarEntry(4, 0); //not enough data
             valueSet1.add(none2);
-            BarEntry none3 = new BarEntry(6, 0); //not enough data
+            BarEntry none3 = new BarEntry(5, 0); //not enough data
             valueSet1.add(none3);
             BarEntry none4 = new BarEntry(6, 0); //not enough data
             valueSet1.add(none4);
         }
         //if there is only 1 value in the list
         else if (duration.size() == 1) {
-            BarEntry one = new BarEntry(6, duration.get(0)); //1 attempt ago
+            BarEntry one = new BarEntry(0, duration.get(0)); //1 attempt ago
             valueSet1.add(one);
-            BarEntry none = new BarEntry(6, 0); //not enough data
+            BarEntry none = new BarEntry(1, 0); //not enough data
             valueSet1.add(none);
-            BarEntry none1 = new BarEntry(6, 0); //not enough data
+            BarEntry none1 = new BarEntry(2, 0); //not enough data
             valueSet1.add(none1);
-            BarEntry none2 = new BarEntry(6, 0); //not enough data
+            BarEntry none2 = new BarEntry(3, 0); //not enough data
             valueSet1.add(none2);
-            BarEntry none3 = new BarEntry(6, 0); //not enough data
+            BarEntry none3 = new BarEntry(4, 0); //not enough data
             valueSet1.add(none3);
-            BarEntry none4 = new BarEntry(6, 0); //not enough data
+            BarEntry none4 = new BarEntry(5, 0); //not enough data
             valueSet1.add(none4);
             BarEntry none5 = new BarEntry(6, 0); //not enough data
             valueSet1.add(none5);

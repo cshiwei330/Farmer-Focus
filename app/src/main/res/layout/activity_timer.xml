@@ -124,7 +124,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.613"
-        app:srcCompat="@drawable/greentick" />
+        app:srcCompat="@drawable/tick" />
 
     <ImageView
         android:id="@+id/inner_circle"
@@ -156,7 +156,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="140dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="36dp"
         android:background="#00FFFFFF"
         android:endColor="@color/darkBeige"
         android:text="Give up"
@@ -188,6 +188,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#C89D7C"
         app:srcCompat="@drawable/line" />
+
+    <ImageView
+        android:id="@+id/sheepGif"
+        android:layout_width="135dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="44dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#0CFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/giveUpBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/sheep" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
