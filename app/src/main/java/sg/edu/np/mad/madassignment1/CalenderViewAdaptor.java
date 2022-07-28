@@ -44,7 +44,9 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
         holder.eventRing.setVisibility(View.GONE);
 
         for (String taskday : tasksThisMonth ){
-            if (daysOfMonth.get(position).equals(taskday)){
+            //daysOfMonth stores single digit dates as 4,5.. taskday stores dates as 04,05...
+            //convert to int then back to str to bypass this
+            if (daysOfMonth.get(position).equals(String.valueOf(Integer.valueOf(taskday)))){
                 holder.eventRing.setVisibility(View.VISIBLE);
                 break;
             }

@@ -1,47 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:activityContext=".StatisticsActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:activityContext=".StatisticsActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/dataOfTheWeek"
-        android:name="sg.edu.np.mad.madassignment1.StatsWeekFragment"
-        android:layout_width="340dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_stats_week" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/dataOfTheWeek"
+            android:name="sg.edu.np.mad.madassignment1.StatsWeekFragment"
+            android:layout_width="340dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="37dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            tools:layout="@layout/fragment_stats_week" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/moodOfTheWeek"
-        android:name="sg.edu.np.mad.madassignment1.MoodoftheweekFragment"
-        android:layout_width="340dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataOfTheWeek"
-        tools:layout="@layout/fragment_moodoftheweek" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/moodOfTheWeek"
+            android:name="sg.edu.np.mad.madassignment1.MoodoftheweekFragment"
+            android:layout_width="340dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="37dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dataOfTheWeek"
+            tools:layout="@layout/fragment_moodoftheweek" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/searchTaskContainer"
-        android:name="sg.edu.np.mad.madassignment1.StatsSearchTaskFragment"
-        android:layout_width="340dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="37dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moodOfTheWeek"
-        tools:layout="@layout/fragment_stats_search_task" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/searchTaskContainer"
+            android:name="sg.edu.np.mad.madassignment1.StatsSearchTaskFragment"
+            android:layout_width="340dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginBottom="43dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/moodOfTheWeek"
+            tools:layout="@layout/fragment_stats_search_task" />
+
+        <view
+            android:id="@+id/view"
+            class="androidx.cardview.widget.CardView"
+            android:layout_width="140dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/roundedcontainer"
+            app:cardBackgroundColor="@color/lightBeige"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/dataOfTheWeek"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <view
+            android:id="@+id/view2"
+            class="androidx.cardview.widget.CardView"
+            android:layout_width="140dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/roundedcontainer"
+            app:cardBackgroundColor="@color/lightBeige"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/dataOfTheWeek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/conpletedTasks"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="72dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="completed task(s)"
+            android:textAlignment="center"
+            android:textColor="#615F5F"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
+            app:layout_constraintHorizontal_bias="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pendingTasks"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="pending task(s)"
+            android:textAlignment="center"
+            android:textColor="#615F5F"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toEndOf="@+id/conpletedTasks"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/NoOfCompletedTasks"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/conpletedTasks"
+            app:layout_constraintEnd_toStartOf="@+id/view2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/NoOfPendingTasks"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/pendingTasks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/NoOfCompletedTasks"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

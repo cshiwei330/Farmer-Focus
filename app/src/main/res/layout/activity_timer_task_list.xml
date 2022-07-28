@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/backToTimer2"
-        android:layout_width="47dp"
+        android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
@@ -36,7 +36,7 @@
         android:layout_marginTop="50dp"
         android:text="Select Task"
         android:textColor="#0C0C0C"
-        android:textSize="34sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/backToTimer2"
         app:layout_constraintTop_toTopOf="parent" />

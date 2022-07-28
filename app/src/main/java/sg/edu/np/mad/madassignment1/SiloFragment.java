@@ -139,15 +139,15 @@ public class SiloFragment extends Fragment {
 
         //creation of pop up dialog
         dialogBuilder = new AlertDialog.Builder(this.getContext());
-        final View BarnTaskPopupView = getLayoutInflater().inflate(R.layout.popup_barn_tasks, null);
+        final View SiloTaskPopupView = getLayoutInflater().inflate(R.layout.popup_silo_tasks, null);
 
         //define elements
-        taskPopUpTitle = (TextView) BarnTaskPopupView.findViewById(R.id.SilotaskPopUpTitle);
-        taskPopUpRecyclerView = (RecyclerView) BarnTaskPopupView.findViewById(R.id.SiloTaskPopUpRecyclerView);
-        upgradeButton = (Button) BarnTaskPopupView.findViewById(R.id.SiloUpgradeButton);
-        upgradeButtonHeight = (Button) BarnTaskPopupView.findViewById(R.id.SiloHeightUpgradebutton);
-        taskPopUpSubTitle = (TextView) BarnTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle);
-        taskPopUpSubTitle2 = (TextView) BarnTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle2);
+        taskPopUpTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SilotaskPopUpTitle);
+        taskPopUpRecyclerView = (RecyclerView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpRecyclerView);
+        upgradeButton = (Button) SiloTaskPopupView.findViewById(R.id.SiloUpgradeButton);
+        upgradeButtonHeight = (Button) SiloTaskPopupView.findViewById(R.id.SiloHeightUpgradebutton);
+        taskPopUpSubTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle);
+        taskPopUpSubTitle2 = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle2);
 
         //set decorative line separator between viewHolders
         //barnTaskPopUpRecyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
@@ -157,6 +157,18 @@ public class SiloFragment extends Fragment {
 //        private int[] siloHeightUpgradeRequirement = new int[]{1,5,7,9,12,15,18,21,24};
 //        //requirement to build more silos
 //        private int[] siloNumUpgradeRequirement = new int[]{1,3,4,5};
+
+        //get total number of completed recurring tasks
+        int totalRecurringTaskCompletedNum = 0;
+        for (ArrayList<Task> uniqueRecurring:taskList) {
+            for (Task t:uniqueRecurring){
+                if (t.getStatus()==0){
+                    totalRecurringTaskCompletedNum += 1;
+                }
+            }
+        }
+        taskPopUpTitle.setText("Recurring Tasks Completed: "+ totalRecurringTaskCompletedNum);
+
 
         //new silo
         //get total silos built
@@ -193,10 +205,7 @@ public class SiloFragment extends Fragment {
 
         //silo height increase
         //require ## number of recurring tasks completed
-        int totalRecurringTaskCompletedNum = 0;
-        for (ArrayList<Task> uniqueRecurring:taskList) {
-            totalRecurringTaskCompletedNum += uniqueRecurring.size();
-        }
+        //totalRecurringTaskCompletedNum
 
         //get required number of tasks completed for silo levels
         int totalSiloLevel = 0;
@@ -214,13 +223,13 @@ public class SiloFragment extends Fragment {
                 int heightUpgradReqLeft = heightUpgradReq-totalRecurringTaskCompletedNum;
 
                 if(heightUpgradReqLeft>0){
-                    taskPopUpSubTitle2.setVisibility(View.VISIBLE);
-                    taskPopUpSubTitle2.setText("Upgrade Silo: Complete" + heightUpgradReqLeft + " More Recurring Tasks");
+                    taskPopUpSubTitle.setVisibility(View.VISIBLE);
+                    taskPopUpSubTitle.setText("Upgrade Silo: Complete " + heightUpgradReqLeft + " More Recurring Tasks");
                     upgradeButtonHeight.setVisibility(View.GONE);
                 }
 
                 else{
-                    taskPopUpSubTitle2.setVisibility(View.INVISIBLE);
+                    taskPopUpSubTitle.setVisibility(View.INVISIBLE);
                     upgradeButtonHeight.setVisibility(View.VISIBLE);
                 }
             }
@@ -241,7 +250,7 @@ public class SiloFragment extends Fragment {
         taskPopUpRecyclerView.setLayoutManager(mLayoutManager);
         taskPopUpRecyclerView.setAdapter(siloTaskAdapter);
 
-        dialogBuilder.setView(BarnTaskPopupView);
+        dialogBuilder.setView(SiloTaskPopupView);
         dialog = dialogBuilder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();

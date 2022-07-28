@@ -21,32 +21,35 @@
         android:id="@+id/BarnTaskPopUpSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Event Tasks Completed: ##"
-        app:layout_constraintStart_toStartOf="@+id/BarntaskPopUpTitle"
-        app:layout_constraintTop_toBottomOf="@+id/BarntaskPopUpTitle" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="36dp"
         android:text="Completed On:"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BarnTaskPopUpSubTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/BarntaskPopUpTitle" />
 
     <TextView
         android:id="@+id/BarntaskPopUpTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="Next Upgrade: Complete ## More Tasks"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/BarnTaskPopUpSubTitle" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/BarnTaskPopUpRecyclerView"
@@ -58,7 +61,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <Button
+     <Button
         android:id="@+id/BarnUpgradeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

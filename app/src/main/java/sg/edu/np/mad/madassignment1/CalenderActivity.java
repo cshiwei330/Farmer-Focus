@@ -219,11 +219,20 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             SimpleDateFormat df = new SimpleDateFormat("MM-yyyy", Locale.getDefault());
             //apply date format to current date
             String dateString = df.format(currentDate);
+
             String stringDate = dayText+"-"+dateString;
 
             //set text to see how many tasks
             int numberOfSameDateTasks = tasksWhiteList(stringDate,taskList).size();
-            todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + stringDate);
+            //get formatted date for single digit dates
+            String todayTasksText;
+            if (dayText.length()==1){
+                todayTasksText = "0"+dayText+"-"+dateString;
+            }
+            else{
+                todayTasksText=stringDate;
+            }
+            todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + todayTasksText);
 
             //set shading and todolist filters
             calendarViewAdapter.getFilter().filter(stringDate);
