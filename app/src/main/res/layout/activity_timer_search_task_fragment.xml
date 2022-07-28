@@ -14,7 +14,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="Please select the task which you wish to do      for the timer to be set"
+        android:text="Please select the task which you wish to do\nfor the timer to be set"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
