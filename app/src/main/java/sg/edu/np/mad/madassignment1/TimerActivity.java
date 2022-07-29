@@ -118,67 +118,8 @@ public class TimerActivity extends DrawerBaseActivity{
         Log.v("testing1", String.valueOf(taskId));
 
 
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            int taskId = extras.getInt("task id", -1);
-//            task = dbHandler.findTask(taskId);
-//
-//            setTime(task);
-//        }
 
-
-        // if extras is not null receive from bundle and set time
-//        SetTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Bundle extras = getIntent().getExtras();
-//                if (extras != null) {
-//                    int taskId = extras.getInt("task id", -1);
-//                    task = dbHandler.findTask(taskId);
-//
-//                    setTime(task);
-//                }
-//            }
-//        });
-
-
-//        Bundle extras  = getIntent().getExtras();
-//        if (extras != null) {
-//            int taskId = extras.getInt("task id", -1);
-//            task = dbHandler.findTask(taskId);
-//
-//            setTime(task);
-//    }
-
-
-        //NEW
-
-        // displays numeric keyboard
-        // only allow user to key in integers 0 to 9 and not anything else when setting the time
-        //mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-        // after the user have entered their preferred timing for countdown in "edit_text_minutes",
-        // they should click on the image view represented by a green tick, to set the time
-//        SetTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String input = mEditTextInput.getText().toString();
-//                if (input.length() == 0) {
-//                    Toast.makeText(TimerActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                long millisInput = Long.parseLong(input) * 60000; // change to milliseconds
-//                if (millisInput <= 0) {
-//                    Toast.makeText(TimerActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                setTime(millisInput);
-//                mEditTextInput.setText("");
-//            }
-//        });
-
-        // if timer is running, start button changes to become pause, else, start button will remain unchanged
+        // if timer is running, start button closes and finish button shows up
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,6 +184,8 @@ public class TimerActivity extends DrawerBaseActivity{
                         // mark task as completed
                         task.setStatus(1);
                         dbHandler.changeTaskStatus(task);
+
+                        mCountDownTimer.cancel();
 
                         mTextViewCountDown.setText("00:00");
 
@@ -400,10 +343,9 @@ public class TimerActivity extends DrawerBaseActivity{
         mTextViewCountDown.setText(timeLeftFormatted);
     }
 
-    // when the timer has started, only the timer countdown and pause button will be shown on the screen.
-    // when paused is clicked, a reset button will pop out on the screen to allow users to reset the timer
-    // if users wants to change the time on the timer, they have to key in their preferred value at the edit
-    // text location which they wishes to change the timer countdown to (in minutes)
+    // when the timer has started, only the timer countdown and finish button will be shown on the screen.
+    // when finish is clicked, an alert dialog will pop out to ask user if they really want to stop doing the task
+    // if yes, task will be mark as completed and timer will be reset to 00:00
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
