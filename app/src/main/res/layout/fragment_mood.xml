@@ -22,8 +22,9 @@
 
     <ImageView
         android:id="@+id/stressedButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -32,8 +33,9 @@
 
     <ImageView
         android:id="@+id/happyButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"
         app:layout_constraintEnd_toStartOf="@+id/neutralButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,8 +45,9 @@
 
     <ImageView
         android:id="@+id/neutralButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_sentiment_neutral_24"
         app:layout_constraintEnd_toStartOf="@+id/sadButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -53,8 +56,9 @@
 
     <ImageView
         android:id="@+id/sadButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_sentiment_dissatisfied_24"
         app:layout_constraintEnd_toStartOf="@+id/stressedButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -63,51 +67,42 @@
 
     <TextView
         android:id="@+id/mood_happy"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="@string/happy"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/mood_neutral"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/happyButton"
         app:layout_constraintTop_toBottomOf="@+id/happyButton" />
 
     <TextView
         android:id="@+id/mood_neutral"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:text="@string/neutral"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/mood_sad"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mood_happy"
+        app:layout_constraintStart_toStartOf="@+id/neutralButton"
         app:layout_constraintTop_toBottomOf="@+id/neutralButton" />
 
     <TextView
         android:id="@+id/mood_sad"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="@string/sad"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@+id/mood_stressed"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mood_neutral"
+        app:layout_constraintStart_toStartOf="@+id/sadButton"
         app:layout_constraintTop_toBottomOf="@+id/sadButton" />
 
     <TextView
         android:id="@+id/mood_stressed"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:text="@string/stressed"
         android:textAlignment="center"
         android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/mood_sad"
+        app:layout_constraintStart_toStartOf="@+id/stressedButton"
         app:layout_constraintTop_toBottomOf="@+id/stressedButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

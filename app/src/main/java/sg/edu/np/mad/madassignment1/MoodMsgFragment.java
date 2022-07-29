@@ -41,7 +41,7 @@ public class MoodMsgFragment extends Fragment {
             msg.setText("Glad that you are feeling happy. Hope this positivity continues!");
         }
         else if (emotion.equals("neutral")){
-            msg.setText("It will come and get you. It's not that you shouldn't be neutral. It's that you won't be able to stay neutral");
+            msg.setText("It will come and get you. It's not that you shouldn't be neutral. It's that you won't be able to stay neutral.");
         }
         else if (emotion.equals("sad")){
             msg.setText("It's ok to be sad sometimes. It'll get easier with time, trust me :)");
