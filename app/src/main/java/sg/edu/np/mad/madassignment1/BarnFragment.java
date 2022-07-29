@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +37,11 @@ public class BarnFragment extends Fragment {
     private TextView barnTaskPopUpSubTitle;
     private ArrayList<Task> taskList = new ArrayList<>();
     private DBHandler dbHandler;
-    private int[] barnUpgradeRequirement = new int[]{0,5,7,9};
+    private int[] barnUpgradeRequirement = new int[]{1,5,7,9};
     private ArrayList<String> farmData;
     private ImageView barnImage;
-    private int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+    private ImageView explosion;
+    private int[] imageList = new int [] {R.drawable.unconstructed_small, R.drawable.barn1, R.drawable.barn2, R.drawable.barn3};
 
 
 
@@ -65,8 +68,11 @@ public class BarnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_barn, container, false);
+
+        //this text is purely for debugging
         TextView tvLabel = (TextView) view.findViewById(R.id.BarnFragmentTextView);
         tvLabel.setText(page + " -- " + title + "THIS IS BARN");
+        tvLabel.setVisibility(View.GONE);
 
         //define dbHandler
         dbHandler = new DBHandler(this.getContext(), null, null,6);
@@ -100,10 +106,15 @@ public class BarnFragment extends Fragment {
         //set barn image
         barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
         barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
+        //set upgrade animation to gone
+        explosion = (ImageView) view.findViewById(R.id.explosion_imageView);
+        explosion.setVisibility(View.GONE);
 
         //background trees
         ImageView treeImage = view.findViewById(R.id.tree_barn);
-        Glide.with(this.getContext()).load(R.drawable.tree).into(treeImage);
+        ImageView treeImage2 = view.findViewById(R.id.tree_barn2);
+        Glide.with(this.getContext()).load(R.drawable.trees).into(treeImage);
+        Glide.with(this.getContext()).load(R.drawable.trees).into(treeImage2);
 
         //barn image clicked
         barnImage.setClickable(true);
@@ -116,9 +127,6 @@ public class BarnFragment extends Fragment {
                 createBarnTaskPopUp(user);
             }
         });
-
-
-
         return view;
     }
 
@@ -144,7 +152,7 @@ public class BarnFragment extends Fragment {
         if (Integer.valueOf(farmData.get(0))<4){
             if (reqTaskLeft>0){
                 barnTaskPopUpTitle.setVisibility(View.VISIBLE);
-                barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Tasks");
+                barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Event Tasks");
                 upgradeButton.setVisibility(View.GONE);
             }
             else {
@@ -183,8 +191,20 @@ public class BarnFragment extends Fragment {
                 dbHandler.upgradeBarn(user.getUserID(), Integer.valueOf(farmData.get(0)));
 
                 //play gif and set new barnImage
-                //TODO: create gif
-                //code goes here
+
+                //upgrade animation
+                explosion.setVisibility(View.VISIBLE);
+                Glide.with(getContext()).load(R.drawable.explosion_animation).into(explosion);
+                //after gif has finished playing, (700ms) set gif to GONE
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        explosion.setVisibility(View.GONE);
+                    }
+                }, 700);
+
+
                 barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
 
             }

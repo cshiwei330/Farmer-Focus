@@ -4,11 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grass_green"
     tools:activityContext=".SiloFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/tree_silo"
+            android:layout_width="153dp"
+            android:layout_height="362dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/trees"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/sky_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/SiloFragmentTextView"
@@ -17,33 +35,155 @@
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.081" />
 
         <ImageView
             android:id="@+id/siloImage1"
-            android:layout_width="79dp"
-            android:layout_height="66dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="44dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unconstructed_small"
+            app:layout_constraintBottom_toTopOf="@+id/textView17"
+            app:layout_constraintEnd_toStartOf="@+id/siloImage2" />
 
         <ImageView
             android:id="@+id/siloImage2"
-            android:layout_width="69dp"
-            android:layout_height="88dp"
-            app:layout_constraintStart_toEndOf="@+id/siloImage1"
-            app:layout_constraintTop_toTopOf="@+id/siloImage1"
-            tools:src="@tools:sample/avatars" />
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unconstructed_small"
+            app:layout_constraintBottom_toBottomOf="@+id/siloImage1"
+            app:layout_constraintEnd_toStartOf="@+id/siloImage3" />
 
         <ImageView
             android:id="@+id/siloImage3"
-            android:layout_width="79dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unconstructed_small"
+            app:layout_constraintBottom_toBottomOf="@+id/siloImage1"
+            app:layout_constraintEnd_toEndOf="@+id/textView17"
+            app:layout_constraintStart_toStartOf="@+id/textView17" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="400dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="96dp"
+            android:background="@color/dirt_brown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView17" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="60dp"
+            android:layout_height="250dp"
+            android:background="@color/dirt_brown"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/farmPlot1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/farmplot"
+            app:layout_constraintBottom_toTopOf="@+id/farmPlot3"
+            app:layout_constraintEnd_toStartOf="@+id/farmPlot2" />
+
+        <ImageView
+            android:id="@+id/farmPlot4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/farmplot"
+            app:layout_constraintBottom_toTopOf="@+id/textView10"
+            app:layout_constraintEnd_toStartOf="@+id/textView17" />
+
+        <ImageView
+            android:id="@+id/farmPlot3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/farmplot"
+            app:layout_constraintBottom_toBottomOf="@+id/farmPlot4"
+            app:layout_constraintEnd_toStartOf="@+id/farmPlot4" />
+
+        <ImageView
+            android:id="@+id/farmPlot2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/farmplot"
+            app:layout_constraintBottom_toTopOf="@+id/farmPlot4"
+            app:layout_constraintEnd_toEndOf="@+id/farmPlot4" />
+
+        <ImageView
+            android:id="@+id/corn1"
+            android:layout_width="58dp"
             android:layout_height="69dp"
-            app:layout_constraintStart_toEndOf="@+id/siloImage2"
-            app:layout_constraintTop_toTopOf="@+id/siloImage1"
-            tools:src="@tools:sample/avatars" />
+            android:src="@drawable/farm_plot_corn"
+            app:layout_constraintEnd_toEndOf="@+id/farmPlot1"
+            app:layout_constraintStart_toStartOf="@+id/farmPlot1"
+            app:layout_constraintTop_toTopOf="@+id/farmPlot1" />
+
+        <ImageView
+            android:id="@+id/corn4"
+            android:layout_width="58dp"
+            android:layout_height="69dp"
+            android:src="@drawable/farm_plot_corn"
+            app:layout_constraintEnd_toEndOf="@+id/farmPlot4"
+            app:layout_constraintStart_toStartOf="@+id/farmPlot4"
+            app:layout_constraintTop_toTopOf="@+id/farmPlot4" />
+
+        <ImageView
+            android:id="@+id/corn3"
+            android:layout_width="58dp"
+            android:layout_height="69dp"
+            android:src="@drawable/farm_plot_corn"
+            app:layout_constraintEnd_toEndOf="@+id/farmPlot3"
+            app:layout_constraintEnd_toStartOf="@+id/farmPlot4"
+            app:layout_constraintStart_toStartOf="@+id/farmPlot3"
+            app:layout_constraintTop_toBottomOf="@+id/farmPlot1" />
+
+        <ImageView
+            android:id="@+id/corn2"
+            android:layout_width="58dp"
+            android:layout_height="69dp"
+            android:src="@drawable/farm_plot_corn"
+            app:layout_constraintEnd_toEndOf="@+id/farmPlot2"
+            app:layout_constraintStart_toEndOf="@+id/farmPlot1"
+            app:layout_constraintTop_toTopOf="@+id/farmPlot2" />
+
+        <ImageView
+            android:id="@+id/silo1_explosion"
+            android:layout_width="213dp"
+            android:layout_height="157dp"
+            android:src="@drawable/explosion_animation"
+            app:layout_constraintBottom_toBottomOf="@+id/siloImage1"
+            app:layout_constraintEnd_toEndOf="@+id/siloImage1"
+            app:layout_constraintStart_toStartOf="@+id/siloImage1"
+            app:layout_constraintTop_toTopOf="@+id/siloImage1" />
+
+        <ImageView
+            android:id="@+id/silo2_explosion"
+            android:layout_width="213dp"
+            android:layout_height="157dp"
+            android:src="@drawable/explosion_animation"
+            app:layout_constraintBottom_toBottomOf="@+id/siloImage2"
+            app:layout_constraintEnd_toEndOf="@+id/siloImage2"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/siloImage2"
+            app:layout_constraintTop_toTopOf="@+id/siloImage2"
+            app:layout_constraintVertical_bias="0.493" />
+
+        <ImageView
+            android:id="@+id/silo3_explosion"
+            android:layout_width="213dp"
+            android:layout_height="157dp"
+            android:src="@drawable/explosion_animation"
+            app:layout_constraintBottom_toBottomOf="@+id/siloImage3"
+            app:layout_constraintEnd_toEndOf="@+id/siloImage3"
+            app:layout_constraintStart_toStartOf="@+id/siloImage3"
+            app:layout_constraintTop_toTopOf="@+id/siloImage3" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

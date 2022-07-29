@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ public class SiloFragment extends Fragment {
     private TextView taskPopUpTitle;
     private RecyclerView taskPopUpRecyclerView;
     private Button upgradeButton;
-    private Button upgradeButtonHeight;
+
     private TextView taskPopUpSubTitle;
     private TextView taskPopUpSubTitle2;
     private ArrayList<ArrayList<Task>> taskList = new ArrayList<ArrayList<Task>>();
@@ -57,9 +61,22 @@ public class SiloFragment extends Fragment {
     private boolean newHeightAvailable = false;
 
     private ArrayList<String> farmData;
+
     private ImageView siloImage1,siloImage2,siloImage3;
     private ImageView[] siloImages;
-    private int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+
+    private ImageView siloExplosion1,siloExplosion2,siloExplosion3;
+    private ImageView[] siloExplosionImages;
+
+    private ImageView corn1,corn2,corn3,corn4;
+    private ImageView[] cornImages;
+
+    private ImageView farmPlot1,farmPlot2,farmPlot3,farmPlot4;
+    private ImageView[] farmPlots;
+
+    private int index = -9999;
+
+    private int[] imageList = new int [] {R.drawable.unconstructed_small, R.drawable.silo1, R.drawable.silo2, R.drawable.silo3};
 
     public static SiloFragment newInstance(int page, String title) {
         SiloFragment siloFragment = new SiloFragment();
@@ -81,8 +98,11 @@ public class SiloFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_silo, container, false);
+
+        //this text is purely for debugging
         TextView tvLabel = (TextView) view.findViewById(R.id.SiloFragmentTextView);
         tvLabel.setText(page + " -- " + title + "THIS IS SILO");
+        tvLabel.setVisibility(View.GONE);
 
         //define dbHandler
         dbHandler = new DBHandler(this.getContext(), null, null,6);
@@ -120,23 +140,27 @@ public class SiloFragment extends Fragment {
             siloImages[i].setImageResource(imageList[siloLevel.get(i)]);
         }
 
-//        siloImage1.setImageResource(imageList[siloLevel.get(0)]);
-//        siloImage2.setImageResource(imageList[siloLevel.get(1)]);
-//        siloImage3.setImageResource(imageList[siloLevel.get(2)]);
+        //set upgrade animation to gone
+        siloExplosion1 = (ImageView) view.findViewById(R.id.silo1_explosion);
+        siloExplosion2 = (ImageView) view.findViewById(R.id.silo2_explosion);
+        siloExplosion3 = (ImageView) view.findViewById(R.id.silo3_explosion);
+        siloExplosionImages = new ImageView[] {siloExplosion1,siloExplosion2,siloExplosion3};
 
-
+        for (int i = 0; i < siloExplosionImages.length; i++) {
+            siloExplosionImages[i].setVisibility(View.GONE);
+        }
 
         //background trees
-//        ImageView treeImage = view.findViewById(R.id.tree_barn);
-//        Glide.with(this.getContext()).load(R.drawable.tree).into(treeImage);
+        ImageView treeImage = view.findViewById(R.id.tree_silo);
+        Glide.with(this.getContext()).load(R.drawable.trees).into(treeImage);
 
         //set farm images
-        //based on number of tasks completed in the last week
+        //based on number of tasks in the next week
         ArrayList<Task> tasksThisWeek = tasksThisWeek(user.getUserID());
         int tasksThisWeekNum = tasksThisWeek.size();
 
         int[] farmPlotsReq = new int[]{0,1,4,8,12};
-        int currentFarmPlotLevel;
+        int currentFarmPlotLevel = 999;
 
         //get plot farm level
         //if eg 5 tasks completed in last week, current plot farm level is 3
@@ -146,19 +170,46 @@ public class SiloFragment extends Fragment {
             }
         }
 
-        //TODO: set farm images based on req
+        //set farm images
+        //set waving corn gifs
+        corn1 = (ImageView) view.findViewById(R.id.corn1);
+        corn2 = (ImageView) view.findViewById(R.id.corn2);
+        corn3 = (ImageView) view.findViewById(R.id.corn3);
+        corn4 = (ImageView) view.findViewById(R.id.corn4);
+        cornImages = new ImageView[] {corn1,corn2,corn3,corn4};
+
+        //set all to invisible
+        for (int i = 0; i < cornImages.length; i++) {
+            cornImages[i].setVisibility(View.GONE);
+        }
+
+        //set visible corn based on number of tasks in following week
+        for (int i = 0; i < currentFarmPlotLevel; i++) {
+            cornImages[i].setVisibility(View.VISIBLE);
+            Glide.with(getContext()).load(R.drawable.farm_plot_corn).into(cornImages[i]);
+        }
+
+        //ID farm plots
+        farmPlot1 = (ImageView) view.findViewById(R.id.farmPlot1);
+        farmPlot2 = (ImageView) view.findViewById(R.id.farmPlot2);
+        farmPlot3 = (ImageView) view.findViewById(R.id.farmPlot3);
+        farmPlot4 = (ImageView) view.findViewById(R.id.farmPlot4);
+        farmPlots = new ImageView[] {farmPlot1,farmPlot2,farmPlot3,farmPlot4};
+        //whedn any part of farm is clicked, show toast
+        for (int i = 0; i < cornImages.length; i++) {
+            //SET EVERYTHING TO BE CLICKED BECAUSE ANDROID DOESN'T UNDERSTAND WHAT A TOUCH IS??
+            cornImages[i].setClickable(true);
+            farmPlots[i].setClickable(true);
+            cornImages[i].setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { Toast.makeText(getContext(), "Plan more tasks to grow more!", Toast.LENGTH_LONG).show();; }});
+            farmPlots[i].setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { Toast.makeText(getContext(), "Plan more tasks to grow more!", Toast.LENGTH_LONG).show();; }});
+        }
 
 
         //silo image clicked
-        siloImage1.setClickable(true);
-        siloImage2.setClickable(true);
-        siloImage3.setClickable(true);
-
-        siloImage1.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { siloImageClicked(user); }});
-        siloImage2.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { siloImageClicked(user); }});
-        siloImage3.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { siloImageClicked(user); }});
-
-
+        for (ImageView siloImage:siloImages) {
+            siloImage.setClickable(true);
+            siloImage.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { siloImageClicked(user); }});
+        }
 
         return view;
     }
@@ -174,7 +225,6 @@ public class SiloFragment extends Fragment {
         taskPopUpTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SilotaskPopUpTitle);
         taskPopUpRecyclerView = (RecyclerView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpRecyclerView);
         upgradeButton = (Button) SiloTaskPopupView.findViewById(R.id.SiloUpgradeButton);
-//        upgradeButtonHeight = (Button) SiloTaskPopupView.findViewById(R.id.SiloHeightUpgradebutton);
         taskPopUpSubTitle = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle);
         taskPopUpSubTitle2 = (TextView) SiloTaskPopupView.findViewById(R.id.SiloTaskPopUpSubTitle2);
 
@@ -308,7 +358,7 @@ public class SiloFragment extends Fragment {
                 //build silo takes always happens first when available
 
                 //get index of changed silo, set to insane number so it fails spectacularly
-                int index = -9999;
+                index = -9999;
 
                 if (newSiloAvailable){
                     //update database and local data
@@ -327,9 +377,15 @@ public class SiloFragment extends Fragment {
                 else if (newHeightAvailable){
                     //update database and local data
                     //+1 to the silo with the lowest level
+                    int lowestSiloLevel=1;
 
-                    //get lowest silo level
-                    int lowestSiloLevel = Collections.min(siloLevel);
+                    //get lowest silo level that is not 0 and maxed level
+                    for (Integer level:siloLevel) {
+                        if (level!=0 && level!= 3){
+                            lowestSiloLevel = level;
+                            break;
+                        }
+                    }
 
                     for (int i = 0; i < siloLevel.size(); i++) {
 
@@ -349,8 +405,18 @@ public class SiloFragment extends Fragment {
 
 
                 //play gif and set new barnImage
-                //TODO: create gif
-                //code goes here
+                //upgrade animation
+                siloExplosionImages[index].setVisibility(View.VISIBLE);
+                Glide.with(getContext()).load(R.drawable.explosion_animation).into(siloExplosionImages[index]);
+                //after gif has finished playing, (700ms) set gif to GONE
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        siloExplosionImages[index].setVisibility(View.GONE);
+                    }
+                }, 700);
+
                 siloImages[index].setImageResource(imageList[siloLevel.get(index)]);
 
             }
@@ -401,14 +467,14 @@ public class SiloFragment extends Fragment {
     public ArrayList<Task> tasksThisWeek(int userID){
 
         ArrayList<Task> allTaskList = new ArrayList<Task>();
-        ArrayList<Task> completedTaskLastWeekNum = new ArrayList<Task>();
+        ArrayList<Task> taskNextWeek = new ArrayList<Task>();
 
         //get today's date
         //get current date
         //get current date
         Calendar calendar = Calendar.getInstance();
 
-        ArrayList<String> pastWeekDates = new ArrayList<String>();
+        ArrayList<String> followingWeekDates = new ArrayList<String>();
 
         //set date format
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -417,29 +483,29 @@ public class SiloFragment extends Fragment {
         //add today's date to list
         Date date = calendar.getTime();
         String stringDate = df.format(date);
-        pastWeekDates.add(stringDate);
+        followingWeekDates.add(stringDate);
 
-        //get dates of past week
+        //get dates of next week
         for (int i = 0; i < 7; i++) {
             calendar.add(Calendar.DATE,1);
             date = calendar.getTime();
             stringDate = df.format(date);
-            pastWeekDates.add(stringDate);
+            followingWeekDates.add(stringDate);
         }
 
         //get all tasks completed last week
         allTaskList = dbHandler.getTaskData(userID);
         for (Task t:allTaskList){
-            for (String d:pastWeekDates){
+            for (String d:followingWeekDates){
                 //if task date is in past week, add to list and break
                 if (t.getTaskDate().equals(d)){
-                    completedTaskLastWeekNum.add(t);
+                    taskNextWeek.add(t);
                     break;
                 }
             }
         }
 
-        return completedTaskLastWeekNum;
+        return taskNextWeek;
     }
 
     //checks if there is a valid silo that can have its height upgraded
@@ -450,7 +516,7 @@ public class SiloFragment extends Fragment {
         int index=-9999;
 
         for (int i = 0; i < siloLevelArray.size(); i++) {
-            if(siloLevelArray.get(i) !=0 || siloLevelArray.get(i) != 3){
+            if(siloLevelArray.get(i) !=0 && siloLevelArray.get(i) != 3){
                 index = i;
                 break;
             }
