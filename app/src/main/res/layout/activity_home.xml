@@ -10,7 +10,7 @@
         android:id="@+id/greetings"
         android:layout_width="362dp"
         android:layout_height="62dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/greetings"
         android:textAlignment="viewStart"
@@ -27,9 +27,8 @@
         android:id="@+id/moodContainerView"
         android:name="sg.edu.np.mad.madassignment1.MoodFragment"
         android:layout_width="351dp"
-        android:layout_height="152dp"
+        android:layout_height="140dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
@@ -40,10 +39,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recentTasksRecyclerView"
         android:layout_width="362dp"
-        android:layout_height="300dp"
+        android:layout_height="0dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/grassGif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recentTasks" />
 

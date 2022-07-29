@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/roundedcontainer"
-    tools:activityContext=".moodmsgFragment">
+    tools:activityContext=".moodmsgFragment"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/moodMsg"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+        android:layout_width="320dp"
+        android:layout_height="120dp"
         android:fontFamily="sans-serif-medium"
         android:text="TextView"
         android:textAlignment="center"
