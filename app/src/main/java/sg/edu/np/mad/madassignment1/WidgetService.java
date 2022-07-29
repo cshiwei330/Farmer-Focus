@@ -46,6 +46,7 @@ public class WidgetService extends RemoteViewsService {
             String username = sharedPreferences.getString("username", "");
             User user = dbHandler.findUser(username);
 
+            //create todayTaskList
             try {
                 todayTaskList = dbHandler.getTodayTaskData(user.getUserID());
             } catch (ParseException e) {
@@ -56,6 +57,7 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
+
             todayTaskList.clear();
 
             // getting stored username
@@ -63,15 +65,12 @@ public class WidgetService extends RemoteViewsService {
             String username = sharedPreferences.getString("username", "");
             User user = dbHandler.findUser(username);
 
+            //create todayTaskList
             try {
                 todayTaskList = dbHandler.getTodayTaskData(user.getUserID());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-/*
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            int appWidgetId = 27;
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);*/
         }
 
         @Override
@@ -101,6 +100,7 @@ public class WidgetService extends RemoteViewsService {
         }
 
         @Override
+        // return one as there is only one widget view
         public int getViewTypeCount() {
             return 1;
         }
@@ -115,45 +115,5 @@ public class WidgetService extends RemoteViewsService {
             return true;
         }
 
-/*        public ArrayList<Task> findTodayTasks(ArrayList<Task> taskList){
-
-            ArrayList<Task> recentTaskList = new ArrayList<>();
-
-            for (int i = 0; i < taskList.size(); i++){ //loop thru current taskList to find tasks that are upcoming
-                Task task = taskList.get(i);
-
-                boolean result = isToday(task.getTaskDate()); //check if task date is within a week
-
-                if (result){
-                    recentTaskList.add(task); //if true then add to new list
-                }
-
-            }
-
-            return recentTaskList;
-        }
-
-        public boolean isToday(String date) { //task.getTaskDate will be a string
-            try {
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //set the date formatter
-                Date dateToValidate = sdf.parse(date); //convert the string to a Date
-
-                // current date with same formatting as dateToValidate
-                Date today = sdf.parse(sdf.format(new Date()));
-
-                //.getTime() returns a Date so comparison can be made
-                if (dateToValidate.compareTo(today)==0){ //tasks that are today are considered within a week
-                    return true;
-                }
-                else {
-                    return false;
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
-        }*/
     }
 }
