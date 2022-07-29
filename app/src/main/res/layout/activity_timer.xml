@@ -109,7 +109,7 @@
         android:layout_width="145dp"
         android:layout_height="49dp"
         android:layout_marginBottom="100dp"
-        android:text="Give up"
+        android:text="finish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"

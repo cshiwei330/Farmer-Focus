@@ -219,9 +219,8 @@ public class TimerActivity extends DrawerBaseActivity{
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
-                builder.setTitle("Are you sure to give up?");
-                builder.setMessage("It seems like you have not sat through the entire duration set for the task " +
-                        //"it's normal to complete the task before the duration is up." +
+                builder.setTitle("Are you sure you have finished?");
+                builder.setMessage("Task will be mark as completed once clicked on this button " +
                         "\n\nWould you like to stop doing the task?");
                 builder.setCancelable(true);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
