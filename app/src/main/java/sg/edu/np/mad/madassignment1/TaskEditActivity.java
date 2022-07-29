@@ -78,6 +78,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
+        //define elements in activity
         EditText newTaskName = findViewById(R.id.editTaskNameDisplay);
         EditText newTaskDesc = findViewById(R.id.editTaskDescDisplay);
         TextView newTaskDate = findViewById(R.id.editTaskDatePicker);
@@ -129,6 +130,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         }
 
         // set default value of the spinner to be original value from database
+        // this ensures that when user does not edit, the database does not change this field of the task
         spinnerAlert.setSelection(alertIndex);
 
         // get the user's choice if edited
@@ -164,6 +166,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             }
         }
 
+        // set default value of the spinner to be original value from database
+        // this ensures that when user does not edit, the database does not change this field of the task
         spinnerRepeat.setSelection(repeatIndex);
 
         spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -191,14 +195,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View view) {
 
-                if (alert == null){
-                    alert = currentTask.getAlert();
-                }
-
-                if (repeat == null){
-                    repeat = currentTask.getRepeat();
-                }
-
+                // Get edited task name and edited task description from the EditText
                 String finalTaskName = newTaskName.getText().toString();
                 finalTaskDesc = newTaskDesc.getText().toString();
 
@@ -252,16 +249,20 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     }
                 }
 
+                // Gets edited task date, task start time and task end time
+                // Format it so that it will be the same format in the database
                 String finalTaskDate = String.format("%02d-%02d-%02d", dayOfMonth, month, year);
                 finalTaskStartTime = String.format("%02d:%02d", starthour, startminute);
                 String finalTaskEndTime = String.format("%02d:%02d", endhour, endminute);
 
+                // Gets the task duration
                 diffInTime = currentTask.getTaskDuration();
 
+                // Get task alert date time from task date provided
+                // It is calculated based on the alert option provided
                 DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 String dateReplace = finalTaskDate.replace("/", "-");
                 taskDate = dateReplace + " " + finalTaskStartTime +":00";
-                Log.v(TAG, "finalTaskStartTime: " + finalTaskStartTime);
                 try {
                     long millisToSubtract;
                     d = format.parse(taskDate);
@@ -336,11 +337,18 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 }
 
 
-
+                // Get the recurring id from the current task
+                // RecurringId cannot be edited by user
+                // This variable is received and put into new Task but not changed
                 int recurringId = currentTask.getRecurringId();
 
+                // Get recurringDuration from the current task
+                // This information cannot be edited by the user
+                // This variable is receeived and put into new Task but not changed
                 String recurringDuration = currentTask.getRecurringDuration();
 
+                // This checks if the task is valid
+                // It is done by ensuring that all compulsory details are provided
                 String validity = taskIsValid(finalTaskName);
 
                 // check if task is valid
@@ -379,6 +387,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                 startActivity(myIntent);
                             }
                         });
+
+                        // Edit the current task and all of the future recurring task
                         builder.setNegativeButton("Current and All Future Task", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -399,26 +409,34 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                     }
                                 }
 
-                                Log.v(TAG, "Final Task Date: " + finalTaskDate);
-                                Log.v(TAG, "currentTask.getTaskDate(): " + currentTask.getTaskDate());
-
                                 // Check if taskDate changed
                                 if (finalTaskDate.matches(currentTask.getTaskDate()) == false) {
 
                                     // find the difference between the old and new date
                                     long dateDifference =  getDateDiff(new SimpleDateFormat("dd-MM-yyyy"), currentTask.getTaskDate(), finalTaskDate);
 
+                                    // Convert 1 day in milliseconds
+                                    // Times the one day in milliseconds by the number of days
+                                    // Tells us how much time to add
                                     long oneDay = 24*60*60*1000;
                                     long millisToAdd = dateDifference * oneDay;
 
+
+                                    // Edit all the future recurring tasks date
+                                    // It will add the millisToAdd to the existing date
+                                    // It will add all the updated dates to the taskDateList and then retrieve the dates from there when populating the task fields
+                                    // This will be done for the alert date time and the task date
                                     for (int j=0; j<recurringFutureTaskList.size(); j++) {
+
                                         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                                         try {
+                                            // Convert String to Date
+                                            // Add the milliseconds indicated to the task date and add it to the taskDateList
+                                            // Convert the task date to String and add to the task date list
                                             taskDateRecurring = dateFormat.parse(recurringFutureTaskList.get(j).getTaskDate());
                                             taskDateRecurring.setTime(taskDateRecurring.getTime() + millisToAdd);
                                             strDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.UK).format(taskDateRecurring);
                                             strDate = strDate.replace("/", "-");
-                                            Log.v(TAG, "strDate: " + strDate);
                                             taskDateList.add(strDate);
 
                                             if (taskDate.matches(" ") == false) {
@@ -426,11 +444,13 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                                                 try {
                                                     String dateReplace = recurringFutureTaskList.get(j).getAlertDateTime();
-                                                    Log.v(TAG, "alertDateTIme when changed" + recurringFutureTaskList.get(j).getAlertDateTime());
                                                     d = format.parse(dateReplace);
                                                     d.setTime(d.getTime() + millisToAdd);
                                                     strAlertDateTime = d.toString();
                                                     strAlertDateTime = strAlertDateTime.replace("/", "-");
+
+                                                    // Format the String date
+                                                    // This will make the format of the date the same as the dates in the database making it easier for viewing
                                                     ArrayList<String> monthsList = new ArrayList<>(
                                                             Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                                                     );
@@ -449,9 +469,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                                     else {
                                                         monthIndex = String.valueOf(monthIndexInt+1);
                                                     }
-                                                    Log.v(TAG, "taskDateSplit[3]" + taskDateSplit[3]);
                                                     strAlertDateTime = taskDateSplitSecond[2] + "-" + monthIndex + "-" + taskDateSplitSecond[5] + " " + taskDateSplit[3];
-                                                    Log.v(TAG, "strAlertDateTime: " + strAlertDateTime);
                                                     newAlertDateTimeList.add(strAlertDateTime);
                                                 }
                                                 catch (ParseException e) {
@@ -461,25 +479,27 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                                             }
                                             else {
+                                                // If no alert is wanted, add " " to the list
                                                 newAlertDateTimeList.add(" ");
                                             }
 
 
                                         }catch (ParseException e) {
-                                            Log.v(TAG, "Got Caught");
                                             e.printStackTrace();
                                         }
                                     }
-                                    Log.v(TAG, "taskDateList size: " + taskDateList.size());
 
+                                    // Populate the task fields and update the task in the database
                                     for (int k=0; k<recurringFutureTaskList.size(); k++){
-                                        Log.v(TAG, "taskDateList.get(k): " + taskDateList.get(k));
                                         Task task = new Task(recurringFutureTaskList.get(k).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, taskDateList.get(k),
                                                 finalTaskStartTime, finalTaskEndTime, diffInTime, alert, newAlertDateTimeList.get(k), taskType, repeat, recurringId, recurringDuration, user.getUserID());
                                         dbHandler.editTask(task);
                                     }
 
                                 }
+                                // If the date does notchange
+                                // Make sure the time is updated for both task start time and alert date time for future recurring tasks
+
                                 else {
                                     String alertDateTime = finalTaskDate + " " + taskDateSplit[3] + ":00";
                                     // Edit the current task
@@ -489,13 +509,13 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                                     // Edit the rest of the task
                                     for (int j=0; j<recurringFutureTaskList.size(); j++) {
-                                        Log.v(TAG, "taskDateSplit[3]: " + taskDateSplit[3]);
                                         alertDateTime = recurringFutureTaskList.get(j).getTaskDate() + " " + taskDateSplit[3];
                                         Task restTask = new Task(recurringFutureTaskList.get(j).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, recurringFutureTaskList.get(j).getTaskDate(),
                                                 finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
                                         dbHandler.editTask(restTask);
                                     }
                                 }
+                                // Navigate back to the task view activity for the new details to be viewed
                                 Bundle extras = new Bundle();
                                 Intent myIntent = new Intent(TaskEditActivity.this, TaskViewActivity.class);
                                 extras.putInt("Task id", oldTaskId);
@@ -517,7 +537,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         });
     }
 
-    // Set Date
+    // onDateSet(...) Method
+    // This method enables the user to pick a date for their task
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, selectedYear);
@@ -534,7 +555,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         textView.setText(currentDateString);
     }
 
-    // Set Start Time
+    // popStartTimePicker(...)
+    // This method allows the user to pick a start time for their task
+    // a time picker shows up when clicked on the timeTextView
     public void popStartTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.editTaskStartTimePicker);
@@ -556,7 +579,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         timePickerDialog.show();
     }
 
-    // Set End Time
+    // popEndTimePicker(...)
+    // This method allows the user to pick an end time for their task
+    // a time picker shows up when clicked on the timeTextView
     public void popEndTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.editTaskEndTimePicker);
@@ -578,11 +603,16 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         timePickerDialog.show();
     }
 
+    // OnDateClick(...) method
+    // This method makes a datePicker show up. It is in the form of a DialogFragment
+    // It shows up whem the user clicks on it to select a date for the task
     public void onDateClick(View view) {
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
     }
 
+    // taskIsValid(...) Method
+    // This method checks if the task is valid by making sure all compulsory selection has been selected and the user's task data is indicated
     public String taskIsValid(String newTaskNameString) {
         if (newTaskNameString.length() < 1) {
             return "name";
@@ -593,6 +623,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         return "VALID";
     }
 
+    // getDateDiff(...) Method
+    // This method gets the difference between 2 dates in days
     public static long getDateDiff(SimpleDateFormat format, String oldDate, String newDate) {
         try {
             return TimeUnit.DAYS.convert(format.parse(newDate).getTime() - format.parse(oldDate).getTime(), TimeUnit.MILLISECONDS);

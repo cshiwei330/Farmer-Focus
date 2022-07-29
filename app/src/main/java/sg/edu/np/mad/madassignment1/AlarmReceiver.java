@@ -58,7 +58,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context,taskId,i,PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "taskalertnotification")
-                .setSmallIcon(R.drawable.appiconround)
+                .setSmallIcon(R.drawable.barn_icon)
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
                 .setAutoCancel(true)

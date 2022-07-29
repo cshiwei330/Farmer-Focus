@@ -96,7 +96,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         //get task data from database
         taskList = dbHandler.getTaskData(user.getUserID());
 
-        //define elements in fragment
+        //define elements in activity
         EditText newTaskName = findViewById(R.id.newTaskNameActivity);
         EditText newTaskDesc = findViewById(R.id.newTaskDescActivity);
         Button createNewTaskButton = findViewById(R.id.createNewTaskButtonActivity);
@@ -660,6 +660,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         timePickerDialog.show();
     }
 
+    // popEndTimePicker(...)
+    // This method allows the user to pick an end time for their task
+    // a time picker shows up when clicked on the timeTextView
     public void popEndTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.newTaskEndTimePicker);
