@@ -204,6 +204,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
 
                     // Set Task Alert DateTime
+                    // Delete appropriate amount of time from start time based on alert specified
                     DateFormat taskAlertFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     taskDate = date + " " + startTime +":00";
 
@@ -255,6 +256,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         e.printStackTrace();
                     }
 
+                    // Formatting date to a format accepted by the alarm manager
                     if (taskDate.matches(" ") == false) {
                         ArrayList<String> monthsList = new ArrayList<>(
                                 Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -278,14 +280,27 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     }
 
 
-                    // Add Event Task To List or 1st of recurring task
+                    // Add Event Task To Task List and Database or 1st of recurring task to Task List or Database
                     // 0 means false = not completed, 1 means true = completed
 
+                    // Set Task Id
                     int id = taskList.size() + 1;
 
+                    // Get the recurring highest recurring id from the database
+                    // Set the new recurring id to be 1 more than the highest
+                    // Ensures that all unique recurring tasks has a unique id
                     int maxRecurringId = dbHandler.returnHighestRecurringId(user.getUserID());
                     int newRecurringId = maxRecurringId + 1;
 
+
+
+                    // Error Handling
+                    // Case 1: Not possible for repeat to be "None" and repeat duration to either be "1 Month" or "1 Year"
+                    // Case 2: Not possible for repeat duration to be "None" and repeat to be "Weekly" or "Monthly"
+                    // Hence, if Case 1 or Case 2 occurs, assume the other variable as "None"
+                    // Have a Toast Message to update the user on what is going on
+
+                    // Case 1
                     if (repeat.matches("None") && (repeatDuration.matches("1 Month") || repeatDuration.matches("1 Year"))) {
                         Log.v(TAG, "Repeat: None and Repeat Duration is 1 Month or 1 Year");
                         repeatDuration = "None";
@@ -293,6 +308,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         Toast.makeText(TaskAddNewActivity.this, "Repeat Duration set to None as there is no repeat frequency indicated.", Toast.LENGTH_SHORT).show();
                     }
 
+                    // Case 2
                     if (repeatDuration.matches("None") && (repeat.matches("Weekly") || repeat.matches("Monthly"))) {
                         Log.v(TAG, "Repeat: Weekly or Monthly and Repeat Duration is None");
                         repeat = "None";
@@ -300,7 +316,10 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         Toast.makeText(TaskAddNewActivity.this, "Repeat set to None as there is no repeat duration indicated.", Toast.LENGTH_SHORT).show();
                     }
 
-                    //populate new task fields
+
+
+                    // Populate new task fields ---------------------------------------------------------------------------------------------------------------------------------
+                    // Add task to database
                     Task newTaskDB = new Task();
                     newTaskDB.setId(id);
                     newTaskDB.setStatus(0);
@@ -315,13 +334,22 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     newTaskDB.setRepeat(repeat);
                     newTaskDB.setRecurringDuration(repeatDuration);
                     newTaskDB.setTaskUserID(user.getUserID());
+
+                    // Set recurringId to 0 if the task type is "Event" as "Event" tasks will not need a recurringId
+                    // Since an "Event" task does not recur recurringId is set to 0 as it does not need anything to uniquely identify it other than TaskId
                     if (taskType.matches("Event")){
                         newTaskDB.setRecurringId(0);
                     }
                     else {
                         newTaskDB.setRecurringId(newRecurringId);
                     }
+
+                    // Add Task to Database
                     dbHandler.addTask(newTaskDB);
+
+                    // ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
                     // UPDATE WIDGET ------------------------------------------------------------------------------
 
@@ -342,9 +370,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     //--------------------------------------------------------------------------------------------
 
 
+
                     Task t = new Task(id, 0, newTaskNameString, newTaskDescString, date, startTime, endTime, diffInTime,
                             alert, taskDate, taskType, repeat, recurringId, repeatDuration, user.getUserID());
-                    // Only set notification if alert is not None
+
+                    // Only set notification if alert is not "None"
                     if (t.getAlert().matches("None") == false){
                         setAlarm(t);
                     }
@@ -352,10 +382,11 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
 
                     // Add remaining tasks to DB based on indicated duration
+                    // Check how many other recurring tasks to add based on repeat frequency and repeat duration
                     if (taskType.matches("Recurring")) {
 
-                        // Decides how many tasks to add
                         int numberOfTimes;
+
                         if (repeat.matches("Weekly")) {
                             if (repeatDuration.matches("1 Month")) {
                                 numberOfTimes = 3;
@@ -364,6 +395,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 numberOfTimes = 51;
                             }
                         }
+
                         else {
                             if (repeatDuration.matches("1 Month")) {
                                 numberOfTimes = 0;
@@ -373,7 +405,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             }
                         }
 
-                        // List of taskDates
+
+
+                        // Format the task dates to be fit the SimpleDateFormat
                         String startDateString;
                         if (month < 10) {
                             startDateString = dayOfMonth + "-" + "0"+ month + "-" + year;
@@ -383,10 +417,13 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         }
 
 
+
+                        // List of taskDates
                         ArrayList<String> taskDateList = new ArrayList<>();
 
                         Date taskDateRecurring = null;
 
+                        // Convert String to Date
                         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                         try {
                             taskDateRecurring = dateFormat.parse(startDateString);
@@ -394,7 +431,8 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             e.printStackTrace();
                         }
 
-                        // Check interval to add for each task date and task alert datetime
+                        // Check interval to add for each task date
+                        // Add time (days or months) based on user's indication and add new dates into the taskDateList
                         if (repeat.matches("Weekly")) {
                             millisToAdd = 604800000L;
                             for (int i=0; i<numberOfTimes; i++) {
@@ -425,17 +463,27 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         ArrayList<String> alertDateTimeList = new ArrayList<>();
                         ArrayList<String> alertDateTimeRightFormatList = new ArrayList<>();
                         Date alertD = null;
-                        Date alertDRightFormat = null;
 
+                        // Check to make sure taskDate (alertDateTime in String) is not " "
+                        // Convert taskDate (String) to (Date)
+                        // Add time (days or months) as specified by user to taskDate
+                        // This will get the new taskDate (the date and time the notification should sound)
+                        /* If taskDate is " " (user does not want an alert), " " will be added to the alertDateTimeRightFormatList
+                        and " " will be the alertDateTime in the Database
+                         */
+                        // If taskDate is " " no notification will be created in the alarmManager and NotificationManagerCompat
 
+                        // If alert wanted
                         if (taskDate.matches(" ") == false) {
 
+                            // Convert to Date format
                             try {
                                 alertD = alertDateTimeFormat.parse(taskDate);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
 
+                            // Do calculations for the future alertDateTime based on the repeat frequency
                             for (int i=0; i<numberOfTimes; i++) {
                                 alertD.setTime(alertD.getTime() + millisToAdd);
                                 alertDateTime = String.valueOf(alertD);
@@ -443,8 +491,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 alertDateTimeList.add(alertDateTime);
                             }
 
-                            Log.v(TAG, "List: " + String.valueOf(alertDateTimeList.size()));
-
+                            // Format taskDate to be accepted by the alarmManager
                             for (int i=0; i<alertDateTimeList.size(); i++){
                                 ArrayList<String> monthsList = new ArrayList<>(
                                         Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -468,19 +515,19 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 alertDateTimeRightFormatList.add(alertDateTime);
                             }
 
-                            Log.v(TAG, "List Right Format: " + String.valueOf(alertDateTimeRightFormatList.size()));
-
                         }
+                        // if no alert wanted
                         else {
                             for (int i=0; i<numberOfTimes; i++) {
                                 alertDateTimeRightFormatList.add(" ");
                             }
                         }
 
-
+                        // Populate task fields
+                        // Add additional tasks to DataBase
+                        // It will carry out the job mentioned above (lines 526 and 527) more than once based on repeat frequency and repeat duration indicated
                         for (int i=0; i<numberOfTimes; i++) {
 
-                            // Set Task Id, Status, Name; Desc
                             id = id + 1;
                             newTaskDB.setId(id);
                             newTaskDB.setStatus(0);
@@ -489,7 +536,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                             newTaskDB.setTaskDate(taskDateList.get(i));
                             newTaskDB.setTaskStartTime(startTime);
                             newTaskDB.setTaskEndTime(endTime);
-                            //newTaskDB.setTaskDuration(0);
                             newTaskDB.setAlert(alert);
                             newTaskDB.setAlertDateTime(alertDateTimeRightFormatList.get(i));
                             newTaskDB.setTaskType(taskType);
@@ -517,6 +563,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     finish();
                 }
                 else {
+                    // Display if task is not valid
                     Toast.makeText(TaskAddNewActivity.this, "Please enter a task "+validity+"!", Toast.LENGTH_SHORT).show();
                 }
 
@@ -524,6 +571,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    // setAlarm Method
+    /* This method sets the notification using the alarmManager which sets the time for the notification to pop up and will send task data to the AlarmReceiver.java*/
+    // The AlarmReceiver.java will then set the notification details such as the title and icon
     private void setAlarm(Task t) {
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
@@ -538,19 +588,20 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date Date1 = null;
         long timeInMilliseconds = 0;
-        Log.v(TAG, "t.getAlertDateTime: " + t.getAlertDateTime());
 
+        // Converts String to Date and converts the dateTime to milliseconds
         try {
             Date1 = format.parse(t.getAlertDateTime());
             timeInMilliseconds = Date1.getTime();
-            Log.v(TAG, String.valueOf(timeInMilliseconds));
         } catch (ParseException e) {
-            Log.v(TAG, "Not found");
             e.printStackTrace();
         }
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+        // set time for notification to pop up
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
     }
 
+    // createNotificationChannel() method
+    // This method creates the channel for all the notifications that will be shown
     private void createNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -566,6 +617,8 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
 
     }
 
+    // onDateSet(...) Method
+    // This method enables the user to pick a date for their task
     @Override
     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
         Calendar c = Calendar.getInstance();
@@ -583,6 +636,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         textView.setText(currentDateString);
     }
 
+    // popStartTimePicker(...)
+    // This method allows the user to pick a start time for their task
+    // a time picker shows up when clicked on the timeTextView
     public void popStartTimePicker(View view)
     {
         TextView timeTextView = findViewById(R.id.editTaskStartTimePicker);
@@ -625,34 +681,41 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         timePickerDialog.show();
     }
 
+    // OnDateClick(...) method
+    // This method makes a datePicker show up. It is in the form of a DialogFragment
+    // It shows up whem the user clicks on it to select a date for the task
     public void onDateClick(View view) {
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
     }
 
+    // taskIsValid(...) Method
+    // This method checks if the task is valid by making sure all compulsory selection has been selected and the user's task data is indicated
     public String  taskIsValid(String newTaskNameString){
+        // ensures that a task has a name as it is compulsory
         if(newTaskNameString.length() < 1){
             return "name";
         }
+        // ensures a task has a date as it is compulsory
         if(year == 0 || month == 0 || dayOfMonth == 0){
             return "date";
         }
-        if (alert == null){
-            return "alert";
-        }
-        if (taskType == null){
-            return "task type";
-        }
-        if (repeat == null){
-            return "repeat";
-        }
-        if (taskType.matches("Recurring") && repeat.matches("None")){
-            return "a valid repeat option since recurring task is selected";
-        }
-        if ((taskType.matches("Event") && repeat.matches("Weekly")) || (taskType.matches("Event") && repeat.matches("Monthly"))) {
-            return "an event task cannot be repeated.";
-        }
-
+//        if (alert == null){
+//            return "alert";
+//        }
+//        if (taskType == null){
+//            return "task type";
+//        }
+//        if (repeat == null){
+//            return "repeat";
+//        }
+//        if (taskType.matches("Recurring") && repeat.matches("None")){
+//            return "a valid repeat option since recurring task is selected";
+//        }
+//        // ensures that the user does not
+//        if ((taskType.matches("Event") && repeat.matches("Weekly")) || (taskType.matches("Event") && repeat.matches("Monthly"))) {
+//            return "an event task cannot be repeated.";
+//        }
         return "VALID";
     }
 }
