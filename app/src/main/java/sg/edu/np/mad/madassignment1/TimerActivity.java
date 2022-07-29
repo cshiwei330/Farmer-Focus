@@ -82,6 +82,8 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
 
+        mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+        mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
 
         //NEW
 
@@ -187,20 +189,30 @@ public class TimerActivity extends DrawerBaseActivity{
                     int taskId = extras.getInt("task id", -1);
                     task = dbHandler.findTask(taskId);
 
-                    setTime(task);
+                    if (task != null) {
+                        setTime(task);
+                    }
+
+                    if (mTimerRunning) {
+                        //pauseTimer();
+                    }
+                    else {
+                        startTimer();
+                    }
                 }
                 else {
                     //to "refresh" the change
-                    Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
-                    startActivity(myIntent);
+//                    Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
+//                    startActivity(myIntent);
+                    //TimerActivity.this.finish();
                     Toast.makeText(TimerActivity.this, "Please select a task", Toast.LENGTH_SHORT).show();
                 }
-                if (mTimerRunning) {
-                    //pauseTimer();
-                }
-                else {
-                    startTimer();
-                }
+//                if (mTimerRunning) {
+//                    //pauseTimer();
+//                }
+//                else {
+//                    startTimer();
+//                }
             }
         });
 
@@ -216,7 +228,6 @@ public class TimerActivity extends DrawerBaseActivity{
                 builder.setCancelable(true);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
-                        mTextViewCountDown.setText("00:00");
 
                         // pause timer
                         pauseTimer();
@@ -231,6 +242,11 @@ public class TimerActivity extends DrawerBaseActivity{
                         // mark task as completed
                         task.setStatus(1);
                         dbHandler.changeTaskStatus(task);
+
+                        mTextViewCountDown.setText("00:00");
+
+                        task = null;
+
 
                         // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
@@ -256,7 +272,6 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonStopwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
                 Intent TimerActivitytoStopWatchActivity = new Intent(TimerActivity.this, StopWatchActivity.class);
                 //put extra
                 TimerActivitytoStopWatchActivity.putExtra("finisher", new ResultReceiver(null) {
@@ -329,9 +344,15 @@ public class TimerActivity extends DrawerBaseActivity{
 
                 //define dbHandler
                 DBHandler dbHandler = new DBHandler(TimerActivity.this, null, null,6);
+
                 // mark task as completed
-                task.setStatus(1);
-                dbHandler.changeTaskStatus(task);
+                if (task != null) {
+                    task.setStatus(1);
+                    dbHandler.changeTaskStatus(task);
+                }
+
+//                task.setStatus(1);
+//                dbHandler.changeTaskStatus(task);
 
                 // show msg tat task is completed
                 Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();

@@ -26,6 +26,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
     private Button mButtonStartPause2;
     private Button mButtonReset2;
     private Button mButtonTimer;
+    private Button mButtonStopWatch;
 
 
     @Override
@@ -44,6 +45,10 @@ public class StopWatchActivity extends DrawerBaseActivity {
         mButtonReset2 = findViewById(R.id.button_reset2);
         chronometer = findViewById(R.id.chronometer);
         mButtonTimer = findViewById(R.id.timer2);
+        mButtonStopWatch = findViewById(R.id.stopwatch2);
+
+        mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+        mButtonStopWatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -76,6 +81,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
                 resetChronometer();
             }
         });
+
 
         mButtonTimer.setOnClickListener(new View.OnClickListener() {
             @Override
