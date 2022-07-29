@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Want to find out what's the average \ntime taken on recurring tasks?"
+        android:text="Check out how long you take for each attempt of \nrecurring tasks!"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
