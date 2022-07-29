@@ -18,11 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class SiloFragment extends Fragment {
@@ -126,7 +130,26 @@ public class SiloFragment extends Fragment {
 //        ImageView treeImage = view.findViewById(R.id.tree_barn);
 //        Glide.with(this.getContext()).load(R.drawable.tree).into(treeImage);
 
-        //barn image clicked
+        //set farm images
+        //based on number of tasks completed in the last week
+        ArrayList<Task> tasksThisWeek = tasksThisWeek(user.getUserID());
+        int tasksThisWeekNum = tasksThisWeek.size();
+
+        int[] farmPlotsReq = new int[]{0,1,4,8,12};
+        int currentFarmPlotLevel;
+
+        //get plot farm level
+        //if eg 5 tasks completed in last week, current plot farm level is 3
+        for (int i = 0; i < farmPlotsReq.length; i++) {
+            if (tasksThisWeekNum>=farmPlotsReq[i]){
+                currentFarmPlotLevel = i;
+            }
+        }
+
+        //TODO: set farm images based on req
+
+
+        //silo image clicked
         siloImage1.setClickable(true);
         siloImage2.setClickable(true);
         siloImage3.setClickable(true);
@@ -373,6 +396,50 @@ public class SiloFragment extends Fragment {
             }
         }
         return  arrayOfArrayOfRecurringTasks;
+    }
+
+    public ArrayList<Task> tasksThisWeek(int userID){
+
+        ArrayList<Task> allTaskList = new ArrayList<Task>();
+        ArrayList<Task> completedTaskLastWeekNum = new ArrayList<Task>();
+
+        //get today's date
+        //get current date
+        //get current date
+        Calendar calendar = Calendar.getInstance();
+
+        ArrayList<String> pastWeekDates = new ArrayList<String>();
+
+        //set date format
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        //apply date format to current date
+
+        //add today's date to list
+        Date date = calendar.getTime();
+        String stringDate = df.format(date);
+        pastWeekDates.add(stringDate);
+
+        //get dates of past week
+        for (int i = 0; i < 7; i++) {
+            calendar.add(Calendar.DATE,1);
+            date = calendar.getTime();
+            stringDate = df.format(date);
+            pastWeekDates.add(stringDate);
+        }
+
+        //get all tasks completed last week
+        allTaskList = dbHandler.getTaskData(userID);
+        for (Task t:allTaskList){
+            for (String d:pastWeekDates){
+                //if task date is in past week, add to list and break
+                if (t.getTaskDate().equals(d)){
+                    completedTaskLastWeekNum.add(t);
+                    break;
+                }
+            }
+        }
+
+        return completedTaskLastWeekNum;
     }
 
     //checks if there is a valid silo that can have its height upgraded
