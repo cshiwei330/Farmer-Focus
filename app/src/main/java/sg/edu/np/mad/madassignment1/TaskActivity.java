@@ -351,9 +351,9 @@ public class TaskActivity extends DrawerBaseActivity{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        for (int j=0; j<taskList.size(); j++) {
-                            cancelNotification(taskList.get(j));
-                        }
+//                        for (int j=0; j<taskList.size(); j++) {
+//                            cancelNotification(taskList.get(j));
+//                        }
 
                         //delete all task entries
                         dbHandler.deleteAllTask(user.getUserID());
