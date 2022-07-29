@@ -45,7 +45,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     long diffInTime;
 
     private String alert, repeat, taskType, finalTaskStartTime, strDate, taskDate, finalTaskDesc, strAlertDateTime;
-    private Spinner spinnerAlert, spinnerRepeat;
+    private Spinner spinnerAlert;
 
     public String GLOBAL_PREF = "MyPrefs";
 
@@ -87,7 +87,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
         Button saveDetailsButton = findViewById(R.id.saveDetailsButton);
 
         spinnerAlert = findViewById(R.id.editTaskAlertDropDown);
-        spinnerRepeat = findViewById(R.id.editTaskRepeatSpinnerDropDown);
 
         // receive from bundle
         Intent receivingEnd = getIntent();
@@ -141,50 +140,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-
-
-        // Spinner for repeat options
-        String[] repeatOptions = getResources().getStringArray(R.array.task_repeat_options);
-        ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatOptions);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerRepeat.setAdapter(adapter2);
-
-        // add all alert times into the optionList
-        for (int i=0; i< repeatOptions.length; i++){
-            repeatOptionsList.add(repeatOptions[i]);
-        }
-
-        // get index for the option in the optionsList
-        for (int i=0; i<repeatOptionsList.size(); i++) {
-            if (repeatOptionsList.get(i).matches(currentTask.getRepeat())) {
-                repeatIndex = i;
-                break;
-            }
-        }
-
-        // set default value of the spinner to be original value from database
-        // this ensures that when user does not edit, the database does not change this field of the task
-        spinnerRepeat.setSelection(repeatIndex);
-
-        spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                repeat = adapterView.getItemAtPosition(i).toString();
-                if (repeat.matches("Weekly") || repeat.matches("Monthly")){
-                    taskType = "Recurring";
-                }
-                else {
-                    taskType = currentTask.getTaskType();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
