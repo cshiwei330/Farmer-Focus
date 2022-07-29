@@ -1,5 +1,26 @@
 package sg.edu.np.mad.madassignment1;
 
+/*----------------------------------------------------------------------------------------------------*/
+                                    /* TIMER ACTIVITY */
+/* The Timer Activity is made for users to set the time for the tasks which they have created.
+This activity allows users to set the timer by selecting the task which they would like to start
+doing by clicking on the container view. In order to set the time on the timer, users have to first
+create a new task and set the duration in the task page. Afterwards, when users come to the timer page,
+they will then be able to select the task which they would like to start doing by clicking on the
+container view. In the event when users click start before selecting their tasks, they will be prompted
+to select their tasks with a toast message asking them to select a task. Once users have successfully selected
+their tasks, they will be brought back to the timer page. Then, once the start button have been clicked, the
+task duration selected by the user in the task page will then be set on the timer and the timer will start
+counting down. When the timer is running, a sheep animation will be displayed to show that the timer is running
+and would be gone either once the time set on the timer have been completed or users clicked on the finish
+button. The finish button is created to allow users to stop doing their tasks before the time set for the
+task is up as they might have completed their tasks before the duration ends. The finish button will calculate
+the time spend on the task by subtracting the time set for the task with the time left on the timer.
+ Once the tasks have been completed, a chicken animation and toast message will show up on the timer
+page to congratulate the user for the completion of their task. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -213,6 +234,8 @@ public class TimerActivity extends DrawerBaseActivity{
         ImageView sheep = findViewById(R.id.sheepGif);
         Glide.with(this).load(R.drawable.sheep).into(sheep);
 
+
+        // navigate to the stopwatch page
         mButtonStopwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,8 +257,7 @@ public class TimerActivity extends DrawerBaseActivity{
     }
 
 
-
-
+    // setting of time in the timer
     private void setTime(Task t) {
         // Get Task Duration (set by user)
         Log.v("test", "testing");
