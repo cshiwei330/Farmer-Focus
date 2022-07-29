@@ -37,6 +37,8 @@ public class StatsSearchTaskFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_stats_search_task, container, false);
         thisContext = container.getContext();
+
+        // button to go to the recurring task statistics page
         Button recurringTask = view.findViewById(R.id.toRecurringTaskPage);
         recurringTask.setOnClickListener(new View.OnClickListener() {
             @Override
