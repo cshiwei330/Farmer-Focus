@@ -213,6 +213,12 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                 // Gets the task duration
                 diffInTime = currentTask.getTaskDuration();
 
+                // Sets the task type
+                taskType = currentTask.getTaskType();
+
+                // Sets the repeat
+                repeat = currentTask.getRepeat();
+
                 // Get task alert date time from task date provided
                 // It is calculated based on the alert option provided
                 DateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
