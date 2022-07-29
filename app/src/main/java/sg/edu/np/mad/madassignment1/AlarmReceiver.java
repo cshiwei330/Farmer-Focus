@@ -23,10 +23,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        // Retrieve data from the intent from the add new task activity
         taskAlert = intent.getStringExtra("task alert");
         taskDesc = intent.getStringExtra("task name");
         taskId = intent.getIntExtra("task id", -1);
 
+        /* Assign the correct title to the notification based on the
+         alert specified by the user for the current task */
         if (taskAlert.matches("At time of event")){
             taskTitle = "Task";
         }
@@ -52,11 +55,15 @@ public class AlarmReceiver extends BroadcastReceiver {
             taskTitle = "Task in a week!";
         }
 
+        // Set intent for the notification when clicked
+        // The user will be brought to the task list page when notification is clicked
         Intent i = new Intent(context, TaskActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context,taskId,i,PendingIntent.FLAG_IMMUTABLE);
 
+        // Build the notification
+        // Give the notification its attributes
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "taskalertnotification")
                 .setSmallIcon(R.drawable.barn_icon)
                 .setContentTitle(taskTitle)
@@ -66,6 +73,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);
 
+        // Create the notification
         notificationManagerCompat = NotificationManagerCompat.from(context);
         notificationManagerCompat.notify(taskId, builder.build());
     }
