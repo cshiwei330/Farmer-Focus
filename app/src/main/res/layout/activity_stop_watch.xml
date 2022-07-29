@@ -96,6 +96,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.531" />
 
+    <ImageView
+        android:id="@+id/cow"
+        android:layout_width="209dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintBottom_toBottomOf="@+id/inner_circle2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/cow" />
+
     <!--    <ImageView-->
 <!--        android:id="@+id/imageView6"-->
 <!--        android:layout_width="60dp"-->

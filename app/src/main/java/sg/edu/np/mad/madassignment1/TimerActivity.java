@@ -3,6 +3,8 @@ package sg.edu.np.mad.madassignment1;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -37,17 +39,14 @@ public class TimerActivity extends DrawerBaseActivity{
     ActivityTimerBinding activityTimerBinding;
 
     //time
-    private EditText mEditTextInput;
     private TextView mTextViewCountDown;
-    private TextView mTextSetTime;
-    //private ImageView SetTime;
     private Button mButtonStartPause;
-    private Button mButtonReset;
     private Button mButtonGiveUp;
     private Button mButtonStopwatch;
     private Button mButtonTimer;
     private TextView mTimeTextView;
     private ImageView sheep;
+    private ImageView chicken;
 
     private CountDownTimer mCountDownTimer;
 
@@ -71,16 +70,15 @@ public class TimerActivity extends DrawerBaseActivity{
         allocateActivityTitle("Timer");
 
         //timer
-//        mTextSetTime = findViewById(R.id.textview_setTime);
-//        mEditTextInput = findViewById(R.id.edit_text_minutes);
         mTextViewCountDown = findViewById(R.id.countdown);
-        //SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonStopwatch = findViewById(R.id.Stopwatch);
         mButtonTimer = findViewById(R.id.Timer);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
+        chicken = findViewById(R.id.chicken);
+
 
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
         mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
@@ -229,6 +227,10 @@ public class TimerActivity extends DrawerBaseActivity{
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
 
+                        //for chicken animation
+                        ImageView chicken = findViewById(R.id.chicken);
+                        Glide.with(TimerActivity.this).load(R.drawable.chicken).into(chicken);
+
                         // pause timer
                         pauseTimer();
 
@@ -342,6 +344,10 @@ public class TimerActivity extends DrawerBaseActivity{
                 MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
                 ring.start();
 
+                //for chicken animation
+                ImageView chicken = findViewById(R.id.chicken);
+                Glide.with(TimerActivity.this).load(R.drawable.chicken).into(chicken);
+
                 //define dbHandler
                 DBHandler dbHandler = new DBHandler(TimerActivity.this, null, null,6);
 
@@ -405,12 +411,14 @@ public class TimerActivity extends DrawerBaseActivity{
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
+            chicken.setVisibility(View.INVISIBLE);
         }
         else {
             mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
             mButtonGiveUp.setVisibility(View.INVISIBLE);
             sheep.setVisibility(View.INVISIBLE);
+            chicken.setVisibility(View.VISIBLE);
 
         }
     }
