@@ -41,8 +41,7 @@ public class TimerRecyclerViewAdaptor extends RecyclerView.Adapter<TimerRecycler
         holder.taskName.setText(t.getTaskName());
         holder.taskDesc.setText(t.getTaskDesc());
         //holder.taskTime.setText(t.getTaskDuration());
-        holder.taskTime.setText(t.getTaskStartTime() + " -"); // change to getTaskDuration()
-        holder.endTIme.setText(t.getTaskEndTime());
+        holder.taskTime.setText(t.getTaskStartTime() + " -" + t.getTaskEndTime()); // change to getTaskDuration()
 
 
 
