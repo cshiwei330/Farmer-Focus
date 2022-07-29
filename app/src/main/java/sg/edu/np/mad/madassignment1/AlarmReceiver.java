@@ -61,7 +61,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.appiconround)
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
-                .setAutoCancel(false)
+                .setAutoCancel(true)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent);

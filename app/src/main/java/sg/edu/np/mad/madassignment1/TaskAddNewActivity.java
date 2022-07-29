@@ -111,6 +111,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAlert.setAdapter(adapter);
 
+        // Get user choice of alert time
         spinnerAlert.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -132,6 +133,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRepeat.setAdapter(adapter2);
 
+        // Get user choice of repeat frequency for recurring tasks
         spinnerRepeat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -150,11 +152,13 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
             }
         });
 
+        // Repeat Duration Spinner Dropdown
         String[] repeatDurationOptions = getResources().getStringArray(R.array.repeat_duration_options);
         ArrayAdapter adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, repeatDurationOptions);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRepeatDuration.setAdapter(adapter3);
 
+        // Get user choice for repeat duration for recurring tasks
         spinnerRepeatDuration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
