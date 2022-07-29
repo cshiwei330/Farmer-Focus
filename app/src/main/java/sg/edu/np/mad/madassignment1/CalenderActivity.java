@@ -222,8 +222,6 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
             String stringDate = dayText+"-"+dateString;
 
-            //set text to see how many tasks
-            int numberOfSameDateTasks = tasksWhiteList(stringDate,taskList).size();
             //get formatted date for single digit dates
             String todayTasksText;
             if (dayText.length()==1){
@@ -232,12 +230,16 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             else{
                 todayTasksText=stringDate;
             }
+
+            //set text to see how many tasks
+            int numberOfSameDateTasks = tasksWhiteList(todayTasksText,taskList).size();
+
             todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + todayTasksText);
 
             //set shading and todolist filters
             calendarViewAdapter.getFilter().filter(stringDate);
             //calenderAdaptor.getFilter().filter(stringDate);
-            hourAdapter.getFilter().filter(stringDate);
+            hourAdapter.getFilter().filter(todayTasksText);
             Log.v("Calender button clicked",stringDate);
 
 
@@ -268,5 +270,4 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         }
         return tasksInThisMonth;
     }
-
 }
