@@ -41,7 +41,7 @@ public class WidgetProvider extends AppWidgetProvider {
         // Fill taskList with current db data
         todayTaskList = dbHandler.getTodayTaskData(user.getUserID());
 
-        // To see how many tasks
+        // To display number of task
         int taskNo = todayTaskList.size();
         RemoteViews mainView = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
         mainView.setTextViewText(R.id.widgetTaskNo, ("   " + String.valueOf(taskNo)));
@@ -53,7 +53,7 @@ public class WidgetProvider extends AppWidgetProvider {
         mainView.setRemoteAdapter(R.id.widgetListView, serviceIntent);
         mainView.setEmptyView(R.id.widgetListView, R.id.empty);
 
-        // launch app when widget is clicked
+        // Launch app when widget is clicked
         Intent configIntent = new Intent(context, HomeActivity.class);
         PendingIntent launchAppPendingIntent = PendingIntent.getActivity(context, 0, configIntent, 0);
         mainView.setOnClickPendingIntent(R.id.widgetTaskNo, launchAppPendingIntent);
@@ -61,22 +61,13 @@ public class WidgetProvider extends AppWidgetProvider {
         mainView.setOnClickPendingIntent(R.id.widgetDivider, launchAppPendingIntent);
         mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, launchAppPendingIntent);
 
-
-        /*// Add New Task Button
-        Intent buttonIntent = new Intent(context, HomeActivity.class);
-        PendingIntent pendingButtonIntent = PendingIntent.getActivity(context,0, buttonIntent,0);
-        mainView.setOnClickPendingIntent(R.id.widgetAddTaskButton, pendingButtonIntent);*/
-
-        // Instruct the widget manager to update the widget
-        //appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widgetListView);
-
         appWidgetManager.updateAppWidget(appWidgetId, mainView);
 
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
+        // update all of widgets
         for (int appWidgetId : appWidgetIds) {
 
             Log.v(TAG, "Update");

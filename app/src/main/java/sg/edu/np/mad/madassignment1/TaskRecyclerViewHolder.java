@@ -17,7 +17,7 @@ public class TaskRecyclerViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         taskName = itemView.findViewById(R.id.task_name);
         taskDesc = itemView.findViewById(R.id.task_desc);
-        taskDate = itemView.findViewById(R.id.task_date_recyclerview);
+        taskDate = itemView.findViewById(R.id.task_date);
         taskCheckBox = itemView.findViewById(R.id.task_checkBox);
     }
 

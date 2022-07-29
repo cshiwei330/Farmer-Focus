@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import sg.edu.np.mad.madassignment1.databinding.ActivityStopWatchBinding;
 
 public class StopWatchActivity extends DrawerBaseActivity {
@@ -27,6 +29,8 @@ public class StopWatchActivity extends DrawerBaseActivity {
     private Button mButtonReset2;
     private Button mButtonTimer;
     private Button mButtonStopWatch;
+
+    private ImageView cow;
 
 
     @Override
@@ -49,6 +53,10 @@ public class StopWatchActivity extends DrawerBaseActivity {
 
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
         mButtonStopWatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
+
+        //for cow animation
+        cow = findViewById(R.id.cow);
+        Glide.with(this).load(R.drawable.cow).into(cow);
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -129,10 +137,11 @@ public class StopWatchActivity extends DrawerBaseActivity {
 
     private void updateWatchInterface() {
         if (running) {
-            //mButtonReset2.setVisibility(View.INVISIBLE);
+            cow.setVisibility(View.VISIBLE);
             mButtonStartPause2.setText("Pause");
         }
         else {
+            cow.setVisibility(View.INVISIBLE);
             mButtonStartPause2.setText("Start");
         }
     }

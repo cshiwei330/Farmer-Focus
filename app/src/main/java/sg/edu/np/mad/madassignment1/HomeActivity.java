@@ -69,7 +69,7 @@ public class HomeActivity extends DrawerBaseActivity {
 
         // toast to indicate to user there are no recent tasks
         if (recentTaskList.size() == 0){
-            Toast.makeText(this, "No Recent Tasks", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hooray! No Upcoming Tasks.", Toast.LENGTH_SHORT).show();
         }
 
         // initialize recyclerview for TASKS

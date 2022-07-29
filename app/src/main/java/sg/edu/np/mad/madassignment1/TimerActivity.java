@@ -1,8 +1,31 @@
 package sg.edu.np.mad.madassignment1;
 
+/*----------------------------------------------------------------------------------------------------*/
+                                    /* TIMER ACTIVITY */
+/* The Timer Activity is made for users to set the time for the tasks which they have created.
+This activity allows users to set the timer by selecting the task which they would like to start
+doing by clicking on the container view. In order to set the time on the timer, users have to first
+create a new task and set the duration in the task page. Afterwards, when users come to the timer page,
+they will then be able to select the task which they would like to start doing by clicking on the
+container view. In the event when users click start before selecting their tasks, they will be prompted
+to select their tasks with a toast message asking them to select a task. Once users have successfully selected
+their tasks, they will be brought back to the timer page. Then, once the start button have been clicked, the
+task duration selected by the user in the task page will then be set on the timer and the timer will start
+counting down. When the timer is running, a sheep animation will be displayed to show that the timer is running
+and would be gone either once the time set on the timer have been completed or users clicked on the finish
+button. The finish button is created to allow users to stop doing their tasks before the time set for the
+task is up as they might have completed their tasks before the duration ends. The finish button will calculate
+the time spend on the task by subtracting the time set for the task with the time left on the timer.
+ Once the tasks have been completed, a chicken animation and toast message will show up on the timer
+page to congratulate the user for the completion of their task. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -37,17 +60,14 @@ public class TimerActivity extends DrawerBaseActivity{
     ActivityTimerBinding activityTimerBinding;
 
     //time
-    private EditText mEditTextInput;
     private TextView mTextViewCountDown;
-    private TextView mTextSetTime;
-    //private ImageView SetTime;
     private Button mButtonStartPause;
-    private Button mButtonReset;
     private Button mButtonGiveUp;
     private Button mButtonStopwatch;
     private Button mButtonTimer;
     private TextView mTimeTextView;
     private ImageView sheep;
+    private ImageView chicken;
 
     private CountDownTimer mCountDownTimer;
 
@@ -71,16 +91,15 @@ public class TimerActivity extends DrawerBaseActivity{
         allocateActivityTitle("Timer");
 
         //timer
-//        mTextSetTime = findViewById(R.id.textview_setTime);
-//        mEditTextInput = findViewById(R.id.edit_text_minutes);
         mTextViewCountDown = findViewById(R.id.countdown);
-        //SetTime = findViewById(R.id.GreenTick);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonStopwatch = findViewById(R.id.Stopwatch);
         mButtonTimer = findViewById(R.id.Timer);
         mTimeTextView = findViewById(R.id.countdown);
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
+        chicken = findViewById(R.id.chicken);
+
 
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
         mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
@@ -120,67 +139,8 @@ public class TimerActivity extends DrawerBaseActivity{
         Log.v("testing1", String.valueOf(taskId));
 
 
-//        Bundle extras = getIntent().getExtras();
-//        if (extras != null) {
-//            int taskId = extras.getInt("task id", -1);
-//            task = dbHandler.findTask(taskId);
-//
-//            setTime(task);
-//        }
 
-
-        // if extras is not null receive from bundle and set time
-//        SetTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Bundle extras = getIntent().getExtras();
-//                if (extras != null) {
-//                    int taskId = extras.getInt("task id", -1);
-//                    task = dbHandler.findTask(taskId);
-//
-//                    setTime(task);
-//                }
-//            }
-//        });
-
-
-//        Bundle extras  = getIntent().getExtras();
-//        if (extras != null) {
-//            int taskId = extras.getInt("task id", -1);
-//            task = dbHandler.findTask(taskId);
-//
-//            setTime(task);
-//    }
-
-
-        //NEW
-
-        // displays numeric keyboard
-        // only allow user to key in integers 0 to 9 and not anything else when setting the time
-        //mEditTextInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-        // after the user have entered their preferred timing for countdown in "edit_text_minutes",
-        // they should click on the image view represented by a green tick, to set the time
-//        SetTime.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String input = mEditTextInput.getText().toString();
-//                if (input.length() == 0) {
-//                    Toast.makeText(TimerActivity.this, "Field can't be empty", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                long millisInput = Long.parseLong(input) * 60000; // change to milliseconds
-//                if (millisInput <= 0) {
-//                    Toast.makeText(TimerActivity.this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//
-//                setTime(millisInput);
-//                mEditTextInput.setText("");
-//            }
-//        });
-
-        // if timer is running, start button changes to become pause, else, start button will remain unchanged
+        // if timer is running, start button closes and finish button shows up
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,13 +181,16 @@ public class TimerActivity extends DrawerBaseActivity{
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
-                builder.setTitle("Are you sure to give up?");
-                builder.setMessage("It seems like you have not sat through the entire duration set for the task " +
-                        //"it's normal to complete the task before the duration is up." +
+                builder.setTitle("Are you sure you have finished?");
+                builder.setMessage("Task will be mark as completed once clicked on this button " +
                         "\n\nWould you like to stop doing the task?");
                 builder.setCancelable(true);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
+
+                        //for chicken animation
+                        ImageView chicken = findViewById(R.id.chicken);
+                        Glide.with(TimerActivity.this).load(R.drawable.chicken).into(chicken);
 
                         // pause timer
                         pauseTimer();
@@ -242,6 +205,8 @@ public class TimerActivity extends DrawerBaseActivity{
                         // mark task as completed
                         task.setStatus(1);
                         dbHandler.changeTaskStatus(task);
+
+                        mCountDownTimer.cancel();
 
                         mTextViewCountDown.setText("00:00");
 
@@ -269,6 +234,8 @@ public class TimerActivity extends DrawerBaseActivity{
         ImageView sheep = findViewById(R.id.sheepGif);
         Glide.with(this).load(R.drawable.sheep).into(sheep);
 
+
+        // navigate to the stopwatch page
         mButtonStopwatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -290,8 +257,7 @@ public class TimerActivity extends DrawerBaseActivity{
     }
 
 
-
-
+    // setting of time in the timer
     private void setTime(Task t) {
         // Get Task Duration (set by user)
         Log.v("test", "testing");
@@ -341,6 +307,10 @@ public class TimerActivity extends DrawerBaseActivity{
                 // timer alarm plays for 16 sec after time runs out
                 MediaPlayer ring = MediaPlayer.create(TimerActivity.this, R.raw.alarmringtone);
                 ring.start();
+
+                //for chicken animation
+                ImageView chicken = findViewById(R.id.chicken);
+                Glide.with(TimerActivity.this).load(R.drawable.chicken).into(chicken);
 
                 //define dbHandler
                 DBHandler dbHandler = new DBHandler(TimerActivity.this, null, null,6);
@@ -395,22 +365,23 @@ public class TimerActivity extends DrawerBaseActivity{
         mTextViewCountDown.setText(timeLeftFormatted);
     }
 
-    // when the timer has started, only the timer countdown and pause button will be shown on the screen.
-    // when paused is clicked, a reset button will pop out on the screen to allow users to reset the timer
-    // if users wants to change the time on the timer, they have to key in their preferred value at the edit
-    // text location which they wishes to change the timer countdown to (in minutes)
+    // when the timer has started, only the timer countdown and finish button will be shown on the screen.
+    // when finish is clicked, an alert dialog will pop out to ask user if they really want to stop doing the task
+    // if yes, task will be mark as completed and timer will be reset to 00:00
 
     private void updateWatchInterface() {
         if (mTimerRunning) {
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
+            chicken.setVisibility(View.INVISIBLE);
         }
         else {
             mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
             mButtonGiveUp.setVisibility(View.INVISIBLE);
             sheep.setVisibility(View.INVISIBLE);
+            chicken.setVisibility(View.VISIBLE);
 
         }
     }
