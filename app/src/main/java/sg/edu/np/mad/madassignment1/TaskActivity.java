@@ -83,6 +83,9 @@ public class TaskActivity extends DrawerBaseActivity{
         // floating button to go to addnewtask
         FloatingActionButton addNewTask = findViewById(R.id.addNewTaskButton);
 
+        Button uncompletedTaskButton = findViewById(R.id.uncompletedTaskButton);
+        Button completedTaskButton = findViewById(R.id.completedTaskButton);
+
         // shared preferences to get username
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
@@ -196,6 +199,9 @@ public class TaskActivity extends DrawerBaseActivity{
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                uncompletedTaskButtonClicked = false;
+                completedTaskButtonClicked = false;
+
                 filterOption = adapterView.getItemAtPosition(i).toString();
 
                 if (secondTaskList.size() != 0){
@@ -206,26 +212,38 @@ public class TaskActivity extends DrawerBaseActivity{
                     mAdaptor.notifyDataSetChanged();
                 }
                 if (filterOption.matches("Default Date Asc")){
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskDateAscComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else if (filterOption.matches("Date Desc")){
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskDateDescComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else if (filterOption.matches("Name Asc")){
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskNameAscComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else if (filterOption.matches("Name Desc")){
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskNameDescComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else if (filterOption.matches("Task Creation Date Asc")){
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskIdAscComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
                 else { //if (filterOption.matches("Task Creation Date Desc"))
+                    uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
+                    completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
                     Collections.sort(taskList, Task.TaskIdDescComparator);
                     mAdaptor.notifyDataSetChanged();
                 }
@@ -234,9 +252,6 @@ public class TaskActivity extends DrawerBaseActivity{
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-        Button uncompletedTaskButton = findViewById(R.id.uncompletedTaskButton);
-        Button completedTaskButton = findViewById(R.id.completedTaskButton);
 
         uncompletedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override

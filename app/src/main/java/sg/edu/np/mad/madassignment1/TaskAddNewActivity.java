@@ -200,6 +200,9 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                     else {
                         date = dayOfMonth + "-" + month + "-" + year;
                     }
+                    if (dayOfMonth < 10) {
+                        date = "0" + date;
+                    }
 
 
 
@@ -262,6 +265,7 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                                 Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                         );
                         String[] taskDateSplit = taskDate.split(" ");
+                        String taskDateDay;
                         int monthIndexInt = -1;
                         String monthIndex;
                         for (int i=0; i<monthsList.size(); i++) {
@@ -276,7 +280,12 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
                         else {
                             monthIndex = String.valueOf(monthIndexInt+1);
                         }
-                        taskDate = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                        if (taskDateSplit[2].length() == 1) {
+                            taskDate = "0" + taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                        }
+                        else {
+                            taskDate = taskDateSplit[2] + "-" + monthIndex + "-" + taskDateSplit[5] + " " + taskDateSplit[3];
+                        }
                     }
 
 
