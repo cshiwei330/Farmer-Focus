@@ -18,10 +18,12 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
-        android:textColor="@color/black"
-        tools:text="Task Name"
         android:gravity="center_vertical"
-        android:textSize="18sp"/>
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        tools:text="Task Name"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/widgetTaskTime"
