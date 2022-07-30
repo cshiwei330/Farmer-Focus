@@ -199,7 +199,7 @@ public class HourAdapter extends ArrayAdapter<HourTasks> implements Filterable {
                     ht.setTasks(hourTasks);
                 }
 
-                //fofcvdrces getView to rerun
+                //force getView to rerun
                 notifyDataSetChanged();
 
                 ////if god fails us:

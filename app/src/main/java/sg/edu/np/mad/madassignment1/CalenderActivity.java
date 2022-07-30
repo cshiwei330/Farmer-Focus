@@ -110,7 +110,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         ArrayList<HourTasks> hourTasksList = new ArrayList<>();
 
-        for (int i = 0; i < 23; i++) {
+        for (int i = 0; i < 24; i++) {
             String hour = String.valueOf(i) + ":00";
             ArrayList<Task> empty = new ArrayList<Task>();
             HourTasks ht = new HourTasks(hour,empty);
