@@ -50,7 +50,6 @@ public class TaskViewActivity extends AppCompatActivity {
         // Receive taskId from adaptor when task is clicked
         Intent receivingEnd = getIntent();
         int newTaskId = receivingEnd.getIntExtra("Task id", 0);
-
         // Using the id, we find the particular task to show in the TaskViewActivity page
         task = dbHandler.findTask(newTaskId);
 

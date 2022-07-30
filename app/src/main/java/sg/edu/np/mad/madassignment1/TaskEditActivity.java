@@ -44,7 +44,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     int year, month, dayOfMonth, alertIndex, repeatIndex;
     long diffInTime;
 
-    private String alert, repeat, taskType, finalTaskStartTime, strDate, taskDate, finalTaskDesc, strAlertDateTime;
+    private String alert, repeat, taskType, finalTaskStartTime, strDate, taskDate,
+            finalTaskDesc, strAlertDateTime, alertDateTime, finalTaskName;
     private Spinner spinnerAlert;
 
     public String GLOBAL_PREF = "MyPrefs";
@@ -137,6 +138,9 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 alert = adapterView.getItemAtPosition(i).toString();
+                if (alert.matches("None")) {
+                    alertDateTime = " ";
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -151,7 +155,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
             public void onClick(View view) {
 
                 // Get edited task name and edited task description from the EditText
-                String finalTaskName = newTaskName.getText().toString();
+                finalTaskName = newTaskName.getText().toString();
                 finalTaskDesc = newTaskDesc.getText().toString();
 
                 // prevents error from occurring if task description is blank
@@ -278,7 +282,6 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                     ArrayList<String> monthsList = new ArrayList<>(
                             Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
                     );
-                    Log.v(TAG, "taskDate: " + taskDate);
                     taskDateSplit = taskDate.split(" ");
                     int monthIndexInt = -1;
                     String monthIndex;
@@ -461,8 +464,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                                 // If the date does notchange
                                 // Make sure the time is updated for both task start time and alert date time for future recurring tasks
 
-                                else {
-                                    String alertDateTime = finalTaskDate + " " + taskDateSplit[3] + ":00";
+                                else if (finalTaskDate.matches(currentTask.getTaskDate()) == true && finalTaskStartTime.matches(currentTask.getTaskStartTime()) == false){
+                                    alertDateTime = currentTask.getAlertDateTime();
                                     // Edit the current task
                                     Task task = new Task(oldTaskId, currentTask.getStatus(), finalTaskName, finalTaskDesc, finalTaskDate,
                                             finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
@@ -470,7 +473,14 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
                                     // Edit the rest of the task
                                     for (int j=0; j<recurringFutureTaskList.size(); j++) {
-                                        alertDateTime = recurringFutureTaskList.get(j).getTaskDate() + " " + taskDateSplit[3];
+                                        Task restTask = new Task(recurringFutureTaskList.get(j).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, recurringFutureTaskList.get(j).getTaskDate(),
+                                                finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
+                                        dbHandler.editTask(restTask);
+                                    }
+                                }
+                                else {
+                                    alertDateTime = currentTask.getAlertDateTime();
+                                    for (int j = 0; j < recurringFutureTaskList.size(); j++) {
                                         Task restTask = new Task(recurringFutureTaskList.get(j).getId(), currentTask.getStatus(), finalTaskName, finalTaskDesc, recurringFutureTaskList.get(j).getTaskDate(),
                                                 finalTaskStartTime, finalTaskEndTime, diffInTime, alert, alertDateTime, taskType, repeat, recurringId, recurringDuration, user.getUserID());
                                         dbHandler.editTask(restTask);
