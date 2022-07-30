@@ -348,6 +348,7 @@ public class TimerActivity extends DrawerBaseActivity{
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
             chicken.setVisibility(View.INVISIBLE);
+            //searchTaskContainer2.setVisibility(View.INVISIBLE);
         }
         else {
             mButtonStartPause.setVisibility(View.VISIBLE);
