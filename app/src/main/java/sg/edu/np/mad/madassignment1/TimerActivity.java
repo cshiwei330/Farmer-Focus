@@ -162,9 +162,6 @@ public class TimerActivity extends DrawerBaseActivity{
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
 
-                        //for chicken animation
-                        ImageView chicken = findViewById(R.id.chicken);
-                        Glide.with(TimerActivity.this).load(R.drawable.chicken).into(chicken);
 
                         // pause timer
                         pauseTimer();
@@ -190,9 +187,9 @@ public class TimerActivity extends DrawerBaseActivity{
                         Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
                         startActivity(myIntent);
 
-
                         // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 builder.setNegativeButton("No", new
