@@ -133,9 +133,6 @@ public class BarnFragment extends Fragment {
         barnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                        "BARN IMAGE CLICKED",
-                        Toast.LENGTH_LONG).show();
                 createBarnTaskPopUp(user);
             }
         });
