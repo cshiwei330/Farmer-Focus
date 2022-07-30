@@ -12,7 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import sg.edu.np.mad.madassignment1.databinding.ActivityAccountSettingsBinding;
+
 public class AccountSettingsActivity extends DrawerBaseActivity {
+
+    //define activity binding
+    ActivityAccountSettingsBinding activityAccountSettingsBinding;
 
     public String getString;
     public static final String SHARED_PREF = "shared";
@@ -24,13 +29,19 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //inflate according to activity binding to show
+        activityAccountSettingsBinding = ActivityAccountSettingsBinding.inflate(getLayoutInflater());
+        //set view to this activity
+        setContentView(activityAccountSettingsBinding.getRoot());
+        //set title
+        allocateActivityTitle("Settings");
 
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
 
         setContentView(R.layout.activity_account_settings);
         Button myButtonSave = findViewById(R.id.SaveBtn);
-        Button myButtonCancel = findViewById(R.id.BackBtn);
+        //Button myButtonCancel = findViewById(R.id.BackBtn);
         TextView myUserName = findViewById(R.id.Nickname);
         TextView editText = findViewById(R.id.EditAccountUsername);
         TextView myPassword = findViewById(R.id.ChangePass);
@@ -79,16 +90,16 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
             @Override
             public void onClick(View view) {
                 //create intent to go back to Settings
-                Intent AccountSettingsToSettingsActivity = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
+                //Intent AccountSettingsToSettingsActivity = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
 
                 //put extra
-                AccountSettingsToSettingsActivity.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        AccountSettingsActivity.this.finish();
-                    }
-                });
+//                AccountSettingsToSettingsActivity.putExtra("finisher", new ResultReceiver(null) {
+//                    @Override
+//                    //when result code =1, received from bundle, kill this activity
+//                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+//                        AccountSettingsActivity.this.finish();
+//                    }
+//                });
 
                 getString = editText.getText().toString();
                 myUserName.setText(getString);
@@ -104,10 +115,10 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
                 Toast.makeText(AccountSettingsActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
 
                 //start activity with result
-                startActivityForResult(AccountSettingsToSettingsActivity,1);
+                //startActivityForResult(AccountSettingsToSettingsActivity,1);
 
                 //kill this activity
-                finish();
+                //finish();
             }
         });
 
@@ -136,28 +147,6 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
             }
         });
 
-        // Navigate back to settings if cancel is pressed
-        myButtonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //create intent to go to Password
-                Intent AccountSettingsToSettingsActivity2 = new Intent(AccountSettingsActivity.this, SettingsActivity.class);
-
-                //put extra
-                AccountSettingsToSettingsActivity2.putExtra("finisher", new ResultReceiver(null) {
-                    @Override
-                    //when result code =1, received from bundle, kill this activity
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        AccountSettingsActivity.this.finish();
-                    }
-                });
-                // Display "Back" msg
-                Toast.makeText(AccountSettingsActivity.this, "Back to Settings", Toast.LENGTH_SHORT).show();
-
-                //start activity with result
-                startActivityForResult(AccountSettingsToSettingsActivity2,1);
-            }
-        });
 
     }
 }
