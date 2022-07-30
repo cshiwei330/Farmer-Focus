@@ -34,9 +34,9 @@
             android:title="@string/menu_statistics" />
 
         <item
-            android:id="@+id/nav_AccountSettings"
+            android:id="@+id/nav_Settings"
             android:icon="@drawable/ic_baseline_settings_24"
-            android:title="Account Settings" />
+            android:title="Settings" />
         <item
             android:id="@+id/nav_Logout"
             android:icon="@drawable/ic_baseline_arrow_forward_24"

@@ -145,8 +145,8 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
         //Settings button
         switch (item.getItemId()){
-            case R.id.nav_AccountSettings:
-                startActivity(new Intent(this,AccountSettingsActivity.class));
+            case R.id.nav_Settings:
+                startActivity(new Intent(this,SettingsActivity.class));
                 overridePendingTransition(0,0);
                 finishAffinity();
                 break;
