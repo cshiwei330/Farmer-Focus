@@ -7,16 +7,6 @@
     android:background="#0AFFFFFF"
     tools:activityContext=".ImagesActivity">
 
-    <ImageView
-        android:id="@+id/Image1"
-        android:layout_width="158dp"
-        android:layout_height="170dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="174dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/android" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="258dp"
@@ -31,16 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/Image2"
-        android:layout_width="193dp"
-        android:layout_height="199dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/a3" />
 
     <ImageView
         android:id="@+id/Farmer"
