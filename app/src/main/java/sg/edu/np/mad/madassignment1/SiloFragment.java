@@ -223,7 +223,6 @@ public class SiloFragment extends Fragment {
     }
 
     private void siloImageClicked(User user) {
-        Toast.makeText(this.getContext(), "SILO IMAGE CLICKED", Toast.LENGTH_LONG).show();
 
         //creation of pop up dialog
         dialogBuilder = new AlertDialog.Builder(this.getContext());
