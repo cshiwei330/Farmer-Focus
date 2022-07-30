@@ -21,7 +21,7 @@ public class TaskViewer extends AppCompatActivity {
 
         Intent receivingEnd = getIntent();
         ArrayList<Integer> taskIDs = new ArrayList<Integer>();
-        taskIDs = receivingEnd.getIntegerArrayListExtra("task id");
+        taskIDs = receivingEnd.getIntegerArrayListExtra("Task id");
 
         DBHandler dbHandler = new DBHandler(this, null, null,6);
 

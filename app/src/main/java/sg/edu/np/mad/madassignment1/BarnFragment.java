@@ -37,8 +37,18 @@ public class BarnFragment extends Fragment {
     private TextView barnTaskPopUpSubTitle;
     private ArrayList<Task> taskList = new ArrayList<>();
     private DBHandler dbHandler;
-    private int[] barnUpgradeRequirement = new int[]{1,5,7,9};
+
+    //requirement to upgrade barn
+    private int[] barnUpgradeRequirement = new int[]{1,4,8,14};
+
+    /*
+    //USE THESE REQUIREMENTS FOR DEMO TO SHOW UPGRADING
+    //requirement to upgrade barn
+    private int[] barnUpgradeRequirement = new int[]{1,2,3,4};
+    */
+
     private ArrayList<String> farmData;
+    private Integer barnLevel;
     private ImageView barnImage;
     private ImageView explosion;
     private int[] imageList = new int [] {R.drawable.unconstructed_small, R.drawable.barn1, R.drawable.barn2, R.drawable.barn3};
@@ -100,12 +110,14 @@ public class BarnFragment extends Fragment {
             farmData = dbHandler.findFarm(user.getUserID());
         }
 
+        barnLevel = Integer.valueOf(farmData.get(0));
+
         //get tasks
         taskList = getFilteredCompleteTaskList(user.getUserID());
 
         //set barn image
         barnImage = (ImageView) view.findViewById(R.id.BarnImageView);
-        barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
+        barnImage.setImageResource(imageList[barnLevel]);
         //set upgrade animation to gone
         explosion = (ImageView) view.findViewById(R.id.explosion_imageView);
         explosion.setVisibility(View.GONE);
@@ -143,13 +155,14 @@ public class BarnFragment extends Fragment {
         //barnTaskPopUpRecyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), DividerItemDecoration.VERTICAL));
 
         //get currently required number of completed tasks to upgrade
-        int req = barnUpgradeRequirement[Integer.valueOf(farmData.get(0))];
+        int req = barnUpgradeRequirement[barnLevel];
         int reqTaskLeft = req-taskList.size();
 
         //set texts
         barnTaskPopUpSubTitle.setText("Event Tasks Completed: "+ taskList.size());
 
-        if (Integer.valueOf(farmData.get(0))<4){
+        //if barn level is not maxed
+        if (barnLevel<3){
             if (reqTaskLeft>0){
                 barnTaskPopUpTitle.setVisibility(View.VISIBLE);
                 barnTaskPopUpTitle.setText("Next Upgrade: Complete "+ reqTaskLeft + " More Event Tasks");
@@ -163,6 +176,7 @@ public class BarnFragment extends Fragment {
         else{
             barnTaskPopUpTitle.setVisibility(View.VISIBLE);
             barnTaskPopUpTitle.setText("Next Upgrade: Maximum Reached!");
+            upgradeButton.setVisibility(View.GONE);
         }
 
 
@@ -187,8 +201,8 @@ public class BarnFragment extends Fragment {
                 dialog.dismiss();
 
                 //update database and local data
-                farmData.set(0, String.valueOf(Integer.valueOf(farmData.get(0))+1));
-                dbHandler.upgradeBarn(user.getUserID(), Integer.valueOf(farmData.get(0)));
+                barnLevel += 1;
+                dbHandler.upgradeBarn(user.getUserID(), barnLevel);
 
                 //play gif and set new barnImage
 
@@ -205,7 +219,7 @@ public class BarnFragment extends Fragment {
                 }, 700);
 
 
-                barnImage.setImageResource(imageList[Integer.valueOf(farmData.get(0))]);
+                barnImage.setImageResource(imageList[barnLevel]);
 
             }
         });

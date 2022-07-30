@@ -57,7 +57,7 @@ public class FarmActivity extends DrawerBaseActivity {
             cloud.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_right));
         }
 
-        //after cloud has moved off screen on the right, (50000ms) reset position and keep doing it evert (5000ms)
+        //after cloud has moved off screen on the right, (30000ms) reset position and keep doing it evert (30000ms)
         //define handler
         Handler handler = new Handler();
         //define code to run
@@ -72,7 +72,7 @@ public class FarmActivity extends DrawerBaseActivity {
                     //reanimate right movement
                     cloud.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_right));                }
                 //repeat again
-                handler.postDelayed(this, 50000);
+                handler.postDelayed(this, 30000);
             }
         };
         //start the initial runnable code once
