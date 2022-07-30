@@ -5,6 +5,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -34,14 +39,44 @@ public class FarmActivity extends DrawerBaseActivity {
         //set title
         allocateActivityTitle("My Farm");
 
+        //set viewPager adapter
         FragmentPagerAdapter adapterViewPager;
         ViewPager vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new PagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
+        //set indicator
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(vpPager);
 
+        //set moving clouds
+        ImageView cloud1 = findViewById(R.id.cloud1);
+        ImageView cloud2 = findViewById(R.id.cloud2);
+        ImageView[] cloudsList = new ImageView[]{cloud1,cloud2};
+        for (ImageView cloud :cloudsList) {
+            cloud.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_right));
+        }
+
+        //after cloud has moved off screen on the right, (50000ms) reset position and keep doing it evert (5000ms)
+        //define handler
+        Handler handler = new Handler();
+        //define code to run
+        Runnable runnableCode = new Runnable() {
+            @Override
+            public void run() {
+                for (ImageView cloud :cloudsList) {
+                    //reset position
+                    cloud.animate().translationX(0);
+                    //clear animation stack
+                    cloud.clearAnimation();
+                    //reanimate right movement
+                    cloud.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.move_right));                }
+                //repeat again
+                handler.postDelayed(this, 50000);
+            }
+        };
+        //start the initial runnable code once
+        handler.post(runnableCode);
 
     }
 }
