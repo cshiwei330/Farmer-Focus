@@ -18,7 +18,8 @@
             android:layout_height="120dp"
             android:background="@color/sky_blue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="invisible" />
 
         <TextView
             android:id="@+id/BarnFragmentTextView"
@@ -45,11 +46,20 @@
             android:id="@+id/tree_barn"
             android:layout_width="173dp"
             android:layout_height="398dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/trees"
             app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/jankMcJankskyTextViewBlocker"
+            android:layout_width="60dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/grass_green"
+            app:layout_constraintBottom_toBottomOf="@+id/tree_barn"
+            app:layout_constraintEnd_toEndOf="@+id/tree_barn" />
 
         <ImageView
             android:id="@+id/tree_barn2"
@@ -57,9 +67,7 @@
             android:layout_height="398dp"
             android:src="@drawable/trees"
             app:layout_constraintBottom_toBottomOf="@+id/textView14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/textView14" />
 
         <TextView
             android:id="@+id/textView14"

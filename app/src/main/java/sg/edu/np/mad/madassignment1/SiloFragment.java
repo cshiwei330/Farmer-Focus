@@ -53,9 +53,17 @@ public class SiloFragment extends Fragment {
     private ArrayList<Integer> siloLevel;
 
     //requirement to increase height
-    private int[] siloHeightUpgradeRequirement = new int[]{1,5,7,9,12,15,18,21,24};
+    private int[] siloHeightUpgradeRequirement = new int[]{1,5,10,15,20,30,40,50,75};
     //requirement to build more silos
-    private int[] siloNumUpgradeRequirement = new int[]{1,3,4,5};
+    private int[] siloNumUpgradeRequirement = new int[]{1,3,5,7};
+
+    /*
+    //USE THESE REQUIREMENTS FOR DEMO TO SHOW UPGRADING
+    //requirement to increase height
+    private int[] siloHeightUpgradeRequirement = new int[]{1,2,3,4,5,6,7,8,9};
+    //requirement to build more silos
+    private int[] siloNumUpgradeRequirement = new int[]{1,2,3,4};
+     */
 
     private boolean newSiloAvailable = false;
     private boolean newHeightAvailable = false;

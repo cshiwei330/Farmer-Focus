@@ -21,7 +21,7 @@
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_statistics.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_stop_watch.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_task.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_timer.xml" value="0.33" />
+        <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_timer.xml" value="0.2" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_timer2.xml" value="0.2" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_timer_search_task_fragment.xml" value="0.3625" />
         <entry key="..\:/Users/Darryl koh/Documents/Year 2/Semester 1/MAD (Mobile App Development)/Assignment (without fragments)/app/src/main/res/layout/activity_timer_task_list.xml" value="0.25" />
@@ -97,39 +97,23 @@
         <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MAD-Assignment-/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MAD-Assignment-/app/src/main/res/menu/main.xml" value="0.3203125" />
         <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MAD-Assignment-/app/src/main/res/menu/main_menu.xml" value="0.27447916666666666" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.3135" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_account_settings.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_add_new_task.xml" value="0.29127134724857684" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_calender.xml" value="0.15942028985507245" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_home.xml" value="0.346875" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_task.xml" value="0.3421875" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_task_viewer.xml" value="0.2" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/activity_view_task.xml" value="0.35833333333333334" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/fragment_moodmsg.xml" value="0.33" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/task_layout.xml" value="0.5" />
-        <entry key="..\:/Users/Showe/OneDrive/Desktop/SCHOOL/Y2SEM1/MAD/Assignments/MOSTTTTTTUPDATED/app/src/main/res/layout/to_do_list_layout.xml" value="0.3145833333333333" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_account_settings.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_add_new_task.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_calender.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_coming_soon.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_edit_task.xml" value="0.264" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_farm.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_password.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_sign_up_page.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_statistics.xml" value="0.264" />
+        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_statistics.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_task.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_timer.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_timer_search_task_fragment.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_timer_task_list.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/activity_view_task.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/calender_to_do_list_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_mood.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_moodmsg.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_moodoftheweek.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_stats_search_task.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/layout/fragment_stats_week.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/aisli/Desktop/school/sem2.1/mobile app development/MAD-Assignment-/app/src/main/res/mipmap-anydpi-v26/appicon.xml" value="0.1785" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/drawable/barn_popup_background.xml" value="0.5475" />
@@ -152,7 +136,7 @@
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/calender_to_do_list_layout.xml" value="0.5" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/content_layout.xml" value="0.1" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_add_new_task.xml" value="0.2695035460992908" />
-        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_barn.xml" value="0.25" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_barn.xml" value="0.20652173913043478" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_calender.xml" value="0.42901554404145076" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_date_picker.xml" value="0.48686594202898553" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_home.xml" value="0.16111111111111112" />
@@ -160,7 +144,9 @@
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/fragment_task.xml" value="0.42988929889298894" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/main_drawer_header.xml" value="0.416213768115942" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/myfarm_barn_task_view_holder.xml" value="0.4642210144927536" />
-        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/popup_barn_tasks.xml" value="0.4642210144927536" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/myfarm_silo_task_view_holder.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/popup_barn_tasks.xml" value="0.67" />
+        <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/popup_silo_tasks.xml" value="0.5344202898550725" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/select_tassk_container.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/task_layout.xml" value="0.4642210144927536" />
         <entry key="..\:/Users/kaiyi/OneDrive/Documents/andriod studio BS/MAD-Assignment-/app/src/main/res/layout/timertask_layout.xml" value="0.4642210144927536" />
@@ -182,7 +168,6 @@
         <entry key="..\:/Year 2/Mobile App Development (MAD)/Assignment/Assignment Final/app/src/main/res/layout/content_layout.xml" value="0.36302083333333335" />
         <entry key="..\:/Year 2/Mobile App Development (MAD)/Assignment/Assignment V2/app/src/main/res/layout/activity_main.xml" value="0.327445652173913" />
         <entry key="..\:/Year 2/Mobile App Development (MAD)/Assignment/Assignment V2/app/src/main/res/layout/fragment_timer.xml" value="0.327445652173913" />
-        <entry key="..\:/Year 2/Mobile App Development (MAD)/MAD Assignment Pt 2/app/src/main/res/mipmap-anydpi-v26/new_app_icon_round.xml" value="0.1875" />
       </map>
     </option>
   </component>

@@ -61,7 +61,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
         menuHeaderUsername.setText(username);
         ImageView menuHeaderProfilePic = header.findViewById(R.id.menuHeaderProfilePic);
 
-        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.femalefarmer};
 
         if (imageID == null || imageID == "" || imageID.equals("0")){
             menuHeaderProfilePic.setImageResource(R.drawable.profile);
@@ -145,8 +145,8 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
         //Settings button
         switch (item.getItemId()){
-            case R.id.nav_Settings:
-                startActivity(new Intent(this,SettingsActivity.class));
+            case R.id.nav_AccountSettings:
+                startActivity(new Intent(this,AccountSettingsActivity.class));
                 overridePendingTransition(0,0);
                 finishAffinity();
                 break;

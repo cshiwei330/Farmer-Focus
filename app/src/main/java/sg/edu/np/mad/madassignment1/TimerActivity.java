@@ -118,22 +118,6 @@ public class TimerActivity extends DrawerBaseActivity{
         taskList = dbHandler.getTaskData(user.getUserID());
 
 
-        // receiving from bundle
-//        Intent receivingEnd = getIntent();
-//        int oldTaskId = receivingEnd.getIntExtra("task id", -1);
-        //Task currentTask = dbHandler.findTask(oldTaskId);
-        //Log.v(TAG, currentTask.getTaskEndTime());
-        //task = dbHandler.findTask(oldTaskId);
-
-
-        // receive from bundle
-//        Bundle extras = getIntent().getExtras();
-//        //Log.v("testID", String.valueOf(extras));
-//        int taskId = extras.getInt("task id", -1);
-//        Log.v("testing1", String.valueOf(taskId));
-//        task = dbHandler.findTask(taskId);
-//        setTime(task);
-
         Intent received = getIntent();
         Bundle taskId = received.getBundleExtra("task id");
         Log.v("testing1", String.valueOf(taskId));
@@ -161,18 +145,8 @@ public class TimerActivity extends DrawerBaseActivity{
                     }
                 }
                 else {
-                    //to "refresh" the change
-//                    Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
-//                    startActivity(myIntent);
-                    //TimerActivity.this.finish();
                     Toast.makeText(TimerActivity.this, "Please select a task", Toast.LENGTH_SHORT).show();
                 }
-//                if (mTimerRunning) {
-//                    //pauseTimer();
-//                }
-//                else {
-//                    startTimer();
-//                }
             }
         });
 
@@ -211,6 +185,10 @@ public class TimerActivity extends DrawerBaseActivity{
                         mTextViewCountDown.setText("00:00");
 
                         task = null;
+
+                        //to "refresh" the change
+                        Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
+                        startActivity(myIntent);
 
 
                         // show msg tat task is completed
@@ -321,8 +299,6 @@ public class TimerActivity extends DrawerBaseActivity{
                     dbHandler.changeTaskStatus(task);
                 }
 
-//                task.setStatus(1);
-//                dbHandler.changeTaskStatus(task);
 
                 // show msg tat task is completed
                 Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();
@@ -395,7 +371,7 @@ public class TimerActivity extends DrawerBaseActivity{
         }
     }
 
-
+    // SHARED PREFERENCES
     @Override
     protected void onStop() {
         super.onStop();
