@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="filter_options">
-        <item>Default (Date Asc)</item>
+        <item>Default Date Asc</item>
         <item>Date Desc</item>
         <item>Name Asc</item>
         <item>Name Desc</item>

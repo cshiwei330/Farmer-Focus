@@ -188,6 +188,11 @@ public class TaskActivity extends DrawerBaseActivity{
                 });
         recyclerView.addOnItemTouchListener(touchListener);
 
+        if (uncompletedTaskButtonClicked == false && completedTaskButtonClicked == false) {
+            Collections.sort(taskList, Task.TaskDateAscComparator);
+            mAdaptor.notifyDataSetChanged();
+        }
+
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -200,34 +205,30 @@ public class TaskActivity extends DrawerBaseActivity{
                     secondTaskList.clear();
                     mAdaptor.notifyDataSetChanged();
                 }
-                else{
-                    if (filterOption.matches("Default (Date Asc)")){
-                        Collections.sort(taskList, Task.TaskDateAscComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Date Desc")){
-                        Collections.sort(taskList, Task.TaskDateDescComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Name Asc")){
-                        Collections.sort(taskList, Task.TaskNameAscComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Name Desc")){
-                        Collections.sort(taskList, Task.TaskNameDescComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Task Creation Date Asc")){
-                        Collections.sort(taskList, Task.TaskIdAscComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else { //if (filterOption.matches("Task Creation Date Desc"))
-                        Collections.sort(taskList, Task.TaskIdDescComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
+                if (filterOption.matches("Default Date Asc")){
+                    Collections.sort(taskList, Task.TaskDateAscComparator);
+                    mAdaptor.notifyDataSetChanged();
                 }
-
-
+                else if (filterOption.matches("Date Desc")){
+                    Collections.sort(taskList, Task.TaskDateDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Name Asc")){
+                    Collections.sort(taskList, Task.TaskNameAscComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Name Desc")){
+                    Collections.sort(taskList, Task.TaskNameDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else if (filterOption.matches("Task Creation Date Asc")){
+                    Collections.sort(taskList, Task.TaskIdAscComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
+                else { //if (filterOption.matches("Task Creation Date Desc"))
+                    Collections.sort(taskList, Task.TaskIdDescComparator);
+                    mAdaptor.notifyDataSetChanged();
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
