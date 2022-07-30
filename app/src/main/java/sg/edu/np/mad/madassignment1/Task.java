@@ -220,10 +220,10 @@ public class Task {
             Date date2 = null;
 
             String t1Date = t1.getTaskDate();
-            String[] splitT1Date = t1Date.split("/");
+            String[] splitT1Date = t1Date.split("-");
 
             String t2Date = t2.getTaskDate();
-            String[] splitT2Date = t2Date.split("/");
+            String[] splitT2Date = t2Date.split("-");
 
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -257,7 +257,6 @@ public class Task {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return date2.compareTo(date1);
         }
     };

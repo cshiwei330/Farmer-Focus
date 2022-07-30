@@ -188,7 +188,6 @@ public class TaskActivity extends DrawerBaseActivity{
                 });
         recyclerView.addOnItemTouchListener(touchListener);
 
-
         spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -222,44 +221,8 @@ public class TaskActivity extends DrawerBaseActivity{
                         Collections.sort(taskList, Task.TaskIdAscComparator);
                         mAdaptor.notifyDataSetChanged();
                     }
-                    else if (filterOption.matches("Task Creation Date Desc")){
+                    else { //if (filterOption.matches("Task Creation Date Desc"))
                         Collections.sort(taskList, Task.TaskIdDescComparator);
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Event Tasks")){
-                        if (secondTaskList.size() != 0){
-                            for (int j=0; j < secondTaskList.size(); j++){
-                                taskList.add(secondTaskList.get(j));
-                            }
-                            secondTaskList.clear();
-                            mAdaptor.notifyDataSetChanged();
-                        }
-                        for (int j=0; j < taskList.size(); j++){
-                            if (taskList.get(j).getTaskType().matches("Recurring")){
-                                secondTaskList.add(taskList.get(j));
-                            }
-                        }
-                        for (int j=0; j<secondTaskList.size(); j++){
-                            taskList.remove(secondTaskList.get(j));
-                        }
-                        mAdaptor.notifyDataSetChanged();
-                    }
-                    else if (filterOption.matches("Recurring Tasks")){
-                        if (secondTaskList.size() != 0){
-                            for (int j=0; j < secondTaskList.size(); j++){
-                                taskList.add(secondTaskList.get(j));
-                            }
-                            secondTaskList.clear();
-                            mAdaptor.notifyDataSetChanged();
-                        }
-                        for (int j=0; j < taskList.size(); j++){
-                            if (taskList.get(j).getTaskType().matches("Event")){
-                                secondTaskList.add(taskList.get(j));
-                            }
-                        }
-                        for (int j=0; j<secondTaskList.size(); j++){
-                            taskList.remove(secondTaskList.get(j));
-                        }
                         mAdaptor.notifyDataSetChanged();
                     }
                 }
@@ -273,14 +236,6 @@ public class TaskActivity extends DrawerBaseActivity{
 
         Button uncompletedTaskButton = findViewById(R.id.uncompletedTaskButton);
         Button completedTaskButton = findViewById(R.id.completedTaskButton);
-
-        if (completedTaskButtonClicked == false && uncompletedTaskButtonClicked == false){
-            uncompletedTaskButtonClicked = true;
-            completedTaskButtonClicked = false;
-
-            uncompletedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
-            completedTaskButton.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
-        }
 
         uncompletedTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,10 +305,6 @@ public class TaskActivity extends DrawerBaseActivity{
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
-//                        for (int j=0; j<taskList.size(); j++) {
-//                            cancelNotification(taskList.get(j));
-//                        }
 
                         //delete all task entries
                         dbHandler.deleteAllTask(user.getUserID());
@@ -443,19 +394,4 @@ public class TaskActivity extends DrawerBaseActivity{
 
         }
     }
-
-//    public void cancelNotification(Task t) {
-//        Bundle extras = new Bundle();
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//        extras.putString("task name", t.getTaskName());
-//        extras.putString("task alert", t.getAlert());
-//        intent.putExtras(extras);
-//        PendingIntent pending = PendingIntent.getBroadcast(this, t.getId(), intent, PendingIntent.FLAG_IMMUTABLE);
-//        // Cancel notification
-//        alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.cancel(pending);
-//
-//        NotificationManagerCompat.from(this).cancelAll();
-//
-//    }
 }

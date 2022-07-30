@@ -2,15 +2,12 @@
 <resources>
 
     <string-array name="filter_options">
-        <item>Default (Date Asc)</item> // desc task date
+        <item>Default (Date Asc)</item>
         <item>Date Desc</item>
         <item>Name Asc</item>
         <item>Name Desc</item>
         <item>Task Creation Date Asc</item> // Task Id asc
         <item>Task Creation Date Desc</item> // Task id desc
-        <item>Task Alert Date Time Asc</item>
-        <item>Event Tasks</item>
-        <item>Recurring Tasks</item>
     </string-array>
 
 </resources>
