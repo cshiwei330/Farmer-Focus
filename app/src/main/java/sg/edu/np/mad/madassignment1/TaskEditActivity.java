@@ -496,7 +496,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
                         });
 
                         AlertDialog alert = builder.create();
-                        alert.setTitle("Delete task");
+                        alert.setTitle("Edit task");
                         alert.show();
 
                     }

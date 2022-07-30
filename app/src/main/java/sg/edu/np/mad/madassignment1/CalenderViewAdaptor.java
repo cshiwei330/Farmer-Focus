@@ -55,7 +55,7 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
             }
         }
 
-        if(selectedDay != null && selectedDay.equals(daysOfMonth.get(position))){
+        if(selectedDay != null && String.valueOf(Integer.valueOf(selectedDay)).equals(daysOfMonth.get(position))){
             Log.v("selectedDay:",selectedDay);
             Log.v("Position:",String.valueOf(position));
             holder.cellConstraintLayout.setBackgroundResource(R.color.darkBeige);

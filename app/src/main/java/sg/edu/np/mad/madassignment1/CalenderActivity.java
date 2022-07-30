@@ -223,23 +223,19 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
             String stringDate = dayText+"-"+dateString;
 
             //get formatted date for single digit dates
-            String todayTasksText;
             if (dayText.length()==1){
-                todayTasksText = "0"+dayText+"-"+dateString;
-            }
-            else{
-                todayTasksText=stringDate;
+                stringDate = "0"+dayText+"-"+dateString;
             }
 
             //set text to see how many tasks
-            int numberOfSameDateTasks = tasksWhiteList(todayTasksText,taskList).size();
+            int numberOfSameDateTasks = tasksWhiteList(stringDate,taskList).size();
 
-            todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + todayTasksText);
+            todayTasksTextView.setText("You have " + numberOfSameDateTasks + " tasks on " + stringDate);
 
             //set shading and todolist filters
             calendarViewAdapter.getFilter().filter(stringDate);
             //calenderAdaptor.getFilter().filter(stringDate);
-            hourAdapter.getFilter().filter(todayTasksText);
+            hourAdapter.getFilter().filter(stringDate);
             Log.v("Calender button clicked",stringDate);
 
 
