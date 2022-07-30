@@ -34,7 +34,7 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         //set view to this activity
         setContentView(activityAccountSettingsBinding.getRoot());
         //set title
-        allocateActivityTitle("Settings");
+        allocateActivityTitle("Account Settings");
 
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
@@ -51,7 +51,7 @@ public class AccountSettingsActivity extends DrawerBaseActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
 
-        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.a1};
+        int[] imageList = new int [] {R.drawable.android, R.drawable.a3, R.drawable.farmer, R.drawable.femalefarmer};
 
         User userDBdata = dbHandler.findUser(username);
        //ImageView myProfilePic = new ImageView(R.id.ProfilePic);

@@ -212,6 +212,10 @@ public class TimerActivity extends DrawerBaseActivity{
 
                         task = null;
 
+                        //to "refresh" the change
+                        Intent myIntent = new Intent(TimerActivity.this, TimerActivity.class);
+                        startActivity(myIntent);
+
 
                         // show msg tat task is completed
                         Toast.makeText(TimerActivity.this, "Congrats! You have completed this task!", Toast.LENGTH_SHORT).show();

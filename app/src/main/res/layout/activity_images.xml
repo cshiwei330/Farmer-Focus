@@ -43,26 +43,25 @@
         app:srcCompat="@drawable/a3" />
 
     <ImageView
-        android:id="@+id/Image4"
-        android:layout_width="161dp"
-        android:layout_height="167dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:background="#07F8F5F5"
-        android:backgroundTint="#0AFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/a1" />
-
-    <ImageView
         android:id="@+id/Farmer"
         android:layout_width="208dp"
         android:layout_height="244dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/farmer" />
+
+    <ImageView
+        android:id="@+id/Image4"
+        android:layout_width="198dp"
+        android:layout_height="212dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="136dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/femalefarmer" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
