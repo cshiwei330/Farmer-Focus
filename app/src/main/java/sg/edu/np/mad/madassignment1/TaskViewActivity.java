@@ -1,3 +1,18 @@
+/*
+    The TaskViewActivity displays the details of a specific task the user has selected from the task
+    list in the TaskActivity. It receives the task information or details from a bundle sent from the
+    adapter of the task list via an intent. The task is then retrieved from the database and all the
+    elements in this page are set with the details of the task.
+
+    The TaskViewActivity has 2 important features. First, it allows the user to delete the task. If
+    it is an event a simple confirmation dialog will pop up to double check with the user if he or
+    she wants to delete the task. If the task is a recurring task, a dialog will pop up to ask the
+    user if he or she wants to just delete this specific task or all the other tasks.
+
+    Lastly, this activity has a floating button which will allow the user to access the task edit
+    activity which is a key feature for the tasks.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AlertDialog;

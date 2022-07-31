@@ -1,3 +1,10 @@
+/*
+    The TaskEditActivity enables the user to edit the details of a task that has already been created.
+    The user simply enters the new details and clicks save. If the task is an event task, the new details
+    are automatically saved and updated in the database. If the task is a recurring task, a dialog will
+    pop up to ask the user if he or she wants to just edit this task or this and the future tasks.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AlertDialog;
@@ -41,7 +48,7 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     private final String TAG = "Edit Task Activity";
 
     int starthour, startminute, endhour, endminute;
-    int year, month, dayOfMonth, alertIndex, repeatIndex;
+    int year, month, dayOfMonth, alertIndex;
     long diffInTime;
 
     private String alert, repeat, taskType, finalTaskStartTime, strDate, taskDate,
@@ -51,12 +58,10 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
     public String GLOBAL_PREF = "MyPrefs";
 
     ArrayList<String> alertOptionsList = new ArrayList<>();
-    ArrayList<String> repeatOptionsList = new ArrayList<>();
 
     // get all recurring tasks
     ArrayList<Task> recurringTaskList = new ArrayList<>();
     ArrayList<Task> recurringFutureTaskList = new ArrayList<>();
-    ArrayList<Integer> recurringTasksId = new ArrayList<>();
 
     // updating taskDate
     ArrayList<String> taskDateList = new ArrayList<>();
@@ -66,13 +71,8 @@ public class TaskEditActivity extends AppCompatActivity implements DatePickerDia
 
     String[] taskDateSplit;
 
-    // updating alertDateTime
-
     DBHandler dbHandler = new DBHandler(this, null, null, 6);
 
-    private AlarmManager alarmManager;
-
-    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

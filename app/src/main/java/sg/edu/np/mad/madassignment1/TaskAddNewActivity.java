@@ -1,3 +1,10 @@
+/*
+    This activity is the TaskAddNewActivity. The purpose of this activity is to allow the user to add
+    new tasks. This activity receives the input, the task details, from the user and adds the task to
+    the database. For event tasks, there will only be one task added. For recurring task, the task the
+    user has provided details for will be added first. Then, the subsequent recurring task will be added.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -712,22 +719,6 @@ public class TaskAddNewActivity extends AppCompatActivity implements DatePickerD
         if(year == 0 || month == 0 || dayOfMonth == 0){
             return "date";
         }
-//        if (alert == null){
-//            return "alert";
-//        }
-//        if (taskType == null){
-//            return "task type";
-//        }
-//        if (repeat == null){
-//            return "repeat";
-//        }
-//        if (taskType.matches("Recurring") && repeat.matches("None")){
-//            return "a valid repeat option since recurring task is selected";
-//        }
-//        // ensures that the user does not
-//        if ((taskType.matches("Event") && repeat.matches("Weekly")) || (taskType.matches("Event") && repeat.matches("Monthly"))) {
-//            return "an event task cannot be repeated.";
-//        }
         return "VALID";
     }
 }

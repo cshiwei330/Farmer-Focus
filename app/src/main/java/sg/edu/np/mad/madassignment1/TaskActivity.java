@@ -1,3 +1,13 @@
+/*
+    The TaskViewActivity has multiple features. First, It displays all the task that the user has added.
+    Secondly, the user can filter the task with the dropdown for more filter options or a simple completed
+    and uncompleted task filter. Thirdly, the user can clear all tasks. All tasks in the task list will be
+    deleted from the database.
+
+    This activity acts as the main page for the task feature. It can access the add new task page and the
+    task view page, which will then allow the user to edit the task.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AlertDialog;
@@ -57,8 +67,6 @@ public class TaskActivity extends DrawerBaseActivity{
 
     private boolean completedTaskButtonClicked = false;
     private boolean uncompletedTaskButtonClicked = false;
-
-    AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
