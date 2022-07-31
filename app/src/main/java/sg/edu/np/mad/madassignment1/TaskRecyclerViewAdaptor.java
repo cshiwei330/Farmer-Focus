@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------------------------------*/
-
-                            /* TaskRecyclerViewAdaptor */
-/* This is the adaptor for the recyclerView that displays task. */
-
-/*----------------------------------------------------------------------------------------------------*/
-
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;
@@ -18,6 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+
+/*----------------------------------------------------------------------------------------------------*/
+
+                                        /* TaskRecyclerViewAdaptor */
+/* This is the adaptor for the recyclerView that displays task. */
+
+/*----------------------------------------------------------------------------------------------------*/
 
 public class TaskRecyclerViewAdaptor extends RecyclerView.Adapter<TaskRecyclerViewHolder> {
 
