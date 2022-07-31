@@ -32,35 +32,37 @@ Grass gif: https://gifer.com/en/ZhkE
 
 Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097292
 
+Lazychicken gif: https://giphy.com/gifs/namecheap-yeti-henny-hedgy-LpGfreBAOqxjjQDpqQ
+
+
 ## Contribution of each member:
 
 | Name:  | Contribution: | Concept: |
 | ------------- | ------------- | ------------- |
-| CHEW SHI WEI  | Home page (mood tracker database), Navigation system, Google Play Release  | Database, Recycler View, Event Handling  |
-| CHUAH KAI YI  | Calender, Add New Task (date/time), Database (date and time), Navigation system  | Database, Recycler View, Event Handling  |
-| KOH KA-WEI DARRYL  | Settings, Account settings, change password, Database (update user), Change profile picture  | Database, Shared preferences, Multimedia, Event Handling  |
-| RADCHANON DON SUKKRAM  | Task, Add New Task, View Task Page and Database (task)  | Database, Recycler View, Event Handling  |
-| TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon  | Database, Shared Preferences, Event Handling  |
+| CHEW SHI WEI  | Home page (mood tracker database), Task layout, App Icon, App Widget and Google Play Release | Database, Recycler View, Event Handling, App Widgets, Remote View, ListView, Animation|
+| CHUAH KAI YI  | Calender, Add New Task (date/time), Database (date and time), Navigation system, Farm  | Database, Recycler View, Event Handling, Array Adaptor, Animation & Gifs, ViewPager, Persistent Storage  |
+| KOH KA-WEI DARRYL  | Settings, Account settings, change password, Database (update user), Change profile picture  | Database, Shared preferences, Multimedia, Event Handling, Animation, CountDownTimer, Chronometer, Persistant Storage |
+| RADCHANON DON SUKKRAM  | Task, Database (task), Add New Task, View Task Page, Edit Task, Recurring Task and Notification   | Database, Recycler View, Event Handling, User Interface(Notification), Alarm Manager, Broadcast Receiver |
+| TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon, Statistics and Splash Screen  | Database, Shared Preferences, Event Handling, Android Charts, Interactions with other apps, User Interface(Splash Screen) |
 
 ## Screenshots of app: 
-### Home
+## Home
 - Mood selector which records the mood of the user
 - It also shows upcoming tasks (displays tasks with dates that are one week from now)
 
 ![Home Page](https://user-images.githubusercontent.com/103928761/182027458-30c06572-45d8-44e0-b6b8-c7c57e6b2019.png)
 
-
-## Mood Message
+### Mood Message
 - A message will be displayed according to the mood selected
 
 ![msg displays](https://user-images.githubusercontent.com/103928761/182027494-abf7566f-9d68-43ae-8778-0c968664a760.png)
 
-
-## Dialog when User enters a different mood for the day
+### Dialog when User enters a different mood for the day
 - Pop up will be shown If a different mood is selected on the same day
 - User can confirm if they want to proceed with their change of mood
 
 ![dialogue](https://user-images.githubusercontent.com/103928761/182027532-3d246b9e-96a2-46d1-9919-d2cbe60df318.png)
+
 
 ## Task
 - Allows user to view all task
@@ -107,6 +109,7 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 ![Edit Task](https://user-images.githubusercontent.com/103928761/182028006-68923084-b29c-40d4-9cbc-2b4420999b38.png)
 ![Edit Recurring Task](https://user-images.githubusercontent.com/103928761/182028007-9fd61bf2-5bfc-48d5-ae1b-86c67bf3b1d9.png)
 
+
 ## Timer
 - Create tasks in tasks page
 - Select tasks to start time (second pic)
@@ -117,12 +120,14 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 ![timer](https://user-images.githubusercontent.com/103928761/182028156-eac45fcb-069c-4803-b4be-334236ebff71.png)
 ![selecttask](https://user-images.githubusercontent.com/103928761/182028219-4b8a0162-70d2-487e-ae31-52b29756fc25.png)
 
+
 ## Stopwatch
 - Click start  to begin
 - Once stopwatch is running, start changes to pause
 - Reset button sets the stopwatch back to 00:00 
 
 ![stopwatch](https://user-images.githubusercontent.com/103928761/182028254-c181cf44-bdf9-4edd-8b3e-359ec111abc2.png)
+
 
 ## Calendar 
 - Click on left and right buttons to change months
@@ -131,6 +136,7 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 - Clicking on a task in the scrollable list view shows the task details
 - 
 ![image](https://user-images.githubusercontent.com/103928761/182028445-6a948dbb-888f-40e2-9864-12978d8e30d7.png)
+
 
 ## Statistics
 - Cards to show the number of completed and pending tasks
@@ -162,27 +168,23 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 ![widget](https://user-images.githubusercontent.com/103928761/182027578-f4dee4d7-5c00-4375-a3e1-0ad3c061e1c5.png)
 
 
-
-
-## Settings 
-- right now, we only have account settings under settings 
-
-![settings](https://user-images.githubusercontent.com/103928761/174847637-85931a1e-c43e-4f5a-9f4c-7ba85194e036.jpg)
-
 ## Account Settings
-- users can change profile picture by clicking the profile picture icon
-- users can set a nickname 
-- users can change password
+- Users can change profile picture by clicking the profile picture icon
+- Users can set a nickname 
+- Users can change password
 
-![account settings](https://user-images.githubusercontent.com/103928761/174847960-bf587775-510f-416e-8301-44ded4cc4852.jpg)
+![accountsettings](https://user-images.githubusercontent.com/103928761/182029795-d76d2975-30d2-4673-bf55-033c08499611.png)
 
-## Change Profile Picture
-- users can pick from either of the 4 profile picture
+### Change Profile Picture
+- Users can either pick the male or female farmer as their desired profile picture
 
-![choose profile pic](https://user-images.githubusercontent.com/103928761/174848272-63411bae-de4e-4891-ba55-a7f59107b219.jpg)
+![changepfp](https://user-images.githubusercontent.com/103928761/182029811-1ee4877c-b585-48d1-9215-fea9e631beba.png)
 
-## Change Password
-- requires user to enter their username and current password
-- user keys in new password and confirm their password 
+### Change Password
+- Requires the user to enter a valid username and password
+- New password cannot be the same as old password
+- New password and confirm password must be the same
 
-![change password](https://user-images.githubusercontent.com/103928761/174853405-ea0b1559-3587-443b-b7f0-1998f21a37db.jpg)
+![changepass](https://user-images.githubusercontent.com/103928761/182029843-1f7c1a95-4937-4441-b0ab-2ba91987f6e3.png)
+
+
