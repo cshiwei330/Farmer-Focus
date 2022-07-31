@@ -1,14 +1,3 @@
-/*----------------------------------------------------------------------------------------------------*/
-
-                                        /* HOME ACTIVITY*/
-/* This Fragment shows a mood selector whereby users can input their mood for the day. It also shows
-* upcoming tasks for the users in a recycler view. Tasks are swipeable so users can choose to edit or delete
-* the task without navigating to the Task. When these actions are performed, I have a method that updates the
-* app widget. I also have a grass animation that makes the home page more lively. */
-
-/*----------------------------------------------------------------------------------------------------*/
-
-
 package sg.edu.np.mad.madassignment1;
 
 import android.appwidget.AppWidgetManager;
@@ -36,6 +25,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivityHomeBinding;
+
+
+/*----------------------------------------------------------------------------------------------------*/
+
+                                /* HOME ACTIVITY*/
+/* This Activity shows a mood selector whereby users can input their mood for the day. It also shows
+ * upcoming tasks for the users in a recycler view. Tasks are swipeable so users can choose to edit or delete
+ * the task without navigating to the Task. When these actions are performed, I have a method that updates the
+ * app widget. I also have a grass animation that makes the home page more lively. */
+
+/*----------------------------------------------------------------------------------------------------*/
 
 public class HomeActivity extends DrawerBaseActivity {
 

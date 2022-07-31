@@ -1,9 +1,3 @@
-/*----------------------------------------------------------------------------------------------------*/
-
-                                /* TaskRecyclerViewHolder */
-/* This is the holder for the recyclerView that displays task. */
-
-/*----------------------------------------------------------------------------------------------------*/
 package sg.edu.np.mad.madassignment1;
 
 import android.view.View;
@@ -12,6 +6,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/*----------------------------------------------------------------------------------------------------*/
+
+                                    /* TaskRecyclerViewHolder */
+/* This is the holder for the recyclerView that displays task. */
+
+/*----------------------------------------------------------------------------------------------------*/
 public class TaskRecyclerViewHolder extends RecyclerView.ViewHolder{
     TextView taskName;
     TextView taskDesc;

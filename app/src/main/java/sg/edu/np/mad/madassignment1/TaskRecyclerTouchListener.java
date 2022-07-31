@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------------------------------*/
-
-                                    /* TaskRecyclerTouchListener */
-/* This Listener enables the swiping function of tasks. */
-
-/*----------------------------------------------------------------------------------------------------*/
-
 package sg.edu.np.mad.madassignment1;
 
 import android.animation.Animator;
@@ -29,6 +22,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import android.os.Handler;
+
+/*----------------------------------------------------------------------------------------------------*/
+
+                                    /* TaskRecyclerTouchListener */
+/* This Listener enables the swiping function of tasks. */
+
+/*----------------------------------------------------------------------------------------------------*/
 
 public class TaskRecyclerTouchListener implements RecyclerView.OnItemTouchListener, TaskOnAcitivityTouchListener {
     private static final String TAG = "RecyclerTouchListener";
