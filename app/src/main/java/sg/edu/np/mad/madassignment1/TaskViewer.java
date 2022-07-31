@@ -1,3 +1,6 @@
+//contains only a recycler view to view tasks from
+//opened when click on task from hour adaptor where there are more than 3 tasks in an hour
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AlertDialog;

@@ -1,3 +1,10 @@
+
+//activity to show calendar
+//used to show tasks according to their date and their start time
+//contains: calendar and hour view
+//opened via navigation bar
+//opens: hour adaptor, calendar adaptor, task viewer
+
 package sg.edu.np.mad.madassignment1;
 
 
@@ -66,26 +73,7 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
 
         //get task data from database
         taskList = dbHandler.getTaskData(user.getUserID());
-/*
-        //define recyclerView
-        recyclerView = findViewById(R.id.calenderToDoListRecycleView);
 
-        // initialize recyclerview
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        //set adaptor to MyAdaptor, given taskList
-        calenderAdaptor = new CalenderAdaptor(taskList);
-        LinearLayoutManager LayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(LayoutManager);
-        recyclerView.setAdapter(calenderAdaptor);
-
-        hourAdapter = new HourAdapter(this, initHourTasksList(), taskList);
-        ListView hourListView = findViewById(R.id.hourListView);
-        hourListView.setAdapter(hourAdapter);
-
-        //set recycler view to be invisible until a date has been selected
-        recyclerView.setVisibility(View.GONE);
-*/
         hourAdapter = new HourAdapter(this, initHourTasksList(), taskList);
         hourListView = findViewById(R.id.hourListView);
         hourListView.setAdapter(hourAdapter);
@@ -139,10 +127,8 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
         //set text
         monthYearText.setText(monthDayText);
 
-        //get number of days in a month
-        int numberOfDaysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         //get array of length 42 that have blanks to show in recyclerView
-        ArrayList<String> daysInMonth = daysInMonthArray(numberOfDaysInMonth);
+        ArrayList<String> daysInMonth = daysInMonthArray();
         //get all the tasks that are in this month
         ArrayList<String> tasksThisMonth = tasksThisMonth(taskList);
 
@@ -154,8 +140,12 @@ public class CalenderActivity extends DrawerBaseActivity implements CalenderView
     }
 
     //method to convert number of days to array with spacing
-    private ArrayList<String> daysInMonthArray(int numberOfDaysInMonth)
+    private ArrayList<String> daysInMonthArray()
     {
+
+        //get number of days in a month
+        int numberOfDaysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
         //define array
         ArrayList<String> daysInMonthArray = new ArrayList<>();
 

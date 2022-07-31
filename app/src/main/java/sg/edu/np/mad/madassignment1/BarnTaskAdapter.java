@@ -36,12 +36,6 @@ public class BarnTaskAdapter extends RecyclerView.Adapter<BarnTaskViewHolder> {
         holder.taskDate.setText(t.getTaskDate());
         holder.taskTime.setText(t.getTaskStartTime());
 
-        //open delete task screen if any element other than checkbox is clicked
-//        holder.taskName.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-//        holder.taskDate.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-//        holder.taskDesc.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-//        holder.taskTime.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { openTaskInfo(holder, t); }});
-
     }
 
     @Override

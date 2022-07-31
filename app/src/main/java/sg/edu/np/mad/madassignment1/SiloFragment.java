@@ -1,3 +1,10 @@
+
+//activity to show silo and farm plots
+//used to show silo and its requirement to upgrade, show farm plots based on number of tasks in next 7 days
+//contains: popup dialog silo
+//opened from farm activity
+//opens: popup silo tasks
+
 package sg.edu.np.mad.madassignment1;
 
 import android.app.AlertDialog;

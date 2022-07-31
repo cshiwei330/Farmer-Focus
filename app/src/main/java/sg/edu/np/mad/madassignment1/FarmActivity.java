@@ -1,3 +1,10 @@
+
+//activity to load barn and silo fragment
+//used initialize fragments, sliding mechanism and cloud animation
+//contains: cloud animation
+//opened via navigation bar
+//opens: silo and barn fragment, page adaptor
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;

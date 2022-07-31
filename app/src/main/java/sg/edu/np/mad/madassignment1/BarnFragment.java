@@ -1,3 +1,10 @@
+
+//activity to show farm barn
+//used to show barn and its requirement to upgrade
+//contains: popup dialog barn
+//opened from farm activity
+//opens: popup barn tasks
+
 package sg.edu.np.mad.madassignment1;
 
 import android.app.AlertDialog;

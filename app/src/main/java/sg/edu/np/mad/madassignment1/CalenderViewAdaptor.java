@@ -54,7 +54,6 @@ public class CalenderViewAdaptor extends RecyclerView.Adapter<CalenderViewViewHo
                 holder.eventRing.setVisibility(View.GONE);
             }
         }
-
         if(selectedDay != null && String.valueOf(Integer.valueOf(selectedDay)).equals(daysOfMonth.get(position))){
             Log.v("selectedDay:",selectedDay);
             Log.v("Position:",String.valueOf(position));

@@ -6,8 +6,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CalenderViewHolder extends RecyclerView.ViewHolder {
-
+public class CalenderViewHolder extends RecyclerView.ViewHolder{
     TextView taskName;
     TextView taskDesc;
     CheckBox taskCheckBox;
