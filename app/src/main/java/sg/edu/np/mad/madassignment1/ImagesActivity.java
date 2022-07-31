@@ -1,5 +1,9 @@
 package sg.edu.np.mad.madassignment1;
-
+/*
+This activity allows users to select their preferred profile picture by clicking on the individual
+profile pictures to set it. In order to do this, shared preferences is used to get the latest username
+to set the profile picture to.
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;

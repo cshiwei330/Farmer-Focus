@@ -1,5 +1,16 @@
 package sg.edu.np.mad.madassignment1;
 
+/*----------------------------------------------------------------------------------------------------*/
+
+                                    /* ACCOUNT SETTINGS ACTIVITY */
+/* This activity is created for users to edit their profile by changing their profile picture and password.
+In order to select their preferred profile picture,  users have to click the default profile picture image.
+Once this is done, they will be navigated to a page with the profile pictures in there to select their
+preferred choice of the profile picture. Once selected, users will be brought back to the account settings
+page where they can click save to save their changes made to the profile picture or password.*/
+
+/*----------------------------------------------------------------------------------------------------*/
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
