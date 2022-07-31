@@ -43,40 +43,126 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 | TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon  | Database, Shared Preferences, Event Handling  |
 
 ## Screenshots of app: 
-### Home Page with no tasks
-- allows user to select their mood and display messages according to the mood
-- shows upcoming tasks (displays tasks dates that are one week from now) 
+### Home
+- Mood selector which records the mood of the user
+- It also shows upcoming tasks (displays tasks with dates that are one week from now)
 
-![home with no tasks](https://user-images.githubusercontent.com/103928761/174839621-a642c601-e325-4eba-b66b-9058d936b4c2.jpg)
+![Home Page](https://user-images.githubusercontent.com/103928761/182027458-30c06572-45d8-44e0-b6b8-c7c57e6b2019.png)
+
 
 ## Mood Message
-- message changes when different mood is selected
+- A message will be displayed according to the mood selected
 
-![message when mood selected](https://user-images.githubusercontent.com/103928761/174851772-29f01f84-9167-4152-be19-779366efd5d6.jpg)
+![msg displays](https://user-images.githubusercontent.com/103928761/182027494-abf7566f-9d68-43ae-8778-0c968664a760.png)
+
 
 ## Dialog when User enters a different mood for the day
-- if a different mood is selected on the same day
-- a pop up will be shown to ask user if they want to proceed with their change of mood
+- Pop up will be shown If a different mood is selected on the same day
+- User can confirm if they want to proceed with their change of mood
 
-![message when mood selected](https://user-images.githubusercontent.com/103928761/174851889-e2b41aae-cefe-49c9-afd3-9f90b3790217.jpg)
+![dialogue](https://user-images.githubusercontent.com/103928761/182027532-3d246b9e-96a2-46d1-9919-d2cbe60df318.png)
 
+## Task
+- Allows user to view all task
 
-## Adding of Tasks
-- enter name of task, task description, task date and time to create a task
-- task date allows user to pick a date from a dialog 
-- task date allows user to pick a time from a dialog 
+![Task Page](https://user-images.githubusercontent.com/103928761/182027643-94d83a9a-3e4b-46ef-be99-f5cf761bda65.png)
 
-![adding of tasks](https://user-images.githubusercontent.com/103928761/174839741-ce329349-0d76-4384-8e9c-876807fe66b5.jpg)
+- Allows user to filter all task for a simpler view of tasks
 
-## Task List
-- updates as tasks are added, this is scrollable
+![Filter Task](https://user-images.githubusercontent.com/103928761/182027691-777972f8-81d1-4832-8999-792a7f8fcbff.png)
 
-![tasks list after tasks are added](https://user-images.githubusercontent.com/103928761/174839790-8de48801-913b-4563-9dc0-68a0a1538aff.jpg)
+- Allows user to clear all tasks
+
+![Clear All Task](https://user-images.githubusercontent.com/103928761/182027727-17db524d-0981-4011-9f56-cc8dddd5a72f.png)
+
+### Adding of Tasks
+- Enter details of the new task
+- Click CREATE NEW TASK Button
+- Task will be added to the task list
+
+![Add New Task 2](https://user-images.githubusercontent.com/103928761/182027834-26931994-992a-42dc-8b94-1acca33731bc.png)
+![Add New Task 1](https://user-images.githubusercontent.com/103928761/182027836-2c106c59-8fb2-4099-adec-a25f65010621.png)
+
+### View Tasks
+- Allows user to view selected task details
+- Allows user to delete specific task
+
+![View Task](https://user-images.githubusercontent.com/103928761/182027894-a6ed3983-c518-4314-9c24-0c62f217e3cd.png)
+
+### Delete Tasks
+- If it is an event task, confirmation dialog will show up
+
+![Delete Specific Task](https://user-images.githubusercontent.com/103928761/182027974-1173a12b-3bde-42e8-897b-c4ed99f6c051.png)
+
+- If a recurring task, the user has the option to delete just the selected task or future recurring tasks. Only after selection, then the confirmation dialog show up
+
+![Delete Recurring Task](https://user-images.githubusercontent.com/103928761/182027979-c9278cbd-89a0-4c12-ab66-8250c8e76828.png)
+
+### Edit Tasks
+- Allows user to edit a task that has been created
+- Click on SAVE button to save changes
+- If event task, changes will be saved immediately
+- If recurring task, user can decide to either delete for current task only or current task and all future recurring tasks
+
+![Edit Task](https://user-images.githubusercontent.com/103928761/182028006-68923084-b29c-40d4-9cbc-2b4420999b38.png)
+![Edit Recurring Task](https://user-images.githubusercontent.com/103928761/182028007-9fd61bf2-5bfc-48d5-ae1b-86c67bf3b1d9.png)
+
+## Timer
+- Create tasks in tasks page
+- Select tasks to start time (second pic)
+- Click start to begin
+- Click finish if you have completed before the duration is up 
+- Tasks will be mark as completed once users click finish or the duration is up
+
+![timer](https://user-images.githubusercontent.com/103928761/182028156-eac45fcb-069c-4803-b4be-334236ebff71.png)
+![selecttask](https://user-images.githubusercontent.com/103928761/182028219-4b8a0162-70d2-487e-ae31-52b29756fc25.png)
+
+## Stopwatch
+- Click start  to begin
+- Once stopwatch is running, start changes to pause
+- Reset button sets the stopwatch back to 00:00 
+
+![stopwatch](https://user-images.githubusercontent.com/103928761/182028254-c181cf44-bdf9-4edd-8b3e-359ec111abc2.png)
 
 ## Calendar 
-- shows the tasks for the date selected 
+- Click on left and right buttons to change months
+- Dates with tasks show have indicator circles to indicate
+- Click on a date to see tasks for that date
+- Clicking on a task in the scrollable list view shows the task details
+- 
+![image](https://user-images.githubusercontent.com/103928761/182028445-6a948dbb-888f-40e2-9864-12978d8e30d7.png)
 
-![calendar with tasks added](https://user-images.githubusercontent.com/103928761/174845916-a7fc3c7e-7613-4b39-9f14-5515eb83278f.jpg)
+## Statistics
+- Cards to show the number of completed and pending tasks
+- A bar chart of completed tasks by day
+- Display the user’s mood of the week
+- Search recurring tasks
+   -  When user clicks on the button, it will bring them to the recurring task statistics activtity
+
+![Screenshot_20220731_154458](https://user-images.githubusercontent.com/103928761/182028323-f436733d-5616-4495-80e9-1ec48406bff1.png)
+
+### Recurring Tasks Statistics
+- Users can search the title of the recurring task name
+- Bar chart of time taken per attempt at recurring tasks will be shown 
+
+![Screenshot_20220731_154524](https://user-images.githubusercontent.com/103928761/182028386-7bbe50a5-30d1-4f93-a421-10375f6e0f14.png)
+
+
+## Notifications 
+- Notifications will show up to remind the user of urgent tasks if alert is set when adding the task
+![Notification](https://user-images.githubusercontent.com/103928761/182028025-0ec13b9f-748b-4039-b69d-c942215fb300.png)
+
+
+## Widget
+- A shortcut for users to view their daily tasks in their homepage
+- Also acts a shortcut to access our app (when the top part of the widget is clicked)
+- Widget updates accordingly when new tasks are added, edited or deleted. 
+- [Refer to this link](https://www.maketecheasier.com/create-android-widget/) if you’re unsure of how to add widgets to your homescreen
+
+![widget](https://user-images.githubusercontent.com/103928761/182027578-f4dee4d7-5c00-4375-a3e1-0ad3c061e1c5.png)
+
+
+
 
 ## Settings 
 - right now, we only have account settings under settings 
@@ -100,4 +186,3 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 - user keys in new password and confirm their password 
 
 ![change password](https://user-images.githubusercontent.com/103928761/174853405-ea0b1559-3587-443b-b7f0-1998f21a37db.jpg)
-
