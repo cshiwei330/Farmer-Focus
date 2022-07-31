@@ -7,11 +7,30 @@
 - TAN YU XIN AISLINN S10222271H
 
 ## Description of App: 
-Farmer Focus is a great buddy to help you keep track of your tasks and boost productivity.
+Farmer Focus is a productivity app that helps you keep track of your tasks the fun way! No more sticky notes or countless applications, an all in one app that will be your best tool to help organize your life.
 
-- Keep track of your tasks
-- Help remain focused on tasks
-- Be reminded of urgent tasks
+> - Create your own account to store your progress
+> - Keep track of your tasks
+> - Add event and recurring tasks according to your schedule
+> - Edit your tasks if your schedule changes
+> - Mark tasks as completed to update your progress
+> - Be reminded of urgent tasks
+> - Focus better with a dedicated countdown timer
+> - Track your time with a inbuilt stopwatch
+> - Visualize insights of your recent and overall productivity
+> - Upgrade your own personal farm from completing milestones
+> - View your tasks quickly directly from your home screen with a widget
+
+Attributes:
+Cloud Image: <a href="https://www.freepik.com/vectors/assortment">Assortment vector created by freepik - www.freepik.com</a>
+
+Chicken gif: Farm Animal Party Sticker by Hay Day for iOS & Android | GIPHY
+
+Cow gif: https://gifer.com/en/tHW
+
+Grass gif: https://gifer.com/en/ZhkE
+
+Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097292
 
 ## Contribution of each member:
 
