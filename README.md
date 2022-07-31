@@ -156,6 +156,26 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 ![Screenshot_20220731_154524](https://user-images.githubusercontent.com/103928761/182028386-7bbe50a5-30d1-4f93-a421-10375f6e0f14.png)
 
 
+## Farm 
+- Swipe to left/right to switch fragments
+
+### Barn
+- Click on barn  to open dialog to see upgrade upgrade requirement
+- Requirements based on number of completed Event tasks
+- Max upgrade is level 3 for barn
+
+![farm_1](https://user-images.githubusercontent.com/103928761/182031097-78ab0cae-52bc-45a5-a9de-c7935f5650d5.png)
+
+### Silo and Farm Plots
+- Click on silo to open dialog to see upgrade upgrade requirement
+- Requirements based on number of completed or created recurring tasks
+- Solo must have be level 1 or be built to upgrade further
+- Max upgrade is level 3 for silo
+- Farm plots based on number tasks in following 7 days
+
+![farm_2](https://user-images.githubusercontent.com/103928761/182031158-edfd1fd8-710e-4fba-9769-becd02c65ce0.png)
+
+
 ## Notifications 
 - Notifications will show up to remind the user of urgent tasks if alert is set when adding the task
 ![Notification](https://user-images.githubusercontent.com/103928761/182028025-0ec13b9f-748b-4039-b69d-c942215fb300.png)
