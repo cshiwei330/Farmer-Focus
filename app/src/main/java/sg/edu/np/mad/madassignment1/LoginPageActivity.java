@@ -1,3 +1,10 @@
+/*
+LOGIN PAGE ACTIVITY
+This activity allows the user to log into the app, bringing them into the home page. If the user tries to log in with a non-existent account
+(e.g. username not in database, password incorrect), there will be a toast message telling the user, and denies the user from logging in.
+The user can also select the remember me check box to stay logged in, even after the app is ended.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;

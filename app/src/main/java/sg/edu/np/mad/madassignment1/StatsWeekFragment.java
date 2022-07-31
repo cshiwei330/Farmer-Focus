@@ -1,3 +1,9 @@
+/*
+STATISTICS OF THE WEEK FRAGMENT
+This fragment is the bar chart of the number of completed tasks per day. The bar chart shows the data for the week, from Sunday to Saturday.
+If the user has yet to complete a task within the week, nothing will show up on the bar chart.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Context;

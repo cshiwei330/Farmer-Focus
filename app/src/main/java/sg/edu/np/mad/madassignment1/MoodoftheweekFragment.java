@@ -1,3 +1,11 @@
+/*
+MOOD OF THE WEEK FRAGMENT
+This fragment shows the user's most frequent emotion in the past 7 days. There is an article recommended for every emotion except for happy.
+The main goal of the article is to help the user get into a more cheerful mindset and get back on track. When the user has not recorded their
+mood for more than 7 days, there will be a text telling them that there is no data to be shown, since the data that is more than 7 days ago is
+considered as outdated.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import android.annotation.SuppressLint;

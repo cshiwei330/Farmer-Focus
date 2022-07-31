@@ -1,3 +1,10 @@
+/*
+SIGN UP PAGE ACTIVITY
+This activity is the sign up page, where the user can create a new account. The user cannot have a blank input for the username or passwords.
+The user also has to agree to the terms and conditions before creating a new account. When the "SIGN UP" button is clicked, the newly created
+account details will be added into the database.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import androidx.appcompat.app.AppCompatActivity;

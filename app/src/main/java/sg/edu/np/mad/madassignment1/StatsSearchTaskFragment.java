@@ -1,3 +1,9 @@
+/*
+SEARCH TASK FRAGMENT
+This fragment prompts the user to check out the data recorded for their recurring tasks. When the "CLICK HERE!" button is clicked, the user
+go to the recurring task statistics page.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Context;

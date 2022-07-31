@@ -1,3 +1,10 @@
+/*
+MAIN ACTIVITY
+This activity is the launch activity of the app. It acts as a splash screen for the app. The activity also gets the user's preference for
+the "remember me" function in the login page. If user has selected remember me, this activity will bring the user into the home page
+immediately. If user did not select remember me, this activity will bring the user into the login page.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;

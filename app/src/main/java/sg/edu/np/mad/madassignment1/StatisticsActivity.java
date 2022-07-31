@@ -1,3 +1,9 @@
+/*
+STATISTICS ACTIVITY
+This activity holds all the fragments of statistics related items. It also has the cards to display the total number of completed and pending
+tasks. The main goal of the statistics is to boost the user's motivation and let them track their progress.
+ */
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.SharedPreferences;
