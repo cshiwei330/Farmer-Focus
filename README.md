@@ -47,7 +47,22 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 | RADCHANON DON SUKKRAM  | Task, Database (task), Add New Task, View Task Page, Edit Task, Recurring Task and Notification   | Database, Recycler View, Event Handling, User Interface(Notification), Alarm Manager, Broadcast Receiver |
 | TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon, Statistics and Splash Screen  | Database, Shared Preferences, Event Handling, Android Charts, Interactions with other apps, User Interface(Splash Screen) |
 
-## Screenshots of app: 
+## Screenshots of app:
+## Log In Page
+- User can key in their account details and log into the app
+- If the username or password is incorrect, they will not be able to log in
+- User can select "Remember Me" to stay logged in the app even when they close the app
+- User can select "SIGN UP HERE" if they want to create a new account
+- "LOG IN" button brings the user to the home page if the account is valid
+
+## Sign Up Page
+- Username that user enters cannot be existing in the database already, must be entirely new
+- Username is case sensitive
+- Input of Password and Confirm Password must be the same
+- Password is case sensitive
+- User has to agree to terms and conditions
+- "BACK" and "SIGN UP" button both brings the user back to the login page, where the user had to log in with an existing account
+
 ## Home
 - Mood selector which records the mood of the user
 - It also shows upcoming tasks (displays tasks with dates that are one week from now)
@@ -116,7 +131,7 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 - Create tasks in tasks page
 - Select tasks to start time (second pic)
 - Click start to begin
-- Click finish if you have completed before the duration is up 
+- Click finish if you have completed before the duration is up
 - Tasks will be mark as completed once users click finish or the duration is up
 
 ![timer](https://user-images.githubusercontent.com/103928761/182028156-eac45fcb-069c-4803-b4be-334236ebff71.png)
@@ -126,26 +141,26 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 ## Stopwatch
 - Click start  to begin
 - Once stopwatch is running, start changes to pause
-- Reset button sets the stopwatch back to 00:00 
+- Reset button sets the stopwatch back to 00:00
 
 ![stopwatch](https://user-images.githubusercontent.com/103928761/182028254-c181cf44-bdf9-4edd-8b3e-359ec111abc2.png)
 
 
-## Calendar 
+## Calendar
 - Click on left and right buttons to change months
 - Dates with tasks show have indicator circles to indicate
 - Click on a date to see tasks for that date
 - Clicking on a task in the scrollable list view shows the task details
-- 
+
 ![image](https://user-images.githubusercontent.com/103928761/182028445-6a948dbb-888f-40e2-9864-12978d8e30d7.png)
 
 
 ## Statistics
 - Cards to show the number of completed and pending tasks
-- A bar chart of completed tasks by day
+- A bar chart of completed tasks by day is shown, and only the data of the past week is available
 - Display the user’s mood of the week
 - Search recurring tasks
-   -  When user clicks on the button, it will bring them to the recurring task statistics activtity
+   -  Click on the "CLICK HERE" button to go to the recurring task statistics page
 
 ![Screenshot_20220731_154458](https://user-images.githubusercontent.com/103928761/182028323-f436733d-5616-4495-80e9-1ec48406bff1.png)
 
