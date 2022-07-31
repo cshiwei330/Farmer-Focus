@@ -1,3 +1,10 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                            /* TaskRecyclerViewAdaptor */
+/* This is the adaptor for the recyclerView that displays task. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.Intent;

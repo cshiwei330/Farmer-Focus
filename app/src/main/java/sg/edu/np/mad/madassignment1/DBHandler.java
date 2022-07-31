@@ -419,6 +419,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return recurring_task;
     }
 
+    // This method is implemented for the app widget
     public ArrayList<Task> getTodayTaskData(int userID) throws ParseException {
 
         ArrayList<Task> taskList = getTaskData(userID);

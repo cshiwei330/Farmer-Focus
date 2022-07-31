@@ -1,3 +1,11 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                /* HOME ACTIVITY - MoodMsgFragment */
+/* This Fragment receives a bundle from MoodFragment which consist of the mood the user selected. Based on
+* the mood the user selected, a message will appear, hoping to motivate the user. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 package sg.edu.np.mad.madassignment1;
 
 import android.os.Bundle;

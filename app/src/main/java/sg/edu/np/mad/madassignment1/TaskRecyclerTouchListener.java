@@ -1,3 +1,10 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                    /* TaskRecyclerTouchListener */
+/* This Listener enables the swiping function of tasks. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 package sg.edu.np.mad.madassignment1;
 
 import android.animation.Animator;

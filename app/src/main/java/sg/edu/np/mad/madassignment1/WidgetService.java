@@ -1,3 +1,11 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                        /* WidgetService */
+/* This is a service that powers the list view through remote view. I get all the tasks that are today from
+* the DBHandler to display them on the widget. Only the task name and time is shown so as to create a
+* minimalistic look on their homescreen. */
+
+/*----------------------------------------------------------------------------------------------------*/
 package sg.edu.np.mad.madassignment1;
 
 import static java.lang.Integer.valueOf;

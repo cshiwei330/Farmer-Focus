@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                        /* HOME ACTIVITY*/
+/* This Fragment shows a mood selector whereby users can input their mood for the day. It also shows
+* upcoming tasks for the users in a recycler view. Tasks are swipeable so users can choose to edit or delete
+* the task without navigating to the Task. When these actions are performed, I have a method that updates the
+* app widget. I also have a grass animation that makes the home page more lively. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
+
 package sg.edu.np.mad.madassignment1;
 
 import android.appwidget.AppWidgetManager;
@@ -153,13 +164,13 @@ public class HomeActivity extends DrawerBaseActivity {
         recyclerView.addOnItemTouchListener(touchListener);
 
 
-
         //for grass animation
         ImageView grass = findViewById(R.id.grassGif);
         Glide.with(this).load(R.drawable.homepagegrass).into(grass);
 
     }
 
+    //Method to find tasks that are upcoming based on tasklist
     public ArrayList<Task> findRecentTasks (ArrayList<Task> taskList){
 
         ArrayList<Task> recentTaskList = new ArrayList<>();
@@ -178,6 +189,7 @@ public class HomeActivity extends DrawerBaseActivity {
         return recentTaskList; //display this list in the recyclerView
     }
 
+    //Method to return boolean if the task date is within a week
     public boolean withinAWeek (String date) { //task.getTaskDate will be a string
         try {
 
@@ -208,6 +220,8 @@ public class HomeActivity extends DrawerBaseActivity {
             return false;
         }
     }
+
+    //Method to update app widget
 
     public void updateWidgets (Context context, DBHandler dbHandler, User user, Task task) throws ParseException {
 

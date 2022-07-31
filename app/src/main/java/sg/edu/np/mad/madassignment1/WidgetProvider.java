@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                        /* WidgetProvider */
+/* This is a template given by android studio when creating an app widget. This is called when the user adds
+* the widget to their home screen. When I want to add a widget to my home screen, I will consider the looks of it
+* therefore I created a minimalistic look for the widget, white background and only displays important detail like
+* number of tasks and the task details. A listview is implemented for the user to view all their tasks for the day,
+* this would be extremely helpful for the user if they have more than 3 tasks for that day. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 package sg.edu.np.mad.madassignment1;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;

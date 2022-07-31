@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------------------------------*/
+
+                                /* HOME ACTIVITY - MoodFragment */
+/* This Fragment shows a mood selector whereby users can input their mood for the day. Their mood will be
+ * recorded in the database for statistics activity. When the user input a different mood on the same day, an
+ * alert dialogue will appear to ask the user if they want to update their mood and the change will be
+ * reflected in the database. When a mood is clicked, this fragment will switch to MoodMsgFragment with a
+ * bundle that consists the mood the user selected. */
+
+/*----------------------------------------------------------------------------------------------------*/
+
 package sg.edu.np.mad.madassignment1;
 
 import android.content.DialogInterface;
@@ -223,7 +234,7 @@ public class MoodFragment extends Fragment {
                 "it's normal to have a change of mood throughout the day." +
                 "\n\nWould you like to update your mood?");
         builder.setCancelable(true);
-        builder.setPositiveButton("Change Mood", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("Update Mood", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         mood.changeMood(newMood);
                         dbHandler.changeMood(mood);     //update database

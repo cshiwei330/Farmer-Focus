@@ -1,4 +1,9 @@
+/*----------------------------------------------------------------------------------------------------*/
 
+                                /* TaskRecyclerViewHolder */
+/* This is the holder for the recyclerView that displays task. */
+
+/*----------------------------------------------------------------------------------------------------*/
 package sg.edu.np.mad.madassignment1;
 
 import android.view.View;
