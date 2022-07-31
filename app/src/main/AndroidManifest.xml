@@ -77,9 +77,6 @@
             android:name=".PasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".DarkMode"
-            android:exported="false" />
-        <activity
             android:name=".AccountSettingsActivity"
             android:exported="false" />
         <activity

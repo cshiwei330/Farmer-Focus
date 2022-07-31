@@ -8,40 +8,12 @@
     tools:activityContext=".SettingsActivity">
 
 
-
-    <TextView
-        android:id="@+id/titleTV"
-        android:layout_width="175dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:text="Settings"
-        android:textAlignment="textStart"
-        android:textColor="#131313"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-<!--    <Switch-->
-<!--        android:id="@+id/themeSwitch"-->
-<!--        android:layout_width="332dp"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_marginStart="28dp"-->
-<!--        android:layout_marginTop="34dp"-->
-<!--        android:layout_marginEnd="38dp"-->
-<!--        android:text="Dark Mode"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/titleTV" />-->
-
     <ImageButton
         android:id="@+id/AccSettingsBtn"
         android:layout_width="49dp"
         android:layout_height="48dp"
-        android:layout_marginTop="118dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="64dp"
         android:src="@drawable/ic_baseline_settings_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,12 +23,21 @@
         android:id="@+id/themeTV"
         android:layout_width="183dp"
         android:layout_height="47dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
         android:text="Account Settings"
         android:textAlignment="viewStart"
         android:textColor="#150F0F"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/lazychicken"
+        android:layout_width="401dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/lazychicken" />
 </androidx.constraintlayout.widget.ConstraintLayout>

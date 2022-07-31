@@ -8,18 +8,17 @@ import android.util.Log;
 import android.view.View;
 
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import sg.edu.np.mad.madassignment1.databinding.ActivitySettingsBinding;
 
 public class SettingsActivity extends DrawerBaseActivity {
 
-    // Dark/Light mode
-    private View mySettings;
-    private Switch themeSwitch;
-    private TextView titleTV, themeTV;
-    private DarkMode mode;
+    public ImageView chicken;
 
     //define activity binding
     ActivitySettingsBinding activitySettingsBinding;
@@ -33,6 +32,11 @@ public class SettingsActivity extends DrawerBaseActivity {
         setContentView(activitySettingsBinding.getRoot());
         //set title
         allocateActivityTitle("Settings");
+
+
+        //for chicken animation
+        ImageView chicken = findViewById(R.id.lazychicken);
+        Glide.with(this).load(R.drawable.lazychicken).into(chicken);
 
         // image button to go to account settings
         ImageButton myButtonSettings = findViewById(R.id.AccSettingsBtn);
