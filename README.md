@@ -45,7 +45,7 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 | CHUAH KAI YI  | Calender, Add New Task (date/time), Database (date and time), Navigation system, Farm  | Database, Recycler View, Event Handling, Array Adaptor, Animation & Gifs, ViewPager, Persistent Storage  |
 | KOH KA-WEI DARRYL  | Settings, Account settings, change password, Database (update user), Change profile picture  | Database, Shared preferences, Multimedia, Event Handling, Animation, CountDownTimer, Chronometer, Persistant Storage |
 | RADCHANON DON SUKKRAM  | Task, Database (task), Add New Task, View Task Page, Edit Task, Recurring Task and Notification   | Database, Recycler View, Event Handling, User Interface(Notification), Alarm Manager, Broadcast Receiver |
-| TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon, Statistics and Splash Screen  | Database, Shared Preferences, Event Handling, Android Charts, Interactions with other apps, User Interface(Splash Screen) |
+| TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon, Statistics and Splash Screen  | Database, Shared Preferences, Event Handling, Android Charts, Interactions with other apps, AutoCompleteTextView, User Interface(Splash Screen) |
 
 ## Screenshots of app:
 ## Log In Page
