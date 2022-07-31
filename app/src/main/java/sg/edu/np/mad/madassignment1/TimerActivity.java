@@ -1,23 +1,26 @@
 package sg.edu.np.mad.madassignment1;
 
 /*----------------------------------------------------------------------------------------------------*/
+
                                     /* TIMER ACTIVITY */
-/* The Timer Activity is made for users to set the time for the tasks which they have created.
+/* The Timer Activity is created for users to focus better with a dedicated countdown timer.
 This activity allows users to set the timer by selecting the task which they would like to start
 doing by clicking on the container view. In order to set the time on the timer, users have to first
 create a new task and set the duration in the task page. Afterwards, when users come to the timer page,
-they will then be able to select the task which they would like to start doing by clicking on the
-container view. In the event when users click start before selecting their tasks, they will be prompted
+they will then be able to select the task which they would like to start doing by clicking on the 'click here' message
+on the container view. In the event when users click start before selecting their tasks, they will be prompted
 to select their tasks with a toast message asking them to select a task. Once users have successfully selected
 their tasks, they will be brought back to the timer page. Then, once the start button have been clicked, the
 task duration selected by the user in the task page will then be set on the timer and the timer will start
 counting down. When the timer is running, a sheep animation will be displayed to show that the timer is running
 and would be gone either once the time set on the timer have been completed or users clicked on the finish
-button. The finish button is created to allow users to stop doing their tasks before the time set for the
-task is up as they might have completed their tasks before the duration ends. The finish button will calculate
-the time spend on the task by subtracting the time set for the task with the time left on the timer.
- Once the tasks have been completed, a chicken animation and toast message will show up on the timer
-page to congratulate the user for the completion of their task. */
+button. The finish button will then prompt the users if they want to mark the task as completed once they
+click on this button. If users select yes, task will be mark as completed and timer will stop running.
+On the other hand, if no is selected, the timer will continue running. The finish button is created to allow
+users to stop doing their tasks before the time set for the task is up as they might have completed their tasks
+before the duration ends. The finish button will calculate the time spend on the task by subtracting the time set
+for the task with the time left on the timer. Once the tasks have been completed, a chicken animation and toast
+message will show up on the timer page to congratulate the user for the completion of their task. */
 
 /*----------------------------------------------------------------------------------------------------*/
 
@@ -54,6 +57,7 @@ import java.util.Locale;
 import sg.edu.np.mad.madassignment1.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends DrawerBaseActivity{
+    // creating a new array list
     ArrayList<Task> taskList = new ArrayList<>();
 
     //define activity binding
@@ -100,7 +104,7 @@ public class TimerActivity extends DrawerBaseActivity{
         sheep = findViewById(R.id.sheepGif);
         chicken = findViewById(R.id.chicken);
 
-
+        // setting colour of buttons
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
         mButtonStopwatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
 
@@ -109,7 +113,7 @@ public class TimerActivity extends DrawerBaseActivity{
         //define dbHandler
         DBHandler dbHandler = new DBHandler(this, null, null,6);
 
-        // getting stored username
+        // getting stored username using Shared Preferences
         SharedPreferences sharedPreferences = getSharedPreferences(GLOBAL_PREF, 0);
         String username = sharedPreferences.getString("username", "");
         User user = dbHandler.findUser(username);
@@ -179,6 +183,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
                         mCountDownTimer.cancel();
 
+                        // set timer countdown text to 00:00
                         mTextViewCountDown.setText("00:00");
 
                         task = null;
@@ -192,6 +197,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
                     }
                 });
+                // if no is clicked, timer continues to run
                 builder.setNegativeButton("No", new
                         DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int id){
@@ -308,19 +314,21 @@ public class TimerActivity extends DrawerBaseActivity{
 
     }
 
+    // pasue the timer
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
         updateWatchInterface();
     }
 
-
+    // reset the timer
     private void resetTimer() {
         mTimeLeftInMillis = mStartTimeInMillis;
         updateCountDownText();
         updateWatchInterface();
     }
 
+    // update timer countdown text
     private void updateCountDownText() {
         int hours = (int) ((mTimeLeftInMillis / 1000) / 3600);
         int minutes = (int) (((mTimeLeftInMillis / 1000) % 3600) / 60); // change milliseconds to minutes after accounting for hours
@@ -341,7 +349,6 @@ public class TimerActivity extends DrawerBaseActivity{
     // when the timer has started, only the timer countdown and finish button will be shown on the screen.
     // when finish is clicked, an alert dialog will pop out to ask user if they really want to stop doing the task
     // if yes, task will be mark as completed and timer will be reset to 00:00
-
     private void updateWatchInterface() {
         if (mTimerRunning) {
             mButtonGiveUp.setVisibility(View.VISIBLE);
@@ -369,7 +376,7 @@ public class TimerActivity extends DrawerBaseActivity{
         }
     }
 
-    // SHARED PREFERENCES
+    // SHARED PREFERENCES to ensure that timer continues to run even after the app is closed
     @Override
     protected void onStop() {
         super.onStop();

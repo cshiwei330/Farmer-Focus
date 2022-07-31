@@ -1,6 +1,15 @@
 package sg.edu.np.mad.madassignment1;
 
-import androidx.appcompat.app.AppCompatActivity;
+/*----------------------------------------------------------------------------------------------------*/
+
+                                        /* STOPWATCH ACTIVITY */
+/* This activity is created for users to track their time taken to complete an activity with a inbuilt stopwatch.
+Once the stopwatch has started, a cow gif will show up on the screen to show that the stopwatch is currently running.
+WHen the stopwatch has started, the start button will change to pause to allow users to pause the stopwatch whenever
+they want to. In the event when users want to reset the stopwatch, they could pause the stopwatch first then click
+on reset for the stopwatch to go back down to 00:00. */
+
+/*----------------------------------------------------------------------------------------------------*/
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,7 +99,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
             }
         });
 
-
+        // for navigation back to the timer
         mButtonTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +120,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
 
     }
 
+    // starting of the stopwatch
     private void startChronometer() {
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
@@ -120,6 +130,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
         }
     }
 
+    // when pause is clicked
     public void pauseChronometer() {
         if (running) {
             chronometer.stop();
@@ -129,12 +140,15 @@ public class StopWatchActivity extends DrawerBaseActivity {
         }
     }
 
+    // when reset is clicked set time back to 00:00
     public void resetChronometer() {
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
         updateWatchInterface();
     }
 
+    // cow gif only shows when stopwatch is running and start button will change to
+    // pause when it is running
     private void updateWatchInterface() {
         if (running) {
             cow.setVisibility(View.VISIBLE);
@@ -146,36 +160,5 @@ public class StopWatchActivity extends DrawerBaseActivity {
         }
     }
 
-    //SHARED PREFERENCES
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        //editor.putLong("startTimeInMillis", mStartTimeInMillis);
-        //editor.putLong("millisLeft", mTimeLeftInMillis);
-        editor.putBoolean("timerRunning", running);
-        //editor.putLong("endTime", mEndTime);
-
-        editor.apply();
-
-//        if (chronometer != null) {
-//            chronometer.cancel();
-//        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
-
-        running = prefs.getBoolean("timerRunning", false);
-
-        updateWatchInterface();
-
-    }
 
 }
