@@ -34,6 +34,8 @@ Splash Screen: https://www.istockphoto.com/vector/farm-animals-gm466647826-60097
 
 Lazychicken gif: https://giphy.com/gifs/namecheap-yeti-henny-hedgy-LpGfreBAOqxjjQDpqQ
 
+Alert sound: https://mixkit.co/free-sound-effects/alarm/
+
 
 ## Contribution of each member:
 
