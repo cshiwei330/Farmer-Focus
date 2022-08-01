@@ -63,9 +63,9 @@ public class StopWatchActivity extends DrawerBaseActivity {
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
         mButtonStopWatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
 
-        //for cow animation
-        cow = findViewById(R.id.cow);
-        Glide.with(this).load(R.drawable.cow).into(cow);
+//        //for cow animation
+//        cow = findViewById(R.id.cow);
+//        Glide.with(this).load(R.drawable.cow).into(cow);
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -147,10 +147,13 @@ public class StopWatchActivity extends DrawerBaseActivity {
         updateWatchInterface();
     }
 
-    // cow gif only shows when stopwatch is running and start button will change to
+    // cow gif only runs when stopwatch is running and start button will change to
     // pause when it is running
     private void updateWatchInterface() {
         if (running) {
+            //for cow animation
+            cow = findViewById(R.id.cow);
+            Glide.with(this).load(R.drawable.cow).into(cow);
             cow.setVisibility(View.VISIBLE);
             mButtonStartPause2.setText("Pause");
         }
