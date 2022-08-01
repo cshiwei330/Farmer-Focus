@@ -74,6 +74,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private ImageView chicken;
     private TextView TaskName;
     private View nameContainer;
+    private View descContainer;
 
     private CountDownTimer mCountDownTimer;
 
@@ -107,6 +108,7 @@ public class TimerActivity extends DrawerBaseActivity{
         chicken = findViewById(R.id.chicken);
         TaskName = findViewById(R.id.taskName);
         nameContainer = findViewById(R.id.view3);
+        descContainer = findViewById(R.id.searchTaskContainer2);
 
         // setting colour of buttons
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
@@ -356,13 +358,13 @@ public class TimerActivity extends DrawerBaseActivity{
     private void updateWatchInterface() {
         if (mTimerRunning) {
             nameContainer.setVisibility(View.VISIBLE);
-            TaskName.setText("\n\tTime set for: " + task.getTaskName() + "!");
+            TaskName.setText("\nTime set for: " + task.getTaskName() + "!");
             TaskName.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
             chicken.setVisibility(View.INVISIBLE);
-            //searchTaskContainer2.setVisibility(View.INVISIBLE);
+            descContainer.setVisibility(View.INVISIBLE);
         }
         else {
             nameContainer.setVisibility(View.INVISIBLE);
