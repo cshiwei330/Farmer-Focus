@@ -48,12 +48,14 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 | TAN YU XIN AISLINN  | Login & Sign up pages (Account database), App Icon, Statistics and Splash Screen  | Database, Shared Preferences, Event Handling, Android Charts, Interactions with other apps, AutoCompleteTextView, User Interface(Splash Screen) |
 
 ## Screenshots of app:
+
 ## Log In Page
 - User can key in their account details and log into the app
 - If the username or password is incorrect, they will not be able to log in
 - User can select "Remember Me" to stay logged in the app even when they close the app
 - User can select "SIGN UP HERE" if they want to create a new account
 - "LOGIN" button brings the user to the home page if the account is valid
+
 ![login](https://user-images.githubusercontent.com/103985282/182031511-cdff2140-768d-4187-b78c-e5f1b0a59815.png)
 
 ## Sign Up Page
@@ -63,6 +65,7 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 - Password is case sensitive
 - User has to agree to terms and conditions
 - "BACK" and "SIGN UP" button both brings the user back to the login page, where the user had to log in with an existing account
+
 ![sign up](https://user-images.githubusercontent.com/103985282/182031513-b9e03b1a-b7f4-49e5-958f-910bd5b24781.png)
 
 ## Home
