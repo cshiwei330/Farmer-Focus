@@ -72,6 +72,8 @@ public class TimerActivity extends DrawerBaseActivity{
     private TextView mTimeTextView;
     private ImageView sheep;
     private ImageView chicken;
+    private TextView TaskName;
+    private View nameContainer;
 
     private CountDownTimer mCountDownTimer;
 
@@ -103,6 +105,8 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
         chicken = findViewById(R.id.chicken);
+        TaskName = findViewById(R.id.taskName);
+        nameContainer = findViewById(R.id.view3);
 
         // setting colour of buttons
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
@@ -351,6 +355,9 @@ public class TimerActivity extends DrawerBaseActivity{
     // if yes, task will be mark as completed and timer will be reset to 00:00
     private void updateWatchInterface() {
         if (mTimerRunning) {
+            nameContainer.setVisibility(View.VISIBLE);
+            TaskName.setText("\n\tTime set for: " + task.getTaskName() + "!");
+            TaskName.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
@@ -358,6 +365,8 @@ public class TimerActivity extends DrawerBaseActivity{
             //searchTaskContainer2.setVisibility(View.INVISIBLE);
         }
         else {
+            nameContainer.setVisibility(View.INVISIBLE);
+            TaskName.setVisibility(View.INVISIBLE);
             mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
             mButtonGiveUp.setVisibility(View.INVISIBLE);

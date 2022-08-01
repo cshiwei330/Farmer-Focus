@@ -32,6 +32,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchTaskContainer2"
         android:name="sg.edu.np.mad.madassignment1.TimerSearchTaskFragment"
@@ -140,6 +142,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countdown"
         app:srcCompat="@drawable/chicken" />
+
+    <view
+        android:id="@+id/view3"
+        class="androidx.cardview.widget.CardView"
+        android:layout_width="341dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/roundedcontainer"
+        app:cardBackgroundColor="@color/lightBeige"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="339dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="84dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="#1B1919"
+        android:textSize="27sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
