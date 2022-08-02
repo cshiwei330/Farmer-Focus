@@ -60,6 +60,7 @@ public class TimerActivity extends DrawerBaseActivity{
     private ImageView sheep;
     private ImageView chicken;
     private TextView TaskName;
+    private TextView Taskmsg;
     private View nameContainer;
     private View descContainer;
 
@@ -94,6 +95,7 @@ public class TimerActivity extends DrawerBaseActivity{
         sheep = findViewById(R.id.sheepGif);
         chicken = findViewById(R.id.chicken);
         TaskName = findViewById(R.id.taskName);
+        Taskmsg = findViewById(R.id.textmsg);
         nameContainer = findViewById(R.id.view3);
         descContainer = findViewById(R.id.searchTaskContainer2);
 
@@ -348,6 +350,7 @@ public class TimerActivity extends DrawerBaseActivity{
             nameContainer.setVisibility(View.VISIBLE);
             TaskName.setText("Time set for: " + task.getTaskName());
             TaskName.setVisibility(View.VISIBLE);
+            Taskmsg.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
@@ -357,6 +360,7 @@ public class TimerActivity extends DrawerBaseActivity{
         else {
             nameContainer.setVisibility(View.INVISIBLE);
             TaskName.setVisibility(View.INVISIBLE);
+            Taskmsg.setVisibility(View.INVISIBLE);
             mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
             mButtonGiveUp.setVisibility(View.INVISIBLE);

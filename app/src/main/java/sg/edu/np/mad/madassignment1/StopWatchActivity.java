@@ -40,6 +40,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
     private Button mButtonStopWatch;
 
     private ImageView cow;
+    private TextView Taskmsg;
 
 
     @Override
@@ -59,6 +60,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
         chronometer = findViewById(R.id.chronometer);
         mButtonTimer = findViewById(R.id.timer2);
         mButtonStopWatch = findViewById(R.id.stopwatch2);
+        Taskmsg = findViewById(R.id.textmsg2);
 
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
         mButtonStopWatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
