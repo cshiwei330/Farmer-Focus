@@ -113,6 +113,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
                     }
                 });
                 //start activity with result
+                //startActivity(StopWatchActivityToTimerActivity);
                 startActivityForResult(StopWatchActivityToTimerActivity, 1);
 
             }
