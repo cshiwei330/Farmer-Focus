@@ -70,14 +70,14 @@
         android:layout_width="123dp"
         android:layout_height="49dp"
         android:layout_marginStart="43dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="320dp"
         android:background="#00FFFFFF"
         android:backgroundTint="#A29574"
         android:text="@string/back"
         android:textColor="#A29574"
         app:iconTint="#A29574"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TermsAndConditions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
         tools:ignore="TextContrastCheck" />
 
     <Button
@@ -85,7 +85,7 @@
         android:layout_width="123dp"
         android:layout_height="49dp"
         android:layout_marginStart="79dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="320dp"
         android:layout_marginEnd="43dp"
         android:backgroundTint="#A29574"
         android:text="@string/sign_up_caps"
@@ -93,7 +93,7 @@
         app:iconTint="#A29574"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backToLogin"
-        app:layout_constraintTop_toBottomOf="@+id/TermsAndConditions"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
@@ -108,17 +108,5 @@
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/TermsAndConditions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="228dp"
-        android:text="@string/TandC"
-        android:textColor="#A29574"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
-        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
