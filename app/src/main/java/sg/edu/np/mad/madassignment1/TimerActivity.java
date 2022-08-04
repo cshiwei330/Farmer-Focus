@@ -5,22 +5,9 @@ package sg.edu.np.mad.madassignment1;
                                     /* TIMER ACTIVITY */
 /* The Timer Activity is created for users to focus better with a dedicated countdown timer.
 This activity allows users to set the timer by selecting the task which they would like to start
-doing by clicking on the container view. In order to set the time on the timer, users have to first
-create a new task and set the duration in the task page. Afterwards, when users come to the timer page,
-they will then be able to select the task which they would like to start doing by clicking on the 'click here' message
-on the container view. In the event when users click start before selecting their tasks, they will be prompted
-to select their tasks with a toast message asking them to select a task. Once users have successfully selected
-their tasks, they will be brought back to the timer page. Then, once the start button have been clicked, the
-task duration selected by the user in the task page will then be set on the timer and the timer will start
-counting down. When the timer is running, a sheep animation will be displayed to show that the timer is running
-and would be gone either once the time set on the timer have been completed or users clicked on the finish
-button. The finish button will then prompt the users if they want to mark the task as completed once they
-click on this button. If users select yes, task will be mark as completed and timer will stop running.
-On the other hand, if no is selected, the timer will continue running. The finish button is created to allow
-users to stop doing their tasks before the time set for the task is up as they might have completed their tasks
-before the duration ends. The finish button will calculate the time spend on the task by subtracting the time set
-for the task with the time left on the timer. Once the tasks have been completed, a chicken animation and toast
-message will show up on the timer page to congratulate the user for the completion of their task. */
+doing by clicking on the container view. When timer has started, start will change to finish in the event
+when user finishes the task before the duration is up. If user sits through the entire duration of the task,
+there will be an alert sound and chicken gif showing up. */
 
 /*----------------------------------------------------------------------------------------------------*/
 
@@ -72,6 +59,10 @@ public class TimerActivity extends DrawerBaseActivity{
     private TextView mTimeTextView;
     private ImageView sheep;
     private ImageView chicken;
+    private TextView TaskName;
+    private TextView Taskmsg;
+    private View nameContainer;
+    private View descContainer;
 
     private CountDownTimer mCountDownTimer;
 
@@ -103,6 +94,10 @@ public class TimerActivity extends DrawerBaseActivity{
         mButtonGiveUp = findViewById(R.id.giveUpBtn);
         sheep = findViewById(R.id.sheepGif);
         chicken = findViewById(R.id.chicken);
+        TaskName = findViewById(R.id.taskName);
+        Taskmsg = findViewById(R.id.textmsg);
+        nameContainer = findViewById(R.id.view3);
+        descContainer = findViewById(R.id.searchTaskContainer2);
 
         // setting colour of buttons
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
@@ -230,6 +225,7 @@ public class TimerActivity extends DrawerBaseActivity{
                     }
                 });
                 //start activity with result
+                //startActivity(TimerActivitytoStopWatchActivity);
                 startActivityForResult(TimerActivitytoStopWatchActivity, 1);
             }
         });
@@ -314,7 +310,7 @@ public class TimerActivity extends DrawerBaseActivity{
 
     }
 
-    // pasue the timer
+    // pause the timer
     private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
@@ -351,13 +347,20 @@ public class TimerActivity extends DrawerBaseActivity{
     // if yes, task will be mark as completed and timer will be reset to 00:00
     private void updateWatchInterface() {
         if (mTimerRunning) {
+            nameContainer.setVisibility(View.VISIBLE);
+            TaskName.setText("Time set for: " + task.getTaskName());
+            TaskName.setVisibility(View.VISIBLE);
+            Taskmsg.setVisibility(View.VISIBLE);
             mButtonGiveUp.setVisibility(View.VISIBLE);
             sheep.setVisibility(View.VISIBLE);
             mButtonStartPause.setVisibility(View.INVISIBLE);
             chicken.setVisibility(View.INVISIBLE);
-            //searchTaskContainer2.setVisibility(View.INVISIBLE);
+            descContainer.setVisibility(View.INVISIBLE);
         }
         else {
+            nameContainer.setVisibility(View.INVISIBLE);
+            TaskName.setVisibility(View.INVISIBLE);
+            Taskmsg.setVisibility(View.INVISIBLE);
             mButtonStartPause.setVisibility(View.VISIBLE);
             mButtonStartPause.setText("Start");
             mButtonGiveUp.setVisibility(View.INVISIBLE);

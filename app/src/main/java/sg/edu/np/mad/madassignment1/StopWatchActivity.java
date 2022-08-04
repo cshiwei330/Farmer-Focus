@@ -40,6 +40,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
     private Button mButtonStopWatch;
 
     private ImageView cow;
+    private TextView Taskmsg;
 
 
     @Override
@@ -59,13 +60,14 @@ public class StopWatchActivity extends DrawerBaseActivity {
         chronometer = findViewById(R.id.chronometer);
         mButtonTimer = findViewById(R.id.timer2);
         mButtonStopWatch = findViewById(R.id.stopwatch2);
+        Taskmsg = findViewById(R.id.textmsg2);
 
         mButtonTimer.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonNotClicked));
         mButtonStopWatch.setBackgroundColor(getResources().getColor(R.color.taskCompletionButtonClicked));
 
-        //for cow animation
-        cow = findViewById(R.id.cow);
-        Glide.with(this).load(R.drawable.cow).into(cow);
+//        //for cow animation
+//        cow = findViewById(R.id.cow);
+//        Glide.with(this).load(R.drawable.cow).into(cow);
 
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -113,6 +115,7 @@ public class StopWatchActivity extends DrawerBaseActivity {
                     }
                 });
                 //start activity with result
+                //startActivity(StopWatchActivityToTimerActivity);
                 startActivityForResult(StopWatchActivityToTimerActivity, 1);
 
             }
@@ -147,10 +150,13 @@ public class StopWatchActivity extends DrawerBaseActivity {
         updateWatchInterface();
     }
 
-    // cow gif only shows when stopwatch is running and start button will change to
+    // cow gif only runs when stopwatch is running and start button will change to
     // pause when it is running
     private void updateWatchInterface() {
         if (running) {
+            //for cow animation
+            cow = findViewById(R.id.cow);
+            Glide.with(this).load(R.drawable.cow).into(cow);
             cow.setVisibility(View.VISIBLE);
             mButtonStartPause2.setText("Pause");
         }
