@@ -61,7 +61,6 @@ Alert sound: https://mixkit.co/free-sound-effects/alarm/
 - Username is case sensitive
 - Input of Password and Confirm Password must be the same
 - Password is case sensitive
-- User has to agree to terms and conditions
 - "BACK" and "SIGN UP" button both brings the user back to the login page, where the user had to log in with an existing account
 ![sign up](https://user-images.githubusercontent.com/103985282/182031513-b9e03b1a-b7f4-49e5-958f-910bd5b24781.png)
 

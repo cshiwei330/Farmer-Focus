@@ -37,14 +37,6 @@ public class SignUpPageActivity extends AppCompatActivity {
             startActivity(cancelCreation);
         });
 
-        // setting up terms and conditions button
-        CheckBox tandc = findViewById(R.id.TermsAndConditions);
-        tandc.setOnClickListener(view -> {
-            if (!tandc.isChecked()) {
-                // making sure that the user agree to the terms and conditions before signing up an account
-                Toast.makeText(SignUpPageActivity.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // setting up sign up button
         Button CreateAccount = findViewById(R.id.signUpButton);
@@ -56,30 +48,24 @@ public class SignUpPageActivity extends AppCompatActivity {
                 if (userDBData == null) {
                     // making sure that the passwords entered matches
                     if (myCreatePassword.getText().toString().equals(myConfirmPassword.getText().toString())) {
-                        // making sure that the user agreed to the terms and conditions
-                        if (tandc.isChecked()) {
-                            // creating a new user object
-                            User userDataDB = new User();
-                            // setting username and password of object
-                            userDataDB.setUsername(myCreateUsername.getText().toString());
-                            userDataDB.setPassword(myConfirmPassword.getText().toString());
-                            // make ImageId equals to 0 when default
-                            //userDataDB.setImageID(0);
-                            // adding object into database
-                            dbHandler.addUser(userDataDB);
-                            // telling user that their account has been created successfully
-                            Toast.makeText(SignUpPageActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                            // starting activity, bringing user back to the login page to log into the app with their newly created account
-                            Intent myCreateIntent = new Intent(SignUpPageActivity.this, LoginPageActivity.class);
-                            startActivity(myCreateIntent);
+                        // creating a new user object
+                        User userDataDB = new User();
+                        // setting username and password of object
+                        userDataDB.setUsername(myCreateUsername.getText().toString());
+                        userDataDB.setPassword(myConfirmPassword.getText().toString());
+                        // make ImageId equals to 0 when default
+                        //userDataDB.setImageID(0);
+                        // adding object into database
+                        dbHandler.addUser(userDataDB);
+                        // telling user that their account has been created successfully
+                        Toast.makeText(SignUpPageActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                        // starting activity, bringing user back to the login page to log into the app with their newly created account
+                        Intent myCreateIntent = new Intent(SignUpPageActivity.this, LoginPageActivity.class);
+                        startActivity(myCreateIntent);
 
-                            //kill this activity
-                            finish();
+                        //kill this activity
+                        finish();
                         } else {
-                            // telling user to agree to terms and conditions
-                            Toast.makeText(SignUpPageActivity.this, "Agree to Terms and Conditions!", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
                         // telling user that the passwords that they entered do not match
                         Toast.makeText(SignUpPageActivity.this, "Passwords Do Not Match", Toast.LENGTH_SHORT).show();
                     }
@@ -87,7 +73,7 @@ public class SignUpPageActivity extends AppCompatActivity {
                     // telling user that the username has been taken already
                     Toast.makeText(SignUpPageActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
                 }
-            } else{
+            } else {
                 // telling user to not leave the edit texts empty
                 Toast.makeText(SignUpPageActivity.this, "Please input something!", Toast.LENGTH_SHORT).show();
             }
